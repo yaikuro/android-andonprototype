@@ -46,7 +46,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="ID"
                 android:gravity="start"
-                android:id="@+id/machine_name_text"
+                android:id="@+id/machine_id"
                 android:layout_below="@id/machine_name"
                 />
 
@@ -59,7 +59,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="start"
                 android:id="@+id/date_start"
-                android:layout_below="@id/machine_name_text"
+                android:layout_below="@id/machine_id"
                 android:textStyle="bold"
                 />
 

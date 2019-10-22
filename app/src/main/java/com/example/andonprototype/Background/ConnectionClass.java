@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class ConnectionClass
 {
-
+    String ipHP = "192.168.43.117";
     String ip = "192.168.0.100";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Winteq";

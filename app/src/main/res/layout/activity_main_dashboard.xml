@@ -52,5 +52,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="30dp"
         android:background="#D50000"
-        android:text="Waiting List Problem" />
+        android:text="Waiting List Problem"
+        android:textColor="#FFFFFF" />
 </RelativeLayout>

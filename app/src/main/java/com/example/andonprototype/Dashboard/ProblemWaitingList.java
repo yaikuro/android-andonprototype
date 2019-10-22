@@ -1,7 +1,6 @@
 package com.example.andonprototype.Dashboard;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +17,6 @@ import com.example.andonprototype.Configuration.Query;
 import com.example.andonprototype.DetailBreakdownPage2;
 import com.example.andonprototype.R;
 
-import java.security.PublicKey;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -29,8 +27,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener {
-
         public String pic;
+        public String Line;
+        public String Station;
+        public String MachineID;
         private ListView ListProblem;
         private SimpleAdapter AP;
         public ImageView imageView;
@@ -63,9 +63,6 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
             MyProblemList = myProblem.getProblem();
             AP = new SimpleAdapter(ProblemWaitingList.this,MyProblemList,R.layout.listitem,fromwhere,viewwhere);
             ListProblem.setAdapter(AP);
-            Object s = (ListProblem.getItemAtPosition(1));
-            String status = s.toString();
-            Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
         }
 
     public static class GetProblem {
@@ -80,8 +77,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 };
         public List<Map<String,String>> getProblem()
         {
-            List<Map<String,String>> data = null;
-            data = new ArrayList<Map<String,String>>();
+            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+
             try
             {
                 ConnectionClass connectionClass = new ConnectionClass();
@@ -135,9 +132,19 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(this, DetailBreakdownPage2.class);
+        Map<String,String> mp = (Map<String, String>) ListProblem.getItemAtPosition(position);
+        Object machine = mp.get("MachineID");
+        Object line = mp.get("Line");
+        Object station = mp.get("Station");
+        MachineID = machine.toString();
+        Line = line.toString();
+        Station = station.toString();
+        Toast.makeText(this, MachineID+Line+Station, Toast.LENGTH_SHORT).show();
         i.putExtra("StartTime", currentDateStart);
+        i.putExtra("Line",Line);
+        i.putExtra("Station",Station);
         i.putExtra("PIC",pic);
+        i.putExtra("MachineID",MachineID);
         startActivity(i);
-
     }
 }

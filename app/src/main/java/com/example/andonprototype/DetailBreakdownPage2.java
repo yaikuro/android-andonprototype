@@ -1,24 +1,19 @@
 package com.example.andonprototype;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.util.AndroidRuntimeException;
 import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,12 +43,15 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     private static final int pic_id = 123;
     private static final int pic_id2 = 124;
     public static final int requestcode = 1;
-    public String Person;
-
+    public String Line;
+    public String Station;
+    public String MachineID;
+    public String picr;
+    boolean doubleBackToExitPressedOnce = false;
     byte[] byteArray;
     ImageView click_image_id, click_image_id2;
     String encodedImageProblem, encodedImageSolution;
-    TextView txtmsg, machine_name_text, date_start_text,date_finish_text,pic;
+    TextView txtmsg, machine_id, date_start_text,date_finish_text,pic;
     Button btnSave, camera_open_id, camera_open_id2;
     EditText problem_desc_text, solution_desc_text;
     
@@ -68,6 +66,12 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_breakdown_page2);
+
+        Line = getIntent().getStringExtra("Line");
+        Station = getIntent().getStringExtra("Station");
+        MachineID = getIntent().getStringExtra("MachineID");
+        picr = getIntent().getStringExtra("PIC");
+
         connectionClass = new ConnectionClass();
 
         camera_open_id      = (Button)    findViewById(R.id.camera_button);
@@ -79,7 +83,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         problem_desc_text   = (EditText)  findViewById(R.id.problem_desc_text);
         solution_desc_text  = (EditText)  findViewById(R.id.solution_desc_text);
 
-        machine_name_text   = (TextView)  findViewById(R.id.machine_name_text);
+        machine_id          = (TextView)  findViewById(R.id.machine_id);
         date_start_text     = (TextView)  findViewById(R.id.date_start_text);
         date_finish_text    = (TextView)  findViewById(R.id.date_finish_text);
         pic                 = (TextView)  findViewById(R.id.pic);
@@ -118,13 +122,9 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         });
 
 
-        machine_name_text.setText(getIntent().getStringExtra("EXTRA_SESSION_ID"));
+        machine_id.setText(getIntent().getStringExtra("MachineID"));
         date_start_text.setText(getIntent().getStringExtra("StartTime"));
-//        listView2 = findViewById(R.id.listview2);
-//        itemsArrayList2 = new ArrayList<ClassListItems>();
-//        SyncData2 orderData2 = new SyncData2();
-//        orderData2.execute("");
-//
+
         ////////////////////////////////////////////////////////Stop watch Section///////////////////////////////////////////////////////////////////////////////////////////////////////////
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
@@ -152,8 +152,10 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             Connection con = connectionClass.CONN();
 
             String commands =
-                    "Insert into machinestatustest (Date_Start, Date_Finish, Duration, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
-                            "('" + date_start_text.getText() + "','" + currentDateFinish + "','" + seconds + "','" + encodedImageProblem + "','" + problem_desc_text.getText().toString() + "','" +
+                    "Insert into machinestatustest (Line, Station, MachineID, Date_Start, Date_Finish, Duration, PIC, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
+                            "('" + Line + "','" + Station + "','" + MachineID + "','" +
+                            date_start_text.getText() + "','" + currentDateFinish + "','" + seconds + "','" + picr + "','" +
+                            encodedImageProblem + "','" + problem_desc_text.getText().toString() + "','" +
                             encodedImageSolution + "','" + solution_desc_text.getText().toString() + "')";
 
             PreparedStatement preStmt = con.prepareStatement(commands);
@@ -194,7 +196,24 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             running = true;
         }
     }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
 
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click Back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 3000);
+    }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
