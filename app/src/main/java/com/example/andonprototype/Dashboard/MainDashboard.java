@@ -85,9 +85,8 @@ public class MainDashboard extends AppCompatActivity {
         btnReportActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String PICR = getIntent().getStringExtra("PIC");
                 Intent i = new Intent(MainDashboard.this, ReportActivity.class);
-                i.putExtra("PICR", PICR);
+                i.putExtra("PIC", pic);
                 startActivity(i);
             }
         });

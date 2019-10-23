@@ -31,9 +31,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 public class DetailBreakdownPage2 extends AppCompatActivity {
@@ -145,14 +148,13 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         long saveTime = SystemClock.elapsedRealtime() - chronometer.getBase();
         int seconds = (int)(saveTime/1000);
 
-        ZonedDateTime currentZoneFinish = ZonedDateTime.now();
-        String currentDateFinish = currentZoneFinish.toString();
+        String currentDateFinish= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
         try {
             Connection con = connectionClass.CONN();
 
             String commands =
-                    "Insert into machinestatustest (Line, Station, MachineID, Date_Start, Date_Finish, Duration, PIC, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
+                    "Insert into machinestatustest (Line, Station, MachineID, Repair_Time_Start, Repair_Time_Finish, Repair_Duration, PIC, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
                             "('" + Line + "','" + Station + "','" + MachineID + "','" +
                             date_start_text.getText() + "','" + currentDateFinish + "','" + seconds + "','" + picr + "','" +
                             encodedImageProblem + "','" + problem_desc_text.getText().toString() + "','" +
@@ -228,7 +230,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
                     if (photo != null) {
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         byteArray = stream.toByteArray();
 
                         encodedImageProblem = Base64.encodeToString(byteArray, Base64.DEFAULT);
@@ -252,7 +254,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
                     if (photo != null) {
                         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
                         byteArray = stream.toByteArray();
 
                         encodedImageSolution = Base64.encodeToString(byteArray, Base64.DEFAULT);

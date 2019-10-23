@@ -20,10 +20,13 @@ import com.example.andonprototype.R;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener {
@@ -34,8 +37,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         private ListView ListProblem;
         private SimpleAdapter AP;
         public ImageView imageView;
-        private ZonedDateTime currentZoneStart = ZonedDateTime.now();
-        private String currentDateStart = currentZoneStart.toString();
+        String currentDateStart= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String[] fromwhere = {"Image","MachineID","Line","Station"};
         int [] viewwhere = {R.id.image,R.id.MachineID,R.id.Line,R.id.Station};
         @Override

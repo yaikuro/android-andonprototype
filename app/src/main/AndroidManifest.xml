@@ -13,12 +13,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard.MachineDashboard"/>
+        <activity android:name=".DetailReport"></activity>
+        <activity android:name=".Dashboard.MachineDashboard" />
         <activity android:name=".barcodescanner.SimpleScanner" />
         <activity android:name=".DetailBreakdownPage2" />
         <activity android:name=".Dashboard.MainDashboard" />
         <activity android:name=".ReportActivity" />
-        <activity android:name=".Dashboard.ProblemWaitingList"/>
+        <activity android:name=".Dashboard.ProblemWaitingList" />
         <activity android:name=".Dashboard.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
