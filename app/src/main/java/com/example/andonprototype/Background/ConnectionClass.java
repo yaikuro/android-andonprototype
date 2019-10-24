@@ -11,6 +11,10 @@ import java.sql.SQLException;
 public class ConnectionClass
 {
     String ipHP = "192.168.43.117";
+    String classXAMPP = "com.mysql.jdbc.Driver";
+    String url = "jdbc:mysql://10.0.2.2/sem7";
+    String unXAMPP = "root";
+    String passwordXAMPP = "";
     String ip = "192.168.0.100";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Winteq";
@@ -25,12 +29,14 @@ public class ConnectionClass
         Connection conn = null;
         String ConnURL = null;
         try {
-
             Class.forName(classs);
             ConnURL = "jdbc:jtds:sqlserver://" + ip + ";"
                     + "databaseName=" + db + ";user=" + un + ";password="
                     + password + ";";
             conn = DriverManager.getConnection(ConnURL);
+// Ini buat MySQL
+//              Class.forName(classXAMPP);
+////            conn = DriverManager.getConnection(url,unXAMPP,passwordXAMPP);
         } catch (SQLException se) {
             Log.e("ERROR", se.getMessage());
         } catch (ClassNotFoundException e) {

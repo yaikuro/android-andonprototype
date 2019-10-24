@@ -34,6 +34,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         public String Line;
         public String Station;
         public String MachineID;
+        public String Status;
         private ListView ListProblem;
         private SimpleAdapter AP;
         public ImageView imageView;
@@ -75,7 +76,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         int[] listviewImage = new int[]
                 {
                         R.drawable.green,
-                        R.drawable.red
+                        R.drawable.red,
+                        R.drawable.yellow
                 };
         public List<Map<String,String>> getProblem()
         {
@@ -112,6 +114,11 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                             int i = 1;
                             datanum.put("Image",Integer.toString(listviewImage[i]));
                         }
+                        else if (status.equals("3"))
+                        {
+                            int i = 2;
+                            datanum.put("Image",Integer.toString(listviewImage[i]));
+                        }
                         datanum.put("MachineID",MachineID);
                         datanum.put("Line",Line);
                         datanum.put("Station",Station);
@@ -134,19 +141,27 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(this, DetailBreakdownPage2.class);
-        Map<String,String> mp = (Map<String, String>) ListProblem.getItemAtPosition(position);
+        Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object machine = mp.get("MachineID");
         Object line = mp.get("Line");
         Object station = mp.get("Station");
+        Object status = mp.get("Status");
         MachineID = machine.toString();
         Line = line.toString();
         Station = station.toString();
-        Toast.makeText(this, MachineID+Line+Station, Toast.LENGTH_SHORT).show();
+        Status = status.toString();
+//        Toast.makeText(this, MachineID+Line+Station, Toast.LENGTH_SHORT).show();
         i.putExtra("StartTime", currentDateStart);
         i.putExtra("Line",Line);
         i.putExtra("Station",Station);
         i.putExtra("PIC",pic);
         i.putExtra("MachineID",MachineID);
-        startActivity(i);
+        if (Status.equals("3"))
+        {
+            Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            startActivity(i);
+        }
     }
 }

@@ -19,6 +19,7 @@ public class GetData {
             {
                     R.drawable.green,
                     R.drawable.red,
+                    R.drawable.yellow
             };
     public List<Map<String,String>>getdata()
     {
@@ -55,6 +56,11 @@ public class GetData {
                     {
                         int i = 1;
                         datanum.put("Image", Integer.toString(listviewImage[i]));
+                    }
+                    else if (status.equals("3"))
+                    {
+                        int i = 2;
+                        datanum.put("Image",Integer.toString(listviewImage[i]));
                     }
                     datanum.put("MachineID",MachineID);
                     datanum.put("Line",Line);

@@ -13,7 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailReport"></activity>
+        <service
+            android:name=".MyService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".Dashboard.MainDashboard$MyService"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".BackgroundService"
+            android:exported="false" />
+
+        <activity android:name=".DetailReport" />
         <activity android:name=".Dashboard.MachineDashboard" />
         <activity android:name=".barcodescanner.SimpleScanner" />
         <activity android:name=".DetailBreakdownPage2" />

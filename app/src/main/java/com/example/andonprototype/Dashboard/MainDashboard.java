@@ -1,25 +1,27 @@
 package com.example.andonprototype.Dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.Background.GetData;
-import com.example.andonprototype.Notification;
+import com.example.andonprototype.Configuration.Query;
+import com.example.andonprototype.MyService;
 import com.example.andonprototype.R;
 import com.example.andonprototype.ReportActivity;
 import com.example.andonprototype.Useless.SessionHandler;
@@ -27,28 +29,27 @@ import com.example.andonprototype.Useless.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import static com.example.andonprototype.App.CHANNEL_1_ID;
 
 public class MainDashboard extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     public String MachineID;
+    public String MachineIDPrev;
     public String Status;
     private SessionHandler session;
-    ConnectionClass connectionClass;
+    Connection connect;
+    String ConnectionResult = "";
     public String pic;
     private NotificationManagerCompat notificationManager;
-
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard);
-        List<Map<String,String>> Notif = null;
+        createNotificationChannels();
         notificationManager = NotificationManagerCompat.from(this);
         session = new SessionHandler(getApplicationContext());
         User user = session.getUserDetails();
@@ -60,6 +61,8 @@ public class MainDashboard extends AppCompatActivity {
         Button btnV = findViewById(R.id.btnView);
         Button btnReportActivity = findViewById(R.id.btnReportActivity);
         Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
+        Button btnStartService = findViewById(R.id.StartService);
+        Button btnStopService = findViewById(R.id.StopService);
 
         btnV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,6 +102,83 @@ public class MainDashboard extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        btnStartService.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent startServiceIntent = new Intent(MainDashboard.this, MyService.class);
+                startService(startServiceIntent);
+            }
+        });
+
+        btnStopService.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Intent stopServiceIntent = new Intent(MainDashboard.this, MyService.class);
+                stopService(stopServiceIntent);
+            }
+        });
+        content();
+    }
+    public void content(){
+        getStatus();
+        //Toast.makeText(MainDashboard.this, Status, Toast.LENGTH_SHORT).show();
+        if (Status.equals("2"))
+        {
+            sendOnChannel1();
+//            if (M
+//            achineIDPrev!=MachineID){
+//                sendOnChannel1();
+//                MachineIDPrev = MachineID;
+//            }
+//            else
+//            {
+//            }
+        }
+        else
+        {
+            //Toast.makeText(MainDashboard.this, "Refresh Bro", Toast.LENGTH_SHORT).show();
+        }
+        refresh(3000);
+    }
+    private void refresh(int milliseconds){
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                content();
+            }
+        };
+        handler.postDelayed(runnable,milliseconds);
+    }
+
+    public void getStatus()
+    {
+        Status = "1";
+        try {
+            ConnectionClass connectionClass = new ConnectionClass();
+            connect = connectionClass.CONN();
+            if (connect==null)
+            {
+                ConnectionResult = "Check your Internet Connection";
+            }
+            else{
+                String query = Query.problemquery;
+                Statement stmt = connect.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if (rs.next())
+                {
+                    MachineID = rs.getString("MachineID");
+                    Status = rs.getString("Status");
+                }
+                ConnectionResult = "Successfull";
+                connect.close();
+            }
+        }
+        catch (Exception ex)
+        {
+            ConnectionResult=ex.getMessage();
+        }
     }
 
     @Override
@@ -117,4 +197,44 @@ public class MainDashboard extends AppCompatActivity {
             }
         }, 3000);
     }
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Channel PENTING",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("This is Channel 1");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
+    }
+    public void sendOnChannel1() {
+        String title = "Machine Problem";
+        String message = "at ";
+        PendingIntent notifyPIntent = PendingIntent.getActivity(getApplicationContext(),0,new Intent(),0);
+
+        Intent activityIntent = new Intent(this, ProblemWaitingList.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle(title)
+                .setContentText(message + "Machine ID : " + MachineID)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle()
+// .bigText(emailObject.getSubjectAndSnippet()))
+                )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                //.setContentIntent(notifyPIntent)
+                .addAction(R.mipmap.ic_launcher,"Repair Jink",contentIntent)
+                .build();
+
+        notificationManager.notify(1, notification);
+    }
+
+
 }

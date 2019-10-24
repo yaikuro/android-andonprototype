@@ -9,5 +9,5 @@ public class Query {
     public static final String problemquery =
             "Select MachineID,Line,Station,Status " +
                     "from machinedashboard " +
-                    "where Status = 2";
+                    "where Status = 2 or Status = 3";
 }
