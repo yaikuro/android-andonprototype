@@ -3,6 +3,7 @@ package com.example.andonprototype.barcodescanner;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.andonprototype.DetailBreakdownPage2;
 import com.example.andonprototype.R;
@@ -15,6 +16,7 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
     private ZXingScannerView mScannerView;
     private ZonedDateTime currentZoneStart = ZonedDateTime.now();
     private String currentDateStart = currentZoneStart.toString();
+    public String MachineID,PIC,Line,Station;
 
     @Override
     public void onCreate(Bundle state) {
@@ -24,6 +26,10 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
         ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
         contentFrame.addView(mScannerView);
+        MachineID = getIntent().getStringExtra("MachineID");
+        PIC = getIntent().getStringExtra("PIC");
+        Line = getIntent().getStringExtra("Line");
+        Station = getIntent().getStringExtra("Station");
     }
 
     @Override
@@ -41,9 +47,17 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
 
     @Override
     public void handleResult(com.google.zxing.Result rawResult) {
-        Intent i = new Intent(SimpleScanner.this, DetailBreakdownPage2.class);
-        i.putExtra("EXTRA_SESSION_ID", rawResult.getText());
-        i.putExtra("StartTime", currentDateStart);
-        startActivity(i);
+        if (rawResult.getText().equals(MachineID)) {
+            Intent i = new Intent(SimpleScanner.this, DetailBreakdownPage2.class);
+            i.putExtra("MachineID", rawResult.getText());
+            i.putExtra("Line",Line);
+            i.putExtra("Station",Station);
+            i.putExtra("PIC",PIC);
+            i.putExtra("StartTime", currentDateStart);
+            startActivity(i);
+        } else{
+            mScannerView.resumeCameraPreview(SimpleScanner.this);
+            Toast.makeText(this, "Machine ID tidak sama", Toast.LENGTH_SHORT).show();
+        }
     }
 }
