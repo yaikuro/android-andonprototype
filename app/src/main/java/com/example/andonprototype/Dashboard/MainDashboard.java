@@ -32,6 +32,7 @@ import java.sql.Statement;
 
 import static com.example.andonprototype.App.CHANNEL_1_ID;
 import static com.example.andonprototype.SaveSharedPreference.clearUserName;
+import static com.example.andonprototype.SaveSharedPreference.getID;
 import static com.example.andonprototype.SaveSharedPreference.getUserName;
 
 public class MainDashboard extends AppCompatActivity {
@@ -39,6 +40,7 @@ public class MainDashboard extends AppCompatActivity {
     public String MachineID,MachineIDprev;
     public String Status;
     public SaveSharedPreference saveSharedPreference;
+    public String notifikasi;
     Connection connect;
     String ConnectionResult = "";
     public String pic;
@@ -55,14 +57,6 @@ public class MainDashboard extends AppCompatActivity {
         notificationManager = NotificationManagerCompat.from(this);
         TextView welcomeText = findViewById(R.id.welcomeText);
         pic = saveSharedPreference.getID(this);
-        if (pic.equals(""))
-        {
-        }
-        else
-        {
-            content();
-        }
-
         welcomeText.setText("Welcome " + pic); //You logged in on " + user.getDate() + ", your session will expire on " + user.getSessionExpiryDate());
         /*+ user.getUSERID());*/
         Button logoutBtn = findViewById(R.id.btnLogout);
@@ -71,6 +65,8 @@ public class MainDashboard extends AppCompatActivity {
         Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
         Button btnStartService = findViewById(R.id.StartService);
         Button btnStopService = findViewById(R.id.StopService);
+
+        notifikasi = welcomeText.getText().toString();
 
         btnV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,10 +82,10 @@ public class MainDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 clearUserName(MainDashboard.this);
                 Intent i = new Intent(MainDashboard.this, LoginActivity.class);
+                notifikasi = "Welcome ";
                 startActivity(i);
                 Toast.makeText(MainDashboard.this, pic, Toast.LENGTH_LONG).show();
                 finish();
-
             }
         });
 
@@ -126,34 +122,18 @@ public class MainDashboard extends AppCompatActivity {
                 stopService(stopServiceIntent);
             }
         });
-    }
-
-    public void loadLogin()
-    {
-        clearUserName(MainDashboard.this);
-        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-        startActivity(i);
-        finish();
+        content(); //Get Status for Notification
     }
 
     private  void content(){
         getStatus();
         //Toast.makeText(MainDashboard.this, Status, Toast.LENGTH_SHORT).show();
-        if (Status.equals("2"))
+        if (!notifikasi.equals("Welcome ")&&Status.equals("2"))
         {
             sendOnChannel1();
-//            if (M
-//            achineIDPrev!=MachineID){
-//                sendOnChannel1();
-//                MachineIDPrev = MachineID;
-//            }
-//            else
-//            {
-//            }
         }
         else
         {
-            //Toast.makeText(MainDashboard.this, "Refresh Bro", Toast.LENGTH_SHORT).show();
         }
         refresh(3000);
     }

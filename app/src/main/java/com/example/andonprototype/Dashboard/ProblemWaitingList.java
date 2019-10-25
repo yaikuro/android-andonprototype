@@ -143,28 +143,35 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(this, DetailBreakdownPage2.class);
-        Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
-        Object machine = mp.get("MachineID");
-        Object line = mp.get("Line");
-        Object station = mp.get("Station");
-        Object status = mp.get("Status");
-        MachineID = machine.toString();
-        Line = line.toString();
-        Station = station.toString();
-        Status = status.toString();
+            if (pic.equals(""))
+            {
+                Toast.makeText(this, "ID not Detected, Please Re-login to verify", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Intent i = new Intent(this, DetailBreakdownPage2.class);
+                Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
+                Object machine = mp.get("MachineID");
+                Object line = mp.get("Line");
+                Object station = mp.get("Station");
+                Object status = mp.get("Status");
+                MachineID = machine.toString();
+                Line = line.toString();
+                Station = station.toString();
+                Status = status.toString();
 //        Toast.makeText(this, MachineID+Line+Station, Toast.LENGTH_SHORT).show();
-        i.putExtra("StartTime", currentDateStart);
-        i.putExtra("Line",Line);
-        i.putExtra("Station",Station);
-        i.putExtra("PIC",pic);
-        i.putExtra("MachineID",MachineID);
-        if (Status.equals("3"))
-        {
-            Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            startActivity(i);
-        }
+                i.putExtra("StartTime", currentDateStart);
+                i.putExtra("Line",Line);
+                i.putExtra("Station",Station);
+                i.putExtra("PIC",pic);
+                i.putExtra("MachineID",MachineID);
+                if (Status.equals("3"))
+                {
+                    Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    startActivity(i);
+                }
+            }
     }
 }
