@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r) {
             pbbar.setVisibility(View.GONE);
-            Toast.makeText(LoginActivity.this,PIC,Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginActivity.this,z,Toast.LENGTH_SHORT).show();
 
             if(isSuccess) {
                 loadDashboard();
@@ -90,8 +90,15 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            if(userid.trim().equals("")|| password.trim().equals(""))
-                z = "Please enter User Id and Password";
+            if(userid.equals("")&&password.equals("")) {
+                z = "Please Enter User ID and Password";
+            }
+            else if(userid.equals("")){
+                z = "User ID cannot be empty";
+            }
+            else if(password.equals("")){
+                z = "Password cannot be empty";
+            }
             else
             {
                 try {

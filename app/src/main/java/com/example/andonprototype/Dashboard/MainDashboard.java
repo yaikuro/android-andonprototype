@@ -45,7 +45,6 @@ public class MainDashboard extends AppCompatActivity {
     String ConnectionResult = "";
     public String pic;
     private NotificationManagerCompat notificationManager;
-    Handler mHandler;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -84,7 +83,7 @@ public class MainDashboard extends AppCompatActivity {
                 Intent i = new Intent(MainDashboard.this, LoginActivity.class);
                 notifikasi = "Welcome ";
                 startActivity(i);
-                Toast.makeText(MainDashboard.this, pic, Toast.LENGTH_LONG).show();
+                Toast.makeText(MainDashboard.this, "Logged Out", Toast.LENGTH_LONG).show();
                 finish();
             }
         });
