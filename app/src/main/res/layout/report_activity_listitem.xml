@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MachineID : "
+        android:layout_marginTop="5dp"
+        android:id="@+id/MachineID1"
+        android:layout_marginLeft="10dp"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/MachineID"
+        android:layout_marginTop="5dp"
+        android:textSize="20dp"
+        android:layout_toEndOf="@id/MachineID1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Line1"
+        android:text="Line : "
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/MachineID1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Line"
+        android:layout_toEndOf="@+id/Line1"
+        android:textSize="15dp"
+        android:layout_below="@id/MachineID1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Station1"
+        android:text="Station : "
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/Line1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/Station1"
+        android:id="@+id/Station"
+        android:textSize="15dp"
+        android:layout_below="@id/Line1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RepairTimeStart1"
+        android:text="Repair Time Start : "
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/Station1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/RepairTimeStart1"
+        android:id="@+id/RepairTimeStart"
+        android:textSize="15dp"
+        android:layout_below="@id/Station"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/RepairTimeFinish1"
+        android:text="Repair Time Finish : "
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/RepairTimeStart1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/RepairTimeFinish1"
+        android:id="@+id/RepairTimeFinish"
+        android:textSize="15dp"
+        android:layout_below="@id/RepairTimeStart"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/Duration1"
+        android:text="Duration : "
+        android:textSize="15dp"
+        android:layout_marginLeft="10dp"
+        android:layout_below="@id/RepairTimeFinish1"
+        android:layout_marginBottom="5dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/Duration1"
+        android:id="@+id/Duration"
+        android:textSize="15dp"
+        android:layout_below="@id/RepairTimeFinish"
+        android:layout_marginBottom="5dp"/>
+</RelativeLayout>
