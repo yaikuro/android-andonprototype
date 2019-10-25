@@ -24,21 +24,21 @@ import com.example.andonprototype.Configuration.Query;
 import com.example.andonprototype.MyService;
 import com.example.andonprototype.R;
 import com.example.andonprototype.ReportActivity;
-import com.example.andonprototype.Useless.SessionHandler;
-import com.example.andonprototype.Useless.User;
+import com.example.andonprototype.SaveSharedPreference;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static com.example.andonprototype.App.CHANNEL_1_ID;
+import static com.example.andonprototype.SaveSharedPreference.clearUserName;
+import static com.example.andonprototype.SaveSharedPreference.getUserName;
 
 public class MainDashboard extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
-    public String MachineID;
-    public String MachineIDPrev;
+    public String MachineID,MachineIDprev;
     public String Status;
-    private SessionHandler session;
+    public SaveSharedPreference saveSharedPreference;
     Connection connect;
     String ConnectionResult = "";
     public String pic;
@@ -46,16 +46,24 @@ public class MainDashboard extends AppCompatActivity {
     Handler mHandler;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard);
         createNotificationChannels();
+        saveSharedPreference = new SaveSharedPreference();
+
         notificationManager = NotificationManagerCompat.from(this);
-        session = new SessionHandler(getApplicationContext());
-        User user = session.getUserDetails();
         TextView welcomeText = findViewById(R.id.welcomeText);
-        pic = getIntent().getStringExtra("ID");
-        welcomeText.setText("Welcome " + getIntent().getStringExtra("ID")); //You logged in on " + user.getDate() + ", your session will expire on " + user.getSessionExpiryDate());
+        pic = saveSharedPreference.getID(this);
+        if (pic.equals(""))
+        {
+        }
+        else
+        {
+            content();
+        }
+
+        welcomeText.setText("Welcome " + pic); //You logged in on " + user.getDate() + ", your session will expire on " + user.getSessionExpiryDate());
         /*+ user.getUSERID());*/
         Button logoutBtn = findViewById(R.id.btnLogout);
         Button btnV = findViewById(R.id.btnView);
@@ -76,10 +84,10 @@ public class MainDashboard extends AppCompatActivity {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                session.logoutUser();
+                clearUserName(MainDashboard.this);
                 Intent i = new Intent(MainDashboard.this, LoginActivity.class);
                 startActivity(i);
-                Toast.makeText(MainDashboard.this, "Successfully Logged Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainDashboard.this, pic, Toast.LENGTH_LONG).show();
                 finish();
 
             }
@@ -118,9 +126,17 @@ public class MainDashboard extends AppCompatActivity {
                 stopService(stopServiceIntent);
             }
         });
-        content();
     }
-    public void content(){
+
+    public void loadLogin()
+    {
+        clearUserName(MainDashboard.this);
+        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    private  void content(){
         getStatus();
         //Toast.makeText(MainDashboard.this, Status, Toast.LENGTH_SHORT).show();
         if (Status.equals("2"))
@@ -163,7 +179,7 @@ public class MainDashboard extends AppCompatActivity {
                 ConnectionResult = "Check your Internet Connection";
             }
             else{
-                String query = Query.problemquery;
+                String query = "Select * from machinedashboard where Status = 2";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 if (rs.next())
@@ -181,6 +197,44 @@ public class MainDashboard extends AppCompatActivity {
         }
     }
 
+    private void createNotificationChannels() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel1 = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Channel PENTING",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel1.setDescription("This is Channel 1");
+
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel1);
+        }
+    }
+    public void sendOnChannel1() {
+        String title = "ALERT";
+        String message = "Machine Problem Detected";
+        PendingIntent notifyPIntent = PendingIntent.getActivity(getApplicationContext(),0,new Intent(),0);
+
+        Intent activityIntent = new Intent(this, ProblemWaitingList.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true)
+                .setStyle(new NotificationCompat.BigTextStyle()
+// .bigText(emailObject.getSubjectAndSnippet()))
+                )
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setOnlyAlertOnce(true)
+                //.setContentIntent(notifyPIntent)
+                .addAction(R.mipmap.ic_launcher,"Repair",contentIntent)
+                .build();
+
+        notificationManager.notify(1, notification);
+    }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -196,44 +250,6 @@ public class MainDashboard extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 3000);
-    }
-    private void createNotificationChannels() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            NotificationChannel channel1 = new NotificationChannel(
-                    CHANNEL_1_ID,
-                    "Channel PENTING",
-                    NotificationManager.IMPORTANCE_HIGH
-            );
-            channel1.setDescription("This is Channel 1");
-
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel1);
-        }
-    }
-    public void sendOnChannel1() {
-        String title = "Machine Problem";
-        String message = "at ";
-        PendingIntent notifyPIntent = PendingIntent.getActivity(getApplicationContext(),0,new Intent(),0);
-
-        Intent activityIntent = new Intent(this, ProblemWaitingList.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
-
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_launcher_background)
-                .setContentTitle(title)
-                .setContentText(message + "Machine ID : " + MachineID)
-                .setAutoCancel(true)
-                .setStyle(new NotificationCompat.BigTextStyle()
-// .bigText(emailObject.getSubjectAndSnippet()))
-                )
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setOnlyAlertOnce(true)
-                //.setContentIntent(notifyPIntent)
-                .addAction(R.mipmap.ic_launcher,"Repair Jink",contentIntent)
-                .build();
-
-        notificationManager.notify(1, notification);
     }
 
 

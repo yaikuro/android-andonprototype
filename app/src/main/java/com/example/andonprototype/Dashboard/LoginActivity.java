@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,20 +16,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.R;
-import com.example.andonprototype.Useless.SessionHandler;
+import com.example.andonprototype.SaveSharedPreference;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
+import static com.example.andonprototype.SaveSharedPreference.clearUserName;
+import static com.example.andonprototype.SaveSharedPreference.getUserName;
 
 
 public class LoginActivity extends AppCompatActivity {
     public Context mContext;
     public String ID;
     public String PIC;
-    public SharedPreferences.Editor mEditor;
-    public SharedPreferences mPreferences;
-    public SessionHandler session;
+    public SaveSharedPreference saveSharedPreference;
     public ConnectionClass connectionClass;
     public EditText etuserid, etpass;
     Button btnlogin;
@@ -37,12 +39,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        session = new SessionHandler(getApplicationContext());
-        if(session.isLoggedIn()){
-            loadDashboard();
-        }
+        saveSharedPreference = new SaveSharedPreference();
         setContentView(R.layout.activity_login);
-
+        if (getUserName(this).length()!=0)
+        {
+            loadDashboard2();
+        }
         connectionClass = new ConnectionClass();
         etuserid = (EditText) findViewById(R.id.edtuserid);
         etpass = (EditText) findViewById(R.id.edtpass);
@@ -55,9 +57,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DoLogin doLogin = new DoLogin();
                 doLogin.execute("");
+                saveSharedPreference.setUserName(LoginActivity.this,etuserid.getText().toString());
             }
         });
-
     }
 
     public class DoLogin extends AsyncTask<String,String,String>
@@ -129,6 +131,12 @@ public class LoginActivity extends AppCompatActivity {
             Intent i = new Intent(getApplicationContext(), MainDashboard.class);
             i.putExtra("ID",ID);
             i.putExtra("PIC",PIC);
+            saveSharedPreference.setID(LoginActivity.this,ID);
+            startActivity(i);
+            finish();
+        }
+        private void loadDashboard2(){
+            Intent i = new Intent(getApplicationContext(), MainDashboard.class);
             startActivity(i);
             finish();
         }

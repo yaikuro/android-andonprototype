@@ -69,7 +69,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_breakdown_page2);
-
         Line = getIntent().getStringExtra("Line");
         Station = getIntent().getStringExtra("Station");
         MachineID = getIntent().getStringExtra("MachineID");
@@ -94,7 +93,11 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         btnSave             = (Button)    findViewById(R.id.btnSave);
         txtmsg              = (TextView)  findViewById(R.id.txtmsg);
 
-        pic.setText(getIntent().getStringExtra("PIC"));
+        pic.setText(picr);
+        machine_id.setText(MachineID);
+        date_start_text.setText(getIntent().getStringExtra("StartTime"));
+
+
         camera_open_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,17 +127,13 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             }
         });
 
-
-        machine_id.setText(getIntent().getStringExtra("MachineID"));
-        date_start_text.setText(getIntent().getStringExtra("StartTime"));
-
         ////////////////////////////////////////////////////////Stop watch Section///////////////////////////////////////////////////////////////////////////////////////////////////////////
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
         chronometer.setBase(SystemClock.elapsedRealtime());
         startChronometer();
         ////////////////////////////////////////////////////////end of stop watch section///////////////////////////////////////////////////////////////////////////////////////////////////
-
+        updatePICstatus3();
 
     } // end of onCreate
 
@@ -161,7 +160,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                             encodedImageSolution + "','" + solution_desc_text.getText().toString() + "')";
 
             PreparedStatement preStmt = con.prepareStatement(commands);
-            preStmt.executeUpdate();
+            preStmt.execute();
             msg = "Inserted Successfully";
         } catch (SQLException ex) {
             msg = ex.getMessage().toString();
@@ -191,6 +190,28 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public void updatePICstatus3()
+    {
+        try {
+            Connection connection = connectionClass.CONN();
+            String query = "UPDATE machinedashboard SET Status=3, PIC='" + picr + "' where MachineID='" + MachineID +"'";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.execute();
+        }catch (SQLException ex){
+        }
+    }
+
+    public void updatePICstatus2()
+    {
+        try {
+            Connection connection = connectionClass.CONN();
+            String query = "UPDATE machinedashboard SET Status=2, PIC=NULL where MachineID='" + MachineID +"'";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.execute();
+        }catch (SQLException ex){
+        }
+    }
+
     public void startChronometer() {
         if (!running) {
             chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
@@ -202,6 +223,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            updatePICstatus2();
             return;
         }
 
@@ -271,4 +293,5 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             }
         }
     }
+
 }

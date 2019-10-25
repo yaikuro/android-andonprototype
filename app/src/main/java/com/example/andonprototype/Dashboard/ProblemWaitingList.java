@@ -16,6 +16,7 @@ import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Configuration.Query;
 import com.example.andonprototype.DetailBreakdownPage2;
 import com.example.andonprototype.R;
+import com.example.andonprototype.SaveSharedPreference;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,18 +39,18 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         private ListView ListProblem;
         private SimpleAdapter AP;
         public ImageView imageView;
+        public SaveSharedPreference saveSharedPreference;
         String currentDateStart= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        String[] fromwhere = {"Image","MachineID","Line","Station"};
-        int [] viewwhere = {R.id.image,R.id.MachineID,R.id.Line,R.id.Station};
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_problem_waiting_list);
+            saveSharedPreference = new SaveSharedPreference();
             ListProblem = (ListView) findViewById(R.id.ListProblem);
             ListProblem.setOnItemClickListener(this);
             imageView = (ImageView) findViewById(R.id.image);
             getProblem();
-            pic = getIntent().getStringExtra("PIC");
+            pic = saveSharedPreference.getID(this);
             final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
             pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
                 @Override
@@ -64,6 +65,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
             List<Map<String,String>> MyProblemList=null;
             GetProblem myProblem = new GetProblem();
             MyProblemList = myProblem.getProblem();
+            String[] fromwhere = {"Image","MachineID","Line","Station"};
+            int [] viewwhere = {R.id.image,R.id.MachineID,R.id.Line,R.id.Station};
             AP = new SimpleAdapter(ProblemWaitingList.this,MyProblemList,R.layout.listitem,fromwhere,viewwhere);
             ListProblem.setAdapter(AP);
         }

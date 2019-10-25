@@ -29,7 +29,9 @@
         <activity android:name=".Dashboard.MachineDashboard" />
         <activity android:name=".barcodescanner.SimpleScanner" />
         <activity android:name=".DetailBreakdownPage2" />
-        <activity android:name=".Dashboard.MainDashboard" />
+        <activity android:name=".Dashboard.MainDashboard">
+
+        </activity>
         <activity android:name=".ReportActivity" />
         <activity android:name=".Dashboard.ProblemWaitingList" />
         <activity android:name=".Dashboard.LoginActivity">
