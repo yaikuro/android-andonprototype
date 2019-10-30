@@ -1,6 +1,5 @@
 package com.example.andonprototype.Background;
 
-import com.example.andonprototype.Configuration.Query;
 import com.example.andonprototype.R;
 
 import java.sql.Connection;
@@ -19,7 +18,8 @@ public class GetData {
             {
                     R.drawable.green,
                     R.drawable.red,
-                    R.drawable.yellow
+                    R.drawable.yellow,
+                    R.drawable.blue
             };
     public List<Map<String,String>>getdata()
     {
@@ -60,6 +60,11 @@ public class GetData {
                     else if (status.equals("3"))
                     {
                         int i = 2;
+                        datanum.put("Image",Integer.toString(listviewImage[i]));
+                    }
+                    else if (status.equals("4"))
+                    {
+                        int i = 3;
                         datanum.put("Image",Integer.toString(listviewImage[i]));
                     }
                     datanum.put("MachineID",MachineID);

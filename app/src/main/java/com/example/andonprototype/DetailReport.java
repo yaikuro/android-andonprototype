@@ -4,26 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.Configuration.Query;
-import com.example.andonprototype.Dashboard.LoginActivity;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class DetailReport extends AppCompatActivity {
     public String mesin;

@@ -8,20 +8,17 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.Service;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.IBinder;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.Configuration.Query;
-import com.example.andonprototype.MyService;
 import com.example.andonprototype.R;
 import com.example.andonprototype.ReportActivity;
 import com.example.andonprototype.SaveSharedPreference;
@@ -32,8 +29,6 @@ import java.sql.Statement;
 
 import static com.example.andonprototype.App.CHANNEL_1_ID;
 import static com.example.andonprototype.SaveSharedPreference.clearUserName;
-import static com.example.andonprototype.SaveSharedPreference.getID;
-import static com.example.andonprototype.SaveSharedPreference.getUserName;
 
 public class MainDashboard extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
@@ -44,6 +39,7 @@ public class MainDashboard extends AppCompatActivity {
     Connection connect;
     String ConnectionResult = "";
     public String pic;
+    ProgressBar pbbar;
     private NotificationManagerCompat notificationManager;
 
     @Override
@@ -62,9 +58,6 @@ public class MainDashboard extends AppCompatActivity {
         Button btnV = findViewById(R.id.btnView);
         Button btnReportActivity = findViewById(R.id.btnReportActivity);
         Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
-        Button btnStartService = findViewById(R.id.StartService);
-        Button btnStopService = findViewById(R.id.StopService);
-
         notifikasi = welcomeText.getText().toString();
 
         btnV.setOnClickListener(new View.OnClickListener() {
@@ -105,22 +98,6 @@ public class MainDashboard extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-        btnStartService.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent startServiceIntent = new Intent(MainDashboard.this, MyService.class);
-                startService(startServiceIntent);
-            }
-        });
-
-        btnStopService.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent stopServiceIntent = new Intent(MainDashboard.this, MyService.class);
-                stopService(stopServiceIntent);
-            }
-        });
         content(); //Get Status for Notification
     }
 
@@ -134,7 +111,7 @@ public class MainDashboard extends AppCompatActivity {
         else
         {
         }
-        refresh(3000);
+        refresh(1000);
     }
     private void refresh(int milliseconds){
         final Handler handler = new Handler();

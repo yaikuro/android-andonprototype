@@ -17,8 +17,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.Configuration.Query;
-import com.example.andonprototype.DetailBreakdownPage2;
+import com.example.andonprototype.Background.Query;
 import com.example.andonprototype.R;
 import com.example.andonprototype.SaveSharedPreference;
 import com.example.andonprototype.barcodescanner.SimpleScanner;
@@ -27,7 +26,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -87,7 +85,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 {
                         R.drawable.green,
                         R.drawable.red,
-                        R.drawable.yellow
+                        R.drawable.yellow,
+                        R.drawable.blue
                 };
 
         public List<Map<String, String>> getProblem() {
@@ -117,6 +116,9 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                             datanum.put("Image", Integer.toString(listviewImage[i]));
                         } else if (status.equals("3")) {
                             int i = 2;
+                            datanum.put("Image", Integer.toString(listviewImage[i]));
+                        } else if (status.equals("4")){
+                            int i = 3;
                             datanum.put("Image", Integer.toString(listviewImage[i]));
                         }
                         datanum.put("MachineID", MachineID);
@@ -164,7 +166,11 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 i.putExtra("MachineID", MachineID);
                 if (Status.equals("3")) {
                     Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if (Status.equals("4")){
+                    Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     startActivity(i);
                 }
             }

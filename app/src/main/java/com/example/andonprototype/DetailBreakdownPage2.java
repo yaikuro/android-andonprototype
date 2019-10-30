@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andonprototype.Background.ConnectionClass;
+import com.example.andonprototype.Dashboard.MainDashboard;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOError;
@@ -46,10 +47,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     private static final int pic_id = 123;
     private static final int pic_id2 = 124;
     public static final int requestcode = 1;
-    public String Line;
-    public String Station;
-    public String MachineID;
-    public String picr;
+    public String Line,Station,MachineID,picr,ResponseDateFinish;
     boolean doubleBackToExitPressedOnce = false;
     byte[] byteArray;
     ImageView click_image_id, click_image_id2;
@@ -73,8 +71,9 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         Station = getIntent().getStringExtra("Station");
         MachineID = getIntent().getStringExtra("MachineID");
         picr = getIntent().getStringExtra("PIC");
+        ResponseDateFinish = getIntent().getStringExtra("ResponseDateFinish");
 
-        connectionClass = new ConnectionClass();
+            connectionClass = new ConnectionClass();
 
         camera_open_id      = (Button)    findViewById(R.id.camera_button);
         click_image_id      = (ImageView) findViewById(R.id.problem_pic);
@@ -95,7 +94,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
         pic.setText(picr);
         machine_id.setText(MachineID);
-        date_start_text.setText(getIntent().getStringExtra("StartTime"));
+        date_start_text.setText(getIntent().getStringExtra("ResponseDateFinish"));
 
 
         camera_open_id.setOnClickListener(new View.OnClickListener() {
@@ -124,6 +123,9 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 UploadtoDB();
+                updatePICstatus4();
+                Intent i = new Intent(DetailBreakdownPage2.this, MainDashboard.class);
+                startActivity(i);
             }
         });
 
@@ -153,8 +155,8 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             Connection con = connectionClass.CONN();
 
             String commands =
-                    "Insert into machinestatustest (Line, Station, MachineID, Repair_Time_Start, Repair_Time_Finish, Repair_Duration, PIC, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
-                            "('" + Line + "','" + Station + "','" + MachineID + "','" +
+                    "Insert into machinestatustest (Line, Station, MachineID, Response_Time_Finish, Repair_Time_Start, Repair_Time_Finish, Repair_Duration, PIC, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
+                            "('" + Line + "','" + Station + "','" + MachineID + "','" + ResponseDateFinish + "','" +
                             date_start_text.getText() + "','" + currentDateFinish + "','" + seconds + "','" + picr + "','" +
                             encodedImageProblem + "','" + problem_desc_text.getText().toString() + "','" +
                             encodedImageSolution + "','" + solution_desc_text.getText().toString() + "')";
@@ -189,6 +191,17 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void updatePICstatus4()
+    {
+        try {
+            Connection connection = connectionClass.CONN();
+            String query = "UPDATE machinedashboard SET Status=4, PIC=NULL where MachineID='" + MachineID +"'";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.execute();
+        }catch (SQLException ex){
+        }
+    }
 
     public void updatePICstatus3()
     {

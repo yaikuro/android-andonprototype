@@ -15,10 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <service
-            android:name=".MyService"
-            android:enabled="true"
-            android:exported="true"></service>
-        <service
             android:name=".Dashboard.MainDashboard$MyService"
             android:enabled="true"
             android:exported="true" />
