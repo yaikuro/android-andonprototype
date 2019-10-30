@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
+import com.example.andonprototype.Dashboard.LoginActivity;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -30,6 +32,8 @@ public class DetailReport extends AppCompatActivity {
     public String Desc_Solution;
     public String ImageProblem;
     public String ImageSolution;
+    public ImageView Image_Problem;
+    public ImageView Image_Solution;
     Connection connect;
     String ConnectionResult = "";
 
@@ -47,8 +51,8 @@ public class DetailReport extends AppCompatActivity {
         TextView RepairFinish = (TextView) findViewById(R.id.RepairTimeFinish);
         TextView DescProblem = (TextView) findViewById(R.id.DescImageProblem);
         TextView DescSolution = (TextView) findViewById(R.id.DescImageSolution);
-        ImageView Image_Problem = (ImageView) findViewById(R.id.ImageProblem);
-        ImageView Image_Solution = (ImageView) findViewById(R.id.ImageSolution);
+        Image_Problem =findViewById(R.id.ImageProblem);
+        Image_Solution =findViewById(R.id.ImageSolution);
         getProblem();
         Toast.makeText(this, num, Toast.LENGTH_SHORT).show();
         MachineID.setText(mesin);
@@ -60,12 +64,7 @@ public class DetailReport extends AppCompatActivity {
         RepairFinish.setText(RepairTimeFinish);
         DescProblem.setText(Desc_Problem);
         DescSolution.setText(Desc_Solution);
-        byte[] decodeStringProb = Base64.decode(ImageProblem, Base64.DEFAULT);
-        Bitmap decodebitmapProb = BitmapFactory.decodeByteArray(decodeStringProb,0,decodeStringProb.length);
-        Image_Problem.setImageBitmap(decodebitmapProb);
-        byte[] decodeStringSol = Base64.decode(ImageSolution, Base64.DEFAULT);
-        Bitmap decodebitmapSol = BitmapFactory.decodeByteArray(decodeStringSol,0,decodeStringSol.length);
-        Image_Solution.setImageBitmap(decodebitmapSol);
+        setPicture();
     }
 
     public void getProblem()
@@ -106,5 +105,14 @@ public class DetailReport extends AppCompatActivity {
             {
                 ConnectionResult=ex.getMessage();
             }
+        }
+        public void setPicture()
+        {
+            byte[] decodeStringProb = Base64.decode(ImageProblem, Base64.DEFAULT);
+            Bitmap decodebitmapProb = BitmapFactory.decodeByteArray(decodeStringProb,0,decodeStringProb.length);
+            Image_Problem.setImageBitmap(decodebitmapProb);
+            byte[] decodeStringSol = Base64.decode(ImageSolution, Base64.DEFAULT);
+            Bitmap decodebitmapSol = BitmapFactory.decodeByteArray(decodeStringSol,0,decodeStringSol.length);
+            Image_Solution.setImageBitmap(decodebitmapSol);
         }
 }

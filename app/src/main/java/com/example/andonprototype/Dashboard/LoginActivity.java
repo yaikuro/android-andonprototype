@@ -136,8 +136,6 @@ public class LoginActivity extends AppCompatActivity {
     }
         private void loadDashboard(){
             Intent i = new Intent(getApplicationContext(), MainDashboard.class);
-            i.putExtra("ID",ID);
-            i.putExtra("PIC",PIC);
             saveSharedPreference.setID(LoginActivity.this,ID);
             startActivity(i);
             finish();

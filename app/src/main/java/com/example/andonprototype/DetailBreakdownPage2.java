@@ -1,7 +1,10 @@
 package com.example.andonprototype;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -23,7 +26,9 @@ import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Dashboard.MainDashboard;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
 import java.io.IOError;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.Writer;
@@ -55,18 +60,18 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     TextView txtmsg, machine_id, date_start_text,date_finish_text,pic;
     Button btnSave, camera_open_id, camera_open_id2;
     EditText problem_desc_text, solution_desc_text;
-    
+    public ContentValues values;
+    public Uri imageUri;
 
     private Chronometer chronometer;
     private long pauseOffset;
     private boolean running;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_breakdown_page2);
+        values = new ContentValues();
         Line = getIntent().getStringExtra("Line");
         Station = getIntent().getStringExtra("Station");
         MachineID = getIntent().getStringExtra("MachineID");
@@ -100,21 +105,14 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         camera_open_id.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent camera_intent
-                        = new Intent(MediaStore
-                        .ACTION_IMAGE_CAPTURE);
-                startActivityForResult(camera_intent, pic_id);
-
+                camera_problem();
             }
         });
 
         camera_open_id2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent camera_intent
-                        = new Intent(MediaStore
-                        .ACTION_IMAGE_CAPTURE);
-                startActivityForResult(camera_intent, pic_id2);
+                camera_solution();
             }
         });
 
@@ -136,12 +134,21 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         startChronometer();
         ////////////////////////////////////////////////////////end of stop watch section///////////////////////////////////////////////////////////////////////////////////////////////////
         updatePICstatus3();
+        GetPicture();
+        btnSave.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                UploadtoDB();
+                updatePICstatus4();
+            }
+        });
     } // end of onCreate
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    public void MainDashboard() {
+        Intent i = new Intent(DetailBreakdownPage2.this, MainDashboard.class);
+        startActivity(i);
+    }
     public void UploadtoDB() {
         String msg = "unknown";
 
@@ -164,6 +171,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             PreparedStatement preStmt = con.prepareStatement(commands);
             preStmt.execute();
             msg = "Inserted Successfully";
+            MainDashboard();
         } catch (SQLException ex) {
             msg = ex.getMessage().toString();
             Log.d("hitesh", msg);
@@ -189,8 +197,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         txtmsg.setText(msg);
 
     }
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void updatePICstatus4()
     {
@@ -254,57 +260,77 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
+        switch (requestCode) {
 
-                case pic_id: {
+            case pic_id: {
+                final InputStream imageStream;
+                try {
+                    imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImageProblem = BitmapFactory.decodeStream(imageStream);
+                    click_image_id.setImageBitmap(selectedImageProblem);
 
-                    Bitmap photo = (Bitmap) data.getExtras()
-                            .get("data");
-                    click_image_id.setImageBitmap(photo);
-
-                    if (photo != null) {
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                        byteArray = stream.toByteArray();
-
-                        encodedImageProblem = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    if (selectedImageProblem != null) {
+                        encodedImageProblem = encodeImage(selectedImageProblem);
                         Toast.makeText(DetailBreakdownPage2.this, "Conversion Done",
                                 Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                        {
-                        Toast.makeText(DetailBreakdownPage2.this, "There's an error",
+                    } else {
+                        Toast.makeText(DetailBreakdownPage2.this, "Cancelled",
                                 Toast.LENGTH_SHORT).show();
-                        }
+                    }
                     break;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
+            }
 
+            case pic_id2:
+            {
+                final InputStream imageStream;
+                try {
+                    imageStream = getContentResolver().openInputStream(imageUri);
+                    final Bitmap selectedImageSolution = BitmapFactory.decodeStream(imageStream);
+                    click_image_id2.setImageBitmap(selectedImageSolution);
 
-                case pic_id2:
-                {
-                    Bitmap photo = (Bitmap) data.getExtras()
-                            .get("data");
-                    click_image_id2.setImageBitmap(photo);
-
-                    if (photo != null) {
-                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                        photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-                        byteArray = stream.toByteArray();
-
-                        encodedImageSolution = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                    if (selectedImageSolution != null) {
+                        encodedImageSolution = encodeImage(selectedImageSolution);
                         Toast.makeText(DetailBreakdownPage2.this, "Conversion Done",
                                 Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                        {
-                        Toast.makeText(DetailBreakdownPage2.this, "There's an error",
+                    } else {
+                        Toast.makeText(DetailBreakdownPage2.this, "Cancelled",
                                 Toast.LENGTH_SHORT).show();
-                        }
+                    }
                     break;
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
                 }
             }
         }
     }
 
+    public void GetPicture(){
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+        imageUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+
+    public void camera_problem() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, pic_id);
+    }
+
+    public void camera_solution() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, pic_id2);
+    }
+
+    private String encodeImage(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
+    }
 }

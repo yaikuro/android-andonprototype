@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.Query;
+import com.example.andonprototype.DetailBreakdownPage2;
 import com.example.andonprototype.R;
 import com.example.andonprototype.SaveSharedPreference;
 import com.example.andonprototype.barcodescanner.SimpleScanner;
@@ -164,14 +165,17 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 i.putExtra("Station", Station);
                 i.putExtra("PIC", pic);
                 i.putExtra("MachineID", MachineID);
-                if (Status.equals("3")) {
-                    Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
-                }
-                else if (Status.equals("4")){
-                    Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                if (pic.equals("admin")){
+                    startActivity(i);
                 }
                 else {
-                    startActivity(i);
+                    if (Status.equals("3")) {
+                        Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                    } else if (Status.equals("4")) {
+                        Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                    } else {
+                        startActivity(i);
+                    }
                 }
             }
         }
