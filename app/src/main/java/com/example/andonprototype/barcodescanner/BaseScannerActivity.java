@@ -5,14 +5,6 @@ import android.view.MenuItem;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseScannerActivity extends AppCompatActivity {
-//    public void setupToolbar() {
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//        final ActionBar ab = getSupportActionBar();
-//        if(ab != null) {
-//            ab.setDisplayHomeAsUpEnabled(true);
-//        }
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

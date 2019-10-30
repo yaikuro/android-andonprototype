@@ -20,7 +20,7 @@ import java.util.Map;
 public class MachineDashboard extends AppCompatActivity {
     ListView ListView;
     SimpleAdapter AD;
-    public ImageView imageView;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,6 @@ public class MachineDashboard extends AppCompatActivity {
         ListView = (ListView) findViewById(R.id.ListView);
         imageView = (ImageView) findViewById(R.id.image);
         getdata();
-
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -48,9 +47,7 @@ public class MachineDashboard extends AppCompatActivity {
         int[] viewwhere = {R.id.image, R.id.MachineID, R.id.Line, R.id.Station};
         AD = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.listitem, fromwhere, viewwhere);
         ListView.setAdapter(AD);
-        Object s = (ListView.getItemAtPosition(0));
-        String status = s.toString();
-        Toast.makeText(this, status, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Found", Toast.LENGTH_SHORT).show();
     }
 }
 

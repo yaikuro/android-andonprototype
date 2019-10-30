@@ -19,9 +19,6 @@
             android:name=".Dashboard.MainDashboard$MyService"
             android:enabled="true"
             android:exported="true" />
-        <service
-            android:name=".BackgroundService"
-            android:exported="false" />
 
         <activity android:name=".DetailReport" />
         <activity android:name=".Dashboard.MachineDashboard" />

@@ -74,29 +74,6 @@
                 android:layout_below="@id/date_start"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="Date Finish: "
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000"
-                android:gravity="start"
-                android:id="@+id/date_finish"
-                android:layout_below="@+id/date_start_text"
-                android:textStyle="bold"
-                />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:hint="date finish"
-                android:layout_marginBottom="10dp"
-                android:gravity="start"
-                android:id="@+id/date_finish_text"
-                android:layout_below="@+id/date_finish"
-                />
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,7 +84,7 @@
                 android:layout_marginBottom="5dp"
                 android:gravity="start"
                 android:id="@+id/duration"
-                android:layout_below="@+id/date_finish_text"
+                android:layout_below="@+id/date_start_text"
                 android:textStyle="bold"
                 />
 
@@ -115,20 +92,8 @@
             android:id="@+id/chronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:layout_below="@+id/duration"
-            />
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textSize="20sp"-->
-<!--                android:hint="duration"-->
-<!--                android:gravity="start"-->
-<!--                android:layout_marginBottom="0dp"-->
-<!--                android:id="@+id/duration_text"-->
-<!--                android:layout_below="@+id/duration"-->
-<!--                />-->
+            android:textSize="20sp"
+            android:layout_below="@+id/duration"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -267,7 +232,6 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="175dp"
             android:layout_marginBottom="90dp"
-
             />
         android:background="@drawable/ic_camera"
         <FrameLayout
@@ -287,7 +251,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnSave"
-            android:layout_below="@id/solution_desc_text"
+            android:layout_below="@id/pbbarDetail"
             android:text="Save"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="20dp"
@@ -297,7 +261,12 @@
             android:textColor="#ffffff"
             android:textStyle="bold"
             />
-
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/solution_desc_text"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/pbbarDetail" />
         <TextView
             android:id="@+id/txtmsg"
             android:layout_width="match_parent"

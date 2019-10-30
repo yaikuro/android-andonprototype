@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,9 +63,8 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     EditText problem_desc_text, solution_desc_text;
     public ContentValues values;
     public Uri imageUri;
-
+    ProgressBar pbbarDetail;
     private Chronometer chronometer;
-    private long pauseOffset;
     private boolean running;
 
     @Override
@@ -77,8 +77,10 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         MachineID = getIntent().getStringExtra("MachineID");
         picr = getIntent().getStringExtra("PIC");
         ResponseDateFinish = getIntent().getStringExtra("ResponseDateFinish");
+        pbbarDetail = (ProgressBar) findViewById(R.id.pbbarDetail);
+        pbbarDetail.setVisibility(View.VISIBLE);
 
-            connectionClass = new ConnectionClass();
+        connectionClass = new ConnectionClass();
 
         camera_open_id      = (Button)    findViewById(R.id.camera_button);
         click_image_id      = (ImageView) findViewById(R.id.problem_pic);
@@ -91,7 +93,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
         machine_id          = (TextView)  findViewById(R.id.machine_id);
         date_start_text     = (TextView)  findViewById(R.id.date_start_text);
-        date_finish_text    = (TextView)  findViewById(R.id.date_finish_text);
         pic                 = (TextView)  findViewById(R.id.pic);
 
         btnSave             = (Button)    findViewById(R.id.btnSave);
@@ -100,7 +101,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         pic.setText(picr);
         machine_id.setText(MachineID);
         date_start_text.setText(getIntent().getStringExtra("ResponseDateFinish"));
-
 
         camera_open_id.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,17 +116,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             }
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                UploadtoDB();
-                updatePICstatus4();
-                Intent i = new Intent(DetailBreakdownPage2.this, MainDashboard.class);
-                startActivity(i);
-            }
-        });
-
         ////////////////////////////////////////////////////////Stop watch Section///////////////////////////////////////////////////////////////////////////////////////////////////////////
         chronometer = findViewById(R.id.chronometer);
         chronometer.setFormat("%s");
@@ -136,70 +125,48 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         updatePICstatus3();
         GetPicture();
         btnSave.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+                pbbarDetail.setVisibility(View.VISIBLE);
                 UploadtoDB();
-                updatePICstatus4();
             }
         });
-    } // end of onCreate
+    }
 
-    public void MainDashboard() {
+    public void LoadMainDashboard() {
         Intent i = new Intent(DetailBreakdownPage2.this, MainDashboard.class);
         startActivity(i);
     }
     public void UploadtoDB() {
         String msg = "unknown";
-
         chronometer.stop();
         long saveTime = SystemClock.elapsedRealtime() - chronometer.getBase();
         int seconds = (int)(saveTime/1000);
-
         String currentDateFinish= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
-
         try {
             Connection con = connectionClass.CONN();
-
             String commands =
-                    "Insert into machinestatustest (Line, Station, MachineID, Response_Time_Finish, Repair_Time_Start, Repair_Time_Finish, Repair_Duration, PIC, Image_Problem, Problem_Desc, Image_Solution, Solution_Desc) values " +
+                    "Insert into machinestatustest (Line, Station, MachineID, Response_Time_Finish, Repair_Time_Start, " +
+                            "Repair_Time_Finish, Repair_Duration, PIC, Image_Problem, Problem_Desc, " +
+                            "Image_Solution, Solution_Desc) values " +
                             "('" + Line + "','" + Station + "','" + MachineID + "','" + ResponseDateFinish + "','" +
                             date_start_text.getText() + "','" + currentDateFinish + "','" + seconds + "','" + picr + "','" +
                             encodedImageProblem + "','" + problem_desc_text.getText().toString() + "','" +
                             encodedImageSolution + "','" + solution_desc_text.getText().toString() + "')";
-
             PreparedStatement preStmt = con.prepareStatement(commands);
             preStmt.execute();
             msg = "Inserted Successfully";
-            MainDashboard();
-        } catch (SQLException ex) {
-            msg = ex.getMessage().toString();
-            Log.d("hitesh", msg);
-
-        } catch (IOError ex) {
-            // TODO: handle exception
-            msg = ex.getMessage().toString();
-            Log.d("hitesh", msg);
-        } catch (AndroidRuntimeException ex) {
-            msg = ex.getMessage().toString();
-            Log.d("hitesh", msg);
-
-        } catch (NullPointerException ex) {
-            msg = ex.getMessage().toString();
+            updatePICstatus4();
+            LoadMainDashboard();
+        }  // TODO: handle exception
+        catch (IOError | Exception ex) {
+            msg = ex.getMessage();
             Log.d("hitesh", msg);
         }
-
-        catch (Exception ex) {
-            msg = ex.getMessage().toString();
-            Log.d("hitesh", msg);
-        }
-
         txtmsg.setText(msg);
-
     }
 
-    public void updatePICstatus4()
-    {
+    public void updatePICstatus4() {
         try {
             Connection connection = connectionClass.CONN();
             String query = "UPDATE machinedashboard SET Status=4, PIC=NULL where MachineID='" + MachineID +"'";
@@ -209,8 +176,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
-    public void updatePICstatus3()
-    {
+    public void updatePICstatus3() {
         try {
             Connection connection = connectionClass.CONN();
             String query = "UPDATE machinedashboard SET Status=3, PIC='" + picr + "' where MachineID='" + MachineID +"'";
@@ -220,8 +186,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
-    public void updatePICstatus2()
-    {
+    public void updatePICstatus2() {
         try {
             Connection connection = connectionClass.CONN();
             String query = "UPDATE machinedashboard SET Status=2, PIC=NULL where MachineID='" + MachineID +"'";
@@ -233,7 +198,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
     public void startChronometer() {
         if (!running) {
-            chronometer.setBase(SystemClock.elapsedRealtime() - pauseOffset);
+            chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
             running = true;
         }

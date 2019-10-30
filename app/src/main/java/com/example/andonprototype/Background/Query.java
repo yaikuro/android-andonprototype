@@ -7,7 +7,7 @@ public class Query {
             "select MachineID, Line, Station, Status " +
                     "from machinedashboard";
     public static final String problemquery =
-            "Select MachineID,Line,Station,Status " +
+            "Select * " +
                     "from machinedashboard " +
                     "where Status = 2 or Status = 3 or Status = 4";
 }

@@ -18,7 +18,6 @@ import androidx.core.content.ContextCompat;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.Query;
-import com.example.andonprototype.DetailBreakdownPage2;
 import com.example.andonprototype.R;
 import com.example.andonprototype.SaveSharedPreference;
 import com.example.andonprototype.barcodescanner.SimpleScanner;
@@ -35,11 +34,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener {
-    public String pic;
-    public String Line;
-    public String Station;
-    public String MachineID;
-    public String Status;
+    public String pic,Line,Station,MachineID,Status,Person;
     private ListView ListProblem;
     private SimpleAdapter AP;
     public ImageView imageView;
@@ -71,8 +66,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         List<Map<String, String>> MyProblemList = null;
         GetProblem myProblem = new GetProblem();
         MyProblemList = myProblem.getProblem();
-        String[] fromwhere = {"Image", "MachineID", "Line", "Station"};
-        int[] viewwhere = {R.id.image, R.id.MachineID, R.id.Line, R.id.Station};
+        String[] fromwhere = {"Image", "MachineID", "Line", "Station", "PIC"};
+        int[] viewwhere = {R.id.image, R.id.MachineID, R.id.Line, R.id.Station, R.id.Person};
         AP = new SimpleAdapter(ProblemWaitingList.this, MyProblemList, R.layout.listitem, fromwhere, viewwhere);
         ListProblem.setAdapter(AP);
     }
@@ -107,6 +102,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                         String MachineID = rs.getString("MachineID");
                         String Line = rs.getString("Line");
                         String Station = rs.getString("Station");
+                        String Person = rs.getString("PIC");
                         Map<String, String> datanum = new HashMap<>();
                         datanum.put("Status", status);
                         if (status.equals("1")) {
@@ -125,6 +121,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                         datanum.put("MachineID", MachineID);
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
+                        datanum.put("PIC", Person);
                         data.add(datanum);
                     }
                     ConnectionResult = "Successfull";
@@ -165,15 +162,23 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 i.putExtra("Station", Station);
                 i.putExtra("PIC", pic);
                 i.putExtra("MachineID", MachineID);
+                //admin akan dihapus di final app
                 if (pic.equals("admin")){
                     startActivity(i);
                 }
                 else {
                     if (Status.equals("3")) {
-                        Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                        Object person = mp.get("PIC");
+                        Person = person.toString();
+                        if (person.equals(pic)){
+                            startActivity(i);
+                        }
+                        else{
+                            Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                        }
                     } else if (Status.equals("4")) {
                         Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
-                    } else {
+                    } else if (Status.equals("2")){
                         startActivity(i);
                     }
                 }

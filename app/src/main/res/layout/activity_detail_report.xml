@@ -155,10 +155,11 @@
 
         <ImageView
             android:id="@+id/ImageProblem"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
             android:layout_below="@id/TitleImageProblem"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_centerInParent="true"/>
         <TextView
             android:layout_width="wrap_content"
@@ -180,9 +181,11 @@
             android:layout_below="@id/DescImageProblem"/>
         <ImageView
             android:id="@+id/ImageSolution"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_below="@id/TitleImageSolution"/>
         <TextView
             android:layout_width="wrap_content"

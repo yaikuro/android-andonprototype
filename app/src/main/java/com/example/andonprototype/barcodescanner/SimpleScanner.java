@@ -2,6 +2,7 @@ package com.example.andonprototype.barcodescanner;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -13,7 +14,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.Locale;
 
@@ -23,6 +23,7 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
     private ZXingScannerView mScannerView;
     public String MachineID,PIC,Line,Station;
     ConnectionClass connectionClass;
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onCreate(Bundle state) {
@@ -65,6 +66,33 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
         } else{
             mScannerView.resumeCameraPreview(SimpleScanner.this);
             Toast.makeText(this, "Machine ID tidak sama", Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            updatePICstatus2();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click Back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 3000);
+    }
+    public void updatePICstatus2() {
+        try {
+            Connection connection = connectionClass.CONN();
+            String query = "UPDATE machinedashboard SET Status=2, PIC=NULL where MachineID='" + MachineID +"'";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.execute();
+        }catch (SQLException ex){
         }
     }
 }

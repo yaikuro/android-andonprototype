@@ -1,11 +1,8 @@
 package com.example.andonprototype.Dashboard;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,14 +19,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static com.example.andonprototype.SaveSharedPreference.clearUserName;
 import static com.example.andonprototype.SaveSharedPreference.getUserName;
 
-
 public class LoginActivity extends AppCompatActivity {
-    public Context mContext;
-    public String ID;
-    public String PIC;
+    public String ID,PIC;
     public SaveSharedPreference saveSharedPreference;
     public ConnectionClass connectionClass;
     public EditText etuserid, etpass;
@@ -67,10 +60,8 @@ public class LoginActivity extends AppCompatActivity {
         String z = "";
         Boolean isSuccess = false;
 
-
         String userid = etuserid.getText().toString();
         String password = etpass.getText().toString();
-
 
         @Override
         protected void onPreExecute() {
@@ -81,13 +72,11 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String r) {
             pbbar.setVisibility(View.GONE);
             Toast.makeText(LoginActivity.this,z,Toast.LENGTH_SHORT).show();
-
             if(isSuccess) {
                 loadDashboard();
             }
 
         }
-
         @Override
         protected String doInBackground(String... params) {
             if(userid.equals("")&&password.equals("")) {
@@ -122,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
                             z = "Invalid Credentials";
                             isSuccess = false;
                         }
-
                     }
                 }
                 catch (Exception ex)

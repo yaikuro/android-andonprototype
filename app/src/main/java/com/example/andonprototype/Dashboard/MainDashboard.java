@@ -30,20 +30,19 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static com.example.andonprototype.App.CHANNEL_1_ID;
 import static com.example.andonprototype.SaveSharedPreference.clearUserName;
 
 public class MainDashboard extends AppCompatActivity {
     private static final String TAG = "MainDashboard";
     boolean doubleBackToExitPressedOnce = false;
-    public String MachineID,MachineIDprev;
+    public static final String CHANNEL_1_ID = "channel1";
+    public String MachineID;
     public String Status;
     public SaveSharedPreference saveSharedPreference;
     public String notifikasi;
     Connection connect;
     String ConnectionResult = "";
     public String pic;
-    ProgressBar pbbar;
     private NotificationManagerCompat notificationManager;
 
     @Override
@@ -56,8 +55,7 @@ public class MainDashboard extends AppCompatActivity {
         notificationManager = NotificationManagerCompat.from(this);
         TextView welcomeText = findViewById(R.id.welcomeText);
         pic = saveSharedPreference.getID(this);
-        welcomeText.setText("Welcome " + pic); //You logged in on " + user.getDate() + ", your session will expire on " + user.getSessionExpiryDate());
-        /*+ user.getUSERID());*/
+        welcomeText.setText("Welcome " + pic);
         Button logoutBtn = findViewById(R.id.btnLogout);
         Button btnV = findViewById(R.id.btnView);
         Button btnReportActivity = findViewById(R.id.btnReportActivity);
@@ -69,7 +67,6 @@ public class MainDashboard extends AppCompatActivity {
             public void onClick(View view) {
                 Intent a = new Intent(MainDashboard.this, MachineDashboard.class);
                 startActivity(a);
-//                finish();
             }
         });
 
@@ -102,22 +99,19 @@ public class MainDashboard extends AppCompatActivity {
                 startActivity(i);
             }
         });
-        content(); //Get Status for Notification
+        content();
         isStoragePermissionGranted();
     }
 
     private  void content(){
         getStatus();
-        //Toast.makeText(MainDashboard.this, Status, Toast.LENGTH_SHORT).show();
         if (!notifikasi.equals("Welcome ")&&Status.equals("2"))
         {
             sendOnChannel1();
         }
-        else
-        {
-        }
         refresh(1000);
     }
+
     private void refresh(int milliseconds){
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
@@ -129,8 +123,7 @@ public class MainDashboard extends AppCompatActivity {
         handler.postDelayed(runnable,milliseconds);
     }
 
-    public void getStatus()
-    {
+    public void getStatus() {
         Status = "1";
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -162,10 +155,10 @@ public class MainDashboard extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
                     CHANNEL_1_ID,
-                    "Channel PENTING",
+                    "Machine Notification Channel",
                     NotificationManager.IMPORTANCE_HIGH
             );
-            channel1.setDescription("This is Channel 1");
+            channel1.setDescription("Problem Channel");
 
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel1);
@@ -174,8 +167,6 @@ public class MainDashboard extends AppCompatActivity {
     public void sendOnChannel1() {
         String title = "ALERT";
         String message = "Machine Problem Detected";
-        PendingIntent notifyPIntent = PendingIntent.getActivity(getApplicationContext(),0,new Intent(),0);
-
         Intent activityIntent = new Intent(this, ProblemWaitingList.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
@@ -183,16 +174,12 @@ public class MainDashboard extends AppCompatActivity {
                 .setContentTitle(title)
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setStyle(new NotificationCompat.BigTextStyle()
-// .bigText(emailObject.getSubjectAndSnippet()))
-                )
+                .setStyle(new NotificationCompat.BigTextStyle())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                //.setContentIntent(notifyPIntent)
                 .addAction(R.mipmap.ic_launcher,"Repair",contentIntent)
                 .build();
-
         notificationManager.notify(1, notification);
     }
 
