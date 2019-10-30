@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fillViewport="true">
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        >
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="20dp"
+            android:id="@+id/listview2"
+            android:layout_above="@id/machine_name"
+            />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Machine ID : "
+                android:textColor="#000000"
+                android:gravity="start"
+                android:layout_marginBottom="5dp"
+                android:id="@+id/machine_name"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginBottom="10dp"
+                android:hint="ID"
+                android:gravity="start"
+                android:id="@+id/machine_id"
+                android:layout_below="@id/machine_name"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Date Start : "
+                android:textColor="#000000"
+                android:layout_marginBottom="5dp"
+                android:gravity="start"
+                android:id="@+id/date_start"
+                android:layout_below="@id/machine_id"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:hint="datestart"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:id="@+id/date_start_text"
+                android:layout_below="@id/date_start"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Date Finish: "
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:gravity="start"
+                android:id="@+id/date_finish"
+                android:layout_below="@+id/date_start_text"
+                android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:hint="date finish"
+                android:layout_marginBottom="10dp"
+                android:gravity="start"
+                android:id="@+id/date_finish_text"
+                android:layout_below="@+id/date_finish"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="Duration : "
+                android:textColor="#000000"
+                android:layout_marginBottom="5dp"
+                android:gravity="start"
+                android:id="@+id/duration"
+                android:layout_below="@+id/date_finish_text"
+                android:textStyle="bold"
+                />
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:layout_below="@+id/duration"
+            />
+
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="20sp"-->
+<!--                android:hint="duration"-->
+<!--                android:gravity="start"-->
+<!--                android:layout_marginBottom="0dp"-->
+<!--                android:id="@+id/duration_text"-->
+<!--                android:layout_below="@+id/duration"-->
+<!--                />-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:text="PIC : "
+                android:layout_marginBottom="5dp"
+                android:textColor="#000000"
+                android:gravity="start"
+                android:id="@+id/pic_text"
+                android:layout_below="@+id/chronometer"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:hint="PIC"
+                android:gravity="start"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/pic"
+                android:layout_below="@+id/pic_text"
+                />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:id="@+id/problem_pic"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_below="@+id/pic"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/camera_button"
+            android:layout_below="@id/problem_pic"
+            android:text="Take Problem Picture"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:background="#Fd7d5d"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/problem_desc"
+            android:text="Problem Description : "
+            android:layout_below="@+id/camera_button"
+            android:layout_marginTop="10dp"
+            android:background="#000000"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/problem_desc_text"
+            android:layout_below="@id/problem_desc"
+            android:background="#FFFFFF"
+            android:hint="Insert description here..."
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:id="@+id/solution_pic"
+            android:layout_below="@+id/problem_desc_text"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/camera_button_solution"
+            android:layout_below="@id/solution_pic"
+            android:text="Take Solution Picture"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:background="#Fd7d5d"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:id="@+id/solution_desc"
+            android:text="Solution Description : "
+            android:layout_below="@id/camera_button_solution"
+            android:layout_marginTop="10dp"
+            android:background="#000000"
+            android:padding="10dp"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/solution_desc_text"
+            android:layout_below="@id/solution_desc"
+            android:background="#FFFFFF"
+            android:hint="Insert description here..."
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/problem_pic"
+            android:layout_alignTop="@+id/problem_pic"
+            android:layout_alignEnd="@+id/problem_pic"
+            android:layout_alignBottom="@+id/problem_pic"
+            android:layout_marginStart="175dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="175dp"
+            android:layout_marginBottom="90dp"
+
+            />
+        android:background="@drawable/ic_camera"
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/solution_pic"
+            android:layout_alignTop="@+id/solution_pic"
+            android:layout_alignEnd="@+id/solution_pic"
+            android:layout_alignBottom="@+id/solution_pic"
+            android:layout_marginStart="175dp"
+            android:layout_marginTop="80dp"
+            android:layout_marginEnd="175dp"
+            android:layout_marginBottom="90dp"
+            />
+        android:background="@drawable/ic_camera"
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSave"
+            android:layout_below="@id/solution_desc_text"
+            android:text="Save"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20sp"
+            android:padding="10dp"
+            android:background="#10109F"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/txtmsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="1.5"
+            android:layout_below="@id/btnSave"
+            android:padding="10dp"
+            android:gravity="center"
+            android:text=""
+            android:textSize="13sp" />
+    </RelativeLayout>
+
+</ScrollView>
