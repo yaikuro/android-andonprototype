@@ -16,7 +16,7 @@ public class ConnectionClass
     String url = "jdbc:mysql://192.168.43.193:3306/sem7";
     String unXAMPP = "dio";
     String passwordXAMPP = "dio";
-    String ip = "192.168.0.100";
+    String ip = "192.168.0.101";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Winteq";
     String un = "admin";

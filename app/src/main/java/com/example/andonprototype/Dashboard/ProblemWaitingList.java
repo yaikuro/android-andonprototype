@@ -105,18 +105,27 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                         String Person = rs.getString("PIC");
                         Map<String, String> datanum = new HashMap<>();
                         datanum.put("Status", status);
-                        if (status.equals("1")) {
-                            int i = 0;
-                            datanum.put("Image", Integer.toString((listviewImage[i])));
-                        } else if (status.equals("2")) {
-                            int i = 1;
-                            datanum.put("Image", Integer.toString(listviewImage[i]));
-                        } else if (status.equals("3")) {
-                            int i = 2;
-                            datanum.put("Image", Integer.toString(listviewImage[i]));
-                        } else if (status.equals("4")){
-                            int i = 3;
-                            datanum.put("Image", Integer.toString(listviewImage[i]));
+                        switch (status) {
+                            case "1": {
+                                int i = 0;
+                                datanum.put("Image", Integer.toString((listviewImage[i])));
+                                break;
+                            }
+                            case "2": {
+                                int i = 1;
+                                datanum.put("Image", Integer.toString(listviewImage[i]));
+                                break;
+                            }
+                            case "3": {
+                                int i = 2;
+                                datanum.put("Image", Integer.toString(listviewImage[i]));
+                                break;
+                            }
+                            case "4": {
+                                int i = 3;
+                                datanum.put("Image", Integer.toString(listviewImage[i]));
+                                break;
+                            }
                         }
                         datanum.put("MachineID", MachineID);
                         datanum.put("Line", Line);
@@ -167,22 +176,28 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                     startActivity(i);
                 }
                 else {
-                    switch (Status) {
+                    Object person = mp.get("PIC");
+                    switch (Status){
                         case "3":
-                            Object person = mp.get("PIC");
                             if (person != null) {
                                 Person = person.toString();
                                 if (person.equals(pic)) {
                                     startActivity(i);
                                 } else {
-                                    Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, Person + " is currently repairing", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "4":
-                            Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                            if(person != null){
+                                Person = person.toString();
+                                Toast.makeText(this, "Waiting for Production Approval, Done by " + Person, 5000).show();
+                            }
+                            else{
+                                Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                            }
                             break;
                         case "2":
                             startActivity(i);

@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class BreakdownHistory extends AppCompatActivity implements ListView.OnItemClickListener{
     Connection connect;
-    private String MachineID,Number;
+    private String MachineID,Number,Validation;
     String ConnectionResult = "";
     ListView BreakdownHistory;
     SimpleAdapter ABH;
@@ -39,12 +39,12 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         Machine = findViewById(R.id.dataMachineID);
         MachineID = getIntent().getStringExtra("MachineID");
         Machine.setText(MachineID);
-        getHistory();
+        validation();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getHistory();
+                validation();
                 pullToRefresh.setRefreshing(false);
             }
         });
@@ -68,7 +68,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
                 ConnectionResult = "Check your Internet Connection";
             } else {
                 String query = "Select No,MachineID,Line,Station,Repair_Time_Start,Repair_Time_Finish,Repair_Duration" +
-                        " from machinestatustest where MachineID = '" + MachineID + "' ORDER BY Repair_Time_Start";
+                        " from machinestatustest where MachineID = '" + MachineID + "' ORDER BY Repair_Time_Start DESC";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -96,6 +96,45 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
             ConnectionResult = ex.getMessage();
         }
         return data;
+    }
+
+    public void validation(){
+        ValidationData();
+        if (Validation==null)
+        {
+            Toast.makeText(this, "No Data Found", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            getHistory();
+        }
+    }
+
+    public void ValidationData() {
+        try
+        {
+            ConnectionClass connectionClass = new ConnectionClass();
+            connect=connectionClass.CONN();
+            if(connect==null)
+            {
+                ConnectionResult = "Check your Internet Connection";
+            }
+            else
+            {
+                String query = "Select No from machinestatustest where MachineID='" + MachineID + "'";
+                Statement stmt = connect.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                if (rs.next())
+                {
+                    Validation = rs.getString("No");
+                }
+                ConnectionResult="Successfull";
+                connect.close();
+            }
+        }
+        catch (Exception ex)
+        {
+            ConnectionResult=ex.getMessage();
+        }
     }
 
     @Override

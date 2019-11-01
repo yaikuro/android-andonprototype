@@ -169,7 +169,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     public void updatePICstatus4() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE machinedashboard SET Status=4, PIC=NULL where MachineID='" + MachineID +"'";
+            String query = "UPDATE machinedashboard SET Status=4, PIC='" + picr + "' where MachineID='" + MachineID +"'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
         }catch (SQLException ex){

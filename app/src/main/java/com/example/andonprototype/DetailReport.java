@@ -52,8 +52,7 @@ public class DetailReport extends AppCompatActivity {
         setPicture();
     }
 
-    public void getProblem()
-        {
+    public void getProblem() {
             try
             {
                 ConnectionClass connectionClass = new ConnectionClass();
