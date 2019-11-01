@@ -47,9 +47,9 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_waiting_list);
         saveSharedPreference = new SaveSharedPreference();
-        ListProblem = (ListView) findViewById(R.id.ListProblem);
+        ListProblem = findViewById(R.id.ListProblem);
         ListProblem.setOnItemClickListener(this);
-        imageView = (ImageView) findViewById(R.id.image);
+        imageView = findViewById(R.id.image);
         getProblem();
         pic = saveSharedPreference.getID(this);
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
@@ -193,7 +193,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                         case "4":
                             if(person != null){
                                 Person = person.toString();
-                                Toast.makeText(this, "Waiting for Production Approval, Done by " + Person, 5000).show();
+                                Toast.makeText(this, "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
                             }
                             else{
                                 Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();

@@ -39,7 +39,9 @@ public class MainDashboard extends AppCompatActivity {
     public String MachineID;
     public String Status;
     public SaveSharedPreference saveSharedPreference;
-    public String notifikasi;
+    public String notifikasi = "Welcome ";
+    public String send;
+    public String hasil;
     Connection connect;
     String ConnectionResult = "";
     public String pic;
@@ -55,12 +57,13 @@ public class MainDashboard extends AppCompatActivity {
         notificationManager = NotificationManagerCompat.from(this);
         TextView welcomeText = findViewById(R.id.welcomeText);
         pic = saveSharedPreference.getID(this);
-        welcomeText.setText("Welcome " + pic);
+        send = notifikasi + pic;
+        welcomeText.setText(send);
         Button logoutBtn = findViewById(R.id.btnLogout);
         Button btnV = findViewById(R.id.btnView);
         Button btnReportActivity = findViewById(R.id.btnReportActivity);
         Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
-        notifikasi = welcomeText.getText().toString();
+        hasil = welcomeText.getText().toString();
 
         btnV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +78,7 @@ public class MainDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 clearUserName(MainDashboard.this);
                 Intent i = new Intent(MainDashboard.this, LoginActivity.class);
-                notifikasi = "Welcome ";
+                send = notifikasi;
                 startActivity(i);
                 Toast.makeText(MainDashboard.this, "Logged Out", Toast.LENGTH_LONG).show();
                 finish();
@@ -105,7 +108,7 @@ public class MainDashboard extends AppCompatActivity {
 
     private  void content(){
         getStatus();
-        if (!notifikasi.equals("Welcome ")&&Status.equals("2"))
+        if (!send.equals(notifikasi)&&Status.equals("2"))
         {
             sendOnChannel1();
         }

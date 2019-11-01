@@ -36,6 +36,7 @@
             android:textColor="#ffffff"
             android:textColorHint="#ffffff"
             android:textSize="20sp"
+            android:inputType="textShortMessage"
             android:textStyle="bold" />
 
         <EditText

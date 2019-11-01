@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/edtInsertID"
-        android:hint="Insert PIC ID"
+        android:hint="@string/insert_pic_id"
         android:layout_below="@+id/txtReportActivity"
         android:layout_marginTop="30dp"
         android:gravity="center"
@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtInsertID"
-        android:text="PIC Search"
+        android:text="@string/pic_search"
         android:id="@+id/btnSearch"
         />
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
