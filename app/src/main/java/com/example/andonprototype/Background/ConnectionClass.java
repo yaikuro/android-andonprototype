@@ -7,6 +7,7 @@ import android.util.Log;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class ConnectionClass
 {
@@ -15,7 +16,7 @@ public class ConnectionClass
     String url = "jdbc:mysql://192.168.43.193:3306/sem7";
     String unXAMPP = "dio";
     String passwordXAMPP = "dio";
-    String ip = "192.168.0.104";
+    String ip = "192.168.0.100";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Winteq";
     String un = "admin";
@@ -37,12 +38,8 @@ public class ConnectionClass
 // Ini buat MySQL
 //              Class.forName(classXAMPP);
 //                conn = DriverManager.getConnection(url,unXAMPP,passwordXAMPP);
-        } catch (SQLException se) {
-            Log.e("ERROR", se.getMessage());
-        } catch (ClassNotFoundException e) {
-            Log.e("ERROR", e.getMessage());
-        } catch (Exception e) {
-            Log.e("ERROR", e.getMessage());
+        } catch (Exception se) {
+            Log.e("ERROR", Objects.requireNonNull(se.getMessage()));
         }
         return conn;
     }

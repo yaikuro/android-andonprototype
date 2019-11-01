@@ -13,8 +13,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="Detail Report"
-            android:textSize="50dp"
+            android:text="@string/detail_report_title"
+            android:textSize="50sp"
             android:textStyle="bold" />
 
         <TextView
@@ -22,10 +22,10 @@
             android:layout_below="@id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
-            android:text="MachineID : "
-            android:textSize="20dp"
+            android:text="@string/machine_id_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -34,17 +34,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_toRightOf="@id/MachineID1"
-            android:textSize="20dp" />
+            android:layout_toEndOf="@id/MachineID1"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/Line1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/MachineID1"
-            android:layout_marginLeft="20dp"
-            android:text="Line : "
-            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/line_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -52,17 +52,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/MachineID"
-            android:layout_toRightOf="@id/Line1"
-            android:textSize="20dp" />
+            android:layout_toEndOf="@id/Line1"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/Station1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Line1"
-            android:layout_marginLeft="20dp"
-            android:text="Station : "
-            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/station_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -70,17 +70,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Line"
-            android:layout_toRightOf="@id/Station1"
-            android:textSize="20dp" />
+            android:layout_toEndOf="@id/Station1"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/PIC1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Station1"
-            android:layout_marginLeft="20dp"
-            android:text="PIC : "
-            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/pic_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -88,17 +88,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Station"
-            android:layout_toRightOf="@id/PIC1"
-            android:textSize="20dp" />
+            android:layout_toEndOf="@id/PIC1"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/RepairTimeStart1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/PIC1"
-            android:layout_marginLeft="20dp"
-            android:text="Repair Date Start : "
-            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/repair_date_start_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -106,40 +106,40 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/RepairTimeStart1"
-            android:layout_marginLeft="20dp"
-            android:textSize="15dp" />
+            android:layout_marginStart="20dp"
+            android:textSize="15sp" />
         <TextView
             android:id="@+id/RepairTimeFinish1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/RepairTimeStart"
-            android:layout_marginLeft="20dp"
-            android:text="Repair Date Finish : "
-            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/repair_date_finish_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/RepairTimeFinish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/RepairTimeFinish1"
-            android:layout_marginLeft="20dp"
-            android:textSize="15dp" />
+            android:layout_marginStart="20dp"
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/Duration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/RepairTimeFinish"
-            android:layout_toRightOf="@id/Duration1"
-            android:textSize="20dp" />
+            android:layout_toEndOf="@id/Duration1"
+            android:textSize="20sp" />
         <TextView
             android:id="@+id/Duration1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/RepairTimeFinish"
-            android:layout_marginLeft="20dp"
-            android:text="Duration : "
-            android:textSize="20dp"
+            android:layout_marginStart="20dp"
+            android:text="@string/duration_colon"
+            android:textSize="20sp"
             android:textStyle="bold"/>
 
         <TextView
@@ -147,8 +147,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/TitleImageProblem"
             android:layout_centerInParent="true"
-            android:textSize="30dp"
-            android:text="Problem Image"
+            android:textSize="30sp"
+            android:text="@string/problem_image_title"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_below="@id/Duration1"/>
@@ -156,44 +156,49 @@
         <ImageView
             android:id="@+id/ImageProblem"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:layout_below="@id/TitleImageProblem"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/problem_image" />
+
         <TextView
+            android:id="@+id/DescImageProblem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/DescImageProblem"
+            android:layout_below="@id/ImageProblem"
             android:layout_centerInParent="true"
-            android:textSize="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_below="@id/ImageProblem"/>
-
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="15sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/TitleImageSolution"
             android:layout_centerInParent="true"
-            android:textSize="30dp"
-            android:text="Solution Image"
+            android:textSize="30sp"
+            android:text="@string/solution_image_title"
             android:textStyle="bold"
             android:layout_below="@id/DescImageProblem"/>
         <ImageView
             android:id="@+id/ImageSolution"
             android:layout_width="match_parent"
-            android:layout_height="350dp"
+            android:layout_height="300dp"
             android:layout_centerInParent="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_below="@id/TitleImageSolution"/>
+            android:layout_below="@id/TitleImageSolution"
+            android:contentDescription="@string/solution_image" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/DescImageSolution"
             android:layout_centerInParent="true"
-            android:textSize="15dp"
-            android:layout_marginTop="5dp"
+            android:textSize="15sp"
+            android:layout_margin="5dp"
             android:layout_below="@id/ImageSolution"/>
     </RelativeLayout>
 </ScrollView>

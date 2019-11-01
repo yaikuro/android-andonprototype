@@ -66,8 +66,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         List<Map<String, String>> MyProblemList = null;
         GetProblem myProblem = new GetProblem();
         MyProblemList = myProblem.getProblem();
-        String[] fromwhere = {"Image", "MachineID", "Line", "Station", "PIC"};
-        int[] viewwhere = {R.id.image, R.id.MachineID, R.id.Line, R.id.Station, R.id.Person};
+        String[] fromwhere = {"Image", "MachineID", "Line", "Station"};
+        int[] viewwhere = {R.id.image, R.id.MachineID, R.id.Line, R.id.Station};
         AP = new SimpleAdapter(ProblemWaitingList.this, MyProblemList, R.layout.listitem, fromwhere, viewwhere);
         ListProblem.setAdapter(AP);
     }
@@ -167,19 +167,26 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                     startActivity(i);
                 }
                 else {
-                    if (Status.equals("3")) {
-                        Object person = mp.get("PIC");
-                        Person = person.toString();
-                        if (person.equals(pic)){
+                    switch (Status) {
+                        case "3":
+                            Object person = mp.get("PIC");
+                            if (person != null) {
+                                Person = person.toString();
+                                if (person.equals(pic)) {
+                                    startActivity(i);
+                                } else {
+                                    Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        case "4":
+                            Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "2":
                             startActivity(i);
-                        }
-                        else{
-                            Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
-                        }
-                    } else if (Status.equals("4")) {
-                        Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
-                    } else if (Status.equals("2")){
-                        startActivity(i);
+                            break;
                     }
                 }
             }

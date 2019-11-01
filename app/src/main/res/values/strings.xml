@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">AndonPrototype</string>
+    <string name="breakdown_history">Breakdown History</string>
+    <string name="machine_id">Machine ID</string>
+    <string name="line">Line</string>
+    <string name="line_colon">Line : </string>
+    <string name="station">Station</string>
+    <string name="repair_time_start">Repair Time Start</string>
+    <string name="repair_time_finish">Repair Time Finish</string>
+    <string name="repair_duration">Repair Duration</string>
+    <string name="colon">:</string>
+    <string name="machine_id_colon">Machine ID : </string>
+    <string name="detail_report_title">Detail Report</string>
+    <string name="station_colon">Station : </string>
+    <string name="pic_colon">PIC : </string>
+    <string name="repair_date_start_colon">Repair Date Start :</string>
+    <string name="repair_date_finish_colon">Repair Date Finish :</string>
+    <string name="duration_colon">Duration :</string>
+    <string name="problem_image_title">Problem Image</string>
+    <string name="solution_image_title">Solution Image</string>
+    <string name="problem_image">Problem Image</string>
+    <string name="solution_image">Solution Image</string>
+    <string name="user_id_hint">USER ID</string>
+    <string name="password_hint">PASSWORD</string>
+    <string name="login_hint">Login</string>
+    <string name="main_dashboard">Andon Main Dashboard</string>
+    <string name="factory_machine_monitoring_system">Factory Machine Monitoring System</string>
+    <string name="machine_dashboard_title">Machine Dashboard</string>
 </resources>

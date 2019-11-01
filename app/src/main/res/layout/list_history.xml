@@ -5,46 +5,17 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/RelativeReport">
+        android:id="@+id/RelativeLayoutHistory">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/machine_id"
             android:layout_marginTop="5dp"
-            android:id="@+id/MachineID1"
-            android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:layout_marginBottom="5dp"
-            android:textSize="20sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Line1"
-            android:text="@string/line"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"
-            android:layout_below="@id/MachineID1"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Station1"
-            android:text="@string/station"
-            android:textSize="15sp"
-            android:layout_marginStart="10dp"
-            android:layout_below="@id/Line1"
-            android:layout_marginBottom="5dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/RepairTimeStart1"
             android:text="@string/repair_time_start"
             android:textSize="15sp"
             android:layout_marginStart="10dp"
-            android:layout_below="@id/Station1"
             android:layout_marginBottom="5dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,14 +25,34 @@
             android:layout_marginStart="10dp"
             android:layout_below="@id/RepairTimeStart1"
             android:layout_marginBottom="5dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Duration1"
             android:text="@string/repair_duration"
+            android:textStyle=""
             android:textSize="15sp"
             android:layout_marginStart="10dp"
             android:layout_below="@id/RepairTimeFinish1"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Line1"
+            android:text="@string/line"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/Duration1"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Station1"
+            android:text="@string/station"
+            android:textSize="15sp"
+            android:layout_marginStart="10dp"
+            android:layout_below="@id/Line1"
             android:layout_marginBottom="5dp"/>
     </RelativeLayout>
     <RelativeLayout
@@ -69,7 +60,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/colon"
         android:layout_marginStart="5dp"
-        android:layout_toEndOf="@id/RelativeReport">
+        android:layout_toEndOf="@id/RelativeLayoutHistory">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,7 +68,7 @@
             android:id="@+id/colon1"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:textSize="20sp"/>
+            android:textSize="15sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,48 +101,19 @@
             android:layout_below="@id/colon4"
             android:layout_marginBottom="5dp"
             android:textSize="15sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/colon"
-            android:id="@+id/colon6"
-            android:layout_below="@id/colon5"
-            android:layout_marginBottom="5dp"
-            android:textSize="15sp"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/RelativeReportData"
+        android:id="@+id/RelativeHistoryData"
         android:layout_toEndOf="@id/colon"
-        android:orientation="horizontal"
-        android:layout_marginStart="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/MachineID"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Line"
-            android:layout_below="@id/MachineID"
-            android:layout_marginBottom="5dp"
-            android:textSize="15sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Station"
-            android:layout_below="@id/Line"
-            android:layout_marginBottom="5dp"
-            android:textSize="15sp"/>
+        android:layout_marginStart="10dp"
+        android:orientation="horizontal">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/RepairTimeStart"
-            android:layout_below="@id/Station"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:textSize="15sp"/>
         <TextView
@@ -166,6 +128,20 @@
             android:layout_height="wrap_content"
             android:id="@+id/Duration"
             android:layout_below="@id/RepairTimeFinish"
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Line"
+            android:layout_below="@id/Duration"
+            android:layout_marginBottom="5dp"
+            android:textSize="15sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Station"
+            android:layout_below="@id/Line"
             android:textSize="15sp"
             android:layout_marginBottom="5dp"/>
     </RelativeLayout>

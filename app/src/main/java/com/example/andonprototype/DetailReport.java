@@ -1,39 +1,25 @@
 package com.example.andonprototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.Dashboard.LoginActivity;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DetailReport extends AppCompatActivity {
-    public String mesin;
-    public String pic;
-    public String num;
-    public String station;
-    public String duration;
-    public String line;
-    public String Nomor;
-    public String RepairTimeStart;
-    public String RepairTimeFinish;
-    public String Desc_Problem;
-    public String Desc_Solution;
-    public String ImageProblem;
-    public String ImageSolution;
-    public ImageView Image_Problem;
-    public ImageView Image_Solution;
+    private String mesin,pic,num,station,duration,line,Nomor,RepairTimeStart;
+    private String RepairTimeFinish,Desc_Problem,Desc_Solution,ImageProblem,ImageSolution;
+    private ImageView Image_Problem,Image_Solution;
     Connection connect;
     String ConnectionResult = "";
 
@@ -42,19 +28,18 @@ public class DetailReport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_report);
         Nomor = getIntent().getStringExtra("No");
-        TextView MachineID = (TextView) findViewById(R.id.MachineID);
-        TextView Line = (TextView) findViewById(R.id.Line);
-        TextView Station = (TextView) findViewById(R.id.Station);
-        TextView PIC = (TextView) findViewById(R.id.PIC);
-        TextView Duration = (TextView) findViewById(R.id.Duration);
-        TextView RepairStart = (TextView) findViewById(R.id.RepairTimeStart);
-        TextView RepairFinish = (TextView) findViewById(R.id.RepairTimeFinish);
-        TextView DescProblem = (TextView) findViewById(R.id.DescImageProblem);
-        TextView DescSolution = (TextView) findViewById(R.id.DescImageSolution);
+        TextView MachineID = findViewById(R.id.MachineID);
+        TextView Line = findViewById(R.id.Line);
+        TextView Station = findViewById(R.id.Station);
+        TextView PIC = findViewById(R.id.PIC);
+        TextView Duration = findViewById(R.id.Duration);
+        TextView RepairStart = findViewById(R.id.RepairTimeStart);
+        TextView RepairFinish = findViewById(R.id.RepairTimeFinish);
+        TextView DescProblem = findViewById(R.id.DescImageProblem);
+        TextView DescSolution = findViewById(R.id.DescImageSolution);
         Image_Problem =findViewById(R.id.ImageProblem);
         Image_Solution =findViewById(R.id.ImageSolution);
         getProblem();
-        Toast.makeText(this, num, Toast.LENGTH_SHORT).show();
         MachineID.setText(mesin);
         Line.setText(line);
         Station.setText(station);
