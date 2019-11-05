@@ -58,5 +58,14 @@
         android:background="#D50000"
         android:text="Waiting List Problem"
         android:textColor="#FFFFFF" />
+    <Button
+        android:layout_width="170dp"
+        android:layout_height="77dp"
+        android:text="Survey"
+        android:id="@+id/btnSurvey"
+        android:layout_below="@id/btnReportActivity"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:layout_margin="20dp"/>
 
 </RelativeLayout>

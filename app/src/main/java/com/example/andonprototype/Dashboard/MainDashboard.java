@@ -25,6 +25,7 @@ import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.R;
 import com.example.andonprototype.ReportActivity;
 import com.example.andonprototype.SaveSharedPreference;
+import com.example.andonprototype.Survey;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -63,6 +64,7 @@ public class MainDashboard extends AppCompatActivity {
         Button btnV = findViewById(R.id.btnView);
         Button btnReportActivity = findViewById(R.id.btnReportActivity);
         Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
+        Button btnSurvey = findViewById(R.id.btnSurvey);
         hasil = welcomeText.getText().toString();
 
         btnV.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +101,14 @@ public class MainDashboard extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MainDashboard.this, ProblemWaitingList.class);
                 i.putExtra("PIC", pic);
+                startActivity(i);
+            }
+        });
+
+        btnSurvey.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainDashboard.this, Survey.class);
                 startActivity(i);
             }
         });
