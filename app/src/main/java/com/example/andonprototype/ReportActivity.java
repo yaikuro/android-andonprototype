@@ -82,7 +82,7 @@ public class ReportActivity extends AppCompatActivity implements ListView.OnItem
             } else {
                 String query = "Select No,MachineID,Line,Station,CONVERT(VARCHAR(10),Repair_Time_Start) AS Repair_Time_Start," +
                         "CONVERT(VARCHAR(10),Repair_Time_Finish) AS Repair_Time_Finish," +
-                        "Repair_Duration from machinestatustest where PIC='" + id + "'";
+                        "Repair_Duration from machinestatustest where PIC='" + id + "' ORDER BY Response_Time_Finish DESC";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {

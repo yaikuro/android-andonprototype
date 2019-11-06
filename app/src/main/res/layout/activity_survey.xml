@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ans1"
             android:hint="Answer"
+            android:inputType="textShortMessage"
             android:layout_below="@id/q1"/>
         <TextView
             android:layout_width="wrap_content"
@@ -49,6 +50,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ans2"
             android:hint="Answer"
+            android:inputType="textShortMessage"
             android:layout_below="@id/q2"/>
         <TextView
             android:layout_width="wrap_content"
@@ -64,6 +66,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/ans3"
             android:hint="Answer"
+            android:inputType="textShortMessage"
             android:layout_below="@id/q3"/>
         <TextView
             android:layout_width="wrap_content"
