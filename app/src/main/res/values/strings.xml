@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AndonPrototype</string>
+    <string name="app_name">Factory Machine Monitoring System</string>
     <string name="breakdown_history">Breakdown History</string>
     <string name="machine_id">Machine ID</string>
     <string name="line">Line</string>
@@ -23,7 +23,7 @@
     <string name="user_id_hint">USER ID</string>
     <string name="password_hint">PASSWORD</string>
     <string name="login_hint">Login</string>
-    <string name="main_dashboard">Andon Main Dashboard</string>
+    <string name="main_dashboard">Main Dashboard</string>
     <string name="factory_machine_monitoring_system">Factory Machine Monitoring System</string>
     <string name="machine_dashboard_title">Machine Dashboard</string>
     <string name="insert_pic_id">Insert PIC ID</string>

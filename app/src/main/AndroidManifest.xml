@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Survey"></activity>
-        <activity android:name=".BreakdownHistory" />
+        <activity android:name=".BreakdownHistory"
+            android:label="Breakdown History"/>
         <activity android:name=".DetailReport" />
         <activity
             android:name=".Dashboard.MachineDashboard"

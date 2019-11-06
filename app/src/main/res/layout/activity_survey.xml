@@ -106,27 +106,51 @@
             android:layout_marginTop="20dp"
             android:textColor="#000000"
             android:textSize="20sp"/>
-        <EditText
-            android:layout_width="match_parent"
+        <CheckBox
+            android:id="@+id/checkboxq61"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ans6"
-            android:hint="Answer"
-            android:layout_below="@id/q6"/>
+            android:layout_below="@id/q6"
+            android:text="Augmented Reality (AR)"/>
+        <CheckBox
+            android:id="@+id/checkboxq62"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkboxq61"
+            android:text="Virtual Reality (VR)"/>
+        <CheckBox
+            android:id="@+id/checkboxq63"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkboxq62"
+            android:text="Monitoring System with IIOT Platform"/>
+        <CheckBox
+            android:id="@+id/checkboxq64"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkboxq63"
+            android:text="Smart Glass"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q7"
             android:text="Do you have a plan to implement similar application in your factory?"
-            android:layout_below="@id/ans6"
+            android:layout_below="@id/checkboxq64"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
             android:textSize="20sp"/>
-        <EditText
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/radioButtonQ71"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ans7"
-            android:hint="Answer"
-            android:layout_below="@id/q7"/>
+            android:layout_below="@id/q7"
+            android:text="Yes"/>
+        <RadioButton
+            android:id="@+id/radioButtonQ72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/radioButtonQ71"
+            android:text="No"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -134,7 +158,7 @@
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
             android:text="Submit"
-            android:layout_below="@id/ans7"/>
+            android:layout_below="@id/radioButtonQ72"/>
     </RelativeLayout>
 
 </ScrollView>
