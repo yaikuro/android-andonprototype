@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
+import com.example.andonprototype.MachineStatusBreakdown;
+import com.example.andonprototype.MachineStatusRepair;
 import com.example.andonprototype.R;
 import com.example.andonprototype.ReportActivity;
 import com.example.andonprototype.SaveSharedPreference;
@@ -65,7 +67,25 @@ public class MainDashboard extends AppCompatActivity {
         Button btnReportActivity = findViewById(R.id.btnReportActivity);
         Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
         Button btnSurvey = findViewById(R.id.btnSurvey);
+        Button btnMachineStatusRepair = findViewById(R.id.btnMachineStatusRepair);
+        Button btnMachineStatusBreakdown = findViewById(R.id.btnMachineStatusBreakdown);
         hasil = welcomeText.getText().toString();
+
+        btnMachineStatusBreakdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainDashboard.this, MachineStatusBreakdown.class);
+                startActivity(i);
+            }
+        });
+
+        btnMachineStatusRepair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainDashboard.this, MachineStatusRepair.class);
+                startActivity(i);
+            }
+        });
 
         btnV.setOnClickListener(new View.OnClickListener() {
             @Override

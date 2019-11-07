@@ -15,15 +15,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Survey"></activity>
-        <activity android:name=".BreakdownHistory"
-            android:label="Breakdown History"/>
+        <activity android:name=".MachineStatusRepair"
+            android:label="Machine Status Repair">
+        </activity>
+        <activity android:name=".Survey" />
+        <activity
+            android:name=".BreakdownHistory"
+            android:label="Breakdown History" />
         <activity android:name=".DetailReport" />
         <activity
             android:name=".Dashboard.MachineDashboard"
             android:label="@string/machine_dashboard_title" />
         <activity android:name=".barcodescanner.SimpleScanner" />
         <activity android:name=".DetailBreakdownPage2" />
+        <activity android:name=".MachineStatusBreakdown"/>
         <activity
             android:name=".Dashboard.MainDashboard"
             android:label="@string/main_dashboard" />

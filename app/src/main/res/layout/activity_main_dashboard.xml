@@ -63,9 +63,33 @@
         android:layout_height="77dp"
         android:text="Survey"
         android:id="@+id/btnSurvey"
-        android:layout_below="@id/btnReportActivity"
+        android:layout_below="@id/btnMachineStatusBreakdown"
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:layout_margin="20dp"/>
+
+    <Button
+        android:id="@+id/btnMachineStatusRepair"
+        android:layout_width="300dp"
+        android:layout_height="77dp"
+        android:layout_below="@id/btn_waiting_list"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#2AD10A"
+        android:text="Machine Status Repair"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btnMachineStatusBreakdown"
+        android:layout_width="300dp"
+        android:layout_height="77dp"
+        android:layout_below="@id/btnMachineStatusRepair"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:background="#D10A0A"
+        android:text="Machine Status Breakdown"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp" />
 
 </RelativeLayout>

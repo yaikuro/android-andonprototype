@@ -150,15 +150,13 @@ public class Survey extends AppCompatActivity {
         }, 3000);
     }
 
-    public void radio_yes()
-    {
+    public void radio_yes() {
         // Note that I have unchecked  radiobuttons except the one
         // which is clicked/checked by user
         radioButtonQ72.setChecked(false);
     }
 
-    public void radio_no()
-    {
+    public void radio_no() {
         // Note that I have unchecked  radiobuttons except the one
         // which is clicked/checked by user
         radioButtonQ71.setChecked(false);
