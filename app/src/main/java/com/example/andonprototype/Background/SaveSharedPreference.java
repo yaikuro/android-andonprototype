@@ -1,4 +1,4 @@
-package com.example.andonprototype;
+package com.example.andonprototype.Background;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -43,6 +43,6 @@ public class SaveSharedPreference
     {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.clear(); //clear all stored data
-        editor.commit();
+        editor.apply();
     }
 }

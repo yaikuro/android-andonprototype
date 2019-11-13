@@ -1,7 +1,5 @@
 package com.example.andonprototype.Background;
 
-import com.example.andonprototype.ReportActivity;
-
 public class Query {
     public static final String getdataquery =
             "select MachineID, Line, Station, Status " +

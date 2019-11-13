@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ReportActivity">
+        tools:context=".ReportActivityFragment">
 
         <EditText
             android:layout_width="match_parent"
@@ -16,7 +16,6 @@
             android:id="@+id/edtInsertID"
             android:hint="Insert PIC"
             android:inputType="textShortMessage"
-            android:layout_below="@+id/txtReportActivity"
             android:layout_marginTop="30dp"
             android:gravity="center"
             />

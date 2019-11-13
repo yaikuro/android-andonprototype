@@ -21,29 +21,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.MachineStatusBreakdown;
-import com.example.andonprototype.MachineStatusRepair;
 import com.example.andonprototype.R;
-import com.example.andonprototype.ReportActivity;
-import com.example.andonprototype.SaveSharedPreference;
-import com.example.andonprototype.Survey;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static com.example.andonprototype.SaveSharedPreference.clearUserName;
-import static com.example.andonprototype.SaveSharedPreference.getID;
+import static com.example.andonprototype.Background.SaveSharedPreference.clearUserName;
+import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 
 public class MainDashboard extends AppCompatActivity {
     private static final String TAG = "MainDashboard";
@@ -68,24 +60,26 @@ public class MainDashboard extends AppCompatActivity {
         setContentView(R.layout.activity_main_dashboard);
         createNotificationChannels();
 
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
         notificationManager = NotificationManagerCompat.from(this);
-//        TextView welcomeText = findViewById(R.id.welcomeText);
+        TextView txtnotif = findViewById(R.id.txtnotif);
         pic = getID(this);
         send = notifikasi + pic;
-//        welcomeText.setText(send);
-        Button logoutBtn = findViewById(R.id.btnLogout);
-        Button btnV = findViewById(R.id.btnView);
-//        hasil = welcomeText.getText().toString();
+        txtnotif.setText(send);
+        hasil = txtnotif.getText().toString();
 
-//        content();
+        content();
         isStoragePermissionGranted();
 
         FloatingActionButton fab        = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                logout();
             }
         });
 
@@ -117,6 +111,15 @@ public class MainDashboard extends AppCompatActivity {
         ////////////////////////////////////////////////End of Bottom Navigation//////////////////////////////////////////////////////////////////////////////
     }
 
+
+    public void logout() {
+        clearUserName(this);
+        send = "";
+        notifikasi = "";
+        Intent i = new Intent(MainDashboard.this, LoginActivity.class);
+        startActivity(i);
+        finish();
+    }
     private  void content(){
         getStatus();
         if (!send.equals(notifikasi)&&Status.equals("2"))
@@ -178,10 +181,11 @@ public class MainDashboard extends AppCompatActivity {
             manager.createNotificationChannel(channel1);
         }
     }
+
     public void sendOnChannel1() {
         String title = "ALERT";
         String message = "Machine Problem Detected";
-        Intent activityIntent = new Intent(this, ProblemWaitingList.class);
+        Intent activityIntent = new Intent(this, MainDashboard.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setSmallIcon(R.drawable.ic_launcher_background)
@@ -214,22 +218,14 @@ public class MainDashboard extends AppCompatActivity {
         }, 3000);
     }
 
-    public boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
-                return true;
-            } else {
-
-                Log.v(TAG,"Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
+    public void isStoragePermissionGranted() {
+        if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
             Log.v(TAG,"Permission is granted");
-            return true;
+        } else {
+
+            Log.v(TAG,"Permission is revoked");
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
     }
 }

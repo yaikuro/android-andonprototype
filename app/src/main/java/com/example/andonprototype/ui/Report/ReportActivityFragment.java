@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.andonprototype.SaveSharedPreference.getID;
+import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 
 
 public class ReportActivityFragment extends Fragment implements ListView.OnItemClickListener{
@@ -50,19 +50,14 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
         mainDashboardViewModel =
                 ViewModelProviders.of(this).get(ReportActivityViewModel.class);
         View root = inflater.inflate(R.layout.fragment_reportactivity, container, false);
-//        final TextView textView = root.findViewById(R.id.welcomeText);
-//        mainDashboardViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+
         ListReport = root.findViewById(R.id.ListReport);
         ListReport.setOnItemClickListener(this);
         Button btnSearch = root.findViewById(R.id.btnSearch);
         edtInsertID = root.findViewById(R.id.edtInsertID);
         id = getID(getActivity());
         edtInsertID.setText(id);
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +65,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                 getReport();
             }
         });
+
         final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -101,7 +97,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
             } else {
                 String query = "Select No,MachineID,Line,Station,CONVERT(VARCHAR(10),Repair_Time_Start) AS Repair_Time_Start," +
                         "CONVERT(VARCHAR(10),Repair_Time_Finish) AS Repair_Time_Finish," +
-                        "Repair_Duration from machinestatustest where PIC='" + id + "'";
+                        "Repair_Duration from machinestatustest where PIC='" + id + "' ORDER BY Response_Time_Finish DESC";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -135,7 +131,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        Intent i = new Intent(getActivity(), DetailReport.class);
+        Intent i = new Intent(getActivity(),DetailReport.class);
         Map<String,String> mp = (Map<String, String>) ListReport.getItemAtPosition(position);
         Object No = mp.get("No");
         Object machine = mp.get("MachineID");
@@ -148,6 +144,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
         Duration = duration.toString();
         Number = No.toString();
         i.putExtra("No", Number);
+        //Toast.makeText(this, Mesin, Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 }

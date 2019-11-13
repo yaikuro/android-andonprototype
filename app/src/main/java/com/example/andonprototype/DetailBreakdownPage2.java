@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -28,6 +29,7 @@ import com.example.andonprototype.Dashboard.MainDashboard;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOError;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -62,32 +64,33 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_breakdown_page2);
+        connectionClass = new ConnectionClass();
         values = new ContentValues();
+
         Line = getIntent().getStringExtra("Line");
         Station = getIntent().getStringExtra("Station");
         MachineID = getIntent().getStringExtra("MachineID");
         picr = getIntent().getStringExtra("PIC");
         ResponseDateFinish = getIntent().getStringExtra("ResponseDateFinish");
-        pbbarDetail = (ProgressBar) findViewById(R.id.pbbarDetail);
+
+        camera_open_id      = findViewById(R.id.camera_button);
+        click_image_id      = findViewById(R.id.problem_pic);
+
+        camera_open_id2     = findViewById(R.id.camera_button_solution);
+        click_image_id2     = findViewById(R.id.solution_pic);
+
+        problem_desc_text   = findViewById(R.id.problem_desc_text);
+        solution_desc_text  = findViewById(R.id.solution_desc_text);
+
+        machine_id          = findViewById(R.id.machine_id);
+        date_start_text     = findViewById(R.id.date_start_text);
+        pic                 = findViewById(R.id.pic);
+
+        btnSave             = findViewById(R.id.btnSave);
+        txtmsg              = findViewById(R.id.txtmsg);
+
+        pbbarDetail         = findViewById(R.id.pbbarDetail);
         pbbarDetail.setVisibility(View.INVISIBLE);
-
-        connectionClass = new ConnectionClass();
-
-        camera_open_id      = (Button)    findViewById(R.id.camera_button);
-        click_image_id      = (ImageView) findViewById(R.id.problem_pic);
-
-        camera_open_id2     = (Button)    findViewById(R.id.camera_button_solution);
-        click_image_id2     = (ImageView) findViewById(R.id.solution_pic);
-
-        problem_desc_text   = (EditText)  findViewById(R.id.problem_desc_text);
-        solution_desc_text  = (EditText)  findViewById(R.id.solution_desc_text);
-
-        machine_id          = (TextView)  findViewById(R.id.machine_id);
-        date_start_text     = (TextView)  findViewById(R.id.date_start_text);
-        pic                 = (TextView)  findViewById(R.id.pic);
-
-        btnSave             = (Button)    findViewById(R.id.btnSave);
-        txtmsg              = (TextView)  findViewById(R.id.txtmsg);
 
         pic.setText(picr);
         machine_id.setText(MachineID);
@@ -113,6 +116,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         chronometer.setBase(SystemClock.elapsedRealtime());
         startChronometer();
         ////////////////////////////////////////////////////////end of stop watch section///////////////////////////////////////////////////////////////////////////////////////////////////
+
         updatePICstatus3();
         GetPicture();
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -128,10 +132,12 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         super.onDestroy();
         pbbarDetail.setVisibility(View.GONE);
     }
+
     public void LoadMainDashboard() {
         Intent i = new Intent(DetailBreakdownPage2.this, MainDashboard.class);
         startActivity(i);
     }
+
     public void UploadtoDB() {
         String msg = "unknown";
         chronometer.stop();
@@ -199,6 +205,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             running = true;
         }
     }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -219,6 +226,13 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }, 3000);
     }
 
+    public static Bitmap rotateImage(Bitmap source, float angle) {
+        Matrix matrix = new Matrix();
+        matrix.postRotate(angle);
+        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
+                matrix, true);
+    }
+
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
@@ -228,10 +242,14 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                 try {
                     imageStream = getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImageProblem = BitmapFactory.decodeStream(imageStream);
-                    click_image_id.setImageBitmap(selectedImageProblem);
-                    
+
+                    Bitmap RotatedselectedImageProblem = null;
+                    RotatedselectedImageProblem = rotateImage(selectedImageProblem, 90);
+
+                    click_image_id.setImageBitmap(RotatedselectedImageProblem);
+
                     if (selectedImageProblem != null) {
-                        encodedImageProblem = encodeImage(selectedImageProblem);
+                        encodedImageProblem = encodeImage(RotatedselectedImageProblem);
                         Toast.makeText(DetailBreakdownPage2.this, "Conversion Done",
                                 Toast.LENGTH_SHORT).show();
                     } else {
@@ -239,7 +257,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                     break;
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -250,10 +268,14 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                 try {
                     imageStream = getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImageSolution = BitmapFactory.decodeStream(imageStream);
-                    click_image_id2.setImageBitmap(selectedImageSolution);
+
+                    Bitmap RotatedselectedImageSolution = null;
+                    RotatedselectedImageSolution = rotateImage(selectedImageSolution, 90);
+
+                    click_image_id2.setImageBitmap(RotatedselectedImageSolution);
 
                     if (selectedImageSolution != null) {
-                        encodedImageSolution = encodeImage(selectedImageSolution);
+                        encodedImageSolution = encodeImage(RotatedselectedImageSolution);
                         Toast.makeText(DetailBreakdownPage2.this, "Conversion Done",
                                 Toast.LENGTH_SHORT).show();
                     } else {
@@ -261,7 +283,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
                     }
                     break;
-                } catch (FileNotFoundException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }

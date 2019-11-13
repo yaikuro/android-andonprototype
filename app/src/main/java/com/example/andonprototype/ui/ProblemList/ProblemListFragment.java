@@ -23,7 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.Query;
 import com.example.andonprototype.R;
-import com.example.andonprototype.SaveSharedPreference;
+import com.example.andonprototype.Background.SaveSharedPreference;
 import com.example.andonprototype.barcodescanner.SimpleScanner;
 
 import java.sql.Connection;
@@ -36,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class ProblemListFragment extends Fragment implements ListView.OnItemClickListener {
@@ -54,14 +55,6 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
         problemListViewModel =
                 ViewModelProviders.of(this).get(ProblemListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_problemwaitinglist, container, false);
-//        final TextView textView = root.findViewById(R.id.text_problemwaitinglist);
-//        problemListViewModel.getText().observe(this, new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
-
 
         ListProblem = root.findViewById(R.id.ListProblem);
         ListProblem.setOnItemClickListener(this);
@@ -76,8 +69,6 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                 pullToRefresh.setRefreshing(false);
             }
         });
-
-
         return root;
     }
 
@@ -125,18 +116,27 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                         String Person = rs.getString("PIC");
                         Map<String, String> datanum = new HashMap<>();
                         datanum.put("Status", status);
-                        if (status.equals("1")) {
-                            int i = 0;
-                            datanum.put("Image", Integer.toString((listviewImage[i])));
-                        } else if (status.equals("2")) {
-                            int i = 1;
-                            datanum.put("Image", Integer.toString(listviewImage[i]));
-                        } else if (status.equals("3")) {
-                            int i = 2;
-                            datanum.put("Image", Integer.toString(listviewImage[i]));
-                        } else if (status.equals("4")){
-                            int i = 3;
-                            datanum.put("Image", Integer.toString(listviewImage[i]));
+                        switch (status) {
+                            case "1": {
+                                int i = 0;
+                                datanum.put("Image", Integer.toString((listviewImage[i])));
+                                break;
+                            }
+                            case "2": {
+                                int i = 1;
+                                datanum.put("Image", Integer.toString(listviewImage[i]));
+                                break;
+                            }
+                            case "3": {
+                                int i = 2;
+                                datanum.put("Image", Integer.toString(listviewImage[i]));
+                                break;
+                            }
+                            case "4": {
+                                int i = 3;
+                                datanum.put("Image", Integer.toString(listviewImage[i]));
+                                break;
+                            }
                         }
                         datanum.put("MachineID", MachineID);
                         datanum.put("Line", Line);
@@ -162,7 +162,7 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
         if (pic.equals("")) {
             Toast.makeText(getActivity(), "ID not Detected, Please Re-login to verify", Toast.LENGTH_SHORT).show();
         } else {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+            if (ContextCompat.checkSelfPermission(Objects.requireNonNull(getActivity()), Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(),
                         new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
@@ -187,22 +187,28 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                     startActivity(i);
                 }
                 else {
-                    switch (Status) {
+                    Object person = mp.get("PIC");
+                    switch (Status){
                         case "3":
-                            Object person = mp.get("PIC");
                             if (person != null) {
                                 Person = person.toString();
                                 if (person.equals(pic)) {
                                     startActivity(i);
                                 } else {
-                                    Toast.makeText(getActivity(), "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getActivity(), Person + " is currently repairing", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 Toast.makeText(getActivity(), "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "4":
-                            Toast.makeText(getActivity(), "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                            if(person != null){
+                                Person = person.toString();
+                                Toast.makeText(getActivity(), "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                            }
                             break;
                         case "2":
                             startActivity(i);

@@ -3,6 +3,7 @@ package com.example.andonprototype.Dashboard;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,13 +14,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.R;
-import com.example.andonprototype.SaveSharedPreference;
+import com.example.andonprototype.Background.SaveSharedPreference;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static com.example.andonprototype.SaveSharedPreference.getUserName;
+import static com.example.andonprototype.Background.SaveSharedPreference.getUserName;
+import static com.example.andonprototype.Background.SaveSharedPreference.setUserName;
 
 public class LoginActivity extends AppCompatActivity {
     public String ID,PIC;
@@ -50,7 +52,22 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DoLogin doLogin = new DoLogin();
                 doLogin.execute("");
-                saveSharedPreference.setUserName(LoginActivity.this,etuserid.getText().toString());
+                setUserName(LoginActivity.this,etuserid.getText().toString());
+            }
+        });
+
+        etpass.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER))
+                {
+                    DoLogin doLogin = new DoLogin();
+                    doLogin.execute("");
+                    setUserName(LoginActivity.this,etuserid.getText().toString());
+                    return true;
+                }
+                return false;
             }
         });
     }

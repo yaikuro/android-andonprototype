@@ -32,8 +32,7 @@
         <activity
             android:name=".Dashboard.MainDashboard"
             android:label="@string/main_dashboard" />
-        <activity android:name=".ReportActivity" />
-        <activity android:name=".Dashboard.ProblemWaitingList" />
+
         <activity android:name=".Dashboard.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

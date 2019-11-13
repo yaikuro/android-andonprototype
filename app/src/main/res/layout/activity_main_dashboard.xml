@@ -57,7 +57,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/sendtxtview"
+            android:id="@+id/txtnotif"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textSize="0sp"
