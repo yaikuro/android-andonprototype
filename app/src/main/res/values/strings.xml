@@ -42,11 +42,26 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">History</string>
     <string name="menu_slideshow">Report</string>
     <string name="menu_tools">Settings</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Export</string>
+    <string name="survey">Survey</string>
+    <string name="what_is_your_name">What is your name?</string>
+    <string name="answer">Answer</string>
+    <string name="what_is_your_job_title_department">What is your job title / department?</string>
+    <string name="what_is_your_company_name">What is your company name?</string>
+    <string name="what_is_your_e_mail">What is your e-mail?</string>
+    <string name="what_is_your_phone_number">What is your phone number?</string>
+    <string name="what_kind_of_application_interest_you">What kind of application interest you?</string>
+    <string name="augmented_reality_ar">Augmented Reality (AR)</string>
+    <string name="virtual_reality_vr">Virtual Reality (VR)</string>
+    <string name="monitoring_system_with_iiot_platform">Monitoring System with IIOT Platform</string>
+    <string name="smart_glass">Smart Glass</string>
+    <string name="implement">Do you have a plan to implement similar application in your factory?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit">Submit</string>
 </resources>

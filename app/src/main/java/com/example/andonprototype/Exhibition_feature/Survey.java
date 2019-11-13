@@ -1,4 +1,4 @@
-package com.example.andonprototype;
+package com.example.andonprototype.Exhibition_feature;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,11 +12,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Dashboard.MainDashboard;
+import com.example.andonprototype.R;
 
 import java.io.IOError;
 import java.sql.Connection;
@@ -37,18 +37,18 @@ public class Survey extends AppCompatActivity {
         setContentView(R.layout.activity_survey);
         final RadioGroup radioGroup;
         connectionClass = new ConnectionClass();
-        btnSubmit = findViewById(R.id.btnSubmit);
-        ans1 = findViewById(R.id.ans1);
-        ans2 = findViewById(R.id.ans2);
-        ans3 = findViewById(R.id.ans3);
-        ans4 = findViewById(R.id.ans4);
-        ans5 = findViewById(R.id.ans5);
-        checkBoxq61 = findViewById(R.id.checkboxq61);
-        checkBoxq62 = findViewById(R.id.checkboxq62);
-        checkBoxq63 = findViewById(R.id.checkboxq63);
-        checkBoxq64 = findViewById(R.id.checkboxq64);
-        radioButtonQ71 = findViewById(R.id.radioButtonQ71);
-        radioButtonQ72 = findViewById(R.id.radioButtonQ72);
+        btnSubmit       = findViewById(R.id.btnSubmit);
+        ans1            = findViewById(R.id.ans1);
+        ans2            = findViewById(R.id.ans2);
+        ans3            = findViewById(R.id.ans3);
+        ans4            = findViewById(R.id.ans4);
+        ans5            = findViewById(R.id.ans5);
+        checkBoxq61     = findViewById(R.id.checkboxq61);
+        checkBoxq62     = findViewById(R.id.checkboxq62);
+        checkBoxq63     = findViewById(R.id.checkboxq63);
+        checkBoxq64     = findViewById(R.id.checkboxq64);
+        radioButtonQ71  = findViewById(R.id.radioButtonQ71);
+        radioButtonQ72  = findViewById(R.id.radioButtonQ72);
         radioButtonQ71.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

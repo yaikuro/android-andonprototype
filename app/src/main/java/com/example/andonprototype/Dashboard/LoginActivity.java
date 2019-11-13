@@ -41,10 +41,10 @@ public class LoginActivity extends AppCompatActivity {
             loadDashboard2();
         }
         connectionClass = new ConnectionClass();
-        etuserid = (EditText) findViewById(R.id.edtuserid);
-        etpass = (EditText) findViewById(R.id.edtpass);
-        btnlogin = (Button) findViewById(R.id.btnlogin);
-        pbbar = (ProgressBar) findViewById(R.id.pbbar);
+        etuserid = findViewById(R.id.edtuserid);
+        etpass = findViewById(R.id.edtpass);
+        btnlogin = findViewById(R.id.btnlogin);
+        pbbar = findViewById(R.id.pbbar);
         pbbar.setVisibility(View.GONE);
 
         btnlogin.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +141,7 @@ public class LoginActivity extends AppCompatActivity {
     }
         private void loadDashboard(){
             Intent i = new Intent(getApplicationContext(), MainDashboard.class);
-            saveSharedPreference.setID(LoginActivity.this,ID);
+            SaveSharedPreference.setID(LoginActivity.this,ID);
             startActivity(i);
             finish();
         }

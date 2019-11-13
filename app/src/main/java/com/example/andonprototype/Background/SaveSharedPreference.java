@@ -8,10 +8,10 @@ import static android.content.SharedPreferences.*;
 
 public class SaveSharedPreference
 {
-    static final String PREF_USER_NAME= "username";
-    static final String PREF_ID= "ID";
+    private static final String PREF_USER_NAME= "username";
+    private static final String PREF_ID= "ID";
 
-    static SharedPreferences getSharedPreferences(Context ctx) {
+    private static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
@@ -19,14 +19,14 @@ public class SaveSharedPreference
     {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.putString(PREF_USER_NAME, userName);
-        editor.commit();
+        editor.apply();
     }
 
     public static void setID(Context ctx, String ID)
     {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.putString(PREF_ID, ID);
-        editor.commit();
+        editor.apply();
     }
 
     public static String getUserName(Context ctx)

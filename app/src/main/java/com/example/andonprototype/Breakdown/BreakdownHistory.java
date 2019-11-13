@@ -1,4 +1,4 @@
-package com.example.andonprototype;
+package com.example.andonprototype.Breakdown;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
+import com.example.andonprototype.R;
+import com.example.andonprototype.Report.DetailReport;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -139,7 +141,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(this,DetailReport.class);
+        Intent i = new Intent(this, DetailReport.class);
         Map<String,String> mp;
         mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object No = mp.get("No");

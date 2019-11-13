@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.DetailBreakdownPage2;
+import com.example.andonprototype.Breakdown.DetailBreakdownPage2;
 import com.example.andonprototype.R;
 
 import java.sql.Connection;
@@ -30,7 +30,7 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
         super.onCreate(state);
         setContentView(R.layout.activity_simple_scanner);
         connectionClass = new ConnectionClass();
-        ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
+        ViewGroup contentFrame = findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
         contentFrame.addView(mScannerView);
         MachineID = getIntent().getStringExtra("MachineID");

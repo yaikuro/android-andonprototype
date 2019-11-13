@@ -18,7 +18,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.DetailReport;
+import com.example.andonprototype.Report.DetailReport;
 import com.example.andonprototype.R;
 
 import java.sql.Connection;

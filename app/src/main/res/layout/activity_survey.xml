@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:fillViewport="true"
     android:layout_margin="10dp"
-    tools:context=".Survey">
+    tools:context=".Exhibition_feature.Survey">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,16 +14,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/Survey_Title"
-            android:text="Survey"
+            android:text="@string/survey"
             android:textStyle="bold"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textColor="#000000"
             android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q1"
-            android:text="What is your name?"
+            android:text="@string/what_is_your_name"
             android:layout_below="@id/Survey_Title"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -33,14 +32,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ans1"
-            android:hint="Answer"
+            android:hint="@string/answer"
             android:inputType="textShortMessage"
             android:layout_below="@id/q1"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q2"
-            android:text="What is your job title / department?"
+            android:text="@string/what_is_your_job_title_department"
             android:layout_below="@id/ans1"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -49,14 +48,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ans2"
-            android:hint="Answer"
+            android:hint="@string/answer"
             android:inputType="textShortMessage"
             android:layout_below="@id/q2"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q3"
-            android:text="What is your company name?"
+            android:text="@string/what_is_your_company_name"
             android:layout_below="@id/ans2"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -65,14 +64,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ans3"
-            android:hint="Answer"
+            android:hint="@string/answer"
             android:inputType="textShortMessage"
             android:layout_below="@id/q3"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q4"
-            android:text="What is your e-mail?"
+            android:text="@string/what_is_your_e_mail"
             android:layout_below="@id/ans3"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -81,14 +80,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ans4"
-            android:hint="Answer"
+            android:hint="@string/answer"
             android:inputType="textEmailAddress"
             android:layout_below="@id/q4"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q5"
-            android:text="What is your phone number?"
+            android:text="@string/what_is_your_phone_number"
             android:layout_below="@id/ans4"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -97,14 +96,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/ans5"
-            android:hint="Answer"
+            android:hint="@string/answer"
             android:inputType="phone"
             android:layout_below="@id/q5"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q6"
-            android:text="What kind of application interest you?"
+            android:text="@string/what_kind_of_application_interest_you"
             android:layout_below="@id/ans5"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -114,30 +113,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/q6"
-            android:text="Augmented Reality (AR)"/>
+            android:text="@string/augmented_reality_ar"/>
         <CheckBox
             android:id="@+id/checkboxq62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkboxq61"
-            android:text="Virtual Reality (VR)"/>
+            android:text="@string/virtual_reality_vr"/>
         <CheckBox
             android:id="@+id/checkboxq63"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkboxq62"
-            android:text="Monitoring System with IIOT Platform"/>
+            android:text="@string/monitoring_system_with_iiot_platform"/>
         <CheckBox
             android:id="@+id/checkboxq64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkboxq63"
-            android:text="Smart Glass"/>
+            android:text="@string/smart_glass"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/q7"
-            android:text="Do you have a plan to implement similar application in your factory?"
+            android:text="@string/implement"
             android:layout_below="@id/checkboxq64"
             android:layout_marginTop="20dp"
             android:textColor="#000000"
@@ -147,20 +146,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/q7"
-            android:text="Yes"/>
+            android:text="@string/yes"/>
         <RadioButton
             android:id="@+id/radioButtonQ72"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/radioButtonQ71"
-            android:text="No"/>
+            android:text="@string/no"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnSubmit"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:text="Submit"
+            android:text="@string/submit"
             android:layout_below="@id/radioButtonQ72"/>
     </RelativeLayout>
 

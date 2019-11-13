@@ -1,4 +1,4 @@
-package com.example.andonprototype;
+package com.example.andonprototype.Report;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andonprototype.Background.ConnectionClass;
+import com.example.andonprototype.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

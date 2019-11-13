@@ -1,4 +1,4 @@
-package com.example.andonprototype;
+package com.example.andonprototype.Breakdown;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -25,9 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Dashboard.MainDashboard;
+import com.example.andonprototype.R;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
 import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStream;
