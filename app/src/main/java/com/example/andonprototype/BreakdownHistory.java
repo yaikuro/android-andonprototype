@@ -140,11 +140,11 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(this,DetailReport.class);
-        Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
+        Map<String,String> mp;
+        mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object No = mp.get("No");
         Number = No.toString();
         i.putExtra("No", Number);
-        //Toast.makeText(this, Mesin, Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 }

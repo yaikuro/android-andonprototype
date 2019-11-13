@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.provider.MediaStore;
-import android.util.AndroidRuntimeException;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -30,19 +29,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOError;
 import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 
@@ -78,7 +69,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         picr = getIntent().getStringExtra("PIC");
         ResponseDateFinish = getIntent().getStringExtra("ResponseDateFinish");
         pbbarDetail = (ProgressBar) findViewById(R.id.pbbarDetail);
-        pbbarDetail.setVisibility(View.VISIBLE);
+        pbbarDetail.setVisibility(View.INVISIBLE);
 
         connectionClass = new ConnectionClass();
 
@@ -132,7 +123,11 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        pbbarDetail.setVisibility(View.GONE);
+    }
     public void LoadMainDashboard() {
         Intent i = new Intent(DetailBreakdownPage2.this, MainDashboard.class);
         startActivity(i);
@@ -162,6 +157,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         catch (IOError | Exception ex) {
             msg = ex.getMessage();
             Log.d("hitesh", msg);
+            pbbarDetail.setVisibility(View.INVISIBLE);
         }
         txtmsg.setText(msg);
     }
@@ -233,7 +229,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                     imageStream = getContentResolver().openInputStream(imageUri);
                     final Bitmap selectedImageProblem = BitmapFactory.decodeStream(imageStream);
                     click_image_id.setImageBitmap(selectedImageProblem);
-
+                    
                     if (selectedImageProblem != null) {
                         encodedImageProblem = encodeImage(selectedImageProblem);
                         Toast.makeText(DetailBreakdownPage2.this, "Conversion Done",

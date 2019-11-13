@@ -17,7 +17,7 @@ public class ConnectionClass
     String unXAMPP = "dio";
     String passwordXAMPP = "dio";
     String ipPameran = "192.168.43.213";
-    String ip = "192.168.0.110";
+    String ip = "192.168.1.101";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Winteq";
     String un = "admin";
@@ -32,7 +32,7 @@ public class ConnectionClass
         String ConnURL = null;
         try {
             Class.forName(classs);
-            ConnURL = "jdbc:jtds:sqlserver://" + ipPameran + ";"
+            ConnURL = "jdbc:jtds:sqlserver://" + ip + ";"
                     + "databaseName=" + db + ";user=" + un + ";password="
                     + password + ";";
             conn = DriverManager.getConnection(ConnURL);

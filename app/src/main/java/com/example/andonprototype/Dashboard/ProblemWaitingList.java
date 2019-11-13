@@ -72,10 +72,6 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         ListProblem.setAdapter(AP);
     }
 
-    public void validateData(){
-
-    }
-
     public static class GetProblem {
         Connection connect;
         String ConnectionResult = "";

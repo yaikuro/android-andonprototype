@@ -1,8 +1,5 @@
 package com.example.andonprototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,11 +7,12 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.GetData;
-import com.example.andonprototype.Dashboard.MachineDashboard;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,9 +33,9 @@ public class MachineStatusRepair extends AppCompatActivity implements ListView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard);
         connectionClass = new ConnectionClass();
-        ListView = (ListView) findViewById(R.id.ListView);
+        ListView = findViewById(R.id.ListView);
         ListView.setOnItemClickListener(MachineStatusRepair.this);
-        imageView = (ImageView) findViewById(R.id.image);
+        imageView = findViewById(R.id.image);
         getdata();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

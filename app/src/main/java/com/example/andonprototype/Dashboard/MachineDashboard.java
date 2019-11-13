@@ -6,6 +6,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,24 +28,46 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     SimpleAdapter AD;
     ImageView imageView;
     public String Mesin;
+    Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard);
-        ListView = (ListView) findViewById(R.id.ListView);
+        this.mHandler = new Handler();
+        m_Runnable.run();
+        ListView = findViewById(R.id.ListView);
         ListView.setOnItemClickListener(this);
-        imageView = (ImageView) findViewById(R.id.image);
+        imageView = findViewById(R.id.image);
         getdata();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getdata();
+                Intent i = new Intent(MachineDashboard.this, MachineDashboard.class);
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(i);
+                overridePendingTransition(0, 0);
                 pullToRefresh.setRefreshing(false);
             }
         });
     }
+
+    private final Runnable m_Runnable = new Runnable()
+    {
+        public void run()
+
+        {
+            Intent i = new Intent(MachineDashboard.this, MachineDashboard.class);
+            finish();
+            overridePendingTransition(0, 0);
+            startActivity(i);
+            overridePendingTransition(0, 0);
+            MachineDashboard.this.mHandler.postDelayed(m_Runnable, 1000);
+        }
+
+    };
 
     public void getdata() {
         List<Map<String, String>> MydataList = null;
