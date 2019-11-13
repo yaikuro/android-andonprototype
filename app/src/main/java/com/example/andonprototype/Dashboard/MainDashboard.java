@@ -4,6 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -28,12 +33,17 @@ import com.example.andonprototype.R;
 import com.example.andonprototype.ReportActivity;
 import com.example.andonprototype.SaveSharedPreference;
 import com.example.andonprototype.Survey;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static com.example.andonprototype.SaveSharedPreference.clearUserName;
+import static com.example.andonprototype.SaveSharedPreference.getID;
 
 public class MainDashboard extends AppCompatActivity {
     private static final String TAG = "MainDashboard";
@@ -41,7 +51,6 @@ public class MainDashboard extends AppCompatActivity {
     public static final String CHANNEL_1_ID = "channel1";
     public String MachineID;
     public String Status;
-    public SaveSharedPreference saveSharedPreference;
     public String notifikasi = "Welcome ";
     public String send;
     public String hasil;
@@ -50,90 +59,62 @@ public class MainDashboard extends AppCompatActivity {
     public String pic;
     private NotificationManagerCompat notificationManager;
 
+    public String notfikasi;
+    private AppBarConfiguration mAppBarConfiguration,appBarConfiguration;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard);
         createNotificationChannels();
-        saveSharedPreference = new SaveSharedPreference();
 
         notificationManager = NotificationManagerCompat.from(this);
-        TextView welcomeText = findViewById(R.id.welcomeText);
-        pic = saveSharedPreference.getID(this);
+//        TextView welcomeText = findViewById(R.id.welcomeText);
+        pic = getID(this);
         send = notifikasi + pic;
-        welcomeText.setText(send);
+//        welcomeText.setText(send);
         Button logoutBtn = findViewById(R.id.btnLogout);
         Button btnV = findViewById(R.id.btnView);
-        Button btnReportActivity = findViewById(R.id.btnReportActivity);
-        Button btnProblemWaitingList = findViewById(R.id.btn_waiting_list);
-        Button btnSurvey = findViewById(R.id.btnSurvey);
-        Button btnMachineStatusRepair = findViewById(R.id.btnMachineStatusRepair);
-        Button btnMachineStatusBreakdown = findViewById(R.id.btnMachineStatusBreakdown);
-        hasil = welcomeText.getText().toString();
+//        hasil = welcomeText.getText().toString();
 
-        btnMachineStatusBreakdown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainDashboard.this, MachineStatusBreakdown.class);
-                startActivity(i);
-            }
-        });
+//        content();
+        isStoragePermissionGranted();
 
-        btnMachineStatusRepair.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainDashboard.this, MachineStatusRepair.class);
-                startActivity(i);
-            }
-        });
-
-        btnV.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fab        = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent a = new Intent(MainDashboard.this, MachineDashboard.class);
-                startActivity(a);
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clearUserName(MainDashboard.this);
-                Intent i = new Intent(MainDashboard.this, LoginActivity.class);
-                send = notifikasi;
-                startActivity(i);
-                Toast.makeText(MainDashboard.this, "Logged Out", Toast.LENGTH_LONG).show();
-                finish();
-            }
-        });
+        DrawerLayout drawer             = findViewById(R.id.drawer_layout);
+        NavigationView navigationView   = findViewById(R.id.nav_view_drawer);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
+                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navControllerDrawer = Navigation.findNavController(this, R.id.nav_host_fragment_drawer);
+//        NavigationUI.setupActionBarWithNavController(this, navControllerDrawer, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navControllerDrawer);
+        ////////////////////////////////////////////////End of Drawer//////////////////////////////////////////////////////////////////////////////
 
-        btnReportActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainDashboard.this, ReportActivity.class);
-                i.putExtra("PIC", pic);
-                startActivity(i);
-            }
-        });
 
-        btnProblemWaitingList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainDashboard.this, ProblemWaitingList.class);
-                i.putExtra("PIC", pic);
-                startActivity(i);
-            }
-        });
-
-        btnSurvey.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainDashboard.this, Survey.class);
-                startActivity(i);
-            }
-        });
-        content();
-        isStoragePermissionGranted();
+        ////////////////////////////////////////////////Bottom Navigation Part////////////////////////////////////////////////////////////////////////////////
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_maindashboard, R.id.navigation_reportactivity, R.id.navigation_problemwaitinglist)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+        ////////////////////////////////////////////////End of Bottom Navigation//////////////////////////////////////////////////////////////////////////////
     }
 
     private  void content(){

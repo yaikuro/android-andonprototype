@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_reportactivity"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_reportactivity" />
+
+    <item
+        android:id="@+id/navigation_maindashboard"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_maindashboard" />
+
+    <item
+        android:id="@+id/navigation_problemwaitinglist"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_problemwaitinglist" />
+
+</menu>

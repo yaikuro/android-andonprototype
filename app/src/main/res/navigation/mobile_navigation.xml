@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_maindashboard">
+
+    <fragment
+        android:id="@+id/navigation_reportactivity"
+        android:name="com.example.andonprototype.ui.Report.ReportActivityFragment"
+        android:label="@string/title_reportactivity"
+        tools:layout="@layout/fragment_reportactivity" />
+
+    <fragment
+        android:id="@+id/navigation_maindashboard"
+        android:name="com.example.andonprototype.ui.MainDashboard.MainDashboardFragment"
+        android:label="@string/title_maindashboard"
+        tools:layout="@layout/fragment_maindashboard" />
+
+    <fragment
+        android:id="@+id/navigation_problemwaitinglist"
+        android:name="com.example.andonprototype.ui.ProblemList.ProblemListFragment"
+        android:label="@string/title_problemwaitinglist"
+        tools:layout="@layout/fragment_problemwaitinglist" />
+
+<!--    //////////////////////////////////////////////////////////////////////////////////////////////-->
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.andonprototype.drawer_ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.andonprototype.drawer_ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery" />
+
+    <fragment
+        android:id="@+id/nav_slideshow"
+        android:name="com.example.andonprototype.drawer_ui.slideshow.SlideshowFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+
+    <fragment
+        android:id="@+id/nav_tools"
+        android:name="com.example.andonprototype.drawer_ui.tools.ToolsFragment"
+        android:label="@string/menu_tools"
+        tools:layout="@layout/fragment_tools" />
+
+    <fragment
+        android:id="@+id/nav_share"
+        android:name="com.example.andonprototype.drawer_ui.share.ShareFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_share" />
+
+    <fragment
+        android:id="@+id/nav_send"
+        android:name="com.example.andonprototype.drawer_ui.send.SendFragment"
+        android:label="@string/menu_send"
+        tools:layout="@layout/fragment_send" />
+</navigation>

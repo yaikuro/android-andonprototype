@@ -28,4 +28,25 @@
     <string name="machine_dashboard_title">Machine Dashboard</string>
     <string name="insert_pic_id">Insert PIC ID</string>
     <string name="pic_search">PIC Search</string>
+
+
+    //Bottom Navigation Bar
+    <string name="title_reportactivity">Report Activity</string>
+    <string name="title_maindashboard">Main Dashboard</string>
+    <string name="title_problemwaitinglist">Problem List</string>
+
+    //Drawer
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">History</string>
+    <string name="menu_slideshow">Report</string>
+    <string name="menu_tools">Settings</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Export</string>
 </resources>
