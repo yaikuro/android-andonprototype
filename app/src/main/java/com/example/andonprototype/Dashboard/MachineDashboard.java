@@ -35,7 +35,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard);
         this.mHandler = new Handler();
-        m_Runnable.run();
         ListView = findViewById(R.id.ListView);
         ListView.setOnItemClickListener(this);
         imageView = findViewById(R.id.image);
@@ -53,21 +52,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             }
         });
     }
-
-    private final Runnable m_Runnable = new Runnable()
-    {
-        public void run()
-
-        {
-            Intent i = new Intent(MachineDashboard.this, MachineDashboard.class);
-            finish();
-            overridePendingTransition(0, 0);
-            startActivity(i);
-            overridePendingTransition(0, 0);
-            MachineDashboard.this.mHandler.postDelayed(m_Runnable, 1000);
-        }
-
-    };
 
     public void getdata() {
         List<Map<String, String>> MydataList = null;
