@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.andonprototype.Dashboard.MachineDashboard;
+import com.example.andonprototype.Dashboard.MainDashboard;
 import com.example.andonprototype.R;
 
 import static com.example.andonprototype.Background.SaveSharedPreference.getID;
@@ -21,6 +22,13 @@ import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 public class MainDashboardFragment extends Fragment {
     private MainViewModel mainViewModel;
 
+    public static MainDashboardFragment newInstance(int instance) {
+        Bundle args = new Bundle();
+        args.putInt("argsInstance", instance);
+        MainDashboardFragment firstFragment = new MainDashboardFragment();
+        firstFragment.setArguments(args);
+        return firstFragment;
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mainViewModel =

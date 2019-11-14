@@ -1,4 +1,4 @@
-package com.example.andonprototype.Report;
+package com.example.andonprototype.ui.Report;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
@@ -11,9 +12,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MachineID : "
+        android:text="Line : "
         android:layout_marginTop="5dp"
-        android:id="@+id/MachineID1"
+        android:id="@+id/Line1"
         android:layout_marginStart="10dp"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -21,46 +22,32 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/MachineID"
-        android:layout_marginTop="5dp"
-        android:textSize="20dp"
-        android:layout_toEndOf="@id/MachineID1"
-        android:layout_toRightOf="@id/image"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Line1"
-        android:text="Line : "
-        android:textSize="15dp"
-        android:layout_marginLeft="10dp"
-        android:layout_below="@id/MachineID1"
-        android:layout_toRightOf="@id/image"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/Line"
-        android:layout_toEndOf="@+id/Line1"
-        android:textSize="15dp"
-        android:layout_below="@id/MachineID1"
+        android:layout_marginTop="5dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_toEndOf="@id/Line1"
         android:layout_toRightOf="@id/image"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/Station1"
         android:text="Station : "
-        android:textSize="15dp"
-        android:layout_marginLeft="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
         android:layout_below="@id/Line1"
-        android:layout_toRightOf="@id/image"
-        android:layout_marginBottom="5dp"/>
+        android:layout_toEndOf="@id/image"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/Station1"
         android:id="@+id/Station"
-        android:textSize="15sp"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/Station1"
+        android:textSize="20sp"
         android:layout_below="@id/Line1"
-        android:layout_marginBottom="5dp"/>
+        android:layout_toRightOf="@id/image"
+        tools:ignore="RtlHardcoded" />
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"

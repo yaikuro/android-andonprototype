@@ -4,26 +4,21 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.Query;
 import com.example.andonprototype.R;
-import com.example.andonprototype.Background.SaveSharedPreference;
 import com.example.andonprototype.barcodescanner.SimpleScanner;
 
 import java.sql.Connection;
@@ -36,42 +31,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
+import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 
-public class ProblemListFragment extends Fragment implements ListView.OnItemClickListener {
+public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener {
     public String pic,Line,Station,MachineID,Status,Person;
     private ListView ListProblem;
     private SimpleAdapter AP;
     public ImageView imageView;
-    public SaveSharedPreference saveSharedPreference;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
-    private ProblemListViewModel problemListViewModel;
-
-
-    public static ProblemListFragment newInstance(int instance) {
-        Bundle args = new Bundle();
-        args.putInt("argsInstance", instance);
-        ProblemListFragment secondFragment = new ProblemListFragment();
-        secondFragment.setArguments(args);
-        return secondFragment;
-    }
-
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        problemListViewModel =
-                ViewModelProviders.of(this).get(ProblemListViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_problemwaitinglist, container, false);
-
-        ListProblem = root.findViewById(R.id.ListProblem);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_problem_waiting_list);
+        ListProblem = findViewById(R.id.ListProblem);
         ListProblem.setOnItemClickListener(this);
-        imageView = root.findViewById(R.id.image);
+        imageView = findViewById(R.id.image);
         getProblem();
-        pic = SaveSharedPreference.getID(getActivity());
-        final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
+        pic = getID(this);
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -79,7 +59,6 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                 pullToRefresh.setRefreshing(false);
             }
         });
-        return root;
     }
 
     public void getProblem() {
@@ -88,7 +67,7 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
         MyProblemList = myProblem.getProblem();
         String[] fromwhere = {"Image", "Line", "Station"};
         int[] viewwhere = {R.id.image, R.id.Line, R.id.Station};
-        AP = new SimpleAdapter(getActivity(), MyProblemList, R.layout.listitem, fromwhere, viewwhere);
+        AP = new SimpleAdapter(ProblemWaitingList.this, MyProblemList, R.layout.listitem, fromwhere, viewwhere);
         ListProblem.setAdapter(AP);
     }
 
@@ -167,14 +146,14 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Class<?> clss = SimpleScanner.class;
         if (pic.equals("")) {
-            Toast.makeText(getActivity(), "ID not Detected, Please Re-login to verify", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ID not Detected, Please Re-login to verify", Toast.LENGTH_SHORT).show();
         } else {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CAMERA)
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(),
+                ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
             } else {
-                Intent i = new Intent(getActivity(), clss);
+                Intent i = new Intent(this, clss);
                 Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
                 Object line = mp.get("Line");
                 Object station = mp.get("Station");
@@ -199,19 +178,19 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                                 if (person.equals(pic)) {
                                     startActivity(i);
                                 } else {
-                                    Toast.makeText(getActivity(), Person + " is currently repairing", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this, Person + " is currently repairing", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
-                                Toast.makeText(getActivity(), "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "4":
                             if(person != null){
                                 Person = person.toString();
-                                Toast.makeText(getActivity(), "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Toast.makeText(getActivity(), "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
                             }
                             break;
                         case "2":

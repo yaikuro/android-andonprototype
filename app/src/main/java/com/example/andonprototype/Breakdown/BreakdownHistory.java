@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.R;
-import com.example.andonprototype.Report.DetailReport;
+import com.example.andonprototype.ui.Report.DetailReport;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

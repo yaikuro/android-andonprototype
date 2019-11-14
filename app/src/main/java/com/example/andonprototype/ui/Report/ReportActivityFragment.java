@@ -18,7 +18,6 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.andonprototype.Background.ConnectionClass;
-import com.example.andonprototype.Report.DetailReport;
 import com.example.andonprototype.R;
 
 import java.sql.Connection;
@@ -45,8 +44,18 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
 
     private ReportActivityViewModel mainDashboardViewModel;
 
+    public static ReportActivityFragment newInstance(int instance) {
+        Bundle args = new Bundle();
+        args.putInt("argsInstance", instance);
+        ReportActivityFragment thirdFragment = new ReportActivityFragment();
+        thirdFragment.setArguments(args);
+        return thirdFragment;
+    }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+
         mainDashboardViewModel =
                 ViewModelProviders.of(this).get(ReportActivityViewModel.class);
         View root = inflater.inflate(R.layout.fragment_reportactivity, container, false);

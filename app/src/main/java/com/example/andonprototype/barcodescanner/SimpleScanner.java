@@ -21,7 +21,7 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class SimpleScanner extends BaseScannerActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView mScannerView;
-    public String MachineID,PIC,Line,Station;
+    public String Verification,PIC,Line,Station;
     ConnectionClass connectionClass;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -30,13 +30,13 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
         super.onCreate(state);
         setContentView(R.layout.activity_simple_scanner);
         connectionClass = new ConnectionClass();
-        ViewGroup contentFrame = findViewById(R.id.content_frame);
+        ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
         contentFrame.addView(mScannerView);
-        MachineID = getIntent().getStringExtra("MachineID");
         PIC = getIntent().getStringExtra("PIC");
         Line = getIntent().getStringExtra("Line");
         Station = getIntent().getStringExtra("Station");
+        Verification = Line + "," + Station;
     }
 
     @Override
@@ -54,18 +54,17 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
 
     @Override
     public void handleResult(com.google.zxing.Result rawResult) {
-        if (rawResult.getText().equals(MachineID)) {
+        if (rawResult.getText().equals(Verification)) {
             Intent i = new Intent(SimpleScanner.this, DetailBreakdownPage2.class);
             String currentResponseDateFinish = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
             i.putExtra("ResponseDateFinish",currentResponseDateFinish);
-            i.putExtra("MachineID", rawResult.getText());
             i.putExtra("Line",Line);
-            i.putExtra("Station",Station);
+            i.putExtra("Station",rawResult.getText());
             i.putExtra("PIC",PIC);
             startActivity(i);
         } else{
             mScannerView.resumeCameraPreview(SimpleScanner.this);
-            Toast.makeText(this, "Machine ID tidak sama", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Station tidak sesuai", Toast.LENGTH_SHORT).show();
         }
     }
     @Override
@@ -89,7 +88,7 @@ public class SimpleScanner extends BaseScannerActivity implements ZXingScannerVi
     public void updatePICstatus2() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE machinedashboard SET Status=2, PIC=NULL where MachineID='" + MachineID +"'";
+            String query = "UPDATE stationdashboard SET Status=2, PIC=NULL where Station='" + Station +"' and Line ='" + Line +"'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
         }catch (SQLException ex){
