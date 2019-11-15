@@ -6,6 +6,6 @@ public class Query {
                     "from machinedashboard";
     public static final String problemquery =
             "Select * " +
-                    "from machinedashboard " +
+                    "from stationdashboard " +
                     "where Status = 2 or Status = 3 or Status = 4";
 }

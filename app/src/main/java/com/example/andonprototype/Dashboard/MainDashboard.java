@@ -7,7 +7,10 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -31,6 +34,7 @@ import com.example.andonprototype.ui.MainDashboard.MainDashboardFragment;
 import com.example.andonprototype.ui.ProblemList.ProblemListFragment;
 import com.example.andonprototype.ui.ProblemList.ProblemWaitingList;
 import com.example.andonprototype.ui.Report.ReportActivityFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -96,47 +100,58 @@ public class MainDashboard extends AppCompatActivity {
         ///////////////////////////////////////////////////////////////////////////
         // Navigation Section
         ///////////////////////////////////////////////////////////////////////////
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_maindashboard, R.id.navigation_problemwaitinglist, R.id.navigation_reportactivity)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
 
-        List<Fragment> fragments = new ArrayList<>(3);
-
-        //add fragments to list
-        fragments.add(MainDashboardFragment.newInstance(0));
-        fragments.add(ProblemListFragment.newInstance(0));
-        fragments.add(ReportActivityFragment.newInstance(0));
 
 
-        //link fragments to container
-        fragNavController = new FragNavController(getSupportFragmentManager(),R.id.container,fragments);
-        //End of FragNav
-
-        //BottomBar menu
-        mBottomBar = BottomBar.attach(this, savedInstanceState);
-        mBottomBar.setItems(R.menu.bottom_nav_menu);
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                //switch between tabs
-                switch (menuItemId) {
-                    case R.id.navigation_maindashboard:
-                        fragNavController.switchTab(TAB_FIRST);
-                        break;
-                    case R.id.navigation_problemwaitinglist:
-                        fragNavController.switchTab(TAB_SECOND);
-                        break;
-                    case R.id.navigation_reportactivity:
-                        fragNavController.switchTab(TAB_THIRD);
-                        break;
-                }
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                if (menuItemId == R.id.navigation_maindashboard) {
-                    fragNavController.clearStack();
-                }
-            }
-        });
-        //End of BottomBar menu
+//        List<Fragment> fragments = new ArrayList<>(3);
+//
+//        //add fragments to list
+//        fragments.add(MainDashboardFragment.newInstance(0));
+//        fragments.add(ProblemListFragment.newInstance(0));
+//        fragments.add(ReportActivityFragment.newInstance(0));
+//
+//
+//        //link fragments to container
+//        fragNavController = new FragNavController(getSupportFragmentManager(),R.id.container,fragments);
+//        //End of FragNav
+//
+//        //BottomBar menu
+//        mBottomBar = BottomBar.attach(this, savedInstanceState);
+//        mBottomBar.setItems(R.menu.bottom_nav_menu);
+//        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+//            @Override
+//            public void onMenuTabSelected(@IdRes int menuItemId) {
+//                //switch between tabs
+//                switch (menuItemId) {
+//                    case R.id.navigation_maindashboard:
+//                        fragNavController.switchTab(TAB_FIRST);
+//                        break;
+//                    case R.id.navigation_problemwaitinglist:
+//                        fragNavController.switchTab(TAB_SECOND);
+//                        break;
+//                    case R.id.navigation_reportactivity:
+//                        fragNavController.switchTab(TAB_THIRD);
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onMenuTabReSelected(@IdRes int menuItemId) {
+//                if (menuItemId == R.id.navigation_maindashboard) {
+//                    fragNavController.clearStack();
+//                }
+//            }
+//        });
+//        //End of BottomBar menu
 
         //Navigation drawer
         new DrawerBuilder().withActivity(this).build();
@@ -252,9 +267,10 @@ public class MainDashboard extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (fragNavController.getCurrentStack().size() > 1) {
-            fragNavController.pop();
-        } else if (doubleBackToExitPressedOnce) {
+//        if (fragNavController.getCurrentStack().size() > 1) {
+//            fragNavController.pop();
+//        } else
+            if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
         }
@@ -276,7 +292,7 @@ public class MainDashboard extends AppCompatActivity {
 
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
-        mBottomBar.onSaveInstanceState(outState);
+//        mBottomBar.onSaveInstanceState(outState);
     }
 
     public void logout() {
