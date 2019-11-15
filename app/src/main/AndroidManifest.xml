@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.andonprototype">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,44 +16,68 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        android:fullBackupContent="true">
-        <activity android:name=".Exhibition_feature.MachineStatusRepair"
-            android:label="Machine Status Repair">
-        </activity>
-        <activity android:name=".Exhibition_feature.Survey" />
-        <activity
-            android:name=".Breakdown.BreakdownHistory"
-            android:label="Breakdown History" />
-        <activity android:name=".ui.Report.DetailReport" />
-        <activity
-            android:name=".Dashboard.MachineDashboard"
-            android:label="@string/machine_dashboard_title"
-            android:screenOrientation="userLandscape"/>
-        <activity android:name=".barcodescanner.SimpleScanner" />
-        <activity android:name=".ui.ProblemList.ProblemWaitingList" />
-        <activity android:name=".Breakdown.DetailBreakdownPage2" />
-        <activity android:name=".Exhibition_feature.MachineStatusBreakdown"/>
-        <activity
-            android:name=".Dashboard.MainDashboard"
-            android:label="@string/main_dashboard" />
+        android:fullBackupContent="true"
+        tools:ignore="ExtraText,InnerclassSeparator">
 
+
+        // Login Activity
         <activity android:name=".Dashboard.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        // Main Dashboard
+        <activity
+            android:name=".Dashboard.MainDashboard"
+            android:label="@string/main_dashboard" />
+
+        // Machine Dashboard
+        <activity
+            android:name=".Dashboard.MachineDashboard"
+            android:label="@string/machine_dashboard_title"
+            android:screenOrientation="userLandscape"/>
+
+        // Problem List
+        <activity
+            android:name=".ui.ProblemList.ProblemWaitingList"
+            android:label="Problem List"/>
+
+        // Simple Scanner
+        <activity
+            android:name=".barcodescanner.SimpleScanner"
+            android:label="Barcode Scanner"/>
+
+        // Detail Breakdown
+        <activity
+            android:name=".Breakdown.DetailBreakdownPage2"
+            android:label="Detail Breakdown"/>
+
+        // Breakdown History
+        <activity
+            android:name=".Breakdown.BreakdownHistory"
+            android:label="Breakdown History" />
+
+        // Detail Report
+        <activity
+            android:name=".ui.Report.DetailReport"
+            android:label="Detail Report"/>
+
+        // Drawer
             <activity android:name=".drawer_ui.Settings"/>
             <activity android:name=".drawer_ui.Help"/>
             <activity android:name=".drawer_ui.Logout"/>
 
-        <activity android:name=".Background.SwipeDismissBaseActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.andonprototype.Dashboard.MainDashboard" />
-        </activity>
+        // Swipe Left-to-Right to exit Activity
+        <activity android:name=".Background.SwipeDismissBaseActivity" />
+
+        // Exhibition Feature
+        <activity android:name=".Exhibition_feature.MachineStatusBreakdown"/>
+        <activity android:name=".Exhibition_feature.MachineStatusRepair"/>
+        <activity android:name=".Exhibition_feature.Survey" />
+
     </application>
 
 </manifest>
