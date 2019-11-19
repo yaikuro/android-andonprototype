@@ -1,4 +1,4 @@
-package com.example.andonprototype.Breakdown;
+package com.example.andonprototype.Dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -26,7 +26,7 @@ import java.util.Map;
 
 public class BreakdownHistory extends AppCompatActivity implements ListView.OnItemClickListener{
     Connection connect;
-    private String MachineID,Number,Validation;
+    private String MachineID,Number,Validation,Line,Station;
     String ConnectionResult = "";
     ListView BreakdownHistory;
     SimpleAdapter ABH;
@@ -39,8 +39,8 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         BreakdownHistory = findViewById(R.id.ListHistory);
         BreakdownHistory.setOnItemClickListener(this);
         Machine = findViewById(R.id.dataMachineID);
-        MachineID = getIntent().getStringExtra("MachineID");
-        Machine.setText(MachineID);
+        Line = getIntent().getStringExtra("Line");
+        Station = getIntent().getStringExtra("Station");
         validation();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -70,18 +70,20 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
                 ConnectionResult = "Check your Internet Connection";
             } else {
                 String query = "Select No,MachineID,Line,Station,Repair_Time_Start,Repair_Time_Finish,Repair_Duration" +
-                        " from machinestatustest where MachineID = '" + MachineID + "' ORDER BY Repair_Time_Start DESC";
+                        " from machinestatustest where Line = '" + Line + "' and Station = '" + Station + "' ORDER BY Repair_Time_Start DESC";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
                     String No = rs.getString("No");
                     String Line = rs.getString("Line");
+                    String MachineID = rs.getString("MachineID");
                     String Station = rs.getString("Station");
                     String Repair_Time_Start = rs.getString("Repair_Time_Start");
                     String Repair_Time_Finish = rs.getString("Repair_Time_Finish");
                     String Repair_Duration = rs.getString("Repair_Duration");
                     Map<String, String> datanum = new HashMap<String, String>();
                     datanum.put("No", No);
+                    datanum.put("MachineID", MachineID);
                     datanum.put("Line", Line);
                     datanum.put("Station", Station);
                     datanum.put("Repair_Time_Start",Repair_Time_Start);
@@ -122,7 +124,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
             }
             else
             {
-                String query = "Select No from machinestatustest where MachineID='" + MachineID + "'";
+                String query = "Select No from machinestatustest where Line='" + Line + "' and Station = '" + Station + "'";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 if (rs.next())

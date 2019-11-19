@@ -1,16 +1,19 @@
 package com.example.andonprototype.ui.Report;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,6 +25,7 @@ import com.example.andonprototype.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,15 +36,16 @@ import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 
 
 public class ReportActivityFragment extends Fragment implements ListView.OnItemClickListener{
-    public String id,Mesin,Station,Duration,Line,Number;
+    public String id,Mesin,Station,Duration,Line,Number,Person;
+    Spinner spinner;
     ListView ListReport;
     SimpleAdapter AR;
-    public ImageView imageView;
-    public EditText edtInsertID;
     private boolean success = false;
     Connection connect;
     String ConnectionResult = "";
     Boolean isSuccess = false;
+    ArrayList NameArray;
+    int nama;
 
     private ReportActivityViewModel mainDashboardViewModel;
 
@@ -55,26 +60,13 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-
         mainDashboardViewModel =
                 ViewModelProviders.of(this).get(ReportActivityViewModel.class);
         View root = inflater.inflate(R.layout.fragment_reportactivity, container, false);
-
+        spinner = root.findViewById(R.id.spinner);
         ListReport = root.findViewById(R.id.ListReport);
         ListReport.setOnItemClickListener(this);
-        Button btnSearch = root.findViewById(R.id.btnSearch);
-        edtInsertID = root.findViewById(R.id.edtInsertID);
-        id = getID(getActivity());
-        edtInsertID.setText(id);
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                id = edtInsertID.getText().toString();
-                getReport();
-            }
-        });
-
+        GetPIC();
         final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -83,30 +75,41 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                 pullToRefresh.setRefreshing(false);
             }
         });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                nama = NameArray.indexOf(spinner.getSelectedItem());
+                Person = (String) parent.getItemAtPosition(nama);
+                getReport();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         return root;
     }
 
     public void getReport() {
         List<Map<String, String>> MyReportList = null;
         MyReportList = getRep();
-        String[] fromwhere = {"MachineID", "Line", "Station", "Repair_Time_Start", "Repair_Time_Finish", "Repair_Duration"};
-        int[] viewwhere = {R.id.MachineID, R.id.Line, R.id.Station, R.id.RepairTimeStart, R.id.RepairTimeFinish, R.id.Duration};
+        String[] fromwhere = {"MachineID", "Line", "Station", "Repair_Time_Start", "Repair_Time_Finish", "Repair_Duration", "PIC"};
+        int[] viewwhere = {R.id.MachineID, R.id.Line, R.id.Station, R.id.RepairTimeStart, R.id.RepairTimeFinish, R.id.Duration, R.id.PIC};
         AR = new SimpleAdapter(getActivity(), MyReportList, R.layout.report_activity_listitem, fromwhere, viewwhere);
         ListReport.setAdapter(AR);
     }
     public List<Map<String, String>> getRep() {
         List<Map<String, String>> data = null;
         data = new ArrayList<Map<String, String>>();
-
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
             if (connect == null) {
                 ConnectionResult = "Check your Internet Connection";
             } else {
-                String query = "Select No,MachineID,Line,Station,CONVERT(VARCHAR(10),Repair_Time_Start) AS Repair_Time_Start," +
-                        "CONVERT(VARCHAR(10),Repair_Time_Finish) AS Repair_Time_Finish," +
-                        "Repair_Duration from machinestatustest where PIC='" + id + "' ORDER BY Response_Time_Finish DESC";
+                String query = "Select No,MachineID,Line,Station,Repair_Time_Start," +
+                        "Repair_Time_Finish,PIC," +
+                        "Repair_Duration from machinestatustest where PIC='" + Person + "' ORDER BY Response_Time_Finish DESC";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
@@ -116,6 +119,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                     String Station = rs.getString("Station");
                     String Repair_Time_Start = rs.getString("Repair_Time_Start");
                     String Repair_Time_Finish = rs.getString("Repair_Time_Finish");
+                    String PIC = rs.getString("PIC");
                     String Repair_Duration = rs.getString("Repair_Duration");
                     Map<String, String> datanum = new HashMap<String, String>();
                     datanum.put("No", No);
@@ -125,6 +129,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                     datanum.put("Repair_Time_Start",Repair_Time_Start);
                     datanum.put("Repair_Time_Finish",Repair_Time_Finish);
                     datanum.put("Repair_Duration",Repair_Duration);
+                    datanum.put("PIC",PIC);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successful";
@@ -136,6 +141,33 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
             ConnectionResult = ex.getMessage();
         }
         return data;
+    }
+    public String GetPIC(){
+        String z = "";
+        try {
+            ConnectionClass connectionClass = new ConnectionClass();
+            connect = connectionClass.CONN();
+            if (connectionClass == null){
+                z = "Check Your Internet Connection";
+            }
+            else{
+                String query = "Select Nama from userid";
+                Statement stmt = connect.createStatement();
+                ResultSet rs = stmt.executeQuery(query);
+                NameArray = new ArrayList();
+                while(rs.next()){
+                    NameArray.add(rs.getString("Nama"));
+                }
+            }
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            z = "Check Your Internet Connection";
+        }
+        ArrayAdapter adapter = new ArrayAdapter(
+                getActivity(),R.layout.spinner_item,NameArray);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(adapter);
+        return z;
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

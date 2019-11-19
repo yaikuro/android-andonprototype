@@ -22,4 +22,10 @@
         android:name="com.example.andonprototype.ui.Report.ReportActivityFragment"
         android:label="Report Activity"
         tools:layout="@layout/fragment_reportactivity" />
+
+    <fragment
+        android:id="@+id/navigation_machinereport"
+        android:name="com.example.andonprototype.ui.MachineReport.MachineReportActivityFragment"
+        android:label="Report Activity"
+        tools:layout="@layout/fragment_machinereportactivity" />
 </navigation>

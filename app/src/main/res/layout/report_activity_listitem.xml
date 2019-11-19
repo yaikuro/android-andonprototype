@@ -5,6 +5,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:id="@+id/RelativeReport">
         <TextView
             android:layout_width="wrap_content"
@@ -12,7 +13,6 @@
             android:text="@string/machine_id"
             android:layout_marginTop="5dp"
             android:id="@+id/MachineID1"
-            android:layout_marginStart="10dp"
             android:textStyle="bold"
             android:layout_marginBottom="5dp"
             android:textSize="20sp" />
@@ -22,7 +22,6 @@
             android:id="@+id/Line1"
             android:text="@string/line"
             android:textSize="15sp"
-            android:layout_marginStart="10dp"
             android:layout_below="@id/MachineID1"
             android:layout_marginBottom="5dp"/>
 
@@ -32,7 +31,6 @@
             android:id="@+id/Station1"
             android:text="@string/station"
             android:textSize="15sp"
-            android:layout_marginStart="10dp"
             android:layout_below="@id/Line1"
             android:layout_marginBottom="5dp"/>
 
@@ -42,7 +40,6 @@
             android:id="@+id/RepairTimeStart1"
             android:text="@string/repair_time_start"
             android:textSize="15sp"
-            android:layout_marginStart="10dp"
             android:layout_below="@id/Station1"
             android:layout_marginBottom="5dp"/>
         <TextView
@@ -51,7 +48,6 @@
             android:id="@+id/RepairTimeFinish1"
             android:text="@string/repair_time_finish"
             android:textSize="15sp"
-            android:layout_marginStart="10dp"
             android:layout_below="@id/RepairTimeStart1"
             android:layout_marginBottom="5dp"/>
         <TextView
@@ -60,9 +56,15 @@
             android:id="@+id/Duration1"
             android:text="@string/repair_duration"
             android:textSize="15sp"
-            android:layout_marginStart="10dp"
             android:layout_below="@id/RepairTimeFinish1"
             android:layout_marginBottom="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/PIC1"
+            android:textSize="15sp"
+            android:layout_below="@id/Duration1"
+            android:text="@string/pic"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -110,14 +112,23 @@
             android:layout_below="@id/colon4"
             android:layout_marginBottom="5dp"
             android:textSize="15sp"/>
+
         <TextView
+            android:id="@+id/colon6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/colon"
-            android:id="@+id/colon6"
             android:layout_below="@id/colon5"
             android:layout_marginBottom="5dp"
-            android:textSize="15sp"/>
+            android:text="@string/colon"
+            android:textSize="15sp" />
+        <TextView
+            android:id="@+id/colon7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/colon6"
+            android:layout_marginBottom="5dp"
+            android:text="@string/colon"
+            android:textSize="15sp" />
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -166,6 +177,13 @@
             android:layout_height="wrap_content"
             android:id="@+id/Duration"
             android:layout_below="@id/RepairTimeFinish"
+            android:textSize="15sp"
+            android:layout_marginBottom="5dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/PIC"
+            android:layout_below="@id/Duration"
             android:textSize="15sp"
             android:layout_marginBottom="5dp"/>
     </RelativeLayout>

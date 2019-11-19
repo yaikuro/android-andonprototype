@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.andonprototype">
+    package="com.example.andonprototype"
+    android:versionCode="1"
+    android:versionName="AndonPrototype">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -17,11 +19,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:fullBackupContent="true"
-        tools:ignore="ExtraText,InnerclassSeparator">
+        tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
+        tools:targetApi="donut">
 
 
-        // Login Activity
-        <activity android:name=".Dashboard.LoginActivity">
+
+        <activity android:name=".Dashboard.LoginActivity"
+                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -29,51 +33,55 @@
             </intent-filter>
         </activity>
 
-        // Main Dashboard
+
         <activity
             android:name=".Dashboard.MainDashboard"
             android:label="@string/main_dashboard" />
 
-        // Machine Dashboard
+
         <activity
             android:name=".Dashboard.MachineDashboard"
             android:label="@string/machine_dashboard_title"
             android:screenOrientation="userLandscape"/>
 
-        // Problem List
+
         <activity
             android:name=".ui.ProblemList.ProblemWaitingList"
             android:label="Problem List"/>
 
-        // Simple Scanner
+
         <activity
             android:name=".barcodescanner.SimpleScanner"
             android:label="Barcode Scanner"/>
 
-        // Detail Breakdown
+
         <activity
-            android:name=".Breakdown.DetailBreakdownPage2"
+            android:name=".Dashboard.DetailBreakdownPage2"
             android:label="Detail Breakdown"/>
 
-        // Breakdown History
+
         <activity
-            android:name=".Breakdown.BreakdownHistory"
+            android:name=".Dashboard.BreakdownHistory"
             android:label="Breakdown History" />
 
-        // Detail Report
+
         <activity
             android:name=".ui.Report.DetailReport"
             android:label="Detail Report"/>
 
-        // Drawer
+        <activity
+            android:name=".ui.MachineReport.DetailMachineReport"
+            android:label="Detail Machine Report"/>
+
+
             <activity android:name=".drawer_ui.Settings"/>
             <activity android:name=".drawer_ui.Help"/>
             <activity android:name=".drawer_ui.Logout"/>
 
-        // Swipe Left-to-Right to exit Activity
+
         <activity android:name=".Background.SwipeDismissBaseActivity" />
 
-        // Exhibition Feature
+
         <activity android:name=".Exhibition_feature.MachineStatusBreakdown"/>
         <activity android:name=".Exhibition_feature.MachineStatusRepair"/>
         <activity android:name=".Exhibition_feature.Survey" />

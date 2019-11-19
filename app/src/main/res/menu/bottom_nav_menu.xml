@@ -13,5 +13,9 @@
         android:id="@+id/navigation_reportactivity"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="@string/title_reportactivity" />
+    <item
+        android:id="@+id/navigation_machinereport"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/title_machinereport" />
 
 </menu>

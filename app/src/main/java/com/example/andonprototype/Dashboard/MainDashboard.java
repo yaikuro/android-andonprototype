@@ -56,8 +56,9 @@ import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 
 public class MainDashboard extends AppCompatActivity {
     private static final String TAG = "MainDashboard";
-    boolean doubleBackToExitPressedOnce = false;
     public static final String CHANNEL_1_ID = "channel1";
+    public static boolean running = false;
+    boolean doubleBackToExitPressedOnce = false;
     public String MachineID;
     public String Status;
     public String Station;
@@ -84,6 +85,10 @@ public class MainDashboard extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard);
+
+        if (!running) {
+            running = true;
+        }
         createNotificationChannels();
 
         notificationManager = NotificationManagerCompat.from(this);
@@ -104,7 +109,7 @@ public class MainDashboard extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_maindashboard, R.id.navigation_problemwaitinglist, R.id.navigation_reportactivity)
+                R.id.navigation_maindashboard, R.id.navigation_problemwaitinglist, R.id.navigation_reportactivity, R.id.navigation_machinereport)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -299,6 +304,7 @@ public class MainDashboard extends AppCompatActivity {
         clearUserName(this);
         send = "";
         notifikasi = "";
+        running = false;
         Intent i = new Intent(MainDashboard.this, LoginActivity.class);
         startActivity(i);
         finish();
@@ -306,7 +312,7 @@ public class MainDashboard extends AppCompatActivity {
 
     private  void content(){
         getStatus();
-        if (!send.equals(notifikasi)&&Status.equals("2"))
+        if (running&&!send.equals(notifikasi)&&Status.equals("2"))
         {
             sendOnChannel1();
         }
@@ -372,9 +378,11 @@ public class MainDashboard extends AppCompatActivity {
         Intent activityIntent = new Intent(this, ProblemWaitingList.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setFullScreenIntent(contentIntent, true)
                 .setSmallIcon(R.drawable.ic_launcher_background)
                 .setContentTitle(title)
                 .setContentText(message)
+                .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
