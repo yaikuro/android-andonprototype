@@ -17,7 +17,7 @@ public class ConnectionClass
     String unXAMPP = "dio";
     String passwordXAMPP = "dio";
     String ipPameran = "192.168.43.213";
-    String ip = "192.168.1.100";
+    String ip = "192.168.0.101";
     String classs = "net.sourceforge.jtds.jdbc.Driver";
     String db = "Winteq";
     String un = "admin";

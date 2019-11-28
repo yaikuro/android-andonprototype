@@ -13,7 +13,7 @@
     <string name="machine_id_colon">Machine ID : </string>
     <string name="detail_report_title">Detail Report</string>
     <string name="station_colon">Station : </string>
-    <string name="pic_colon">PIC</string>
+    <string name="pic_colon">PIC : </string>
     <string name="repair_date_start_colon">Repair Date Start :</string>
     <string name="repair_date_finish_colon">Repair Date Finish :</string>
     <string name="duration_colon">Duration :</string>

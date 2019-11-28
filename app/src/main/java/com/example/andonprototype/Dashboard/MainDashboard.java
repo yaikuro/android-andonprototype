@@ -379,10 +379,9 @@ public class MainDashboard extends AppCompatActivity {
         PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setFullScreenIntent(contentIntent, true)
-                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle(title)
                 .setContentText(message)
-                .setContentIntent(contentIntent)
                 .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)

@@ -25,8 +25,8 @@
 
 
         <activity android:name=".Dashboard.LoginActivity"
-                   android:label="@string/app_name"
-            android:theme="@style/splashScreenTheme">
+                   android:label="@string/app_name">
+<!--            android:theme="@style/splashScreenTheme">-->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -58,6 +58,7 @@
 
         <activity
             android:name=".Dashboard.DetailBreakdownPage2"
+            android:screenOrientation="userPortrait"
             android:label="Detail Breakdown"/>
 
 
