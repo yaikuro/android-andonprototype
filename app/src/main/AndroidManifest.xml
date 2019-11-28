@@ -13,81 +13,60 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
-        android:fullBackupContent="true"
         tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
         tools:targetApi="donut">
+        <activity android:name=".SwipeProblem"></activity>
+        <activity
+            android:name=".Dashboard.LoginActivity"
+            android:label="@string/app_name">
 
-
-
-        <activity android:name=".Dashboard.LoginActivity"
-                   android:label="@string/app_name">
-<!--            android:theme="@style/splashScreenTheme">-->
+            <!-- android:theme="@style/splashScreenTheme"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".Dashboard.MainDashboard"
             android:label="@string/main_dashboard" />
-
-
         <activity
             android:name=".Dashboard.MachineDashboard"
             android:label="@string/machine_dashboard_title"
-            android:screenOrientation="userLandscape"/>
-
-
+            android:screenOrientation="userLandscape" />
         <activity
             android:name=".ui.ProblemList.ProblemWaitingList"
-            android:label="Problem List"/>
-
-
+            android:label="Problem List" />
         <activity
             android:name=".barcodescanner.SimpleScanner"
-            android:label="Barcode Scanner"/>
-
-
+            android:label="Barcode Scanner" />
         <activity
             android:name=".Dashboard.DetailBreakdownPage2"
-            android:screenOrientation="userPortrait"
-            android:label="Detail Breakdown"/>
-
-
+            android:label="Detail Breakdown"
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".Dashboard.BreakdownHistory"
             android:label="Breakdown History" />
-
-
         <activity
             android:name=".ui.Report.DetailReport"
-            android:label="Detail Report"/>
-
+            android:label="Detail Report" />
         <activity
             android:name=".ui.MachineReport.DetailMachineReport"
-            android:label="Detail Machine Report"/>
-
-
-            <activity android:name=".drawer_ui.Settings"/>
-            <activity android:name=".drawer_ui.Help"/>
-            <activity android:name=".drawer_ui.Logout"/>
-
-
+            android:label="Detail Machine Report" />
+        <activity android:name=".drawer_ui.Settings" />
+        <activity android:name=".drawer_ui.Help" />
+        <activity android:name=".drawer_ui.Logout" />
         <activity android:name=".Background.SwipeDismissBaseActivity" />
-
-
-        <activity android:name=".Exhibition_feature.MachineStatusBreakdown"/>
-        <activity android:name=".Exhibition_feature.MachineStatusRepair"/>
+        <activity android:name=".Exhibition_feature.MachineStatusBreakdown" />
+        <activity android:name=".Exhibition_feature.MachineStatusRepair" />
         <activity android:name=".Exhibition_feature.Survey" />
-
     </application>
 
 </manifest>

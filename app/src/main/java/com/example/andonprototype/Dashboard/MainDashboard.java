@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.R;
+import com.example.andonprototype.SwipeProblem;
 import com.example.andonprototype.drawer_ui.Help;
 import com.example.andonprototype.drawer_ui.Settings;
 import com.example.andonprototype.ui.MainDashboard.MainDashboardFragment;
@@ -58,6 +59,7 @@ public class MainDashboard extends AppCompatActivity {
     private static final String TAG = "MainDashboard";
     public static final String CHANNEL_1_ID = "channel1";
     public static boolean running = false;
+    public static boolean validate = false;
     boolean doubleBackToExitPressedOnce = false;
     public String MachineID;
     public String Status;
@@ -89,6 +91,9 @@ public class MainDashboard extends AppCompatActivity {
         if (!running) {
             running = true;
         }
+        if(!validate){
+            validate = true;
+        }
         createNotificationChannels();
 
         notificationManager = NotificationManagerCompat.from(this);
@@ -115,49 +120,6 @@ public class MainDashboard extends AppCompatActivity {
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-
-
-//        List<Fragment> fragments = new ArrayList<>(3);
-//
-//        //add fragments to list
-//        fragments.add(MainDashboardFragment.newInstance(0));
-//        fragments.add(ProblemListFragment.newInstance(0));
-//        fragments.add(ReportActivityFragment.newInstance(0));
-//
-//
-//        //link fragments to container
-//        fragNavController = new FragNavController(getSupportFragmentManager(),R.id.container,fragments);
-//        //End of FragNav
-//
-//        //BottomBar menu
-//        mBottomBar = BottomBar.attach(this, savedInstanceState);
-//        mBottomBar.setItems(R.menu.bottom_nav_menu);
-//        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-//            @Override
-//            public void onMenuTabSelected(@IdRes int menuItemId) {
-//                //switch between tabs
-//                switch (menuItemId) {
-//                    case R.id.navigation_maindashboard:
-//                        fragNavController.switchTab(TAB_FIRST);
-//                        break;
-//                    case R.id.navigation_problemwaitinglist:
-//                        fragNavController.switchTab(TAB_SECOND);
-//                        break;
-//                    case R.id.navigation_reportactivity:
-//                        fragNavController.switchTab(TAB_THIRD);
-//                        break;
-//                }
-//            }
-//
-//            @Override
-//            public void onMenuTabReSelected(@IdRes int menuItemId) {
-//                if (menuItemId == R.id.navigation_maindashboard) {
-//                    fragNavController.clearStack();
-//                }
-//            }
-//        });
-//        //End of BottomBar menu
-
         //Navigation drawer
         new DrawerBuilder().withActivity(this).build();
 
@@ -166,28 +128,6 @@ public class MainDashboard extends AppCompatActivity {
                 .withIdentifier(1)
                 .withName(R.string.drawer_item_home)
                 .withIcon(R.drawable.ic_home_black_24dp);
-//        PrimaryDrawerItem primary_item1 = new PrimaryDrawerItem()
-//                .withIdentifier(2)
-//                .withName(R.string.drawer_item_option1)
-//                .withIcon(R.drawable.ic_looks_one_black_24dp);
-//        PrimaryDrawerItem primary_item2 = new PrimaryDrawerItem()
-//                .withIdentifier(3)
-//                .withName(R.string.drawer_item_option2)
-//                .withIcon(R.drawable.ic_looks_two_black_24dp);
-//        //secondary items
-//        SecondaryDrawerItem secondary_item1 = (SecondaryDrawerItem) new SecondaryDrawerItem()
-//                .withIdentifier(11)
-//                .withName(R.string.drawer_item_option1)
-//                .withIcon(R.drawable.ic_looks_one_black_24dp);
-//        SecondaryDrawerItem secondary_item2 = (SecondaryDrawerItem) new SecondaryDrawerItem()
-//                .withIdentifier(12)
-//                .withName(R.string.drawer_item_option2)
-//                .withIcon(R.drawable.ic_looks_two_black_24dp);
-//        SecondaryDrawerItem secondary_item3 = (SecondaryDrawerItem) new SecondaryDrawerItem()
-//                .withIdentifier(13)
-//                .withName(R.string.drawer_item_option3)
-//                .withIcon(R.drawable.ic_looks_3_black_24dp);
-        //settings, help, contact items
         SecondaryDrawerItem settings = (SecondaryDrawerItem) new SecondaryDrawerItem()
                 .withIdentifier(97)
                 .withName(R.string.drawer_item_settings)
@@ -312,9 +252,11 @@ public class MainDashboard extends AppCompatActivity {
 
     private  void content(){
         getStatus();
-        if (running&&!send.equals(notifikasi)&&Status.equals("2"))
+        if (running&&!send.equals(notifikasi)&&Status.equals("2")&&validate)
         {
             sendOnChannel1();
+            Intent i = new Intent(MainDashboard.this, SwipeProblem.class);
+            startActivity(i);
         }
         refresh(1000);
     }
@@ -375,7 +317,7 @@ public class MainDashboard extends AppCompatActivity {
     public void sendOnChannel1() {
         String title = "ALERT";
         String message = "Machine Problem Detected";
-        Intent activityIntent = new Intent(this, ProblemWaitingList.class);
+        Intent activityIntent = new Intent(this, SwipeProblem.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setFullScreenIntent(contentIntent, true)
@@ -391,7 +333,6 @@ public class MainDashboard extends AppCompatActivity {
                 .build();
         notificationManager.notify(1, notification);
     }
-
 
     public void isStoragePermissionGranted() {
         if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)

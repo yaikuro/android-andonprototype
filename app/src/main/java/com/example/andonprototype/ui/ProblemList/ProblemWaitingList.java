@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,11 +35,15 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.example.andonprototype.Background.SaveSharedPreference.getID;
+import static com.example.andonprototype.Dashboard.MainDashboard.validate;
 
 public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener {
     public String pic,Line,Station,MachineID,Status,Person;
     private ListView ListProblem;
+    int itemcount;
     private SimpleAdapter AP;
+    boolean doubleBackToExitPressedOnce = false;
+    TextView textView;
     public ImageView imageView;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -47,6 +53,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_problem_waiting_list);
         ListProblem = findViewById(R.id.ListProblem);
+        textView = findViewById(R.id.NoProblem);
+        validate = false;
         ListProblem.setOnItemClickListener(this);
         imageView = findViewById(R.id.image);
         getProblem();
@@ -69,6 +77,14 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         int[] viewwhere = {R.id.image, R.id.Line, R.id.Station};
         AP = new SimpleAdapter(ProblemWaitingList.this, MyProblemList, R.layout.listitem, fromwhere, viewwhere);
         ListProblem.setAdapter(AP);
+        itemcount = MyProblemList.size();
+        if (itemcount<1){
+            Toast.makeText(this, "Masalah sudah terambil", Toast.LENGTH_SHORT).show();
+            textView.setText("Masalah sudah Terambil");
+        }
+        else {
+            textView.setText("");
+        }
     }
 
     public static class GetProblem {
@@ -85,15 +101,16 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 };
 
         public List<Map<String, String>> getProblem() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
-
+            List<Map<String, String>> data = new ArrayList<>();
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     ConnectionResult = "Check your Internet Connection";
                 } else {
-                    String query = Query.problemquery;
+                    String query =  "Select * " +
+                            "from stationdashboard " +
+                            "where Status = 2";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
                     while (rs.next()) {
@@ -200,5 +217,24 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 }
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            validate = true;
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click Back again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 3000);
     }
 }
