@@ -1,15 +1,19 @@
 package com.example.andonprototype.ui.ProblemList;
 
 import android.Manifest;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -19,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
 
 import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.Query;
@@ -92,17 +97,17 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
         ListProblem.setAdapter(AP);
     }
 
-    public static class GetProblem {
+    public class GetProblem {
         Connection connect;
         String ConnectionResult = "";
 
         Boolean isSuccess = false;
         int[] listviewImage = new int[]
                 {
-                        R.drawable.green,
-                        R.drawable.red,
-                        R.drawable.yellow,
-                        R.drawable.blue
+                        R.drawable.color_green,
+                        R.drawable.color_red,
+                        R.drawable.color_yellow,
+                        R.drawable.color_blue
                 };
 
         public List<Map<String, String>> getProblem() {
@@ -221,5 +226,12 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                 }
             }
         }
+    }
+    public void blinkEffect() {
+        ObjectAnimator animation = ObjectAnimator.ofInt(ListProblem, "backgroundColor", Color.WHITE, Color.RED, Color.WHITE);
+        animation.setDuration(1500);
+        animation.setEvaluator(new ArgbEvaluator());
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.start();
     }
 }

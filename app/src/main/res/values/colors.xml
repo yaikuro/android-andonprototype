@@ -5,4 +5,5 @@
     <color name="colorAccent">#D81B60</color>
     <color name="gradient_start">#505050</color>
     <color name="gradient_end">#202020</color>
+    <color name="black">#000000</color>
 </resources>

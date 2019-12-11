@@ -18,10 +18,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
+        android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
         tools:targetApi="donut">
-        <activity android:name=".SwipeProblem"></activity>
+        <activity android:name=".ui.pop_dialog"></activity>
+        <activity android:name=".SwipeProblem" />
         <activity
             android:name=".Dashboard.LoginActivity"
             android:label="@string/app_name">
@@ -63,6 +64,7 @@
         <activity android:name=".drawer_ui.Settings" />
         <activity android:name=".drawer_ui.Help" />
         <activity android:name=".drawer_ui.Logout" />
+        <activity android:name=".ui.AssetManagement.AssetManagementReport" />
         <activity android:name=".Background.SwipeDismissBaseActivity" />
         <activity android:name=".Exhibition_feature.MachineStatusBreakdown" />
         <activity android:name=".Exhibition_feature.MachineStatusRepair" />

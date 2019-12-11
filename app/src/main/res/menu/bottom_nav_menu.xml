@@ -18,4 +18,8 @@
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="@string/title_machinereport" />
 
+    <item
+        android:id="@+id/navigation_assetmanagement"
+        android:icon="@drawable/ic_menu_slideshow"
+        android:title="@string/asset_management" />
 </menu>

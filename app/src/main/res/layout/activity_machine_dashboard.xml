@@ -14,11 +14,17 @@
         android:id="@+id/refresh"
         android:layout_alignParentEnd="true"
         android:layout_margin="20dp"/>
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbbar"
+        android:layout_centerInParent="true"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:id="@+id/Machine_Dashboard_Title"
+        android:textColor="@color/black"
         android:text="Machine Dashboard MCB-VRLA"
         android:textStyle="bold"
         android:textSize="35sp"
@@ -43,12 +49,14 @@
                     android:layout_width="50sp"
                     android:layout_height="50sp"
                     android:id="@+id/green_symbol"
-                    android:src="@drawable/green"/>
+                    android:src="@drawable/color_green"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_toEndOf="@id/green_symbol"
                     android:text=": Running"/>
             </RelativeLayout>
@@ -60,11 +68,13 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/red_symbol"
-                    android:src="@drawable/red"/>
+                    android:src="@drawable/color_red"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/red_symbol"
                     android:text=": Breakdown"/>
@@ -77,13 +87,15 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/yello_symbol"
-                    android:src="@drawable/yellow"/>
+                    android:src="@drawable/color_yellow"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textColor="@color/black"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/yello_symbol"
+                    android:textStyle="bold"
                     android:text=": Repair On Progress"/>
             </RelativeLayout>
             <RelativeLayout
@@ -94,12 +106,14 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:id="@+id/blue_symbol"
-                    android:src="@drawable/blue"/>
+                    android:src="@drawable/color_blue"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
+                    android:textColor="@color/black"
                     android:layout_centerVertical="true"
+                    android:textStyle="bold"
                     android:layout_toEndOf="@id/blue_symbol"
                     android:text=": Finish Repair"/>
             </RelativeLayout>
@@ -125,6 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Line 10"
+                    android:gravity="center"
                     android:textSize="18sp"
                     android:id="@+id/Line10_Title"
                     android:textStyle="bold" />
@@ -143,6 +158,7 @@
                     android:layout_height="wrap_content"
                     android:text="Line 9"
                     android:textSize="18sp"
+                    android:gravity="center"
                     android:id="@+id/Line9_Title"
                     android:textStyle="bold" />
                 <ListView
@@ -160,6 +176,7 @@
                     android:layout_height="wrap_content"
                     android:text="Line 8"
                     android:textSize="18sp"
+                    android:gravity="center"
                     android:id="@+id/Line8_Title"
                     android:textStyle="bold" />
                 <ListView
@@ -177,6 +194,7 @@
                     android:layout_height="wrap_content"
                     android:text="Line 7"
                     android:textSize="18sp"
+                    android:gravity="center"
                     android:id="@+id/Line7_Title"
                     android:textStyle="bold" />
                 <ListView
@@ -195,6 +213,7 @@
                     android:text="Line 6"
                     android:textSize="18sp"
                     android:id="@+id/Line6_Title"
+                    android:gravity="center"
                     android:textStyle="bold" />
                 <ListView
                     android:id="@+id/ListView6"
@@ -211,6 +230,7 @@
                     android:layout_height="wrap_content"
                     android:text="Line 5"
                     android:textSize="18sp"
+                    android:gravity="center"
                     android:id="@+id/Line5_Title"
                     android:textStyle="bold" />
                 <ListView
@@ -229,6 +249,7 @@
                     android:text="Line 4"
                     android:textSize="18sp"
                     android:id="@+id/Line4_Title"
+                    android:gravity="center"
                     android:textStyle="bold" />
                 <ListView
                     android:id="@+id/ListView4"
@@ -246,6 +267,7 @@
                     android:text="Line 11"
                     android:textSize="18sp"
                     android:id="@+id/Line11_Title"
+                    android:gravity="center"
                     android:textStyle="bold" />
                 <ListView
                     android:id="@+id/ListView11"
@@ -262,6 +284,7 @@
                     android:layout_height="wrap_content"
                     android:text="Line 3"
                     android:textSize="18sp"
+                    android:gravity="center"
                     android:id="@+id/Line3_Title"
                     android:textStyle="bold" />
                 <ListView
@@ -280,6 +303,7 @@
                     android:text="Line 2"
                     android:textSize="18sp"
                     android:id="@+id/Line2_Title"
+                    android:gravity="center"
                     android:textStyle="bold" />
                 <ListView
                     android:id="@+id/ListView2"
@@ -295,6 +319,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Line 1"
+                    android:gravity="center"
                     android:textSize="18sp"
                     android:id="@+id/Line1_Title"
                     android:textStyle="bold"/>

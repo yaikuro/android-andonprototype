@@ -11,18 +11,22 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.vectordrawable.graphics.drawable.ArgbEvaluator;
 
+import android.animation.ObjectAnimator;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +39,7 @@ import com.example.andonprototype.ui.MainDashboard.MainDashboardFragment;
 import com.example.andonprototype.ui.ProblemList.ProblemListFragment;
 import com.example.andonprototype.ui.ProblemList.ProblemWaitingList;
 import com.example.andonprototype.ui.Report.ReportActivityFragment;
+import com.example.andonprototype.ui.pop_dialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -55,7 +60,7 @@ import java.util.List;
 import static com.example.andonprototype.Background.SaveSharedPreference.clearUserName;
 import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 
-public class MainDashboard extends AppCompatActivity {
+public class MainDashboard extends AppCompatActivity implements pop_dialog.ExampleDialogListener{
     private static final String TAG = "MainDashboard";
     public static final String CHANNEL_1_ID = "channel1";
     public static boolean running = false;
@@ -114,7 +119,7 @@ public class MainDashboard extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_maindashboard, R.id.navigation_problemwaitinglist, R.id.navigation_reportactivity, R.id.navigation_machinereport)
+                R.id.navigation_maindashboard, R.id.navigation_problemwaitinglist, R.id.navigation_reportactivity, R.id.navigation_machinereport, R.id.navigation_assetmanagement)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
@@ -343,5 +348,27 @@ public class MainDashboard extends AppCompatActivity {
             Log.v(TAG,"Permission is revoked");
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
+    }
+    public void openDialog() {
+        pop_dialog exampleDialog = new pop_dialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    @Override
+    public void applyTexts(String username, String password) {
+    }
+
+    public void listMenuButton(View view) {
+        openDialog();
+    }
+
+    public void btnLocation(View view) {
+        Intent i = new Intent(this, MachineDashboard.class);
+        startActivity(i);
+    }
+
+    public void btnMoreInfo(View view) {
+        Intent i = new Intent(this, Settings.class);
+        startActivity(i);
     }
 }

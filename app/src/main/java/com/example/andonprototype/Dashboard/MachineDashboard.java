@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -40,6 +41,8 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     SimpleAdapter AD1, AD2, AD3, AD4, AD5, AD6, AD7, AD8, AD9, AD10, AD11;
     ImageView imageView;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
+    ProgressBar pbbar;
+    public Boolean isSuccess,success;
     public String Line, Station, Status, PIC, Person;
     Button refresh;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -49,6 +52,10 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard);
+        final Handler handler = new Handler();
+        isSuccess = false;
+        success = false;
+        pbbar = findViewById(R.id.pbbar);
         PIC = SaveSharedPreference.getID(this);
         refresh = findViewById(R.id.refresh);
         ListView = findViewById(R.id.ListView);
@@ -75,6 +82,23 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         ListView11.setOnItemClickListener(this);
         imageView = findViewById(R.id.image);
         getdata();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ListView.setAdapter(AD1);
+                ListView2.setAdapter(AD2);
+                ListView3.setAdapter(AD3);
+                ListView4.setAdapter(AD4);
+                ListView5.setAdapter(AD5);
+                ListView6.setAdapter(AD6);
+                ListView7.setAdapter(AD7);
+                ListView8.setAdapter(AD8);
+                ListView9.setAdapter(AD9);
+                ListView10.setAdapter(AD10);
+                ListView11.setAdapter(AD11);
+                pbbar.setVisibility(View.GONE);
+            }
+        },2000);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,127 +124,74 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     }
 
     public void getdata() {
-        getdata1();
-        getdata2();
-        getdata3();
-        getdata4();
-        getdata5();
-        getdata6();
-        getdata7();
-        getdata8();
-        getdata9();
-        getdata10();
-        getdata11();
-    }
-
-    public void getdata1() {
-        List<Map<String, String>> MydataList = null;
         GetData myData = new GetData();
-        MydataList = myData.getdata1();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD1 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView.setAdapter(AD1);
-    }
 
-    public void getdata2() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata2();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD2 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView2.setAdapter(AD2);
-    }
+        List<Map<String, String>> MydataList1;
+        MydataList1 = myData.getdata1();
+        String[] fromwhere1 = {"Image", "Station"};
+        int[] viewwhere1 = {R.id.image, R.id.Station};
+        AD1 = new SimpleAdapter(MachineDashboard.this, MydataList1, R.layout.stationlistitem, fromwhere1, viewwhere1);
 
-    public void getdata3() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata3();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD3 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView3.setAdapter(AD3);
-    }
 
-    public void getdata4() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata4();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD4 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView4.setAdapter(AD4);
-    }
+        List<Map<String, String>> MydataList2;
+        MydataList2 = myData.getdata2();
+        String[] fromwhere2 = {"Image", "Station"};
+        int[] viewwhere2 = {R.id.image, R.id.Station};
+        AD2 = new SimpleAdapter(MachineDashboard.this, MydataList2, R.layout.stationlistitem, fromwhere2, viewwhere2);
 
-    public void getdata5() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata5();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD5 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView5.setAdapter(AD5);
-    }
+        List<Map<String, String>> MydataList3;
+        MydataList3 = myData.getdata3();
+        String[] fromwhere3 = {"Image", "Station"};
+        int[] viewwhere3 = {R.id.image, R.id.Station};
+        AD3 = new SimpleAdapter(MachineDashboard.this, MydataList3, R.layout.stationlistitem, fromwhere3, viewwhere3);
 
-    public void getdata6() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata6();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD6 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView6.setAdapter(AD6);
-    }
+        List<Map<String, String>> MydataList4;
+        MydataList4 = myData.getdata4();
+        String[] fromwhere4 = {"Image", "Station"};
+        int[] viewwhere4 = {R.id.image, R.id.Station};
+        AD4 = new SimpleAdapter(MachineDashboard.this, MydataList4, R.layout.stationlistitem, fromwhere4, viewwhere4);
 
-    public void getdata7() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata7();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD7 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView7.setAdapter(AD7);
-    }
+        List<Map<String, String>> MydataList5;
+        MydataList5 = myData.getdata5();
+        String[] fromwhere5 = {"Image", "Station"};
+        int[] viewwhere5 = {R.id.image, R.id.Station};
+        AD5 = new SimpleAdapter(MachineDashboard.this, MydataList5, R.layout.stationlistitem, fromwhere5, viewwhere5);
 
-    public void getdata8() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata8();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD8 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView8.setAdapter(AD8);
-    }
+        List<Map<String, String>> MydataList6;
+        MydataList6 = myData.getdata6();
+        String[] fromwhere6 = {"Image", "Station"};
+        int[] viewwhere6 = {R.id.image, R.id.Station};
+        AD6 = new SimpleAdapter(MachineDashboard.this, MydataList6, R.layout.stationlistitem, fromwhere6, viewwhere6);
 
-    public void getdata9() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata9();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD9 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView9.setAdapter(AD9);
-    }
+        List<Map<String, String>> MydataList7;
+        MydataList7 = myData.getdata7();
+        String[] fromwhere7 = {"Image", "Station"};
+        int[] viewwhere7 = {R.id.image, R.id.Station};
+        AD7 = new SimpleAdapter(MachineDashboard.this, MydataList7, R.layout.stationlistitem, fromwhere7, viewwhere7);
 
-    public void getdata10() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata10();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD10 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView10.setAdapter(AD10);
-    }
+        List<Map<String, String>> MydataList8;
+        MydataList8 = myData.getdata8();
+        String[] fromwhere8 = {"Image", "Station"};
+        int[] viewwhere8 = {R.id.image, R.id.Station};
+        AD8 = new SimpleAdapter(MachineDashboard.this, MydataList8, R.layout.stationlistitem, fromwhere8, viewwhere8);
 
-    public void getdata11() {
-        List<Map<String, String>> MydataList = null;
-        GetData myData = new GetData();
-        MydataList = myData.getdata11();
-        String[] fromwhere = {"Image", "Station"};
-        int[] viewwhere = {R.id.image, R.id.Station};
-        AD11 = new SimpleAdapter(MachineDashboard.this, MydataList, R.layout.stationlistitem, fromwhere, viewwhere);
-        ListView11.setAdapter(AD11);
+        List<Map<String, String>> MydataList9;
+        MydataList9 = myData.getdata9();
+        String[] fromwhere9 = {"Image", "Station"};
+        int[] viewwhere9 = {R.id.image, R.id.Station};
+        AD9 = new SimpleAdapter(MachineDashboard.this, MydataList9, R.layout.stationlistitem, fromwhere9, viewwhere9);
+
+        List<Map<String, String>> MydataList10;
+        MydataList10 = myData.getdata10();
+        String[] fromwhere10 = {"Image", "Station"};
+        int[] viewwhere10 = {R.id.image, R.id.Station};
+        AD10 = new SimpleAdapter(MachineDashboard.this, MydataList10, R.layout.stationlistitem, fromwhere10, viewwhere10);
+
+        List<Map<String, String>> MydataList11;
+        MydataList11 = myData.getdata11();
+        String[] fromwhere11 = {"Image", "Station"};
+        int[] viewwhere11 = {R.id.image, R.id.Station};
+        AD11 = new SimpleAdapter(MachineDashboard.this, MydataList11, R.layout.stationlistitem, fromwhere11, viewwhere11);
     }
 
     @Override
@@ -245,8 +216,11 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 Object line = mp.get("Line");
                 Object station = mp.get("Station");
                 Object status = mp.get("Status");
+                assert line != null;
                 Line = line.toString();
+                assert station != null;
                 Station = station.toString();
+                assert status != null;
                 Status = status.toString();
                 i.putExtra("StartTime", currentDateStart);
                 i.putExtra("Line", Line);
@@ -291,27 +265,25 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         }
     }
 
-    public static class GetData {
+    public class GetData {
         private Connection connect;
-        private String ConnectionResult = "";
-        private Boolean isSuccess = false;
         private int[] listviewImage = new int[]
                 {
-                        R.drawable.green,
-                        R.drawable.red,
-                        R.drawable.yellow,
-                        R.drawable.blue
+                        R.drawable.color_green,
+                        R.drawable.color_red,
+                        R.drawable.color_yellow,
+                        R.drawable.color_blue
                 };
 
-        public List<Map<String, String>> getdata1() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata1() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                } else {
                     String query = "Select * from stationdashboard where Line = 1";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -350,25 +322,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata2() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata2() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
+                if (connect == null){
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     String query = "Select * from stationdashboard where Line = 2";
                     Statement stmt = connect.createStatement();
@@ -408,26 +379,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata3() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata3() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 3";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -466,26 +435,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata4() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata4() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 4";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -524,26 +491,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata5() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata5() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 5";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -582,26 +547,23 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata6() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata6() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                }else {
                     String query = "Select * from stationdashboard where Line = 6";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -640,26 +602,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata7() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata7() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 7";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -698,26 +658,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata8() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata8() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 8";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -756,26 +714,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata9() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata9() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 9";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -814,26 +770,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata10() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata10() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 10";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -872,26 +826,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC",PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }
 
-        public List<Map<String, String>> getdata11() {
-            List<Map<String, String>> data = new ArrayList<Map<String, String>>();
+        List<Map<String, String>> getdata11() {
+            List<Map<String, String>> data = new ArrayList<>();
 
             try {
                 ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
-                if (connect == null)
-                    ConnectionResult = "Check your Internet Connection";
-                else {
+                if (connect == null) {
+                    Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
+                }else {
                     String query = "Select * from stationdashboard where Line = 11";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -930,13 +882,11 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
-                    ConnectionResult = "Successful";
                     isSuccess = true;
                     connect.close();
                 }
             } catch (Exception ex) {
                 isSuccess = false;
-                ConnectionResult = ex.getMessage();
             }
             return data;
         }

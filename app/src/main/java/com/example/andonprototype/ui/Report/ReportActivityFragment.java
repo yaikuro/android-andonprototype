@@ -142,7 +142,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
         }
         return data;
     }
-    public String GetPIC(){
+    public void GetPIC(){
         String z = "";
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -151,7 +151,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                 z = "Check Your Internet Connection";
             }
             else{
-                String query = "Select Nama from userid";
+                String query = "SELECT Nama FROM userid ORDER BY No OFFSET 1 ROWS";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 NameArray = new ArrayList();
@@ -167,7 +167,6 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                 getActivity(),R.layout.spinner_item,NameArray);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
-        return z;
     }
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)

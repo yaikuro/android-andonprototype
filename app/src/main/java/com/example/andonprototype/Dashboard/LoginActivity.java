@@ -73,8 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public class DoLogin extends AsyncTask<String,String,String>
-    {
+    public class DoLogin extends AsyncTask<String,String,String> {
         String z = "";
         Boolean isSuccess = false;
 

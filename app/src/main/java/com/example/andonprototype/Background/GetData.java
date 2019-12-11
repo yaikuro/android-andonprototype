@@ -16,10 +16,10 @@ public class GetData {
     private Boolean isSuccess = false;
     private int[] listviewImage = new int[]
             {
-                    R.drawable.green,
-                    R.drawable.red,
-                    R.drawable.yellow,
-                    R.drawable.blue
+                    R.drawable.color_green,
+                    R.drawable.color_red,
+                    R.drawable.color_yellow,
+                    R.drawable.color_blue
             };
     public List<Map<String,String>>getdata()
     {

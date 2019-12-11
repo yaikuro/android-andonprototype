@@ -22,6 +22,9 @@ import com.example.andonprototype.Background.ConnectionClass;
 import com.example.andonprototype.Background.Query;
 import com.example.andonprototype.R;
 import com.example.andonprototype.barcodescanner.SimpleScanner;
+import com.example.andonprototype.drawer_ui.Help;
+import com.example.andonprototype.drawer_ui.Settings;
+import com.example.andonprototype.ui.pop_dialog;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -37,7 +40,7 @@ import java.util.Map;
 import static com.example.andonprototype.Background.SaveSharedPreference.getID;
 import static com.example.andonprototype.Dashboard.MainDashboard.validate;
 
-public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener {
+public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog.ExampleDialogListener {
     public String pic,Line,Station,MachineID,Status,Person;
     private ListView ListProblem;
     int itemcount;
@@ -87,6 +90,11 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         }
     }
 
+    @Override
+    public void applyTexts(String username, String password) {
+
+    }
+
     public static class GetProblem {
         Connection connect;
         String ConnectionResult = "";
@@ -94,10 +102,10 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         Boolean isSuccess = false;
         int[] listviewImage = new int[]
                 {
-                        R.drawable.green,
-                        R.drawable.red,
-                        R.drawable.yellow,
-                        R.drawable.blue
+                        R.drawable.color_green,
+                        R.drawable.color_red,
+                        R.drawable.color_yellow,
+                        R.drawable.color_blue
                 };
 
         public List<Map<String, String>> getProblem() {
@@ -236,5 +244,23 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 doubleBackToExitPressedOnce=false;
             }
         }, 3000);
+    }
+    public void openDialog() {
+        pop_dialog exampleDialog = new pop_dialog();
+        exampleDialog.show(getSupportFragmentManager(), "example dialog");
+    }
+
+    public void listMenuButton(View view) {
+        openDialog();
+    }
+
+    public void btnLocation(View view) {
+        Intent i = new Intent(this, Help.class);
+        startActivity(i);
+    }
+
+    public void btnMoreInfo(View view) {
+        Intent i = new Intent(this, Settings.class);
+        startActivity(i);
     }
 }
