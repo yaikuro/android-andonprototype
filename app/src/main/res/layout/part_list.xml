@@ -29,5 +29,12 @@
             android:textSize="20sp"
             android:gravity="center"
             android:id="@+id/Durability"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:id="@+id/Date"/>
     </LinearLayout>
 </FrameLayout>

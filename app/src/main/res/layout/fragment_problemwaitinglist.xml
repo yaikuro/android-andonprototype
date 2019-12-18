@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".Dashboard.MainDashboard$ProblemWaitingList">
+        tools:context=".ui.Dashboard.MainDashboard$ProblemWaitingList">
 
         <TextView
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:textStyle="bold"
             android:text="Problem Waiting List"
             android:gravity="top|center"
-            android:textSize="30dp"/>
+            android:textSize="30sp"/>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"

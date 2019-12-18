@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#00FFFFFF"
+    android:padding="16dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLocation"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnRenew"
+        android:text="Renew Part"/>
+<!--        app:icon="@drawable/ic_pin_drop_black_24dp"/>-->
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnMoreInfo"
+        style="@style/Widget.MaterialComponents.Button.Icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:onClick="btnMoreInfo"
+        android:text="More Info"
+        app:icon="@drawable/ic_info_black_24dp"/>
+
+</LinearLayout>

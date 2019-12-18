@@ -4,38 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.Dashboard.MainDashboard$ProblemWaitingList">
-
-    <TextView
+    tools:context=".ui.Dashboard.Change_Part_List">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Title"
-        android:textStyle="bold"
-        android:text="Problem Waiting List"
-        android:gravity="top|center"
-        android:textSize="30sp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:id="@+id/NoProblem"
-        android:textSize="20sp"/>
+        android:layout_margin="10dp"
+        android:id="@+id/RelativeLayoutHistory">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Title"
+            android:text="List of Machine"
+            android:layout_centerHorizontal="true"
+            android:textSize="40sp"/>
+    </RelativeLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
-        android:layout_below="@id/Title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        android:layout_below="@id/RelativeLayoutHistory"
         android:background="@android:color/transparent">
+
         <ListView
-            android:id="@+id/ListProblem"
+            android:id="@+id/ListMachineChangePart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            />
+            android:layout_below="@id/RelativeLayoutHistory" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-
 </RelativeLayout>

@@ -7,31 +7,31 @@
 
     <fragment
         android:id="@+id/navigation_maindashboard"
-        android:name="com.example.andonprototype.ui.MainDashboard.MainDashboardFragment"
+        android:name="com.app.andonprototype.ui.MainDashboard.MainDashboardFragment"
         android:label="Main Dashboard"
         tools:layout="@layout/fragment_maindashboard" />
 
     <fragment
         android:id="@+id/navigation_problemwaitinglist"
-        android:name="com.example.andonprototype.ui.ProblemList.ProblemListFragment"
+        android:name="com.app.andonprototype.ui.ProblemList.ProblemListFragment"
         android:label="Problem List"
         tools:layout="@layout/fragment_problemwaitinglist" />
 
     <fragment
         android:id="@+id/navigation_reportactivity"
-        android:name="com.example.andonprototype.ui.Report.ReportActivityFragment"
+        android:name="com.app.andonprototype.ui.Report.ReportActivityFragment"
         android:label="Report Activity"
         tools:layout="@layout/fragment_reportactivity" />
 
     <fragment
         android:id="@+id/navigation_machinereport"
-        android:name="com.example.andonprototype.ui.MachineReport.MachineReportActivityFragment"
+        android:name="com.app.andonprototype.ui.MachineReport.MachineReportActivityFragment"
         android:label="Report Activity"
         tools:layout="@layout/fragment_machinereportactivity" />
 
     <fragment
         android:id="@+id/navigation_assetmanagement"
-        android:name="com.example.andonprototype.ui.AssetManagement.AssetActivityFragment"
+        android:name="com.app.andonprototype.ui.AssetManagement.AssetActivityFragment"
         android:label="Asset Management"
         tools:layout="@layout/fragment_assetmanagementactivity" />
 </navigation>
