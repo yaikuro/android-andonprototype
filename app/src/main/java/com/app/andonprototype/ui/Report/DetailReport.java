@@ -81,7 +81,7 @@ public class DetailReport extends AppCompatActivity {
                         ImageProblem = rs.getString("Image_Problem");
                         ImageSolution = rs.getString("Image_Solution");
                     }
-                    ConnectionResult="Successfull";
+                    ConnectionResult="Successful";
                     connect.close();
                 }
             }

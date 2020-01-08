@@ -81,23 +81,24 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         ListView11.setOnItemClickListener(this);
         imageView = findViewById(R.id.image);
         getdata();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ListView.setAdapter(AD1);
-                ListView2.setAdapter(AD2);
-                ListView3.setAdapter(AD3);
-                ListView4.setAdapter(AD4);
-                ListView5.setAdapter(AD5);
-                ListView6.setAdapter(AD6);
-                ListView7.setAdapter(AD7);
-                ListView8.setAdapter(AD8);
-                ListView9.setAdapter(AD9);
-                ListView10.setAdapter(AD10);
-                ListView11.setAdapter(AD11);
-                pbbar.setVisibility(View.GONE);
-            }
-        },2000);
+        adapter_show();
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                ListView.setAdapter(AD1);
+//                ListView2.setAdapter(AD2);
+//                ListView3.setAdapter(AD3);
+//                ListView4.setAdapter(AD4);
+//                ListView5.setAdapter(AD5);
+//                ListView6.setAdapter(AD6);
+//                ListView7.setAdapter(AD7);
+//                ListView8.setAdapter(AD8);
+//                ListView9.setAdapter(AD9);
+//                ListView10.setAdapter(AD10);
+//                ListView11.setAdapter(AD11);
+//                pbbar.setVisibility(View.GONE);
+//            }
+//        },2000);
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,6 +121,21 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 pullToRefresh.setRefreshing(false);
             }
         });
+    }
+
+    public void adapter_show(){
+        ListView.setAdapter(AD1);
+        ListView2.setAdapter(AD2);
+        ListView3.setAdapter(AD3);
+        ListView4.setAdapter(AD4);
+        ListView5.setAdapter(AD5);
+        ListView6.setAdapter(AD6);
+        ListView7.setAdapter(AD7);
+        ListView8.setAdapter(AD8);
+        ListView9.setAdapter(AD9);
+        ListView10.setAdapter(AD10);
+        ListView11.setAdapter(AD11);
+        pbbar.setVisibility(View.GONE);
     }
 
     public void getdata() {
@@ -265,6 +281,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
 
     public class GetData {
         private Connection connect;
+        ConnectionClass connectionClass = new ConnectionClass();
         private int[] listviewImage = new int[]
                 {
                         R.drawable.color_green,
@@ -277,7 +294,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -333,7 +349,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null){
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -390,7 +405,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -446,7 +460,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -502,7 +515,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -558,7 +570,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                 }else {
@@ -613,7 +624,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -669,7 +679,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -725,7 +734,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -781,7 +789,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
@@ -837,7 +844,6 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             List<Map<String, String>> data = new ArrayList<>();
 
             try {
-                ConnectionClass connectionClass = new ConnectionClass();
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();

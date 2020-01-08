@@ -133,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
                 catch (Exception ex)
                 {
                     isSuccess = false;
-                    z = "Exceptions";
+                    z = "Invalid Credentials";
                 }
             }
             return z;

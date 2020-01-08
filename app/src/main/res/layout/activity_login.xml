@@ -11,6 +11,7 @@
         android:id="@+id/Linear"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_margin="20dp"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -23,42 +24,51 @@
             android:textColor="#DD009CAA"
             android:textSize="35sp"
             android:textStyle="bold"
+            android:layout_marginBottom="50dp"
             android:typeface="sans" />
 
-        <EditText
-            android:id="@+id/edtuserid"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#5d5d5d"
-            android:hint="@string/user_id_hint"
-            android:padding="10dp"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:textSize="20sp"
-            android:inputType="textShortMessage"
-            android:textStyle="bold" />
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            android:layout_marginBottom="10dp"
+            android:hint="ID">
 
-        <EditText
-            android:id="@+id/edtpass"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textShortMessage"
+                android:id="@+id/edtuserid"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="#5d5d5d"
-            android:hint="@string/password_hint"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:endIconMode="password_toggle"
+            android:hint="Password">
 
-        <Button
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtpass"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-
+            android:layout_marginTop="50dp"
+            app:cornerRadius="20dp"
             android:background="@color/colorPrimaryDark"
             android:padding="10dp"
             android:text="@string/login_hint"

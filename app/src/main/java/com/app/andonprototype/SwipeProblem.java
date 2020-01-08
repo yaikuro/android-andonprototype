@@ -11,16 +11,19 @@ import com.ebanx.swipebtn.OnActiveListener;
 import com.ebanx.swipebtn.OnStateChangeListener;
 import com.ebanx.swipebtn.SwipeButton;
 import com.app.andonprototype.ui.ProblemList.ProblemWaitingList;
+import com.mysql.fabric.Response;
 
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 
 public class SwipeProblem extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
+    String Response_Time_Start;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_swipe_problem);
         validate = false;
+        Response_Time_Start = getIntent().getStringExtra("Response_Time_Start");
         SwipeButton enableButton = findViewById(R.id.swipe_btn);
         enableButton.setOnStateChangeListener(new OnStateChangeListener() {
             @Override

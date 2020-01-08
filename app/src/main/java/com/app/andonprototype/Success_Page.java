@@ -1,13 +1,11 @@
 package com.app.andonprototype;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 
-import com.app.andonprototype.ui.Dashboard.DetailBreakdownPage2;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.app.andonprototype.ui.Dashboard.MainDashboard;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;

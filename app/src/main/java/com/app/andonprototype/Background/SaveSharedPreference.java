@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import androidx.fragment.app.FragmentActivity;
+
 import static android.content.SharedPreferences.*;
 
 public class SaveSharedPreference
@@ -34,7 +36,7 @@ public class SaveSharedPreference
         return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
     }
 
-    public static String getID(Context ctx)
+    public static String getID(FragmentActivity ctx)
     {
         return getSharedPreferences(ctx).getString(PREF_ID, "");
     }

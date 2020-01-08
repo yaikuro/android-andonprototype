@@ -339,6 +339,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         String title = "ALERT";
         String message = "Machine Problem Detected";
         Intent activityIntent = new Intent(this, SwipeProblem.class);
+        activityIntent.putExtra("Response_Time_Start", currentDate);
         PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setFullScreenIntent(contentIntent, true)

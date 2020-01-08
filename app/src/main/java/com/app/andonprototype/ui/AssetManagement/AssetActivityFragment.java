@@ -155,8 +155,7 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
             String query = "Select Line from stationdashboard group by Line";
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            LineArray = new ArrayList<String>();
-            StationArray = new ArrayList<>();
+            LineArray = new ArrayList<>();
             while(rs.next()){
                 LineArray.add(rs.getString("Line"));
             }
