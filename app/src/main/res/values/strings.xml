@@ -77,4 +77,6 @@
     <string name="title_machinereport">Machine Report</string>
     <string name="pic">PIC :</string>
     <string name="asset_management">Asset Management</string>
+    <string name="_00">0/0</string>
+    <string name="machine_dashboard">Machine Dashboard</string>
 </resources>
