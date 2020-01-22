@@ -19,6 +19,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
+import com.app.andonprototype.ui.MachineReport.DetailMachineReport;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -172,7 +173,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id)
     {
-        Intent i = new Intent(getActivity(),DetailReport.class);
+        Intent i = new Intent(getActivity(), DetailMachineReport.class);
         Map<String,String> mp = (Map<String, String>) ListReport.getItemAtPosition(position);
         Object No = mp.get("No");
         Object machine = mp.get("MachineID");

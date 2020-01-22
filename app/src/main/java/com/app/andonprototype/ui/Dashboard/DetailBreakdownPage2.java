@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -122,8 +123,10 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pbbarDetail.setVisibility(View.VISIBLE);
-                UploadtoDB();
+//                pbbarDetail.setVisibility(View.VISIBLE);
+//                UploadtoDB();
+                UploadData uploadData = new UploadData();
+                uploadData.execute();
             }
         });
     }
@@ -136,6 +139,28 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     public void Loadsuccespage() {
         Intent i = new Intent(DetailBreakdownPage2.this, Success_Page.class);
         startActivity(i);
+        finish();
+    }
+
+    public class UploadData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute()
+        {
+            pbbarDetail.setVisibility(View.VISIBLE);
+            //do initialization of required objects objects here
+        };
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            UploadtoDB();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            super.onPostExecute(result);
+            pbbarDetail.setVisibility(View.GONE);
+        };
     }
 
     public void UploadtoDB() {

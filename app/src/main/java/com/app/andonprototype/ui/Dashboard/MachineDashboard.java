@@ -6,8 +6,12 @@ import androidx.core.content.ContextCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -51,10 +55,10 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard);
-        final Handler handler = new Handler();
         isSuccess = false;
         success = false;
         pbbar = findViewById(R.id.pbbar);
+        pbbar.setVisibility(View.GONE);
         PIC = SaveSharedPreference.getID(this);
         refresh = findViewById(R.id.refresh);
         ListView = findViewById(R.id.ListView);
@@ -80,25 +84,10 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         ListView10.setOnItemClickListener(this);
         ListView11.setOnItemClickListener(this);
         imageView = findViewById(R.id.image);
-        getdata();
-        adapter_show();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                ListView.setAdapter(AD1);
-//                ListView2.setAdapter(AD2);
-//                ListView3.setAdapter(AD3);
-//                ListView4.setAdapter(AD4);
-//                ListView5.setAdapter(AD5);
-//                ListView6.setAdapter(AD6);
-//                ListView7.setAdapter(AD7);
-//                ListView8.setAdapter(AD8);
-//                ListView9.setAdapter(AD9);
-//                ListView10.setAdapter(AD10);
-//                ListView11.setAdapter(AD11);
-//                pbbar.setVisibility(View.GONE);
-//            }
-//        },2000);
+        LoadData task = new LoadData();
+        task.execute();
+//        getdata();
+//        adapter_show();
         refresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +124,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         ListView9.setAdapter(AD9);
         ListView10.setAdapter(AD10);
         ListView11.setAdapter(AD11);
-        pbbar.setVisibility(View.GONE);
+//        pbbar.setVisibility(View.GONE);
     }
 
     public void getdata() {
@@ -894,6 +883,29 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             }
             return data;
         }
+    }
+
+    public class LoadData extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute()
+        {
+            pbbar.setVisibility(View.VISIBLE);
+
+            //do initialization of required objects objects here
+        };
+        @Override
+        protected Void doInBackground(Void... params)
+        {
+            getdata();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result)
+        {
+            super.onPostExecute(result);
+            adapter_show();
+            pbbar.setVisibility(View.GONE);
+        };
     }
 }
 

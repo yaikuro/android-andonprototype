@@ -8,6 +8,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/pbbarReport"
+            android:layout_centerInParent="true"/>
+
         <TextView
             android:id="@+id/Title"
             android:layout_width="wrap_content"
@@ -146,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/TitleImageProblem"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:textSize="30sp"
             android:text="@string/problem_image_title"
             android:textStyle="bold"
@@ -160,7 +166,7 @@
             android:layout_below="@id/TitleImageProblem"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:contentDescription="@string/problem_image" />
 
         <TextView
@@ -168,7 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/ImageProblem"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -178,7 +184,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/TitleImageSolution"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:textSize="30sp"
             android:text="@string/solution_image_title"
             android:textStyle="bold"
@@ -187,7 +193,7 @@
             android:id="@+id/ImageSolution"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_below="@id/TitleImageSolution"
@@ -196,7 +202,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/DescImageSolution"
-            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
             android:textSize="20sp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"

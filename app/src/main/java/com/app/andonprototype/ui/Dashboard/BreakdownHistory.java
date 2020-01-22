@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
-import com.app.andonprototype.ui.Report.DetailReport;
+import com.app.andonprototype.ui.MachineReport.DetailMachineReport;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -143,7 +143,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent(this, DetailReport.class);
+        Intent i = new Intent(this, DetailMachineReport.class);
         Map<String,String> mp;
         mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object No = mp.get("No");

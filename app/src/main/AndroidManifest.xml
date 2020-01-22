@@ -58,9 +58,6 @@
             android:name=".ui.Dashboard.BreakdownHistory"
             android:label="Breakdown History" />
         <activity
-            android:name=".ui.Report.DetailReport"
-            android:label="Detail Report" />
-        <activity
             android:name=".ui.MachineReport.DetailMachineReport"
             android:label="Detail Machine Report" />
         <activity android:name=".drawer_ui.Settings" />
