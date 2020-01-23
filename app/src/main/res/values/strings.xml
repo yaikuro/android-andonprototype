@@ -83,4 +83,6 @@
     <string name="problem_waiting_list">Problem Waiting List</string>
     <string name="machine_report_center">Machine Report Center</string>
     <string name="report_activity_center">Report Activity Center</string>
+    <string name="asset_management_center">Asset Management Center</string>
+    <string name="refresh">Refresh</string>
 </resources>

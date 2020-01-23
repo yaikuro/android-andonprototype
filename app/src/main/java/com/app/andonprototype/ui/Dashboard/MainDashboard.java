@@ -407,4 +407,5 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         Intent i = new Intent(this, Settings.class);
         startActivity(i);
     }
+
 }

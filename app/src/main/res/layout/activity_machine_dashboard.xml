@@ -1,6 +1,4 @@
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,326 +6,377 @@
     tools:context=".ui.Dashboard.MachineDashboard">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Refresh"
         android:id="@+id/refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"/>
+        android:layout_margin="20dp"
+        android:text="@string/refresh" />
+
     <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/pbbar"
-        android:layout_centerInParent="true"/>
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
+        android:layout_centerInParent="true" />
+
+    <TextView
         android:id="@+id/Machine_Dashboard_Title"
-        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
         android:text="Machine Dashboard MCB-VRLA"
-        android:textStyle="bold"
+        android:textColor="@color/black"
         android:textSize="35sp"
-        android:layout_centerHorizontal="true"/>
+        android:textStyle="bold" />
+
     <RelativeLayout
+        android:id="@+id/Legend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Legend"
+        android:layout_below="@id/Machine_Dashboard_Title"
         android:layout_marginStart="10dp"
-        android:layout_marginBottom="30dp"
         android:layout_marginEnd="10dp"
-        android:layout_below="@id/Machine_Dashboard_Title">
+        android:layout_marginBottom="30dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true">
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <ImageView
+                    android:id="@+id/green_symbol"
                     android:layout_width="50sp"
                     android:layout_height="50sp"
-                    android:id="@+id/green_symbol"
-                    android:src="@drawable/color_green"/>
+                    android:src="@drawable/color_green" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
+                    android:layout_margin="10dp"
                     android:layout_toEndOf="@id/green_symbol"
-                    android:text=": Running"/>
+                    android:text=": Running"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
                     android:id="@+id/red_symbol"
-                    android:src="@drawable/color_red"/>
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/color_red" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
                     android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
                     android:layout_toEndOf="@id/red_symbol"
-                    android:text=": Breakdown"/>
+                    android:text=": Breakdown"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
                     android:id="@+id/yello_symbol"
-                    android:src="@drawable/color_yellow"/>
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/color_yellow" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/black"
                     android:layout_centerVertical="true"
+                    android:layout_margin="10dp"
                     android:layout_toEndOf="@id/yello_symbol"
-                    android:textStyle="bold"
-                    android:text=": Repair On Progress"/>
+                    android:text=": Repair on Progress"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <ImageView
+                    android:id="@+id/blue_symbol"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:id="@+id/blue_symbol"
-                    android:src="@drawable/color_blue"/>
+                    android:src="@drawable/color_blue" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/black"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
+                    android:layout_margin="10dp"
                     android:layout_toEndOf="@id/blue_symbol"
-                    android:text=": Finish Repair"/>
+                    android:text=": Finish Repair"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/pullToRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/pullToRefresh"
         android:layout_below="@id/Legend"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp">
+
         <LinearLayout
+            android:id="@+id/List"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/List">
+            android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line10_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Line 10"
                     android:gravity="center"
+                    android:text="Line 10"
                     android:textSize="18sp"
-                    android:id="@+id/Line10_Title"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView10"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line10_Title"/>
+                    android:layout_below="@id/Line10_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line9_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 9"
                     android:textSize="18sp"
-                    android:gravity="center"
-                    android:id="@+id/Line9_Title"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView9"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line9_Title"/>
+                    android:layout_below="@id/Line9_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line8_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 8"
                     android:textSize="18sp"
-                    android:gravity="center"
-                    android:id="@+id/Line8_Title"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView8"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line8_Title"/>
+                    android:layout_below="@id/Line8_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line7_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 7"
                     android:textSize="18sp"
-                    android:gravity="center"
-                    android:id="@+id/Line7_Title"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView7"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line7_Title"/>
+                    android:layout_below="@id/Line7_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line6_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 6"
                     android:textSize="18sp"
-                    android:id="@+id/Line6_Title"
-                    android:gravity="center"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line6_Title"/>
+                    android:layout_below="@id/Line6_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line5_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 5"
                     android:textSize="18sp"
-                    android:gravity="center"
-                    android:id="@+id/Line5_Title"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line5_Title"/>
+                    android:layout_below="@id/Line5_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line4_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 4"
                     android:textSize="18sp"
-                    android:id="@+id/Line4_Title"
-                    android:gravity="center"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line4_Title"/>
+                    android:layout_below="@id/Line4_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line11_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 11"
                     android:textSize="18sp"
-                    android:id="@+id/Line11_Title"
-                    android:gravity="center"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView11"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line11_Title"/>
+                    android:layout_below="@id/Line11_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line3_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 3"
                     android:textSize="18sp"
-                    android:gravity="center"
-                    android:id="@+id/Line3_Title"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line3_Title"/>
+                    android:layout_below="@id/Line3_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line2_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="Line 2"
                     android:textSize="18sp"
-                    android:id="@+id/Line2_Title"
-                    android:gravity="center"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line2_Title"/>
+                    android:layout_below="@id/Line2_Title" />
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
+
                 <TextView
+                    android:id="@+id/Line1_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Line 1"
                     android:gravity="center"
+                    android:text="Line 1"
                     android:textSize="18sp"
-                    android:id="@+id/Line1_Title"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/ListView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/Line1_Title"/>
+                    android:layout_below="@id/Line1_Title" />
             </RelativeLayout>
         </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

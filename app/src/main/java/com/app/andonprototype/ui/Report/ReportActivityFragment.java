@@ -31,8 +31,8 @@ import java.util.List;
 import java.util.Map;
 
 
-public class ReportActivityFragment extends Fragment implements ListView.OnItemClickListener{
-    public String id,Mesin,Station,Duration,Line,Number,Person;
+public class ReportActivityFragment extends Fragment implements ListView.OnItemClickListener {
+    public String id, Mesin, Station, Duration, Line, Number, Person;
     Spinner spinner;
     ListView ListReport;
     SimpleAdapter AR;
@@ -69,7 +69,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
             @Override
             public void onRefresh() {
                 getReport();
-                if (MyReportList.isEmpty()){
+                if (MyReportList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Report Activity", Toast.LENGTH_SHORT).show();
                 }
                 pullToRefresh.setRefreshing(false);
@@ -81,10 +81,11 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                 nama = NameArray.indexOf(spinner.getSelectedItem());
                 Person = (String) parent.getItemAtPosition(nama);
                 getReport();
-                if (MyReportList.isEmpty()){
+                if (MyReportList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Report Activity", Toast.LENGTH_SHORT).show();
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -100,6 +101,7 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
         AR = new SimpleAdapter(getActivity(), MyReportList, R.layout.report_activity_listitem, fromwhere, viewwhere);
         ListReport.setAdapter(AR);
     }
+
     private List<Map<String, String>> getRep() {
         List<Map<String, String>> data = null;
         data = new ArrayList<Map<String, String>>();
@@ -128,10 +130,10 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
                     datanum.put("MachineID", MachineID);
                     datanum.put("Line", Line);
                     datanum.put("Station", Station);
-                    datanum.put("Repair_Time_Start",Repair_Time_Start);
-                    datanum.put("Repair_Time_Finish",Repair_Time_Finish);
-                    datanum.put("Repair_Duration",Repair_Duration);
-                    datanum.put("PIC",PIC);
+                    datanum.put("Repair_Time_Start", Repair_Time_Start);
+                    datanum.put("Repair_Time_Finish", Repair_Time_Finish);
+                    datanum.put("Repair_Duration", Repair_Duration);
+                    datanum.put("PIC", PIC);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successful";
@@ -144,37 +146,37 @@ public class ReportActivityFragment extends Fragment implements ListView.OnItemC
         }
         return data;
     }
-    private void GetPIC(){
+
+    private void GetPIC() {
         String z = "";
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            if (connectionClass == null){
+            if (connectionClass == null) {
                 z = "Check Your Internet Connection";
-            }
-            else{
+            } else {
                 String query = "SELECT Nama FROM userid ORDER BY No OFFSET 1 ROWS";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 NameArray = new ArrayList();
-                while(rs.next()){
+                while (rs.next()) {
                     NameArray.add(rs.getString("Nama"));
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             z = "Check Your Internet Connection";
         }
         ArrayAdapter adapter = new ArrayAdapter(
-                getActivity(),R.layout.spinner_item,NameArray);
+                getActivity(), R.layout.spinner_item, NameArray);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
     }
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(getActivity(), DetailMachineReport.class);
-        Map<String,String> mp = (Map<String, String>) ListReport.getItemAtPosition(position);
+        Map<String, String> mp = (Map<String, String>) ListReport.getItemAtPosition(position);
         Object No = mp.get("No");
         Object machine = mp.get("MachineID");
         Object line = mp.get("Line");

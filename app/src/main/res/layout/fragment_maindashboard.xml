@@ -5,328 +5,316 @@
     android:layout_height="match_parent"
     android:background="@color/md_blue_grey_100">
 
-    <GridLayout
-        android:id="@+id/grid1"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView1"
+        style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:alignmentMode="alignMargins"
-        android:background="@color/md_blue_grey_100"
-        android:columnCount="1"
-        android:columnOrderPreserved="false"
-        android:rowCount="3">
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:clickable="true"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/image_person"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:contentDescription="@string/profile_picture" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/person"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="20dp">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/welcomeText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_MachineDashboard"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cardView1"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:clickable="true"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="80dp"
+                android:contentDescription="@string/machine_dashboard"
+                android:src="@drawable/machine_icon1" />
 
-                <ImageView
-                    android:id="@+id/image_person"
-                    android:layout_width="150dp"
-                    android:layout_height="200dp"
-                    android:layout_gravity="left"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/profile_picture" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
-
-            <LinearLayout
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_height="wrap_content"
+                android:elevation="6dp"
+                android:text="@string/machine_dashboard"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:contentDescription="@string/machine_dashboard"
-                    android:src="@drawable/machine_icon1" />
+    </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnView"
-                    android:layout_width="match_parent"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView3"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="230dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/cardView_MachineDashboard"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:clickable="true"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <RelativeLayout
+                android:layout_width="84dp"
+                android:layout_height="97dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/relLayout_customProgressCircleBar"
+                    android:layout_width="84dp"
+                    android:layout_height="77dp">
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/custom_progressbar_drawable"
+                        android:secondaryProgress="0" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/txtProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="N/A"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/progress_counter"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:elevation="6dp"
-                    android:text="@string/machine_dashboard"
-                    app:cornerRadius="12dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
+                    android:layout_below="@+id/relLayout_customProgressCircleBar"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/_00" />
+            </RelativeLayout>
 
-    <GridLayout
-        android:id="@+id/grid"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/grid1"
-        android:alignmentMode="alignMargins"
-        android:background="@color/md_blue_grey_100"
-        android:columnCount="2"
-        android:columnOrderPreserved="false"
-        android:rowCount="3">
+        </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="10dp">
+    </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView_ProblemList"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="230dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/cardView_MachineDashboard"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:clickable="true"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
 
-                <RelativeLayout
-                    android:layout_width="84dp"
-                    android:layout_height="97dp"
-                    app:layout_constraintBottom_toTopOf="@+id/btnView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-                    <RelativeLayout
-                        android:id="@+id/relLayout_customProgressCircleBar"
-                        android:layout_width="84dp"
-                        android:layout_height="77dp">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/machine_icon2" />
 
-                        <ProgressBar
-                            android:id="@+id/progressBar"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:indeterminate="false"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/custom_progressbar_drawable"
-                            android:secondaryProgress="0" />
+        </LinearLayout>
 
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+    </com.google.android.material.card.MaterialCardView>
 
-                            <TextView
-                                android:id="@+id/txtProgress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_centerHorizontal="true"
-                                android:layout_centerVertical="true"
-                                android:text="N/A"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </RelativeLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView5"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="230dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/cardView3"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:clickable="true"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
 
-                    <TextView
-                        android:id="@+id/progress_counter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/relLayout_customProgressCircleBar"
-                        android:layout_centerHorizontal="true"
-                        android:text="@string/_00" />
-                </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/machine_icon2" />
-
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
-
-    <GridLayout
-        android:id="@+id/grid3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/grid"
-        android:alignmentMode="alignMargins"
-        android:background="@color/md_blue_grey_100"
-        android:columnCount="2"
-        android:columnOrderPreserved="false"
-        android:rowCount="3">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+            <RelativeLayout
+                android:layout_width="84dp"
+                android:layout_height="97dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <RelativeLayout
+                    android:id="@+id/relLayout_customProgressCircleBar1"
                     android:layout_width="84dp"
-                    android:layout_height="97dp"
-                    android:layout_centerInParent="true"
-                    app:layout_constraintBottom_toTopOf="@+id/btnView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_height="77dp">
 
-                    <RelativeLayout
-                        android:id="@+id/relLayout_customProgressCircleBar3"
-                        android:layout_width="84dp"
-                        android:layout_height="77dp">
-
-                        <ProgressBar
-                            android:id="@+id/progressBar3"
-                            style="?android:attr/progressBarStyleHorizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:indeterminate="false"
-                            android:max="100"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/custom_progressbar_drawable"
-                            android:secondaryProgress="0" />
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:id="@+id/txtProgress3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_centerHorizontal="true"
-                                android:layout_centerVertical="true"
-                                android:text="N/A"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/progress_counter3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/relLayout_customProgressCircleBar3"
+                    <ProgressBar
+                        android:id="@+id/progressBar1"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_centerHorizontal="true"
-                        android:text="0/0" />
+                        android:indeterminate="false"
+                        android:max="100"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/custom_progressbar_drawable"
+                        android:secondaryProgress="0" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/txtProgress1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:text="N/A"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </RelativeLayout>
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/progress_counter1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/relLayout_customProgressCircleBar1"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/_00" />
+            </RelativeLayout>
 
+        </LinearLayout>
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="12dp"
-            app:cardBackgroundColor="#FFFFFF"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="6dp">
+    </com.google.android.material.card.MaterialCardView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView6"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="230dp"
+        android:layout_height="130dp"
+        android:layout_below="@id/cardView_ProblemList"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:clickable="true"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/machine_icon3" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-    </GridLayout>
-<!--  End of Grid Layout  -->
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/machine_icon3" />
 
+        </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/person"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="20dp">
-
-
-
-        <TextView
-            android:id="@+id/welcomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-
+    </com.google.android.material.card.MaterialCardView>
 
 </RelativeLayout>

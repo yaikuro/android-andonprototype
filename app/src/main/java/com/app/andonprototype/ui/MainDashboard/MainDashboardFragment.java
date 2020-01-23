@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -23,6 +24,8 @@ import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.Success_Page;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.Dashboard.MachineDashboard;
+import com.app.andonprototype.ui.ProblemList.ProblemWaitingList;
+import com.google.android.material.card.MaterialCardView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -42,18 +45,19 @@ import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 public class MainDashboardFragment extends Fragment {
     private MainViewModel mainViewModel;
     private ImageView image_person;
-    private String ConnectionResult,pic,image,currentDate;
+    private String ConnectionResult, pic, image, currentDate;
     private Boolean isSuccess;
     private TextView txtProgress;
     private ProgressBar progressBar;
-    ArrayList<String> list_done;
-    ArrayList<String> list_all;
+    private ArrayList<String> list_done;
+    private ArrayList<String> list_all;
     private int pStart = 0;
     private int pStatus;
     private int work, all;
     private Handler handler = new Handler();
-    TextView progress_counter;
-    Connection connect;
+    private Connection connect;
+
+
     public static MainDashboardFragment newInstance(int instance) {
         Bundle args = new Bundle();
         args.putInt("argsInstance", instance);
@@ -61,6 +65,7 @@ public class MainDashboardFragment extends Fragment {
         firstFragment.setArguments(args);
         return firstFragment;
     }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         mainViewModel =
@@ -72,11 +77,11 @@ public class MainDashboardFragment extends Fragment {
         welcomeText.setText("Welcome " + pic);
         txtProgress = root.findViewById(R.id.txtProgress);
         progressBar = root.findViewById(R.id.progressBar);
-        progress_counter = root.findViewById(R.id.progress_counter);
+        TextView progress_counter = root.findViewById(R.id.progress_counter);
         currentDate = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
         Toast.makeText(getActivity(), currentDate, Toast.LENGTH_SHORT).show();
-        image_person                    = root.findViewById(R.id.image_person);
-        Button btnV                     = root.findViewById(R.id.btnView);
+        image_person = root.findViewById(R.id.image_person);
+        Button btnV = root.findViewById(R.id.btnView);
 
         btnV.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,16 +90,37 @@ public class MainDashboardFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+
+        MaterialCardView cardView_MachineDasboard = root.findViewById(R.id.cardView_MachineDashboard);
+        cardView_MachineDasboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), MachineDashboard.class);
+                startActivity(i);
+            }
+        });
+
+        MaterialCardView cardView_ProblemList = root.findViewById(R.id.cardView_ProblemList);
+        cardView_ProblemList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), ProblemWaitingList.class);
+                startActivity(i);
+            }
+        });
+
+
         getImage();
-        if (isSuccess){
+        if (isSuccess) {
             setPicture();
         }
         get_list_done();
         get_list_all();
-        if (!list_all.isEmpty()){
+        if (!list_all.isEmpty()) {
             work = list_done.size();
             all = list_all.size();
-            pStatus = (work*100)/all;
+            pStatus = (work * 100) / all;
             Toast.makeText(getActivity(), Integer.toString(pStatus), Toast.LENGTH_SHORT).show();
             progress_counter.setText(work + "/" + all);
 
@@ -121,56 +147,61 @@ public class MainDashboardFragment extends Fragment {
         }
 
 
-
         return root;
     }
-    private void getImage(){
+
+    public void machine_maindasboard(View view) {
+        Intent i = new Intent(getActivity(), MachineDashboard.class);
+        startActivity(i);
+    }
+
+    private void getImage() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            if (connect==null){
+            if (connect == null) {
                 ConnectionResult = "Check your Internet Connection";
-            }
-            else{
+            } else {
                 String query = "Select Image from userid where Nama = '" + pic + "'";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                if (rs.next()){
+                if (rs.next()) {
                     image = rs.getString("Image");
-                    isSuccess= !image.isEmpty();
+                    isSuccess = !image.isEmpty();
                 }
                 ConnectionResult = "Successful";
                 connect.close();
             }
-        }
-        catch (Exception ex){
-            ConnectionResult=ex.getMessage();
+        } catch (Exception ex) {
+            ConnectionResult = ex.getMessage();
             isSuccess = false;
         }
     }
-    private void setPicture(){
+
+    private void setPicture() {
         byte[] decodeStringPicture = Base64.decode(image, Base64.DEFAULT);
-        Bitmap decodebitmapPicture = BitmapFactory.decodeByteArray(decodeStringPicture,0,decodeStringPicture.length);
+        Bitmap decodebitmapPicture = BitmapFactory.decodeByteArray(decodeStringPicture, 0, decodeStringPicture.length);
         image_person.setImageBitmap(decodebitmapPicture);
     }
-    private void get_list_done(){
+
+    private void get_list_done() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            String query = "Select No from machinestatustest where PIC = '" + pic +"' " +
+            String query = "Select No from machinestatustest where PIC = '" + pic + "' " +
                     "and Response_Time_Finish LIKE '" + currentDate + "%'";
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             list_done = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 list_done.add(rs.getString("No"));
             }
-        }
-        catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
-    private void get_list_all(){
+
+    private void get_list_all() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
@@ -178,11 +209,10 @@ public class MainDashboardFragment extends Fragment {
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             list_all = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 list_all.add(rs.getString("No"));
             }
-        }
-        catch (SQLException ex){
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
