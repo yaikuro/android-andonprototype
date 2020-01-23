@@ -1,73 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:descendantFocusability="blocksDescendants">
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="67dp">
-        <ImageView
-            android:layout_width="67dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="67dp"
-            android:id="@+id/image"
-            android:layout_alignParentStart="true"
-            android:layout_margin="5dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Line : "
-            android:layout_marginTop="5dp"
-            android:id="@+id/Line1"
-            android:layout_marginStart="10dp"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_toEndOf="@id/image"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Line"
-            android:layout_marginTop="5dp"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:layout_toEndOf="@id/Line1"
-            android:layout_toRightOf="@id/image"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Station1"
-            android:text="Station : "
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_marginStart="10dp"
-            android:layout_below="@id/Line1"
-            android:layout_toEndOf="@id/image"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Station"
-            android:textStyle="bold"
-            android:layout_toEndOf="@+id/Station1"
-            android:textSize="20sp"
-            android:layout_below="@id/Line1"
-            android:layout_toRightOf="@id/image"
-            tools:ignore="RtlHardcoded" />
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:id="@+id/Person"/>
-        <ImageButton
-            android:id="@+id/listMenuButton"
-            android:layout_width="30dp"
-            android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
-            android:background="#00FFFFFF"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:onClick="listMenuButton"
-            android:src="@drawable/ic_more_vert_black_24dp"
-            android:contentDescription="Menu" />
-    </RelativeLayout>
+            android:descendantFocusability="blocksDescendants">
+            <ImageView
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:id="@+id/image"
+                android:layout_alignParentStart="true"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Line : "
+                android:layout_marginTop="5dp"
+                android:id="@+id/Line1"
+                android:layout_marginStart="10dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_toEndOf="@id/image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Line"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_toEndOf="@id/Line1"
+                android:layout_toRightOf="@id/image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Station1"
+                android:text="Station : "
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginStart="10dp"
+                android:layout_below="@id/Line1"
+                android:layout_toEndOf="@id/image"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Station"
+                android:textStyle="bold"
+                android:layout_toEndOf="@+id/Station1"
+                android:textSize="20sp"
+                android:layout_below="@id/Line1"
+                android:layout_toRightOf="@id/image"
+                tools:ignore="RtlHardcoded" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:id="@+id/Person"/>
+            <ImageButton
+                android:id="@+id/listMenuButton"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentEnd="true"
+                android:background="#00FFFFFF"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:onClick="listMenuButton"
+                android:src="@drawable/ic_more_vert_black_24dp"
+                android:contentDescription="Menu" />
+        </RelativeLayout>
 
 
-</RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>

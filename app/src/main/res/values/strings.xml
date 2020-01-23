@@ -79,4 +79,8 @@
     <string name="asset_management">Asset Management</string>
     <string name="_00">0/0</string>
     <string name="machine_dashboard">Machine Dashboard</string>
+    <string name="profile_picture">profile_picture</string>
+    <string name="problem_waiting_list">Problem Waiting List</string>
+    <string name="machine_report_center">Machine Report Center</string>
+    <string name="report_activity_center">Report Activity Center</string>
 </resources>
