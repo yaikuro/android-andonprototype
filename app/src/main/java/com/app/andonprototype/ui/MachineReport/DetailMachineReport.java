@@ -23,8 +23,10 @@ public class DetailMachineReport extends AppCompatActivity {
     private String mesin, pic, num, station, duration, line, Nomor, RepairTimeStart;
     private String RepairTimeFinish, Desc_Problem, Desc_Solution, ImageProblem, ImageSolution;
     private ImageView Image_Problem, Image_Solution;
-    private TextView MachineID,Line,Station,PIC,Duration,RepairStart,RepairFinish,DescProblem,DescSolution;
-    ProgressBar progressBar;
+    private TextView MachineID,Line,Station,PIC,Duration,RepairStart,RepairFinish,DescProblem,DescSolution,NoProblem,NoSolution;
+    public boolean emptyProblem = false;
+    public boolean emptySolution = false;
+    ProgressBar progressBar,progressBarSolution;
     Connection connect;
     String ConnectionResult = "";
 
@@ -33,6 +35,7 @@ public class DetailMachineReport extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_report);
         progressBar = findViewById(R.id.pbbarReport);
+        progressBarSolution = findViewById(R.id.pbbarSolution);
         Nomor = getIntent().getStringExtra("No");
         MachineID = findViewById(R.id.MachineID);
         Line = findViewById(R.id.Line);
@@ -45,6 +48,8 @@ public class DetailMachineReport extends AppCompatActivity {
         DescSolution = findViewById(R.id.DescImageSolution);
         Image_Problem = findViewById(R.id.ImageProblem);
         Image_Solution = findViewById(R.id.ImageSolution);
+        NoProblem = findViewById(R.id.NoProblem);
+        NoSolution = findViewById(R.id.NoSolution);
         getProblem();
         setText();
         LoadData loadData = new LoadData();
@@ -112,6 +117,20 @@ public class DetailMachineReport extends AppCompatActivity {
                 if (rs.next()) {
                     ImageProblem = rs.getString("Image_Problem");
                     ImageSolution = rs.getString("Image_Solution");
+                    if(ImageProblem.isEmpty()){
+                        emptyProblem = true;
+                    }
+                    if (ImageSolution.isEmpty()){
+                        emptySolution = true;
+                    }
+                    if (ImageProblem.isEmpty() && ImageSolution.isEmpty()){
+                        emptyProblem = true;
+                        emptySolution = true;
+                    }
+                    if (!ImageProblem.isEmpty() && !ImageSolution.isEmpty()){
+                        emptyProblem = false;
+                        emptySolution = false;
+                    }
                 }
                 ConnectionResult = "Successfull";
                 connect.close();
@@ -119,20 +138,30 @@ public class DetailMachineReport extends AppCompatActivity {
         } catch (Exception ex) {
             ConnectionResult = ex.getMessage();
         }
+
     }
-    public void setPicture(){
-            byte[] decodeStringProb = Base64.decode(ImageProblem, Base64.DEFAULT);
-            Bitmap decodebitmapProb = BitmapFactory.decodeByteArray(decodeStringProb,0,decodeStringProb.length);
-            Image_Problem.setImageBitmap(decodebitmapProb);
-            byte[] decodeStringSol = Base64.decode(ImageSolution, Base64.DEFAULT);
-            Bitmap decodebitmapSol = BitmapFactory.decodeByteArray(decodeStringSol,0,decodeStringSol.length);
-            Image_Solution.setImageBitmap(decodebitmapSol);
+    public void setPicture() {
+        byte[] decodeStringProb = Base64.decode(ImageProblem, Base64.DEFAULT);
+        Bitmap decodebitmapProb = BitmapFactory.decodeByteArray(decodeStringProb, 0, decodeStringProb.length);
+        Image_Problem.setImageBitmap(decodebitmapProb);
+        byte[] decodeStringSol = Base64.decode(ImageSolution, Base64.DEFAULT);
+        Bitmap decodebitmapSol = BitmapFactory.decodeByteArray(decodeStringSol, 0, decodeStringSol.length);
+        Image_Solution.setImageBitmap(decodebitmapSol);
+        if (emptyProblem = true) {
+            NoProblem.setText("No Picture of Problem");
+        } if (emptySolution = true) {
+            NoSolution.setText("No Picture of Solution");
+        } if (emptySolution = emptyProblem = true) {
+            NoProblem.setText("No Picture of Problem");
+            NoSolution.setText("No Picture of Solution");
         }
+    }
     public class LoadData extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute()
         {
             progressBar.setVisibility(View.VISIBLE);
+            progressBarSolution.setVisibility(View.VISIBLE);
             //do initialization of required objects objects here
         };
         @Override
@@ -147,6 +176,7 @@ public class DetailMachineReport extends AppCompatActivity {
             super.onPostExecute(result);
             setPicture();
             progressBar.setVisibility(View.GONE);
+            progressBarSolution.setVisibility(View.GONE);
         };
     }
 }

@@ -8,12 +8,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/pbbarReport"
-            android:layout_centerInParent="true"/>
-
         <TextView
             android:id="@+id/Title"
             android:layout_width="wrap_content"
@@ -147,7 +141,6 @@
             android:text="@string/duration_colon"
             android:textSize="20sp"
             android:textStyle="bold"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,27 +151,37 @@
             android:textStyle="bold"
             android:layout_marginTop="10dp"
             android:layout_below="@id/Duration1"/>
-
-        <ImageView
-            android:id="@+id/ImageProblem"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_below="@id/TitleImageProblem"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/problem"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_centerHorizontal="true"
-            android:contentDescription="@string/problem_image" />
-
+            android:layout_below="@id/TitleImageProblem">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pbbarReport"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/NoProblem"
+                android:layout_centerInParent="true"/>
+            <ImageView
+                android:id="@+id/ImageProblem"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/problem_image" />
+        </RelativeLayout>
         <TextView
             android:id="@+id/DescImageProblem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/ImageProblem"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="10dp"
+            android:layout_below="@id/problem"
             android:textSize="20sp" />
         <TextView
             android:layout_width="wrap_content"
@@ -189,25 +192,37 @@
             android:text="@string/solution_image_title"
             android:textStyle="bold"
             android:layout_below="@id/DescImageProblem"/>
-        <ImageView
-            android:id="@+id/ImageSolution"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_centerHorizontal="true"
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_below="@id/TitleImageSolution"
-            android:contentDescription="@string/solution_image" />
+            android:id="@+id/solution"
+            android:layout_below="@id/TitleImageSolution">
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/pbbarSolution"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/NoSolution"
+                android:layout_centerInParent="true"/>
+            <ImageView
+                android:id="@+id/ImageSolution"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="@string/solution_image" />
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/DescImageSolution"
             android:layout_centerHorizontal="true"
             android:textSize="20sp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:layout_below="@id/ImageSolution"/>
+            android:layout_margin="10dp"
+            android:layout_below="@id/solution"/>
     </RelativeLayout>
 </ScrollView>

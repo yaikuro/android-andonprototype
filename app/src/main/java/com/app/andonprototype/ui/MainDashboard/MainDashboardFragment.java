@@ -79,7 +79,6 @@ public class MainDashboardFragment extends Fragment {
         progressBar = root.findViewById(R.id.progressBar);
         TextView progress_counter = root.findViewById(R.id.progress_counter);
         currentDate = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
-        Toast.makeText(getActivity(), currentDate, Toast.LENGTH_SHORT).show();
         image_person = root.findViewById(R.id.image_person);
         Button btnV = root.findViewById(R.id.btnView);
 
