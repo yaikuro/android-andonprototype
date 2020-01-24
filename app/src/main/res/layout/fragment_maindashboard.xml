@@ -47,9 +47,10 @@
                 android:id="@+id/welcomeText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:textAlignment="center"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -85,22 +86,24 @@
                 android:contentDescription="@string/machine_dashboard"
                 android:src="@drawable/machine_icon1" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnView"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:elevation="6dp"
                 android:text="@string/machine_dashboard"
-                app:cornerRadius="12dp" />
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView3"
+        android:id="@+id/cardView_Progress"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="230dp"
-        android:layout_height="130dp"
+        android:layout_width="280dp"
+        android:layout_height="160dp"
         android:layout_below="@id/cardView_MachineDashboard"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
@@ -120,7 +123,7 @@
             <RelativeLayout
                 android:layout_width="84dp"
                 android:layout_height="97dp"
-                app:layout_constraintBottom_toTopOf="@+id/btnView"
+                app:layout_constraintBottom_toTopOf="@+id/cardView_MachineDashboard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -153,7 +156,7 @@
                             android:layout_centerInParent="true"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true"
-                            android:text="N/A"
+                            android:text="@string/n_a"
                             android:textAppearance="?android:attr/textAppearanceSmall"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -171,6 +174,15 @@
                     android:text="@string/_00" />
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/today_s_progress"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
@@ -178,8 +190,8 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_ProblemList"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="230dp"
-        android:layout_height="130dp"
+        android:layout_width="280dp"
+        android:layout_height="160dp"
         android:layout_below="@id/cardView_MachineDashboard"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
@@ -202,16 +214,25 @@
                 android:layout_height="80dp"
                 android:src="@drawable/machine_icon2" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/problem_waiting_list"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView5"
+        android:id="@+id/cardView_comingsoon1"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="230dp"
-        android:layout_height="130dp"
-        android:layout_below="@id/cardView3"
+        android:layout_width="280dp"
+        android:layout_height="160dp"
+        android:layout_below="@id/cardView_Progress"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
@@ -231,7 +252,7 @@
             <RelativeLayout
                 android:layout_width="84dp"
                 android:layout_height="97dp"
-                app:layout_constraintBottom_toTopOf="@+id/btnView"
+                app:layout_constraintBottom_toTopOf="@+id/cardView_Progress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -282,15 +303,24 @@
                     android:text="@string/_00" />
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/coming_soon"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView6"
+        android:id="@+id/cardView_comingsoon2"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="230dp"
-        android:layout_height="130dp"
+        android:layout_width="280dp"
+        android:layout_height="160dp"
         android:layout_below="@id/cardView_ProblemList"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
@@ -312,6 +342,16 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@drawable/machine_icon3" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/coming_soon"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 

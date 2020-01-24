@@ -80,15 +80,6 @@ public class MainDashboardFragment extends Fragment {
         TextView progress_counter = root.findViewById(R.id.progress_counter);
         currentDate = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
         image_person = root.findViewById(R.id.image_person);
-        Button btnV = root.findViewById(R.id.btnView);
-
-        btnV.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(getActivity(), MachineDashboard.class);
-                startActivity(i);
-            }
-        });
 
 
         MaterialCardView cardView_MachineDasboard = root.findViewById(R.id.cardView_MachineDashboard);
@@ -106,6 +97,30 @@ public class MainDashboardFragment extends Fragment {
             public void onClick(View view) {
                 Intent i = new Intent(getActivity(), ProblemWaitingList.class);
                 startActivity(i);
+            }
+        });
+
+        MaterialCardView cardView_Progress = root.findViewById(R.id.cardView_Progress);
+        cardView_Progress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Today's Progress", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        MaterialCardView cardView_comingsoon1= root.findViewById(R.id.cardView_comingsoon1);
+        cardView_comingsoon1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Coming soon", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        MaterialCardView cardView_comingsoon2 = root.findViewById(R.id.cardView_comingsoon2);
+        cardView_comingsoon2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getActivity(), "Coming soon", Toast.LENGTH_SHORT).show();
             }
         });
 
