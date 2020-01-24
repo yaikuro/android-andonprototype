@@ -23,10 +23,10 @@ public class DetailMachineReport extends AppCompatActivity {
     private String mesin, pic, num, station, duration, line, Nomor, RepairTimeStart;
     private String RepairTimeFinish, Desc_Problem, Desc_Solution, ImageProblem, ImageSolution;
     private ImageView Image_Problem, Image_Solution;
-    private TextView MachineID,Line,Station,PIC,Duration,RepairStart,RepairFinish,DescProblem,DescSolution,NoProblem,NoSolution;
+    private TextView MachineID, Line, Station, PIC, Duration, RepairStart, RepairFinish, DescProblem, DescSolution, NoProblem, NoSolution;
     public boolean emptyProblem = false;
     public boolean emptySolution = false;
-    ProgressBar progressBar,progressBarSolution;
+    ProgressBar progressBar, progressBarSolution;
     Connection connect;
     String ConnectionResult = "";
 
@@ -58,7 +58,7 @@ public class DetailMachineReport extends AppCompatActivity {
 //        setPicture();
     }
 
-    public void setText(){
+    public void setText() {
         MachineID.setText(mesin);
         Line.setText(line);
         Station.setText(station);
@@ -104,7 +104,7 @@ public class DetailMachineReport extends AppCompatActivity {
         }
     }
 
-    public void getPicture(){
+    public void getPicture() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
@@ -117,17 +117,17 @@ public class DetailMachineReport extends AppCompatActivity {
                 if (rs.next()) {
                     ImageProblem = rs.getString("Image_Problem");
                     ImageSolution = rs.getString("Image_Solution");
-                    if(ImageProblem.isEmpty()){
+                    if (ImageProblem.isEmpty()) {
                         emptyProblem = true;
                     }
-                    if (ImageSolution.isEmpty()){
+                    if (ImageSolution.isEmpty()) {
                         emptySolution = true;
                     }
-                    if (ImageProblem.isEmpty() && ImageSolution.isEmpty()){
+                    if (ImageProblem.isEmpty() && ImageSolution.isEmpty()) {
                         emptyProblem = true;
                         emptySolution = true;
                     }
-                    if (!ImageProblem.isEmpty() && !ImageSolution.isEmpty()){
+                    if (!ImageProblem.isEmpty() && !ImageSolution.isEmpty()) {
                         emptyProblem = false;
                         emptySolution = false;
                     }
@@ -140,6 +140,7 @@ public class DetailMachineReport extends AppCompatActivity {
         }
 
     }
+
     public void setPicture() {
         byte[] decodeStringProb = Base64.decode(ImageProblem, Base64.DEFAULT);
         Bitmap decodebitmapProb = BitmapFactory.decodeByteArray(decodeStringProb, 0, decodeStringProb.length);
@@ -149,35 +150,41 @@ public class DetailMachineReport extends AppCompatActivity {
         Image_Solution.setImageBitmap(decodebitmapSol);
         if (emptyProblem = true) {
             NoProblem.setText("No Picture of Problem");
-        } if (emptySolution = true) {
+        }
+        if (emptySolution = true) {
             NoSolution.setText("No Picture of Solution");
-        } if (emptySolution = emptyProblem = true) {
+        }
+        if (emptySolution = emptyProblem = true) {
             NoProblem.setText("No Picture of Problem");
             NoSolution.setText("No Picture of Solution");
         }
     }
+
     public class LoadData extends AsyncTask<Void, Void, Void> {
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             progressBar.setVisibility(View.VISIBLE);
             progressBarSolution.setVisibility(View.VISIBLE);
             //do initialization of required objects objects here
-        };
+        }
+
+        ;
+
         @Override
-        protected Void doInBackground(Void... params)
-        {
+        protected Void doInBackground(Void... params) {
             getPicture();
             return null;
         }
+
         @Override
-        protected void onPostExecute(Void result)
-        {
+        protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             setPicture();
             progressBar.setVisibility(View.GONE);
             progressBarSolution.setVisibility(View.GONE);
-        };
+        }
+
+        ;
     }
 }
 

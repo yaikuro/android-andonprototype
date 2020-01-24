@@ -40,7 +40,7 @@ import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 
 public class ProblemWaitingList extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog.ExampleDialogListener {
-    public String pic,Line,Station,MachineID,Status,Person;
+    public String pic, Line, Station, MachineID, Status, Person;
     private ListView ListProblem;
     int itemcount;
     private SimpleAdapter AP;
@@ -80,11 +80,10 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
         AP = new SimpleAdapter(ProblemWaitingList.this, MyProblemList, R.layout.listitem, fromwhere, viewwhere);
         ListProblem.setAdapter(AP);
         itemcount = MyProblemList.size();
-        if (itemcount<1){
+        if (itemcount < 1) {
             Toast.makeText(this, "Masalah sudah terambil", Toast.LENGTH_SHORT).show();
             textView.setText("Masalah sudah Terambil");
-        }
-        else {
+        } else {
             textView.setText("");
         }
     }
@@ -115,7 +114,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 if (connect == null) {
                     ConnectionResult = "Check your Internet Connection";
                 } else {
-                    String query =  "Select * " +
+                    String query = "Select * " +
                             "from stationdashboard " +
                             "where Status = 2";
                     Statement stmt = connect.createStatement();
@@ -190,12 +189,11 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                 i.putExtra("Station", Station);
                 i.putExtra("PIC", pic);
                 //admin akan dihapus di final app
-                if (pic.equals("admin")){
+                if (pic.equals("admin")) {
                     startActivity(i);
-                }
-                else {
+                } else {
                     Object person = mp.get("PIC");
-                    switch (Status){
+                    switch (Status) {
                         case "3":
                             if (person != null) {
                                 Person = person.toString();
@@ -209,11 +207,10 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
                             }
                             break;
                         case "4":
-                            if(person != null){
+                            if (person != null) {
                                 Person = person.toString();
                                 Toast.makeText(this, "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
                             }
                             break;
@@ -225,6 +222,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -240,10 +238,11 @@ public class ProblemWaitingList extends AppCompatActivity implements ListView.On
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 3000);
     }
+
     public void openDialog() {
         pop_dialog exampleDialog = new pop_dialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");

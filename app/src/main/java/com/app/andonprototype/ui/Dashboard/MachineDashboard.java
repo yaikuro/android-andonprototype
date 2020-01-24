@@ -45,7 +45,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     ImageView imageView;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
     ProgressBar pbbar;
-    public Boolean isSuccess,success;
+    public Boolean isSuccess, success;
     public String Line, Station, Status, PIC, Person;
     Button refresh;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
@@ -112,7 +112,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         });
     }
 
-    public void adapter_show(){
+    public void adapter_show() {
         ListView.setAdapter(AD1);
         ListView2.setAdapter(AD2);
         ListView3.setAdapter(AD3);
@@ -213,7 +213,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(MachineDashboard.this,
                         new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
-            } else{
+            } else {
                 Intent i = new Intent(this, clss);
                 Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
                 Object line = mp.get("Line");
@@ -231,8 +231,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 i.putExtra("Station", Station);
                 if (PIC.equals("admin")) {
                     startActivity(i);
-                }
-                else {
+                } else {
                     Object person = mp.get("PIC");
                     switch (Status) {
                         case "1":
@@ -339,10 +338,9 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
 
             try {
                 connect = connectionClass.CONN();
-                if (connect == null){
+                if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 2";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -378,7 +376,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -397,7 +395,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 3";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -433,7 +431,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -452,7 +450,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 4";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -488,7 +486,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -507,7 +505,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 5";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -543,7 +541,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -561,7 +559,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
             try {
                 connect = connectionClass.CONN();
                 if (connect == null) {
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 6";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -597,7 +595,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -616,7 +614,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 7";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -652,7 +650,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -671,7 +669,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 8";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -707,7 +705,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -726,7 +724,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 9";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -762,7 +760,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -781,7 +779,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 10";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -817,7 +815,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                         }
                         datanum.put("Line", Line);
                         datanum.put("Station", Station);
-                        datanum.put("PIC",PIC);
+                        datanum.put("PIC", PIC);
                         data.add(datanum);
                     }
                     isSuccess = true;
@@ -836,7 +834,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
                 connect = connectionClass.CONN();
                 if (connect == null) {
                     Toast.makeText(MachineDashboard.this, "No Connection", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String query = "Select * from stationdashboard where Line = 11";
                     Statement stmt = connect.createStatement();
                     ResultSet rs = stmt.executeQuery(query);
@@ -887,25 +885,28 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
 
     public class LoadData extends AsyncTask<Void, Void, Void> {
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             pbbar.setVisibility(View.VISIBLE);
 
             //do initialization of required objects objects here
-        };
+        }
+
+        ;
+
         @Override
-        protected Void doInBackground(Void... params)
-        {
+        protected Void doInBackground(Void... params) {
             getdata();
             return null;
         }
+
         @Override
-        protected void onPostExecute(Void result)
-        {
+        protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             adapter_show();
             pbbar.setVisibility(View.GONE);
-        };
+        }
+
+        ;
     }
 }
 

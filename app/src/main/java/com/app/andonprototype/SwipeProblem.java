@@ -18,6 +18,7 @@ import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 public class SwipeProblem extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     String Response_Time_Start;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class SwipeProblem extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -56,7 +58,7 @@ public class SwipeProblem extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 3000);
     }

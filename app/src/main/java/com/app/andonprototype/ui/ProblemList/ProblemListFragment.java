@@ -43,7 +43,7 @@ import java.util.Map;
 
 
 public class ProblemListFragment extends Fragment implements ListView.OnItemClickListener {
-    public String pic,Line,Station,MachineID,Status,Person;
+    public String pic, Line, Station, MachineID, Status, Person;
     private ListView ListProblem;
     private SimpleAdapter AP;
     public ImageView imageView;
@@ -190,12 +190,11 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                 i.putExtra("Station", Station);
                 i.putExtra("PIC", pic);
                 //admin akan dihapus di final app
-                if (pic.equals("admin")){
+                if (pic.equals("admin")) {
                     startActivity(i);
-                }
-                else {
+                } else {
                     Object person = mp.get("PIC");
-                    switch (Status){
+                    switch (Status) {
                         case "3":
                             if (person != null) {
                                 Person = person.toString();
@@ -209,11 +208,10 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
                             }
                             break;
                         case "4":
-                            if(person != null){
+                            if (person != null) {
                                 Person = person.toString();
                                 Toast.makeText(getActivity(), "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(getActivity(), "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
                             }
                             break;
@@ -225,6 +223,7 @@ public class ProblemListFragment extends Fragment implements ListView.OnItemClic
             }
         }
     }
+
     public void blinkEffect() {
         ObjectAnimator animation = ObjectAnimator.ofInt(ListProblem, "backgroundColor", Color.WHITE, Color.RED, Color.WHITE);
         animation.setDuration(1500);

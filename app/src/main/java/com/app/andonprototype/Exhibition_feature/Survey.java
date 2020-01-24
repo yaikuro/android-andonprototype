@@ -24,31 +24,32 @@ import java.sql.PreparedStatement;
 
 public class Survey extends AppCompatActivity {
     Button btnSubmit;
-    EditText ans1,ans2,ans3,ans4,ans5,ans6,ans7;
-    CheckBox checkBoxq61,checkBoxq62,checkBoxq63,checkBoxq64;
-    RadioButton radioButtonQ71,radioButtonQ72;
-    String Name,Job,Company,Email,Phone,Application,Plan;
-    String q61,q62,q63,q64;
+    EditText ans1, ans2, ans3, ans4, ans5, ans6, ans7;
+    CheckBox checkBoxq61, checkBoxq62, checkBoxq63, checkBoxq64;
+    RadioButton radioButtonQ71, radioButtonQ72;
+    String Name, Job, Company, Email, Phone, Application, Plan;
+    String q61, q62, q63, q64;
     boolean doubleBackToExitPressedOnce = false;
     ConnectionClass connectionClass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_survey);
         final RadioGroup radioGroup;
         connectionClass = new ConnectionClass();
-        btnSubmit       = findViewById(R.id.btnSubmit);
-        ans1            = findViewById(R.id.ans1);
-        ans2            = findViewById(R.id.ans2);
-        ans3            = findViewById(R.id.ans3);
-        ans4            = findViewById(R.id.ans4);
-        ans5            = findViewById(R.id.ans5);
-        checkBoxq61     = findViewById(R.id.checkboxq61);
-        checkBoxq62     = findViewById(R.id.checkboxq62);
-        checkBoxq63     = findViewById(R.id.checkboxq63);
-        checkBoxq64     = findViewById(R.id.checkboxq64);
-        radioButtonQ71  = findViewById(R.id.radioButtonQ71);
-        radioButtonQ72  = findViewById(R.id.radioButtonQ72);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        ans1 = findViewById(R.id.ans1);
+        ans2 = findViewById(R.id.ans2);
+        ans3 = findViewById(R.id.ans3);
+        ans4 = findViewById(R.id.ans4);
+        ans5 = findViewById(R.id.ans5);
+        checkBoxq61 = findViewById(R.id.checkboxq61);
+        checkBoxq62 = findViewById(R.id.checkboxq62);
+        checkBoxq63 = findViewById(R.id.checkboxq63);
+        checkBoxq64 = findViewById(R.id.checkboxq64);
+        radioButtonQ71 = findViewById(R.id.radioButtonQ71);
+        radioButtonQ72 = findViewById(R.id.radioButtonQ72);
         radioButtonQ71.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +70,8 @@ public class Survey extends AppCompatActivity {
             }
         });
     }
-    public void UploadData(){
+
+    public void UploadData() {
         String msg = "";
         try {
             Connection con = connectionClass.CONN();
@@ -84,14 +86,14 @@ public class Survey extends AppCompatActivity {
             msg = "Inserted Successfully";
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             LoadMainDashboard();
-        }
-        catch (IOError|Exception ex){
+        } catch (IOError | Exception ex) {
             msg = ex.getMessage();
-            Log.d("hitesh",msg);
+            Log.d("hitesh", msg);
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
     }
-    public void getData(){
+
+    public void getData() {
         Name = ans1.getText().toString();
         Job = ans2.getText().toString();
         Company = ans3.getText().toString();
@@ -100,37 +102,40 @@ public class Survey extends AppCompatActivity {
         getDataQ6();
         getDataQ7();
     }
-    public void getDataQ6(){
+
+    public void getDataQ6() {
         q61 = "";
         q62 = "";
         q63 = "";
         q64 = "";
-        if (checkBoxq61.isChecked()){
+        if (checkBoxq61.isChecked()) {
             q61 = checkBoxq61.getText().toString() + ", ";
         }
-        if (checkBoxq62.isChecked()){
+        if (checkBoxq62.isChecked()) {
             q62 = checkBoxq62.getText().toString() + ", ";
         }
-        if (checkBoxq63.isChecked()){
+        if (checkBoxq63.isChecked()) {
             q63 = checkBoxq63.getText().toString() + ", ";
         }
-        if (checkBoxq64.isChecked()){
+        if (checkBoxq64.isChecked()) {
             q64 = checkBoxq64.getText().toString();
         }
         Application = q61 + q62 + q63 + q64;
     }
-    public void getDataQ7(){
-        if (radioButtonQ71.isChecked()){
+
+    public void getDataQ7() {
+        if (radioButtonQ71.isChecked()) {
             Plan = radioButtonQ71.getText().toString();
-        }
-        else if (radioButtonQ72.isChecked()){
+        } else if (radioButtonQ72.isChecked()) {
             Plan = radioButtonQ72.getText().toString();
         }
     }
+
     public void LoadMainDashboard() {
         Intent i = new Intent(Survey.this, MainDashboard.class);
         startActivity(i);
     }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -145,7 +150,7 @@ public class Survey extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 3000);
     }

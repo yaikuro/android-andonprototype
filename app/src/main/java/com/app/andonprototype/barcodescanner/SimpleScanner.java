@@ -23,8 +23,8 @@ import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class SimpleScanner extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private ZXingScannerView mScannerView;
-    public String Verification,PIC,Line,Station;
-    public String Result,verificationLine,verificationStation,MachineID;
+    public String Verification, PIC, Line, Station;
+    public String Result, verificationLine, verificationStation, MachineID;
     ConnectionClass connectionClass;
     boolean doubleBackToExitPressedOnce = false;
 
@@ -57,29 +57,28 @@ public class SimpleScanner extends AppCompatActivity implements ZXingScannerView
 
     @Override
     public void handleResult(com.google.zxing.Result rawResult) {
-        if (rawResult.getText().length()<4){
+        if (rawResult.getText().length() < 4) {
             mScannerView.resumeCameraPreview(SimpleScanner.this);
             Toast.makeText(this, "Wrong QR Code", Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Result = rawResult.getText().substring(0,4);
+        } else {
+            Result = rawResult.getText().substring(0, 4);
             MachineID = rawResult.getText().substring(Result.length());
             if (Result.equals(Verification)) {
                 Intent i = new Intent(SimpleScanner.this, DetailBreakdownPage2.class);
                 String currentResponseDateFinish = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
-                i.putExtra("MachineID",MachineID);
-                i.putExtra("ResponseDateFinish",currentResponseDateFinish);
-                i.putExtra("Line",Line);
-                i.putExtra("Station",Station);
-                i.putExtra("PIC",PIC);
+                i.putExtra("MachineID", MachineID);
+                i.putExtra("ResponseDateFinish", currentResponseDateFinish);
+                i.putExtra("Line", Line);
+                i.putExtra("Station", Station);
+                i.putExtra("PIC", PIC);
                 startActivity(i);
-            }
-            else{
+            } else {
                 mScannerView.resumeCameraPreview(SimpleScanner.this);
                 Toast.makeText(this, "Station tidak sesuai", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
@@ -94,17 +93,18 @@ public class SimpleScanner extends AppCompatActivity implements ZXingScannerView
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 3000);
     }
+
     public void updatePICstatus2() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE stationdashboard SET Status=2, PIC=NULL where Station='" + Station +"' and Line ='" + Line +"'";
+            String query = "UPDATE stationdashboard SET Status=2, PIC=NULL where Station='" + Station + "' and Line ='" + Line + "'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
         }
     }
 }

@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_part.ExampleDialogListener{
+public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_part.ExampleDialogListener {
     private String No, Name, Format, Query, currentDate;
     ListView ListAsset;
     TextView Machine;
@@ -62,103 +62,106 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         });
     }
 
-        public void getAsset () {
-            List<Map<String, String>> MyPartList = null;
-            MyPartList = getProblem();
-            String[] fromwhere = {"Part","Type","Durability","Date"};
-            int[] viewwhere = {R.id.Part,R.id.Type,R.id.Durability,R.id.Date};
-            AP = new SimpleAdapter(this, MyPartList, R.layout.part_list, fromwhere, viewwhere);
-            ListAsset.setAdapter(AP);
-        }
+    public void getAsset() {
+        List<Map<String, String>> MyPartList = null;
+        MyPartList = getProblem();
+        String[] fromwhere = {"Part", "Type", "Durability", "Date"};
+        int[] viewwhere = {R.id.Part, R.id.Type, R.id.Durability, R.id.Date};
+        AP = new SimpleAdapter(this, MyPartList, R.layout.part_list, fromwhere, viewwhere);
+        ListAsset.setAdapter(AP);
+    }
 
-        public List<Map<String, String>> getProblem() {
+    public List<Map<String, String>> getProblem() {
         List<Map<String, String>> data = new ArrayList<>();
-            try {
-                ConnectionClass connectionClass = new ConnectionClass();
-                connect = connectionClass.CONN();
-                if (connect == null) {
-                    ConnectionResult = "Check your Internet Connection";
-                } else {
-                    switch (Format){
-                        case "1":{
-                            Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, CONVERT(date, m.Due_Date) AS Due_Date " +
-                                    "from machinelist m,inventorypart i " +
-                                    "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID";
-                            break;
-                        }
-                        case "2":{
-                            Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, CONVERT(date, m.Due_Date) AS Due_Date " +
-                                    "from machinelist m,inventorypart i " +
-                                    "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID " +
-                                    "and DATEDIFF(second, '" + currentDate + "', m.Due_Date) < 300";
-                            break;
-                        }
+        try {
+            ConnectionClass connectionClass = new ConnectionClass();
+            connect = connectionClass.CONN();
+            if (connect == null) {
+                ConnectionResult = "Check your Internet Connection";
+            } else {
+                switch (Format) {
+                    case "1": {
+                        Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, CONVERT(date, m.Due_Date) AS Due_Date " +
+                                "from machinelist m,inventorypart i " +
+                                "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID";
+                        break;
                     }
-                    Statement stmt = connect.createStatement();
-                    ResultSet rs = stmt.executeQuery(Query);
-                    while (rs.next()) {
-                        String No = rs.getString("No");
-                        String Part = rs.getString("Nama_Part");
-                        String Type = rs.getString("Jenis_Part");
-                        String Durability = rs.getString("Umur");
-                        String Date = rs.getString("Due_Date");
-                        Map<String, String> datanum = new HashMap<>();
-                        datanum.put("No", No);
-                        datanum.put("Part", Part);
-                        datanum.put("Type", Type);
-                        datanum.put("Durability", Durability);
-                        datanum.put("Date", Date);
-                        data.add(datanum);
+                    case "2": {
+                        Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, CONVERT(date, m.Due_Date) AS Due_Date " +
+                                "from machinelist m,inventorypart i " +
+                                "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID " +
+                                "and DATEDIFF(second, '" + currentDate + "', m.Due_Date) < 300";
+                        break;
                     }
-                        ConnectionResult = "Successfull";
-                        isSuccess = true;
-                        connect.close();
-                    }
-                } catch (Exception ex) {
-                    isSuccess = false;
-                    ConnectionResult = ex.getMessage();
                 }
-                return data;
+                Statement stmt = connect.createStatement();
+                ResultSet rs = stmt.executeQuery(Query);
+                while (rs.next()) {
+                    String No = rs.getString("No");
+                    String Part = rs.getString("Nama_Part");
+                    String Type = rs.getString("Jenis_Part");
+                    String Durability = rs.getString("Umur");
+                    String Date = rs.getString("Due_Date");
+                    Map<String, String> datanum = new HashMap<>();
+                    datanum.put("No", No);
+                    datanum.put("Part", Part);
+                    datanum.put("Type", Type);
+                    datanum.put("Durability", Durability);
+                    datanum.put("Date", Date);
+                    data.add(datanum);
+                }
+                ConnectionResult = "Successfull";
+                isSuccess = true;
+                connect.close();
             }
+        } catch (Exception ex) {
+            isSuccess = false;
+            ConnectionResult = ex.getMessage();
+        }
+        return data;
+    }
 
     public void btnRenew(View view) {
         updateDateNow();
         updateDueDate();
         finish();
         Intent i = new Intent(AssetManagementReport.this, AssetManagementReport.class);
-        overridePendingTransition( 0, 0);
+        overridePendingTransition(0, 0);
         i.putExtra("Name", Name);
         i.putExtra("Current_Date", currentDate);
         i.putExtra("Format", Format);
         startActivity(i);
-        overridePendingTransition( 0, 0);
+        overridePendingTransition(0, 0);
     }
+
     public void updateDateNow() {
         //UPDATE machinelist SET Date_Start = GETDATE()
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
             String query = "UPDATE machinelist SET Date_Start = GETDATE() " +
-                    "where No='" + No +"'";
+                    "where No='" + No + "'";
             PreparedStatement stmt = connect.prepareStatement(query);
             stmt.execute();
-        }catch (SQLException ignored){
+        } catch (SQLException ignored) {
         }
     }
+
     public void updateDueDate() {
-         //UPDATE machinelist SET Due_Date = DATEADD(SECOND, i.umur, m.Date_Start) from inventorypart i, machinelist m where m.PartID = i.PartID
+        //UPDATE machinelist SET Due_Date = DATEADD(SECOND, i.umur, m.Date_Start) from inventorypart i, machinelist m where m.PartID = i.PartID
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
             String query = "UPDATE machinelist SET Due_Date = DATEADD(SECOND, i.Umur, m.Date_Start) " +
                     "from inventorypart i, machinelist m " +
-                    "where m.PartID = i.PartID and No='" + No +"'";
+                    "where m.PartID = i.PartID and No='" + No + "'";
             PreparedStatement stmt = connect.prepareStatement(query);
             stmt.execute();
             Toast.makeText(this, "Data Updated", Toast.LENGTH_SHORT).show();
-        }catch (SQLException ignored){
+        } catch (SQLException ignored) {
         }
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
@@ -166,6 +169,7 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         No = ID.toString();
         openDialog();
     }
+
     public void openDialog() {
         pop_dialog_part exampleDialog = new pop_dialog_part();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");

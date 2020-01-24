@@ -24,7 +24,7 @@ import static com.app.andonprototype.Background.SaveSharedPreference.getUserName
 import static com.app.andonprototype.Background.SaveSharedPreference.setUserName;
 
 public class LoginActivity extends AppCompatActivity {
-    public String ID,PIC;
+    public String ID, PIC;
     public SaveSharedPreference saveSharedPreference;
     public ConnectionClass connectionClass;
     public EditText etuserid, etpass;
@@ -37,8 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         saveSharedPreference = new SaveSharedPreference();
         setContentView(R.layout.activity_login);
-        if (getUserName(this).length()!=0)
-        {
+        if (getUserName(this).length() != 0) {
             loadDashboard2();
         }
         connectionClass = new ConnectionClass();
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DoLogin doLogin = new DoLogin();
                 doLogin.execute("");
-                setUserName(LoginActivity.this,etuserid.getText().toString());
+                setUserName(LoginActivity.this, etuserid.getText().toString());
             }
         });
 
@@ -61,11 +60,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER))
-                {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     DoLogin doLogin = new DoLogin();
                     doLogin.execute("");
-                    setUserName(LoginActivity.this,etuserid.getText().toString());
+                    setUserName(LoginActivity.this, etuserid.getText().toString());
                     return true;
                 }
                 return false;
@@ -73,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public class DoLogin extends AsyncTask<String,String,String> {
+    public class DoLogin extends AsyncTask<String, String, String> {
         String z = "";
         Boolean isSuccess = false;
 
@@ -88,25 +86,22 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String r) {
             pbbar.setVisibility(View.GONE);
-            Toast.makeText(LoginActivity.this,z,Toast.LENGTH_SHORT).show();
-            if(isSuccess) {
+            Toast.makeText(LoginActivity.this, z, Toast.LENGTH_SHORT).show();
+            if (isSuccess) {
                 loadDashboard();
             }
 
         }
+
         @Override
         protected String doInBackground(String... params) {
-            if(userid.isEmpty()&&password.isEmpty()) {
+            if (userid.isEmpty() && password.isEmpty()) {
                 z = "Please Enter User ID and Password";
-            }
-            else if(userid.isEmpty()){
+            } else if (userid.isEmpty()) {
                 z = "User ID cannot be empty";
-            }
-            else if(password.isEmpty()){
+            } else if (password.isEmpty()) {
                 z = "Password cannot be empty";
-            }
-            else
-            {
+            } else {
                 try {
                     Connection con = connectionClass.CONN();
                     if (con == null) {
@@ -116,22 +111,17 @@ public class LoginActivity extends AppCompatActivity {
                         Statement stmt = con.createStatement();
                         ResultSet rs = stmt.executeQuery(query);
 
-                        if(rs.next())
-                        {
+                        if (rs.next()) {
                             z = "Login successfull";
-                            isSuccess=true;
+                            isSuccess = true;
                             ID = rs.getString("Nama");
                             PIC = rs.getString("npk");
-                        }
-                        else
-                        {
+                        } else {
                             z = "Invalid Credentials";
                             isSuccess = false;
                         }
                     }
-                }
-                catch (Exception ex)
-                {
+                } catch (Exception ex) {
                     isSuccess = false;
                     z = "Invalid Credentials";
                 }
@@ -139,15 +129,17 @@ public class LoginActivity extends AppCompatActivity {
             return z;
         }
     }
-        private void loadDashboard(){
-            Intent i = new Intent(getApplicationContext(), MainDashboard.class);
-            SaveSharedPreference.setID(LoginActivity.this,ID);
-            startActivity(i);
-            finish();
-        }
-        private void loadDashboard2(){
-            Intent i = new Intent(getApplicationContext(), MainDashboard.class);
-            startActivity(i);
-            finish();
-        }
+
+    private void loadDashboard() {
+        Intent i = new Intent(getApplicationContext(), MainDashboard.class);
+        SaveSharedPreference.setID(LoginActivity.this, ID);
+        startActivity(i);
+        finish();
+    }
+
+    private void loadDashboard2() {
+        Intent i = new Intent(getApplicationContext(), MainDashboard.class);
+        startActivity(i);
+        finish();
+    }
 }

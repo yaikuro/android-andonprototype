@@ -34,7 +34,7 @@ import java.util.Map;
 import java.util.Objects;
 
 
-public class AssetActivityFragment extends Fragment implements ListView.OnItemClickListener{
+public class AssetActivityFragment extends Fragment implements ListView.OnItemClickListener {
     public String id;
     public String Station;
     public String Line;
@@ -43,7 +43,7 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
     private Spinner LineSpinner, StationSpinner;
     private ArrayList<String> LineArray;
     private ArrayList<String> StationArray;
-    private int line,station;
+    private int line, station;
     List<Map<String, String>> MachineReportList;
 
     private AssetActivityViewModel mainDashboardViewModel;
@@ -95,7 +95,7 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
                 station = StationArray.indexOf(StationSpinner.getSelectedItem());
                 Station = (String) parent.getItemAtPosition(station);
                 getMachineReport();
-                if (MachineReportList.isEmpty()){
+                if (MachineReportList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Data Found", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -115,6 +115,7 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
         SimpleAdapter AR = new SimpleAdapter(getActivity(), MachineReportList, R.layout.asset_list, fromwhere, viewwhere);
         ListMachineAsset.setAdapter(AR);
     }
+
     private List<Map<String, String>> getRep() {
         List<Map<String, String>> data;
         data = new ArrayList<>();
@@ -135,7 +136,7 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
                 while (rs.next()) {
                     String MachineName = rs.getString("Machine_Name");
                     Map<String, String> datanum = new HashMap<>();
-                    datanum.put("Machine_Name",MachineName);
+                    datanum.put("Machine_Name", MachineName);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successful";
@@ -148,7 +149,8 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
         }
         return data;
     }
-    private void GetLine(){
+
+    private void GetLine() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
@@ -156,48 +158,49 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             LineArray = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 LineArray.add(rs.getString("Line"));
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                Objects.requireNonNull(getActivity()),R.layout.spinner_item,LineArray);
+                Objects.requireNonNull(getActivity()), R.layout.spinner_item, LineArray);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         LineSpinner.setAdapter(adapter);
     }
-    private void GetStation(){
+
+    private void GetStation() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            String query = "Select Station from stationdashboard where Line = '" + Line +"'";
+            String query = "Select Station from stationdashboard where Line = '" + Line + "'";
             Statement stmt = connect.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             StationArray = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
                 StationArray.add(rs.getString("Station"));
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                Objects.requireNonNull(getActivity()),R.layout.spinner_item,StationArray);
+                Objects.requireNonNull(getActivity()), R.layout.spinner_item, StationArray);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         StationSpinner.setAdapter(adapter);
     }
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(getActivity(), AssetManagementReport.class);
-        Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
+        Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object MachineName = mp.get("Machine_Name");
         String name = MachineName.toString();
         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String format = "1";
-        i.putExtra("Name",name);
-        i.putExtra("Format",format);
-        i.putExtra("Current_Date",currentDate);
+        i.putExtra("Name", name);
+        i.putExtra("Format", format);
+        i.putExtra("Current_Date", currentDate);
         //Toast.makeText(this, Mesin, Toast.LENGTH_SHORT).show();
         startActivity(i);
     }

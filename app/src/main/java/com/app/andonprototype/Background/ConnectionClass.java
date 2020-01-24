@@ -8,8 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Objects;
 
-public class ConnectionClass
-{
+public class ConnectionClass {
     private String ipHP = "172.20.10.2";
     private String ip = "192.168.1.100";
     private String classs = "net.sourceforge.jtds.jdbc.Driver";

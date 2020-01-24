@@ -22,7 +22,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-public class MachineStatusBreakdown extends AppCompatActivity implements ListView.OnItemClickListener{
+public class MachineStatusBreakdown extends AppCompatActivity implements ListView.OnItemClickListener {
 
     android.widget.ListView ListView;
     SimpleAdapter AD;
@@ -63,21 +63,20 @@ public class MachineStatusBreakdown extends AppCompatActivity implements ListVie
     public void updatePICstatus1() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE machinedashboard SET Status=2, PIC=NULL where MachineID='" + Mesin +"'";
+            String query = "UPDATE machinedashboard SET Status=2, PIC=NULL where MachineID='" + Mesin + "'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
         }
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
-        Map<String,String> mp = (Map<String, String>) ListView.getItemAtPosition(position);
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Map<String, String> mp = (Map<String, String>) ListView.getItemAtPosition(position);
         Object machine = mp.get("MachineID");
         Mesin = machine.toString();
         updatePICstatus1();
-        Intent i = new Intent(MachineStatusBreakdown.this,MachineStatusBreakdown.class);
+        Intent i = new Intent(MachineStatusBreakdown.this, MachineStatusBreakdown.class);
         finish();
         startActivity(i);
     }

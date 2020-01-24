@@ -27,9 +27,10 @@ public class Success_Page extends AppCompatActivity {
             public void run() {
                 loaddashboard();
             }
-        },1700);
+        }, 1700);
     }
-    public void success(){
+
+    public void success() {
         SimpleDraweeView simpleDraweeView = findViewById(R.id.loading_gif);
         ImageRequest imageRequest = ImageRequestBuilder.newBuilderWithResourceId(R.drawable.loading).build();
         DraweeController controller = Fresco.newDraweeControllerBuilder()
@@ -38,7 +39,8 @@ public class Success_Page extends AppCompatActivity {
                 .build();
         simpleDraweeView.setController(controller);
     }
-    public void loaddashboard(){
+
+    public void loaddashboard() {
         finish();
         Intent i = new Intent(Success_Page.this, MainDashboard.class);
         startActivity(i);

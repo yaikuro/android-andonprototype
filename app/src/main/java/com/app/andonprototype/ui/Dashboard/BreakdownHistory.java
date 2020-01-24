@@ -24,14 +24,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BreakdownHistory extends AppCompatActivity implements ListView.OnItemClickListener{
+public class BreakdownHistory extends AppCompatActivity implements ListView.OnItemClickListener {
     Connection connect;
-    private String MachineID,Number,Validation,Line,Station;
+    private String MachineID, Number, Validation, Line, Station;
     String ConnectionResult = "";
     ListView BreakdownHistory;
     SimpleAdapter ABH;
-    Boolean isSuccess=false;
+    Boolean isSuccess = false;
     TextView Machine;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,14 +52,16 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
             }
         });
     }
-    public void getHistory(){
-        List<Map<String,String>> HistoryList = null;
+
+    public void getHistory() {
+        List<Map<String, String>> HistoryList = null;
         HistoryList = getData();
-        String [] fromwhere = {"Line","Station","Repair_Time_Start","Repair_Time_Finish","Repair_Duration"};
-        int [] viewwhere = {R.id.Line,R.id.Station,R.id.RepairTimeStart,R.id.RepairTimeFinish,R.id.Duration};
-        ABH = new SimpleAdapter(BreakdownHistory.this,HistoryList,R.layout.list_history,fromwhere,viewwhere);
+        String[] fromwhere = {"Line", "Station", "Repair_Time_Start", "Repair_Time_Finish", "Repair_Duration"};
+        int[] viewwhere = {R.id.Line, R.id.Station, R.id.RepairTimeStart, R.id.RepairTimeFinish, R.id.Duration};
+        ABH = new SimpleAdapter(BreakdownHistory.this, HistoryList, R.layout.list_history, fromwhere, viewwhere);
         BreakdownHistory.setAdapter(ABH);
     }
+
     public List<Map<String, String>> getData() {
         List<Map<String, String>> data = null;
         data = new ArrayList<Map<String, String>>();
@@ -86,9 +89,9 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
                     datanum.put("MachineID", MachineID);
                     datanum.put("Line", Line);
                     datanum.put("Station", Station);
-                    datanum.put("Repair_Time_Start",Repair_Time_Start);
-                    datanum.put("Repair_Time_Finish",Repair_Time_Finish);
-                    datanum.put("Repair_Duration",Repair_Duration);
+                    datanum.put("Repair_Time_Start", Repair_Time_Start);
+                    datanum.put("Repair_Time_Finish", Repair_Time_Finish);
+                    datanum.put("Repair_Duration", Repair_Duration);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successful";
@@ -102,49 +105,40 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         return data;
     }
 
-    public void validation(){
+    public void validation() {
         ValidationData();
-        if (Validation==null)
-        {
+        if (Validation == null) {
             Toast.makeText(this, "No Data Found", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             getHistory();
         }
     }
 
     public void ValidationData() {
-        try
-        {
+        try {
             ConnectionClass connectionClass = new ConnectionClass();
-            connect=connectionClass.CONN();
-            if(connect==null)
-            {
+            connect = connectionClass.CONN();
+            if (connect == null) {
                 ConnectionResult = "Check your Internet Connection";
-            }
-            else
-            {
+            } else {
                 String query = "Select No from machinestatustest where Line='" + Line + "' and Station = '" + Station + "'";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                if (rs.next())
-                {
+                if (rs.next()) {
                     Validation = rs.getString("No");
                 }
-                ConnectionResult="Successfull";
+                ConnectionResult = "Successfull";
                 connect.close();
             }
-        }
-        catch (Exception ex)
-        {
-            ConnectionResult=ex.getMessage();
+        } catch (Exception ex) {
+            ConnectionResult = ex.getMessage();
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(this, DetailMachineReport.class);
-        Map<String,String> mp;
+        Map<String, String> mp;
         mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object No = mp.get("No");
         Number = No.toString();

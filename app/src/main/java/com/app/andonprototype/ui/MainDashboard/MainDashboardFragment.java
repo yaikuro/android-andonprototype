@@ -108,7 +108,7 @@ public class MainDashboardFragment extends Fragment {
             }
         });
 
-        MaterialCardView cardView_comingsoon1= root.findViewById(R.id.cardView_comingsoon1);
+        MaterialCardView cardView_comingsoon1 = root.findViewById(R.id.cardView_comingsoon1);
         cardView_comingsoon1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -154,7 +154,13 @@ public class MainDashboardFragment extends Fragment {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        pStart++;
+                        if (pStart < 100 && pStatus > 0) {
+                            pStart++;
+                        }
+                        if (pStart >= 100) {
+                            pStart = 100;
+                        }
+
                     }
                 }
             }).start();
@@ -162,11 +168,6 @@ public class MainDashboardFragment extends Fragment {
 
 
         return root;
-    }
-
-    public void machine_maindasboard(View view) {
-        Intent i = new Intent(getActivity(), MachineDashboard.class);
-        startActivity(i);
     }
 
     private void getImage() {

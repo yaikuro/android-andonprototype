@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_blue_grey_100">
 
-    <RelativeLayout
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".ui.Dashboard.MainDashboard$ProblemWaitingList">
 
         <TextView
+            android:id="@+id/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/Title"
-            android:textStyle="bold"
+            android:gravity="top|center"
             android:text="@string/problem_waiting_list"
             android:textColor="@color/black"
-            android:gravity="top|center"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"
-            android:layout_below="@id/Title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_below="@id/Title"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent">
+
             <ListView
                 android:id="@+id/ListProblem"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+                android:layout_height="wrap_content" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 
     </RelativeLayout>

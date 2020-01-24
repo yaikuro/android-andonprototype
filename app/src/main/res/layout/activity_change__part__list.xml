@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Dashboard.Change_Part_List">
+
     <RelativeLayout
+        android:id="@+id/RelativeLayoutHistory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:id="@+id/RelativeLayoutHistory">
+        android:layout_margin="10dp">
 
         <TextView
+            android:id="@+id/Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Title"
-            android:text="List of Machine"
             android:layout_centerHorizontal="true"
-            android:textSize="40sp"/>
+            android:text="List of Machine"
+            android:textSize="40sp" />
     </RelativeLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

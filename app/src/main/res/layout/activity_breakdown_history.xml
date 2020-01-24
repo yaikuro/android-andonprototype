@@ -4,48 +4,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.Dashboard.BreakdownHistory">
+
     <RelativeLayout
+        android:id="@+id/RelativeLayoutHistory"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/RelativeLayoutHistory">
+        android:layout_height="wrap_content">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/Title"
-            android:text="@string/breakdown_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:textSize="40sp"/>
+            android:text="@string/breakdown_history"
+            android:textSize="40sp" />
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/Machine"
-            android:text="@string/machine_id_colon"
-            android:layout_below="@id/Title"
-            android:textSize="30sp"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="20sp"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/Machine"
-            android:id="@+id/dataMachineID"
-            android:textSize="30sp"
-            android:layout_marginStart="10sp"
             android:layout_below="@id/Title"
-            android:layout_marginTop="20sp"/>
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:text="@string/machine_id_colon"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/dataMachineID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Title"
+            android:layout_marginStart="10sp"
+            android:layout_marginTop="20sp"
+            android:layout_toEndOf="@id/Machine"
+            android:textSize="30sp" />
     </RelativeLayout>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
-        android:layout_below="@id/RelativeLayoutHistory"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_below="@id/RelativeLayoutHistory"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent">
-    <ListView
-        android:id="@+id/ListHistory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/RelativeLayoutHistory" />
+
+        <ListView
+            android:id="@+id/ListHistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/RelativeLayoutHistory" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>

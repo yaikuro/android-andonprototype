@@ -1,43 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/md_blue_grey_100"
+    android:orientation="vertical"
     tools:context=".ui.Dashboard.MainDashboard$ProblemWaitingList">
 
     <TextView
+        android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Title"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:text="@string/problem_waiting_list"
         android:gravity="top|center"
-        android:textSize="30sp"/>
+        android:text="@string/problem_waiting_list"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/NoProblem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:id="@+id/NoProblem"
-        android:textSize="20sp"/>
+        android:textSize="20sp" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
-        android:layout_below="@id/Title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_below="@id/Title"
         android:layout_marginTop="10dp"
         android:background="@android:color/transparent">
+
         <ListView
             android:id="@+id/ListProblem"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
+            android:layout_height="wrap_content" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 
 
 </RelativeLayout>

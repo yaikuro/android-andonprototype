@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class GetData {
     private Connection connect;
-    private String ConnectionResult="";
+    private String ConnectionResult = "";
     private Boolean isSuccess = false;
     private int[] listviewImage = new int[]
             {
@@ -21,29 +21,26 @@ public class GetData {
                     R.drawable.color_yellow,
                     R.drawable.color_blue
             };
-    public List<Map<String,String>>getdata()
-    {
+
+    public List<Map<String, String>> getdata() {
         List<Map<String, String>> data = new ArrayList<Map<String, String>>();
 
-        try
-        {
+        try {
             ConnectionClass connectionClass = new ConnectionClass();
-            connect=connectionClass.CONN();
+            connect = connectionClass.CONN();
             if (connect == null)
                 ConnectionResult = "Check your Internet Connection";
-            else
-            {
-                String query= Query.getdataquery;
+            else {
+                String query = Query.getdataquery;
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                while(rs.next())
-                {
+                while (rs.next()) {
                     String status = rs.getString("Status");
                     String MachineID = rs.getString("MachineID");
                     String Line = rs.getString("Line");
                     String Station = rs.getString("Station");
-                    Map<String,String> datanum = new HashMap<>();
-                    datanum.put("Status",status);
+                    Map<String, String> datanum = new HashMap<>();
+                    datanum.put("Status", status);
                     //int i = Integer.parseInt(status);
                     switch (status) {
                         case "1": {
@@ -67,19 +64,18 @@ public class GetData {
                             break;
                         }
                     }
-                    datanum.put("MachineID",MachineID);
-                    datanum.put("Line",Line);
-                    datanum.put("Station",Station);
+                    datanum.put("MachineID", MachineID);
+                    datanum.put("Line", Line);
+                    datanum.put("Station", Station);
                     data.add(datanum);
                 }
-                ConnectionResult="Successful";
-                isSuccess=true;
+                ConnectionResult = "Successful";
+                isSuccess = true;
                 connect.close();
             }
-        }catch (Exception ex)
-        {
-            isSuccess=false;
-            ConnectionResult=ex.getMessage();
+        } catch (Exception ex) {
+            isSuccess = false;
+            ConnectionResult = ex.getMessage();
         }
         return data;
     }

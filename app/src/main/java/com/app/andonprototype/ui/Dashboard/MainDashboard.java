@@ -52,7 +52,7 @@ import java.util.Map;
 import static com.app.andonprototype.Background.SaveSharedPreference.clearUserName;
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 
-public class MainDashboard extends AppCompatActivity implements pop_dialog.ExampleDialogListener{
+public class MainDashboard extends AppCompatActivity implements pop_dialog.ExampleDialogListener {
     private static final String TAG = "MainDashboard";
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_2_ID = "channel2";
@@ -64,6 +64,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
     Connection connect;
     String ConnectionResult = "";
     private NotificationManagerCompat notificationManager;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +72,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         if (!running) {
             running = true;
         }
-        if(!validate){
+        if (!validate) {
             validate = true;
         }
         createNotificationChannels();
@@ -189,13 +190,12 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
     } // End of onCreate
 
 
-
     @Override
     public void onBackPressed() {
 //        if (fragNavController.getCurrentStack().size() > 1) {
 //            fragNavController.pop();
 //        } else
-            if (doubleBackToExitPressedOnce) {
+        if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
         }
@@ -207,7 +207,8 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
             public void run() {
                 doubleBackToExitPressedOnce = false;
             }
-        }, 3000);{
+        }, 3000);
+        {
         }
     }
 
@@ -230,22 +231,21 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         finish();
     }
 
-    private  void content(){
+    private void content() {
         getStatus();
         getDate();
-        if (running&&!send.equals(notifikasi)&&Status.equals("2")&&validate)
-        {
+        if (running && !send.equals(notifikasi) && Status.equals("2") && validate) {
             sendOnChannel1();
             Intent i = new Intent(MainDashboard.this, SwipeProblem.class);
             startActivity(i);
         }
-        if (!MachineName.isEmpty()){
+        if (!MachineName.isEmpty()) {
             sendOnChannel2();
         }
         refresh(1000);
     }
 
-    private void refresh(int milliseconds){
+    private void refresh(int milliseconds) {
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
@@ -253,7 +253,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
                 content();
             }
         };
-        handler.postDelayed(runnable,milliseconds);
+        handler.postDelayed(runnable, milliseconds);
     }
 
     public void getStatus() {
@@ -261,26 +261,21 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            if (connect==null)
-            {
+            if (connect == null) {
                 ConnectionResult = "Check your Internet Connection";
-            }
-            else{
+            } else {
                 String query = "Select Station,Status from stationdashboard where Status = 2";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                if (rs.next())
-                {
+                if (rs.next()) {
                     Station = rs.getString("Station");
                     Status = rs.getString("Status");
                 }
                 ConnectionResult = "Successfull";
                 connect.close();
             }
-        }
-        catch (Exception ex)
-        {
-            ConnectionResult=ex.getMessage();
+        } catch (Exception ex) {
+            ConnectionResult = ex.getMessage();
         }
     }
 
@@ -292,11 +287,9 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            if (connect==null)
-            {
+            if (connect == null) {
                 ConnectionResult = "Check your Internet Connection";
-            }
-            else{
+            } else {
                 String query = "Select Machine_Name, DATEDIFF(second, '" + currentDate + "', Due_Date) from machinelist " +
                         "where DATEDIFF(second, '" + currentDate + "', Due_Date) < 300";
                 Statement stmt = connect.createStatement();
@@ -306,10 +299,8 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
                 ConnectionResult = "Successfull";
                 connect.close();
             }
-        }
-        catch (Exception ex)
-        {
-            ConnectionResult=ex.getMessage();
+        } catch (Exception ex) {
+            ConnectionResult = ex.getMessage();
         }
     }
 
@@ -340,7 +331,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
         String message = "Machine Problem Detected";
         Intent activityIntent = new Intent(this, SwipeProblem.class);
         activityIntent.putExtra("Response_Time_Start", currentDate);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
                 .setFullScreenIntent(contentIntent, true)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
@@ -351,15 +342,16 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setOnlyAlertOnce(true)
-                .addAction(R.mipmap.ic_launcher,"Repair",contentIntent)
+                .addAction(R.mipmap.ic_launcher, "Repair", contentIntent)
                 .build();
         notificationManager.notify(1, notification);
     }
-    public void sendOnChannel2(){
+
+    public void sendOnChannel2() {
         String title = "ALERT PART";
         String message = "Part Replacement Check";
         Intent activityIntent = new Intent(this, Change_Part_List.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,0,activityIntent,0);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_2_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setFullScreenIntent(contentIntent, true)
@@ -378,13 +370,14 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
     public void isStoragePermissionGranted() {
         if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED) {
-            Log.v(TAG,"Permission is granted");
+            Log.v(TAG, "Permission is granted");
         } else {
 
-            Log.v(TAG,"Permission is revoked");
+            Log.v(TAG, "Permission is revoked");
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
     }
+
     public void openDialog() {
         pop_dialog exampleDialog = new pop_dialog();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");

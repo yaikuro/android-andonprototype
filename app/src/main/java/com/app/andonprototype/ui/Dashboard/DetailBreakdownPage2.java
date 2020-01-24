@@ -47,12 +47,12 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     private static final int pic_id = 123;
     private static final int pic_id2 = 124;
     public static final int requestcode = 1;
-    public String Line,Station,MachineID,picr,ResponseDateFinish;
+    public String Line, Station, MachineID, picr, ResponseDateFinish;
     boolean doubleBackToExitPressedOnce = false;
     byte[] byteArray;
     ImageView click_image_id, click_image_id2;
     String encodedImageProblem, encodedImageSolution;
-    TextView txtmsg, machine_id, date_start_text,date_finish_text,pic;
+    TextView txtmsg, machine_id, date_start_text, date_finish_text, pic;
     Button btnSave, camera_open_id, camera_open_id2;
     EditText problem_desc_text, solution_desc_text;
     public ContentValues values;
@@ -74,23 +74,23 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         picr = getIntent().getStringExtra("PIC");
         ResponseDateFinish = getIntent().getStringExtra("ResponseDateFinish");
 
-        camera_open_id      = findViewById(R.id.camera_button);
-        click_image_id      = findViewById(R.id.problem_pic);
+        camera_open_id = findViewById(R.id.camera_button);
+        click_image_id = findViewById(R.id.problem_pic);
 
-        camera_open_id2     = findViewById(R.id.camera_button_solution);
-        click_image_id2     = findViewById(R.id.solution_pic);
+        camera_open_id2 = findViewById(R.id.camera_button_solution);
+        click_image_id2 = findViewById(R.id.solution_pic);
 
-        problem_desc_text   = findViewById(R.id.problem_desc_text);
-        solution_desc_text  = findViewById(R.id.solution_desc_text);
+        problem_desc_text = findViewById(R.id.problem_desc_text);
+        solution_desc_text = findViewById(R.id.solution_desc_text);
 
-        machine_id          = findViewById(R.id.machine_id);
-        date_start_text     = findViewById(R.id.date_start_text);
-        pic                 = findViewById(R.id.pic);
+        machine_id = findViewById(R.id.machine_id);
+        date_start_text = findViewById(R.id.date_start_text);
+        pic = findViewById(R.id.pic);
 
-        btnSave             = findViewById(R.id.btnSave);
-        txtmsg              = findViewById(R.id.txtmsg);
+        btnSave = findViewById(R.id.btnSave);
+        txtmsg = findViewById(R.id.txtmsg);
 
-        pbbarDetail         = findViewById(R.id.pbbarDetail);
+        pbbarDetail = findViewById(R.id.pbbarDetail);
         pbbarDetail.setVisibility(View.INVISIBLE);
 
         pic.setText(picr);
@@ -130,8 +130,9 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             }
         });
     }
+
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         pbbarDetail.setVisibility(View.GONE);
     }
@@ -144,31 +145,34 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
     public class UploadData extends AsyncTask<Void, Void, Void> {
         @Override
-        protected void onPreExecute()
-        {
+        protected void onPreExecute() {
             pbbarDetail.setVisibility(View.VISIBLE);
             //do initialization of required objects objects here
-        };
+        }
+
+        ;
+
         @Override
-        protected Void doInBackground(Void... params)
-        {
+        protected Void doInBackground(Void... params) {
             UploadtoDB();
             return null;
         }
+
         @Override
-        protected void onPostExecute(Void result)
-        {
+        protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             pbbarDetail.setVisibility(View.GONE);
-        };
+        }
+
+        ;
     }
 
     public void UploadtoDB() {
         String msg = "unknown";
         chronometer.stop();
         long saveTime = SystemClock.elapsedRealtime() - chronometer.getBase();
-        int seconds = (int)(saveTime/1000);
-        String currentDateFinish= new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
+        int seconds = (int) (saveTime / 1000);
+        String currentDateFinish = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
         try {
             Connection con = connectionClass.CONN();
             String commands =
@@ -184,8 +188,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             msg = "Inserted Successfully";
             updatePICstatus4();
             Loadsuccespage();
-        }
-        catch (IOError | Exception ex) {
+        } catch (IOError | Exception ex) {
             msg = ex.getMessage();
             Log.d("hitesh", msg);
             pbbarDetail.setVisibility(View.INVISIBLE);
@@ -196,30 +199,30 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     public void updatePICstatus4() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE stationdashboard SET Status=4, PIC='" + picr + "' where Station='" + Station +"' and Line = '" + Line + "'";
+            String query = "UPDATE stationdashboard SET Status=4, PIC='" + picr + "' where Station='" + Station + "' and Line = '" + Line + "'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
         }
     }
 
     public void updatePICstatus3() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE stationdashboard SET Status=3, PIC='" + picr + "' where Station='" + Station +"' and Line = '" + Line + "'";
+            String query = "UPDATE stationdashboard SET Status=3, PIC='" + picr + "' where Station='" + Station + "' and Line = '" + Line + "'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
         }
     }
 
     public void updatePICstatus2() {
         try {
             Connection connection = connectionClass.CONN();
-            String query = "UPDATE stationdashboard SET Status=2, PIC=NULL where Station='" + Station +"' and Line = '" + Line + "'";
+            String query = "UPDATE stationdashboard SET Status=2, PIC=NULL where Station='" + Station + "' and Line = '" + Line + "'";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.execute();
-        }catch (SQLException ex){
+        } catch (SQLException ex) {
         }
     }
 
@@ -246,7 +249,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
             @Override
             public void run() {
-                doubleBackToExitPressedOnce=false;
+                doubleBackToExitPressedOnce = false;
             }
         }, 3000);
     }
@@ -287,8 +290,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                 }
             }
 
-            case pic_id2:
-            {
+            case pic_id2: {
                 final InputStream imageStream;
                 try {
                     imageStream = getContentResolver().openInputStream(imageUri);
@@ -315,7 +317,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
-    public void GetPicture(){
+    public void GetPicture() {
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
         imageUri = getContentResolver().insert(
@@ -336,7 +338,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
 
     private String encodeImage(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG,40,baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
         byte[] b = baos.toByteArray();
         String encImage = Base64.encodeToString(b, Base64.DEFAULT);
         return encImage;

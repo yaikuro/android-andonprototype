@@ -3,164 +3,185 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fillViewport="true"
     android:layout_margin="10dp"
+    android:fillViewport="true"
     tools:context=".Exhibition_feature.Survey">
+
     <RelativeLayout
+        android:id="@+id/Title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Title">
+        android:layout_height="wrap_content">
+
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/Survey_Title"
-            android:text="@string/survey"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="#000000"
-            android:layout_centerHorizontal="true"/>
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="@string/survey"
+            android:textColor="#000000"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/q1"
-            android:text="@string/what_is_your_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@id/Survey_Title"
             android:layout_marginTop="20dp"
+            android:text="@string/what_is_your_name"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ans1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans1"
+            android:layout_below="@id/q1"
             android:hint="@string/answer"
-            android:inputType="textShortMessage"
-            android:layout_below="@id/q1"/>
+            android:inputType="textShortMessage" />
+
         <TextView
+            android:id="@+id/q2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/q2"
-            android:text="@string/what_is_your_job_title_department"
             android:layout_below="@id/ans1"
             android:layout_marginTop="20dp"
+            android:text="@string/what_is_your_job_title_department"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ans2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans2"
+            android:layout_below="@id/q2"
             android:hint="@string/answer"
-            android:inputType="textShortMessage"
-            android:layout_below="@id/q2"/>
+            android:inputType="textShortMessage" />
+
         <TextView
+            android:id="@+id/q3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/q3"
-            android:text="@string/what_is_your_company_name"
             android:layout_below="@id/ans2"
             android:layout_marginTop="20dp"
+            android:text="@string/what_is_your_company_name"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ans3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans3"
+            android:layout_below="@id/q3"
             android:hint="@string/answer"
-            android:inputType="textShortMessage"
-            android:layout_below="@id/q3"/>
+            android:inputType="textShortMessage" />
+
         <TextView
+            android:id="@+id/q4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/q4"
-            android:text="@string/what_is_your_e_mail"
             android:layout_below="@id/ans3"
             android:layout_marginTop="20dp"
+            android:text="@string/what_is_your_e_mail"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ans4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans4"
+            android:layout_below="@id/q4"
             android:hint="@string/answer"
-            android:inputType="textEmailAddress"
-            android:layout_below="@id/q4"/>
+            android:inputType="textEmailAddress" />
+
         <TextView
+            android:id="@+id/q5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/q5"
-            android:text="@string/what_is_your_phone_number"
             android:layout_below="@id/ans4"
             android:layout_marginTop="20dp"
+            android:text="@string/what_is_your_phone_number"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <EditText
+            android:id="@+id/ans5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ans5"
+            android:layout_below="@id/q5"
             android:hint="@string/answer"
-            android:inputType="phone"
-            android:layout_below="@id/q5"/>
+            android:inputType="phone" />
+
         <TextView
+            android:id="@+id/q6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/q6"
-            android:text="@string/what_kind_of_application_interest_you"
             android:layout_below="@id/ans5"
             android:layout_marginTop="20dp"
+            android:text="@string/what_kind_of_application_interest_you"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <CheckBox
             android:id="@+id/checkboxq61"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/q6"
-            android:text="@string/augmented_reality_ar"/>
+            android:text="@string/augmented_reality_ar" />
+
         <CheckBox
             android:id="@+id/checkboxq62"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkboxq61"
-            android:text="@string/virtual_reality_vr"/>
+            android:text="@string/virtual_reality_vr" />
+
         <CheckBox
             android:id="@+id/checkboxq63"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkboxq62"
-            android:text="@string/monitoring_system_with_iiot_platform"/>
+            android:text="@string/monitoring_system_with_iiot_platform" />
+
         <CheckBox
             android:id="@+id/checkboxq64"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/checkboxq63"
-            android:text="@string/smart_glass"/>
+            android:text="@string/smart_glass" />
+
         <TextView
+            android:id="@+id/q7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/q7"
-            android:text="@string/implement"
             android:layout_below="@id/checkboxq64"
             android:layout_marginTop="20dp"
+            android:text="@string/implement"
             android:textColor="#000000"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
+
         <RadioButton
             android:id="@+id/radioButtonQ71"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/q7"
-            android:text="@string/yes"/>
+            android:text="@string/yes" />
+
         <RadioButton
             android:id="@+id/radioButtonQ72"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/radioButtonQ71"
-            android:text="@string/no"/>
+            android:text="@string/no" />
+
         <Button
+            android:id="@+id/btnSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnSubmit"
-            android:textSize="20sp"
+            android:layout_below="@id/radioButtonQ72"
             android:layout_centerHorizontal="true"
             android:text="@string/submit"
-            android:layout_below="@id/radioButtonQ72"/>
+            android:textSize="20sp" />
     </RelativeLayout>
 
 </ScrollView>

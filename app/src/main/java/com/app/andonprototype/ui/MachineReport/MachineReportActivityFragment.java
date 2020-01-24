@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class MachineReportActivityFragment extends Fragment implements ListView.OnItemClickListener{
+public class MachineReportActivityFragment extends Fragment implements ListView.OnItemClickListener {
     public String id;
     public String Station;
     public String Line;
@@ -46,8 +46,8 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
     String ConnectionResult = "";
     Boolean isSuccess = false;
     Spinner LineSpinner, StationSpinner;
-    ArrayList LineArray,StationArray;
-    int line,station;
+    ArrayList LineArray, StationArray;
+    int line, station;
     List<Map<String, String>> MachineReportList;
 
     private MachineReportActivityViewModel mainDashboardViewModel;
@@ -74,7 +74,7 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
             @Override
             public void onRefresh() {
                 getMachineReport();
-                if (MachineReportList.isEmpty()){
+                if (MachineReportList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Report Activity", Toast.LENGTH_SHORT).show();
                 }
                 pullToRefresh.setRefreshing(false);
@@ -99,7 +99,7 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
                 station = StationArray.indexOf(StationSpinner.getSelectedItem());
                 Station = (String) parent.getItemAtPosition(station);
                 getMachineReport();
-                if (MachineReportList.isEmpty()){
+                if (MachineReportList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Report Activity", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -119,6 +119,7 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
         AR = new SimpleAdapter(getActivity(), MachineReportList, R.layout.report_activity_listitem, fromwhere, viewwhere);
         ListMachineReport.setAdapter(AR);
     }
+
     private List<Map<String, String>> getRep() {
         List<Map<String, String>> data;
         data = new ArrayList<Map<String, String>>();
@@ -148,10 +149,10 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
                     datanum.put("MachineID", MachineID);
                     datanum.put("Line", Line);
                     datanum.put("Station", Station);
-                    datanum.put("Repair_Time_Start",Repair_Time_Start);
-                    datanum.put("Repair_Time_Finish",Repair_Time_Finish);
-                    datanum.put("Repair_Duration",Repair_Duration);
-                    datanum.put("PIC",PIC);
+                    datanum.put("Repair_Time_Start", Repair_Time_Start);
+                    datanum.put("Repair_Time_Finish", Repair_Time_Finish);
+                    datanum.put("Repair_Duration", Repair_Duration);
+                    datanum.put("PIC", PIC);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successful";
@@ -164,66 +165,66 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
         }
         return data;
     }
-    public String GetLine(){
+
+    public String GetLine() {
         String z = "";
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            if (connectionClass == null){
+            if (connectionClass == null) {
                 z = "Check Your Internet Connection";
-            }
-            else{
+            } else {
                 String query = "Select Line from stationdashboard group by Line";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 LineArray = new ArrayList();
                 StationArray = new ArrayList();
-                while(rs.next()){
+                while (rs.next()) {
                     LineArray.add(rs.getString("Line"));
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             z = "Check Your Internet Connection";
         }
         ArrayAdapter adapter = new ArrayAdapter(
-                getActivity(),R.layout.spinner_item,LineArray);
+                getActivity(), R.layout.spinner_item, LineArray);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         LineSpinner.setAdapter(adapter);
         return z;
     }
-    public String GetStation(){
+
+    public String GetStation() {
         String z = "";
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
-            if (connectionClass == null){
+            if (connectionClass == null) {
                 z = "Check Your Internet Connection";
-            }
-            else{
-                String query = "Select Station from stationdashboard where Line = '" + Line +"'";
+            } else {
+                String query = "Select Station from stationdashboard where Line = '" + Line + "'";
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 StationArray = new ArrayList();
-                while(rs.next()){
+                while (rs.next()) {
                     StationArray.add(rs.getString("Station"));
                 }
             }
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
             z = "Check Your Internet Connection";
         }
         ArrayAdapter adapter = new ArrayAdapter(
-                getActivity(),R.layout.spinner_item,StationArray);
+                getActivity(), R.layout.spinner_item, StationArray);
         adapter.setDropDownViewResource(R.layout.spinner_item);
         StationSpinner.setAdapter(adapter);
         return z;
     }
+
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent(getActivity(), DetailMachineReport.class);
-        Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
+        Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object No = mp.get("No");
         Number = No.toString();
         i.putExtra("No", Number);

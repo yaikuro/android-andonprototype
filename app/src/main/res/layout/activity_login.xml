@@ -7,8 +7,8 @@
     tools:context=".ui.Dashboard.LoginActivity">
 
     <LinearLayout
-        android:layout_width="match_parent"
         android:id="@+id/Linear"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_margin="20dp"
@@ -19,69 +19,70 @@
             android:id="@+id/Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:gravity="center"
             android:text="@string/factory_machine_monitoring_system"
             android:textColor="#DD009CAA"
             android:textSize="35sp"
             android:textStyle="bold"
-            android:layout_marginBottom="50dp"
             android:typeface="sans" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="ID"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
-            app:boxCornerRadiusTopStart="20dp"
-            android:layout_marginBottom="10dp"
-            android:hint="ID">
+            app:boxCornerRadiusTopStart="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtuserid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textShortMessage"
-                android:id="@+id/edtuserid"
-                />
+                android:inputType="textShortMessage" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Password"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
             app:boxCornerRadiusTopStart="20dp"
-            app:endIconMode="password_toggle"
-            android:hint="Password">
+            app:endIconMode="password_toggle">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edtpass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtpass"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnlogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            app:cornerRadius="20dp"
             android:background="@color/colorPrimaryDark"
             android:padding="10dp"
             android:text="@string/login_hint"
             android:textColor="#ffffff"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:cornerRadius="20dp" />
 
     </LinearLayout>
+
     <ProgressBar
         android:id="@+id/pbbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
         android:layout_below="@id/Linear"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:layout_gravity="center" />
 </RelativeLayout>

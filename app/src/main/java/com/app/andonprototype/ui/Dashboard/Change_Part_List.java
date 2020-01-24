@@ -26,13 +26,14 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Change_Part_List extends AppCompatActivity implements AdapterView.OnItemClickListener {
-//TODO: List of Parts to Change in each machine (From Notifications)
+    //TODO: List of Parts to Change in each machine (From Notifications)
     private String No, Name, currentDate;
     ListView ListMachineChangePart;
     SimpleAdapter ACP;
     Boolean isSuccess = false;
     Connection connect;
     String ConnectionResult = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,19 +46,20 @@ public class Change_Part_List extends AppCompatActivity implements AdapterView.O
             @Override
             public void onRefresh() {
                 finish();
-                Intent i = new Intent (Change_Part_List.this, Change_Part_List.class);
-                overridePendingTransition( 0, 0);
+                Intent i = new Intent(Change_Part_List.this, Change_Part_List.class);
+                overridePendingTransition(0, 0);
                 startActivity(i);
-                overridePendingTransition( 0, 0);
+                overridePendingTransition(0, 0);
                 pullToRefresh.setRefreshing(false);
             }
         });
     }
-    public void getAsset () {
+
+    public void getAsset() {
         List<Map<String, String>> MyPartList;
         MyPartList = getProblem();
-        String[] fromwhere = {"Line","Station","Machine_Name"};
-        int[] viewwhere = {R.id.Line,R.id.Station,R.id.MachineID};
+        String[] fromwhere = {"Line", "Station", "Machine_Name"};
+        int[] viewwhere = {R.id.Line, R.id.Station, R.id.MachineID};
         ACP = new SimpleAdapter(this, MyPartList, R.layout.machine_part_list, fromwhere, viewwhere);
         ListMachineChangePart.setAdapter(ACP);
     }
@@ -97,6 +99,7 @@ public class Change_Part_List extends AppCompatActivity implements AdapterView.O
         }
         return data;
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
@@ -105,8 +108,8 @@ public class Change_Part_List extends AppCompatActivity implements AdapterView.O
         String name = MachineName.toString();
         String format = "2";
         i.putExtra("Name", name);
-        i.putExtra("Format",format);
-        i.putExtra("Current_Date",currentDate);
+        i.putExtra("Format", format);
+        i.putExtra("Current_Date", currentDate);
         startActivity(i);
     }
 }
