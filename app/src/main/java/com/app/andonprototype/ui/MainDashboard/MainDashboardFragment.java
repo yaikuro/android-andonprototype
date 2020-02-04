@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -131,43 +133,58 @@ public class MainDashboardFragment extends Fragment {
         }
         get_list_done();
         get_list_all();
-        if (!list_all.isEmpty()) {
-            work = list_done.size();
-            all = list_all.size();
-            pStatus = (work * 100) / all;
-            Toast.makeText(getActivity(), Integer.toString(pStatus), Toast.LENGTH_SHORT).show();
-            progress_counter.setText(work + "/" + all);
 
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    while (pStart <= pStatus) {
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                progressBar.setProgress(pStart);
-                                txtProgress.setText(pStart + " %");
+        try {
+            if (!list_all.isEmpty()) {
+                work = list_done.size();
+                all = list_all.size();
+                pStatus = (work * 100) / all;
+                Toast.makeText(getActivity(), Integer.toString(pStatus), Toast.LENGTH_SHORT).show();
+                progress_counter.setText(work + "/" + all);
+
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (pStart <= pStatus) {
+                            handler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressBar.setProgress(pStart);
+                                    txtProgress.setText(pStart + " %");
+                                }
+                            });
+                            try {
+                                Thread.sleep(20);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
                             }
-                        });
-                        try {
-                            Thread.sleep(20);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        if (pStart < 100 && pStatus > 0) {
-                            pStart++;
-                        }
-                        if (pStart >= 100) {
-                            pStart = 100;
-                        }
+                            if (pStart < 100 && pStatus > 0) {
+                                pStart++;
+                            }
+                            if (pStart >= 100) {
+                                pStart = 100;
+                            }
 
+                        }
                     }
-                }
-            }).start();
+                }).start();
+            }
+        } catch (Exception e) {
+            errorBox("Error", e.getMessage());
         }
 
-
         return root;
+    }
+
+
+    private void errorBox(String method, String message) {
+        Log.d("EXCEPTION: " + method, message);
+
+        AlertDialog.Builder messageBox = new AlertDialog.Builder(getActivity());
+        messageBox.setTitle(method);
+        messageBox.setMessage(message);
+        messageBox.setCancelable(true);
+        messageBox.show();
     }
 
     private void getImage() {
