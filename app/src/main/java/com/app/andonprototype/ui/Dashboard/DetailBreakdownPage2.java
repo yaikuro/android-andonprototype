@@ -123,10 +123,21 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                pbbarDetail.setVisibility(View.VISIBLE);
-//                UploadtoDB();
-                UploadData uploadData = new UploadData();
-                uploadData.execute();
+                if (problem_desc_text.length()==0||solution_desc_text.length()==0){
+                    if (problem_desc_text.length()==0&&solution_desc_text.length()==0){
+                        Toast.makeText(DetailBreakdownPage2.this, "Problem and solution description cannot be empty", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (problem_desc_text.length()==0){
+                        Toast.makeText(DetailBreakdownPage2.this, "Problem description cannot be empty", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (solution_desc_text.length()==0) {
+                        Toast.makeText(DetailBreakdownPage2.this, "Solution description cannot be empty", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    UploadData uploadData = new UploadData();
+                    uploadData.execute();
+                }
             }
         });
     }
