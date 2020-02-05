@@ -65,8 +65,8 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     public void getAsset() {
         List<Map<String, String>> MyPartList = null;
         MyPartList = getProblem();
-        String[] fromwhere = {"Part", "Type", "Durability", "Date"};
-        int[] viewwhere = {R.id.Part, R.id.Type, R.id.Durability, R.id.Date};
+        String[] fromwhere = {"Part", "Type", "Durability", "Date", "Date_Register", "Quantity"};
+        int[] viewwhere = {R.id.Part, R.id.Type, R.id.Durability, R.id.Date, R.id.Date_Register, R.id.Quantity};
         AP = new SimpleAdapter(this, MyPartList, R.layout.part_list, fromwhere, viewwhere);
         ListAsset.setAdapter(AP);
     }
@@ -81,13 +81,13 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
             } else {
                 switch (Format) {
                     case "1": {
-                        Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, CONVERT(date, m.Due_Date) AS Due_Date " +
+                        Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, m.Quantity, CONVERT (date, m.Date_Start) AS Date_Register, CONVERT(date, m.Due_Date) AS Due_Date " +
                                 "from machinelist m,inventorypart i " +
                                 "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID";
                         break;
                     }
                     case "2": {
-                        Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, CONVERT(date, m.Due_Date) AS Due_Date " +
+                        Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, m.Quantity, CONVERT (date, m.Date_Start) AS Date_Register, CONVERT(date, m.Due_Date) AS Due_Date " +
                                 "from machinelist m,inventorypart i " +
                                 "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID " +
                                 "and DATEDIFF(second, '" + currentDate + "', m.Due_Date) < 300";
@@ -102,12 +102,16 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
                     String Type = rs.getString("Jenis_Part");
                     String Durability = rs.getString("Umur");
                     String Date = rs.getString("Due_Date");
+                    String Date_Register = rs.getString("Date_Register");
+                    String Quantity = rs.getString("Quantity");
                     Map<String, String> datanum = new HashMap<>();
                     datanum.put("No", No);
                     datanum.put("Part", Part);
                     datanum.put("Type", Type);
                     datanum.put("Durability", Durability);
                     datanum.put("Date", Date);
+                    datanum.put("Date_Register", Date_Register);
+                    datanum.put("Quantity", Quantity);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successfull";

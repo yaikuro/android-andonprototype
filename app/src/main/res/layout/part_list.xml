@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/Part"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp" />
@@ -22,7 +22,7 @@
         <TextView
             android:id="@+id/Type"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp" />
@@ -30,17 +30,33 @@
         <TextView
             android:id="@+id/Durability"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/Date"
+            android:id="@+id/Quantity"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/Date_Register"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/Date"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="18sp" />
     </LinearLayout>
 </FrameLayout>
