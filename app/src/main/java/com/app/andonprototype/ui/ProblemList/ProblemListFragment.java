@@ -100,7 +100,7 @@ public class ProblemListFragment extends Fragment implements ProblemListAdapter.
     }
 
     public void GetProblem () {
-        Boolean isSuccess = false;
+        boolean isSuccess = false;
         String ConnectionResult;
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -146,7 +146,7 @@ public class ProblemListFragment extends Fragment implements ProblemListAdapter.
                 i.putExtra("Line", Line);
                 i.putExtra("Station", Station);
                 i.putExtra("PIC", pic);
-                //admin akan dihapus di final app
+
                 if (pic.equals("admin")) {
                     startActivity(i);
                 } else {

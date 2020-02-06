@@ -28,8 +28,8 @@
             <ImageView
                 android:id="@+id/image_person"
                 android:layout_width="150dp"
-                android:layout_height="0dp"
-                android:layout_gravity="start"
+                android:layout_height="200dp"
+                android:layout_gravity="left"
                 android:layout_weight="1"
                 android:contentDescription="@string/profile_picture" />
 
@@ -102,8 +102,8 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_Progress"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_below="@id/cardView_MachineDashboard"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
@@ -122,7 +122,7 @@
 
             <RelativeLayout
                 android:layout_width="84dp"
-                android:layout_height="77dp"
+                android:layout_height="97dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardView_MachineDashboard"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,9 +130,8 @@
 
                 <RelativeLayout
                     android:id="@+id/relLayout_customProgressCircleBar"
-                    android:layout_width="64dp"
-                    android:layout_height="57dp"
-                    android:layout_centerHorizontal="true">
+                    android:layout_width="84dp"
+                    android:layout_height="77dp">
 
                     <ProgressBar
                         android:id="@+id/progressBar"
@@ -181,7 +180,7 @@
                 android:text="@string/today_s_progress"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_view_text_hp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -191,8 +190,8 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_ProblemList"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_below="@id/cardView_MachineDashboard"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
@@ -211,8 +210,8 @@
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="@dimen/card_view_image_width_hp"
-                android:layout_height="@dimen/card_view_image_height_hp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/machine_icon2" />
 
             <TextView
@@ -221,7 +220,7 @@
                 android:gravity="center"
                 android:text="@string/problem_waiting_list"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_view_text_hp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -231,8 +230,8 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_comingsoon1"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_below="@id/cardView_Progress"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
@@ -252,7 +251,7 @@
 
             <RelativeLayout
                 android:layout_width="84dp"
-                android:layout_height="77dp"
+                android:layout_height="97dp"
                 app:layout_constraintBottom_toTopOf="@+id/cardView_Progress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -260,9 +259,8 @@
 
                 <RelativeLayout
                     android:id="@+id/relLayout_customProgressCircleBar1"
-                    android:layout_width="64dp"
-                    android:layout_height="57dp"
-                    android:layout_centerHorizontal="true">
+                    android:layout_width="84dp"
+                    android:layout_height="77dp">
 
                     <ProgressBar
                         android:id="@+id/progressBar1"
@@ -311,7 +309,7 @@
                 android:text="@string/coming_soon"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_view_text_hp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
@@ -321,8 +319,8 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_comingsoon2"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_below="@id/cardView_ProblemList"
         android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
@@ -341,8 +339,8 @@
             android:padding="16dp">
 
             <ImageView
-                android:layout_width="@dimen/card_view_image_width_hp"
-                android:layout_height="@dimen/card_view_image_height_hp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/machine_icon3" />
 
             <TextView
@@ -352,7 +350,7 @@
                 android:text="@string/coming_soon"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/card_view_text_hp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
         </LinearLayout>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:layout_margin="5dp"
     android:fillViewport="true">
 
 
@@ -15,67 +16,59 @@
         android:layout_marginRight="5dp"
         android:layout_marginBottom="10dp">
 
-        <ListView
-            android:id="@+id/listview2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@id/machine_name"
-            android:layout_centerHorizontal="true"
-            android:layout_marginStart="20dp" />
 
-
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/machine_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:gravity="start"
-            android:text="Machine ID : "
+            android:text="@string/machine_id_double_dot"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/machine_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/machine_name"
             android:layout_marginBottom="10dp"
             android:gravity="start"
-            android:hint="ID"
+            android:hint="@string/id"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date_start"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/machine_id"
             android:layout_marginBottom="5dp"
             android:gravity="start"
-            android:text="Date Start : "
+            android:text="@string/date_start_double_dot"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/date_start_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/date_start"
             android:layout_marginBottom="10dp"
             android:gravity="start"
-            android:hint="datestart"
+            android:hint="@string/date_start"
             android:textSize="20sp" />
 
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/duration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/date_start_text"
             android:layout_marginBottom="5dp"
             android:gravity="start"
-            android:text="Duration : "
+            android:text="@string/duration_double_dot"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -87,26 +80,26 @@
             android:layout_below="@+id/duration"
             android:textSize="20sp" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/pic_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/chronometer"
             android:layout_marginBottom="5dp"
             android:gravity="start"
-            android:text="PIC : "
+            android:text="@string/pic_double_dot"
             android:textColor="#000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/pic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/pic_text"
             android:layout_marginBottom="10dp"
             android:gravity="start"
-            android:hint="PIC"
+            android:hint="@string/pic"
             android:textSize="20sp" />
 
         <ImageView
@@ -117,7 +110,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/camera_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,83 +119,84 @@
             android:layout_marginBottom="10dp"
             android:background="#Fd7d5d"
             android:padding="10dp"
-            android:text="Take Problem Picture"
+            android:text="@string/take_problem_picture"
             android:textColor="#ffffff"
             android:textSize="20sp"
+            app:cornerRadius="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/problem_desc"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/problem_desc_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/camera_button"
-            android:layout_marginTop="10dp"
-            android:background="#000000"
-            android:padding="10dp"
-            android:text="Problem Description : "
-            android:textColor="#ffffff"
-            android:textColorHint="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/problem_desc_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/problem_desc"
+            android:layout_below="@id/camera_button"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:hint="@string/problem_description"
+            android:textColorHint="@color/black"
+            app:hintAnimationEnabled="true"
             android:background="#FFFFFF"
-            android:hint="Insert description here..."
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/problem_desc_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:inputType="textShortMessage" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/solution_pic"
             android:layout_width="match_parent"
             android:layout_height="200sp"
-            android:layout_below="@+id/problem_desc_text"
+            android:layout_below="@+id/problem_desc_text_view"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/camera_button_solution"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/solution_pic"
             android:background="#Fd7d5d"
             android:padding="10dp"
-            android:text="Take Solution Picture"
+            android:text="@string/take_solution_picture"
             android:textColor="#ffffff"
             android:textSize="20sp"
+            app:cornerRadius="15dp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/solution_desc"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/solution_desc_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/camera_button_solution"
             android:layout_marginTop="10dp"
-            android:background="#000000"
-            android:padding="10dp"
-            android:text="Solution Description : "
-            android:textColor="#ffffff"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/solution_desc_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/solution_desc"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/solution_description"
+            android:textColorHint="@color/black"
+            app:hintAnimationEnabled="true"
             android:background="#FFFFFF"
-            android:hint="Insert description here..."
-            android:padding="10dp"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/solution_desc_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:inputType="textShortMessage" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -215,7 +209,6 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="175dp"
             android:layout_marginBottom="90dp" />
-        android:background="@drawable/ic_camera"
 
         <FrameLayout
             android:layout_width="wrap_content"
@@ -228,9 +221,9 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="175dp"
             android:layout_marginBottom="90dp" />
-        android:background="@drawable/ic_camera"
 
-        <Button
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSave"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -239,26 +232,26 @@
             android:layout_marginBottom="20dp"
             android:background="#10109F"
             android:padding="10dp"
-            android:text="Save"
+            android:text="@string/save"
             android:textColor="#ffffff"
             android:textSize="20sp"
+            app:cornerRadius="15dp"
             android:textStyle="bold" />
 
         <ProgressBar
             android:id="@+id/pbbarDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/solution_desc_text"
+            android:layout_below="@id/solution_desc_text_view"
             android:layout_centerHorizontal="true" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/txtmsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/btnSave"
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
-            android:layout_weight="1.5"
             android:gravity="center"
             android:padding="10dp"
             android:text=""

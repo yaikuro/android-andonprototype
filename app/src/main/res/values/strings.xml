@@ -75,7 +75,7 @@
     <string name="drawer_item_option3">Option 3</string>
     <string name="action_logout">action_logout</string>
     <string name="title_machinereport">Machine Report</string>
-    <string name="pic">PIC :</string>
+    <string name="pic_double_dot">PIC :</string>
     <string name="asset_management">Asset Management</string>
     <string name="_00">0/0</string>
     <string name="machine_dashboard">Machine Dashboard</string>
@@ -90,4 +90,16 @@
     <string name="today_s_progress">Today\'s Progress</string>
     <string name="n_a">N/A</string>
     <string name="menu">Menu</string>
+    <string name="machine_problem_detected">Machine Problem Detected</string>
+    <string name="take_problem_picture">Take Problem Picture</string>
+    <string name="problem_description">Problem Description</string>
+    <string name="solution_description">Solution Description</string>
+    <string name="take_solution_picture">Take Solution Picture</string>
+    <string name="pic">PIC</string>
+    <string name="duration_double_dot">Duration :</string>
+    <string name="date_start">Date Start</string>
+    <string name="date_start_double_dot">Date Start :</string>
+    <string name="id">ID</string>
+    <string name="machine_id_double_dot">Machine ID :</string>
+    <string name="save">Save</string>
 </resources>
