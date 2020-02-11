@@ -5,7 +5,21 @@
     android:id="@+id/background_red"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     tools:context=".SwipeProblem">
+
+
+    <ImageView
+        android:id="@+id/warning_sign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foregroundGravity="center"
+        android:src="@drawable/warning_sign"
+        app:layout_constraintBottom_toTopOf="@id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/warning_sign" />
 
     <TextView
         android:id="@+id/textView2"
@@ -14,26 +28,13 @@
         android:gravity="center"
         android:text="@string/machine_problem_detected"
         android:textColor="#000000"
-        android:textSize="50dp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/swipe_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.697" />
+        app:layout_constraintTop_toBottomOf="@id/warning_sign" />
 
-    <ImageView
-        android:id="@+id/warning_sign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:foregroundGravity="center"
-        android:src="@drawable/warning_sign"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <com.ebanx.swipebtn.SwipeButton
         android:id="@+id/swipe_btn"
@@ -58,7 +59,7 @@
         app:inner_text_size="16sp"
         app:inner_text_top_padding="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textView2"
         app:layout_constraintVertical_bias="0.885"
         tools:layout_editor_absoluteX="36dp" />
 

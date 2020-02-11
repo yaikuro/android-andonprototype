@@ -39,6 +39,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;
+import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 
 public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener, pop_dialog.ExampleDialogListener {
@@ -74,7 +75,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
         validate = false;
         imageView = findViewById(R.id.image);
         getProblem();
-        pic = getID(this);
+        pic = getNama(this);
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

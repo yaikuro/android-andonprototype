@@ -42,6 +42,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;
+import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 
 
 public class MainDashboardFragment extends Fragment {
@@ -74,8 +75,8 @@ public class MainDashboardFragment extends Fragment {
                 ViewModelProviders.of(this).get(MainViewModel.class);
         View root = inflater.inflate(R.layout.fragment_maindashboard, container, false);
 
+        pic = getNama(getActivity());
         TextView welcomeText = root.findViewById(R.id.welcomeText);
-        pic = getID(getActivity());
         welcomeText.setText("Welcome " + pic);
         txtProgress = root.findViewById(R.id.txtProgress);
         progressBar = root.findViewById(R.id.progressBar);
@@ -131,6 +132,7 @@ public class MainDashboardFragment extends Fragment {
         if (isSuccess) {
             setPicture();
         }
+
         get_list_done();
         get_list_all();
 

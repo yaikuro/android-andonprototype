@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="50dp"
             android:gravity="center"
-            android:text="@string/factory_machine_monitoring_system"
+            android:text="@string/andon_factory_monitoring_system"
             android:textColor="#DD009CAA"
             android:textSize="35sp"
             android:textStyle="bold"

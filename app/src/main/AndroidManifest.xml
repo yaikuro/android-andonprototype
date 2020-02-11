@@ -21,7 +21,7 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
         tools:targetApi="donut">
-        <activity android:name=".Success_Page"></activity>
+        <activity android:name=".Success_Page"/>
         <activity android:name=".ui.Dashboard.Change_Part_List" />
         <activity android:name=".ui.pop_dialog" />
         <activity android:name=".SwipeProblem" />

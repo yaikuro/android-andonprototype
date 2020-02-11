@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_blue_grey_100">
@@ -16,7 +17,9 @@
         android:clickable="true"
         android:minHeight="50dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,7 +31,7 @@
             <ImageView
                 android:id="@+id/image_person"
                 android:layout_width="150dp"
-                android:layout_height="0dp"
+                android:layout_height="170dp"
                 android:layout_gravity="start"
                 android:layout_weight="1"
                 android:contentDescription="@string/profile_picture" />
@@ -47,13 +50,13 @@
                 android:id="@+id/welcomeText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="90dp"
                 android:layout_weight="1"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@id/image_person"
                 app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
@@ -64,14 +67,15 @@
         style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cardView1"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:clickable="true"
         android:minHeight="50dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -82,7 +86,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="65dp"
                 android:contentDescription="@string/machine_dashboard"
                 android:src="@drawable/machine_icon1" />
 
@@ -102,16 +106,17 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_Progress"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
-        android:layout_below="@id/cardView_MachineDashboard"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:clickable="true"
         android:minHeight="50dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView_MachineDashboard">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -191,17 +196,17 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_ProblemList"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
-        android:layout_below="@id/cardView_MachineDashboard"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:clickable="true"
         android:minHeight="50dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView_MachineDashboard">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -231,17 +236,17 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_comingsoon1"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
-        android:layout_below="@id/cardView_Progress"
-        android:layout_alignParentStart="true"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:clickable="true"
         android:minHeight="50dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView_Progress">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -321,17 +326,17 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView_comingsoon2"
         style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="@dimen/card_view_width_hp"
-        android:layout_height="@dimen/card_view_height_hp"
-        android:layout_below="@id/cardView_ProblemList"
-        android:layout_alignParentEnd="true"
+        android:layout_width="@dimen/card_view_width"
+        android:layout_height="@dimen/card_view_height"
         android:layout_marginLeft="@dimen/mtrl_card_spacing"
         android:layout_marginTop="@dimen/mtrl_card_spacing"
         android:layout_marginRight="@dimen/mtrl_card_spacing"
         android:clickable="true"
         android:minHeight="50dp"
         app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+        app:cardElevation="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView_ProblemList">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -359,4 +364,4 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -123,22 +123,18 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (problem_desc_text.length()==0||solution_desc_text.length()==0){
-                    if (problem_desc_text.length()==0&&solution_desc_text.length()==0){
-                        Toast.makeText(DetailBreakdownPage2.this, "Problem and solution description cannot be empty", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (problem_desc_text.length()==0){
-                        Toast.makeText(DetailBreakdownPage2.this, "Problem description cannot be empty", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (solution_desc_text.length()==0) {
-                        Toast.makeText(DetailBreakdownPage2.this, "Solution description cannot be empty", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                else{
+                if (problem_desc_text.length() == 0 && solution_desc_text.length() == 0) {
+                    Toast.makeText(DetailBreakdownPage2.this, "Problem and solution description cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (problem_desc_text.length() == 0) {
+                    Toast.makeText(DetailBreakdownPage2.this, "Problem description cannot be empty", Toast.LENGTH_SHORT).show();
+                } else if (solution_desc_text.length() == 0) {
+                    Toast.makeText(DetailBreakdownPage2.this, "Solution description cannot be empty", Toast.LENGTH_SHORT).show();
+                } else {
                     UploadData uploadData = new UploadData();
                     uploadData.execute();
                 }
             }
+
         });
     }
 
@@ -148,8 +144,8 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         pbbarDetail.setVisibility(View.GONE);
     }
 
-    public void Loadsuccespage() {
-        Intent i = new Intent(DetailBreakdownPage2.this, Success_Page.class);
+    private void Loadsuccesspage() {
+        Intent i = new Intent(this, Success_Page.class);
         startActivity(i);
         finish();
     }
@@ -160,8 +156,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             pbbarDetail.setVisibility(View.VISIBLE);
             //do initialization of required objects objects here
         }
-
-        ;
 
         @Override
         protected Void doInBackground(Void... params) {
@@ -174,8 +168,6 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             super.onPostExecute(result);
             pbbarDetail.setVisibility(View.GONE);
         }
-
-        ;
     }
 
     public void UploadtoDB() {
@@ -198,7 +190,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
             preStmt.execute();
             msg = "Inserted Successfully";
             updatePICstatus4();
-            Loadsuccespage();
+            Loadsuccesspage();
         } catch (IOError | Exception ex) {
             msg = ex.getMessage();
             Log.d("hitesh", msg);

@@ -21,6 +21,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.getUserName;
+import static com.app.andonprototype.Background.SaveSharedPreference.setID;
+import static com.app.andonprototype.Background.SaveSharedPreference.setNama;
 import static com.app.andonprototype.Background.SaveSharedPreference.setUserName;
 
 public class LoginActivity extends AppCompatActivity {
@@ -52,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DoLogin doLogin = new DoLogin();
                 doLogin.execute("");
-                setUserName(LoginActivity.this, etuserid.getText().toString());
+                setID(LoginActivity.this, etuserid.getText().toString());
             }
         });
 
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     DoLogin doLogin = new DoLogin();
                     doLogin.execute("");
-                    setUserName(LoginActivity.this, etuserid.getText().toString());
+                    setID(LoginActivity.this, etuserid.getText().toString());
                     return true;
                 }
                 return false;
@@ -114,8 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                         if (rs.next()) {
                             z = "Login successfull";
                             isSuccess = true;
-                            ID = rs.getString("Nama");
-                            PIC = rs.getString("npk");
+                            ID = rs.getString("npk");
+                            PIC = rs.getString("Nama");
                         } else {
                             z = "Invalid Credentials";
                             isSuccess = false;
@@ -132,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loadDashboard() {
         Intent i = new Intent(getApplicationContext(), MainDashboard.class);
-        SaveSharedPreference.setID(LoginActivity.this, ID);
+        setNama(LoginActivity.this, PIC);
         startActivity(i);
         finish();
     }

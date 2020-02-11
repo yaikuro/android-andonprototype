@@ -59,7 +59,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
         success = false;
         pbbar = findViewById(R.id.pbbar);
         pbbar.setVisibility(View.GONE);
-        PIC = SaveSharedPreference.getID(this);
+        PIC = SaveSharedPreference.getNama(this);
         refresh = findViewById(R.id.refresh);
         ListView = findViewById(R.id.ListView);
         ListView2 = findViewById(R.id.ListView2);

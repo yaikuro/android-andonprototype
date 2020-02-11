@@ -80,7 +80,7 @@ public class ProblemListFragment extends Fragment implements ProblemListAdapter.
         recyclerView.setLayoutManager(layoutManager);
         imageView = root.findViewById(R.id.image);
         getProblem();
-        pic = SaveSharedPreference.getID(getActivity());
+        pic = SaveSharedPreference.getNama(getActivity());
         final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

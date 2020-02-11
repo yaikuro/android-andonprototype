@@ -5,11 +5,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -51,6 +53,7 @@ import java.util.Map;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.clearUserName;
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;
+import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 
 public class MainDashboard extends AppCompatActivity implements pop_dialog.ExampleDialogListener {
     private static final String TAG = "MainDashboard";
@@ -59,7 +62,8 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
     public static boolean running = false;
     public static boolean validate = false;
     boolean doubleBackToExitPressedOnce = false;
-    public String currentDate, MachineID, Status, MachineName, Station, send, hasil, pic;
+    private static final int ZBAR_CAMERA_PERMISSION = 1;
+    public String currentDate, MachineID, Status, MachineName, Station, send, hasil, pic, ID;
     String notifikasi = "Welcome ";
     Connection connect;
     String ConnectionResult = "";
@@ -76,10 +80,17 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
             validate = true;
         }
         createNotificationChannels();
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
+        }
+
 
         notificationManager = NotificationManagerCompat.from(this);
         TextView txtnotif = findViewById(R.id.txtnotif);
-        pic = getID(this);
+        ID = getID(this); // Npk
+        pic = getNama(this); // Nama
         send = notifikasi + pic;
         txtnotif.setText(send);
         hasil = txtnotif.getText().toString();
