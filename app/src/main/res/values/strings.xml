@@ -107,4 +107,6 @@
     <string name="take_profile_picture">Take Profile Picture</string>
     <string name="confirm">Confirm</string>
     <string name="warning_sign">Warning Sign</string>
+    <string name="line_doubledot">Line :</string>
+    <string name="station_doubledot">Station :</string>
 </resources>

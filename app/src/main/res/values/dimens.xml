@@ -17,4 +17,6 @@
     <dimen name="card_view_image_width_hp">60dp</dimen>
     <dimen name="card_view_image_height_hp">60dp</dimen>
     <dimen name="card_view_text_hp">15sp</dimen>
+
+    <dimen name="material_card_spacing">8dp</dimen>
 </resources>

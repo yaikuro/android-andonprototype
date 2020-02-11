@@ -27,17 +27,32 @@
         android:orientation="vertical"
         tools:context=".ReportActivityFragment">
 
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.MaterialComponents.CardView"
+            android:id="@+id/spinnerCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/material_card_spacing"
+            android:layout_marginTop="@dimen/material_card_spacing"
+            android:layout_marginEnd="@dimen/material_card_spacing"
+            android:minHeight="10dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="6dp"
+            android:background="?selectableItemBackground">
+
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true" />
 
+        </com.google.android.material.card.MaterialCardView>
+
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/pullToRefresh"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_below="@id/spinner"
+            android:layout_below="@id/spinnerCardView"
             android:layout_marginTop="10dp"
             android:background="@android:color/transparent">
 

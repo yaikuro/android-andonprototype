@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.MaterialComponents.CardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/mtrl_card_spacing"
-        android:layout_marginTop="@dimen/mtrl_card_spacing"
-        android:layout_marginRight="@dimen/mtrl_card_spacing"
-        android:minHeight="50dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="6dp">
+    android:layout_marginStart="@dimen/material_card_spacing"
+    android:layout_marginTop="@dimen/material_card_spacing"
+    android:layout_marginEnd="@dimen/material_card_spacing"
+    android:minHeight="50dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="6dp"
+    android:background="?selectableItemBackground">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -36,7 +32,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@id/image"
-                android:text="Line : "
+                android:text="@string/line_doubledot"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -58,7 +54,7 @@
                 android:layout_below="@id/Line1"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/image"
-                android:text="Station : "
+                android:text="@string/station_doubledot"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -69,11 +65,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/Line1"
                 android:layout_toEndOf="@+id/Station1"
-                android:layout_toRightOf="@id/image"
                 android:textColor="@color/black"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                tools:ignore="RtlHardcoded" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/Person"
@@ -93,7 +87,4 @@
                 android:src="@drawable/ic_more_vert_black_24dp" />
         </RelativeLayout>
 
-
     </com.google.android.material.card.MaterialCardView>
-
-</LinearLayout>

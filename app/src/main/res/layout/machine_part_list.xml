@@ -50,6 +50,7 @@
                     android:layout_marginBottom="5dp"
                     android:text="@string/machine_id"
                     android:textColor="@color/black"
+                    android:textStyle="bold"
                     android:textSize="20sp" />
             </RelativeLayout>
 
