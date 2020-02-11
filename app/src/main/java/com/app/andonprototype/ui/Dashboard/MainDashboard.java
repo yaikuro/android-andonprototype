@@ -31,6 +31,7 @@ import com.app.andonprototype.R;
 import com.app.andonprototype.SwipeProblem;
 import com.app.andonprototype.drawer_ui.Help;
 import com.app.andonprototype.drawer_ui.Settings;
+import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
 import com.app.andonprototype.ui.pop_dialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mikepenz.materialdrawer.Drawer;
@@ -39,17 +40,13 @@ import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
-import com.ncapdevi.fragnav.FragNavController;
-import com.roughike.bottombar.BottomBar;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.clearUserName;
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;

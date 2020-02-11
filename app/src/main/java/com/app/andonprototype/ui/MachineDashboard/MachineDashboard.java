@@ -1,19 +1,17 @@
-package com.app.andonprototype.ui.Dashboard;
+package com.app.andonprototype.ui.MachineDashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.Manifest;
-import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -27,6 +25,7 @@ import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.Background.SaveSharedPreference;
 import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
+import com.app.andonprototype.ui.Dashboard.MainDashboard;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -43,6 +42,7 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     ListView ListView, ListView2, ListView3, ListView4, ListView5, ListView6, ListView7, ListView8, ListView9, ListView10, ListView11;
     SimpleAdapter AD1, AD2, AD3, AD4, AD5, AD6, AD7, AD8, AD9, AD10, AD11;
     ImageView imageView;
+    Connection connect;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
     ProgressBar pbbar;
     public Boolean isSuccess, success;
@@ -50,11 +50,16 @@ public class MachineDashboard extends AppCompatActivity implements ListView.OnIt
     Button refresh;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
 
+    RecyclerView recyclerView;
+    private ArrayList<MachineListItems> itemsArrayList;
+    private MachineDashboardAdapter machineDashboardAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard);
+
         isSuccess = false;
         success = false;
         pbbar = findViewById(R.id.pbbar);

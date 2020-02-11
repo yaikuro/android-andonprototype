@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -18,14 +17,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.app.andonprototype.Background.ConnectionClass;
-import com.app.andonprototype.Success_Page;
 import com.app.andonprototype.R;
-import com.app.andonprototype.ui.Dashboard.MachineDashboard;
+import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
 import com.app.andonprototype.ui.ProblemList.ProblemWaitingList;
 import com.google.android.material.card.MaterialCardView;
 
@@ -36,12 +33,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 
 
@@ -129,7 +122,7 @@ public class MainDashboardFragment extends Fragment {
 
 
         getImage();
-        if (isSuccess) {
+        if (isSuccess = true) {
             setPicture();
         }
 
@@ -201,7 +194,9 @@ public class MainDashboardFragment extends Fragment {
                 ResultSet rs = stmt.executeQuery(query);
                 if (rs.next()) {
                     image = rs.getString("Image");
-                    isSuccess = !image.isEmpty();
+                    if(!image.isEmpty()){
+                        isSuccess = true;
+                    }
                 }
                 ConnectionResult = "Successful";
                 connect.close();

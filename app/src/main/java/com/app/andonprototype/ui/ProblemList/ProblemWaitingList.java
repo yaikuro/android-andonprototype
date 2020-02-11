@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -21,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
-import com.app.andonprototype.ui.Dashboard.MachineDashboard;
+import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
 import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
 import com.app.andonprototype.drawer_ui.Settings;
@@ -33,12 +32,8 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 

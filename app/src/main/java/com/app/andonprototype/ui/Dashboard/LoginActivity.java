@@ -20,6 +20,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import static com.app.andonprototype.Background.SaveSharedPreference.getID;
+import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 import static com.app.andonprototype.Background.SaveSharedPreference.getUserName;
 import static com.app.andonprototype.Background.SaveSharedPreference.setID;
 import static com.app.andonprototype.Background.SaveSharedPreference.setNama;
@@ -39,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         saveSharedPreference = new SaveSharedPreference();
         setContentView(R.layout.activity_login);
-        if (getUserName(this).length() != 0) {
+        if (!getNama(this).isEmpty()) {
             loadDashboard2();
         }
         connectionClass = new ConnectionClass();
@@ -118,6 +120,7 @@ public class LoginActivity extends AppCompatActivity {
                             isSuccess = true;
                             ID = rs.getString("npk");
                             PIC = rs.getString("Nama");
+                            setNama(LoginActivity.this,PIC);
                         } else {
                             z = "Invalid Credentials";
                             isSuccess = false;

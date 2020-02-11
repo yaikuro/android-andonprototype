@@ -42,7 +42,7 @@
             android:label="@string/main_dashboard"
             android:screenOrientation="userPortrait"/>
         <activity
-            android:name=".ui.Dashboard.MachineDashboard"
+            android:name=".ui.MachineDashboard.MachineDashboard"
             android:label="@string/machine_dashboard_title"
             android:screenOrientation="userLandscape" />
         <activity
