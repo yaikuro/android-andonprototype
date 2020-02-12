@@ -27,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.Success_Page;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOError;
@@ -53,7 +54,8 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     ImageView click_image_id, click_image_id2;
     String encodedImageProblem, encodedImageSolution;
     TextView txtmsg, machine_id, date_start_text, date_finish_text, pic;
-    Button btnSave, camera_open_id, camera_open_id2;
+    Button  camera_open_id, camera_open_id2;
+    FloatingActionButton btnSave;
     EditText problem_desc_text, solution_desc_text;
     public ContentValues values;
     public Uri imageUri;
