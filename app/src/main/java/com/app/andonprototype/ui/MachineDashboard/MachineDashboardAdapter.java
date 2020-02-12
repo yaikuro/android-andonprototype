@@ -16,7 +16,7 @@ import java.util.List;
 public class MachineDashboardAdapter extends RecyclerView.Adapter<MachineDashboardAdapter.ViewHolder>{
     private List<MachineListItems> values;
     public Context context;
-    private OnPressListener onPressListener;
+    private OnPushListener onPushListener;
     int[] listviewImage = new int[]
             {
                     R.drawable.color_green,
@@ -26,51 +26,49 @@ public class MachineDashboardAdapter extends RecyclerView.Adapter<MachineDashboa
             };
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView Line, Station;
+        public TextView Station;
         public View layout;
         public ImageView Status;
-        OnPressListener onPressListener;
+        OnPushListener onPushListener;
 
-        public ViewHolder(View v, OnPressListener onPressListener) {
+        public ViewHolder(View v, OnPushListener onPushListener) {
             super(v);
             layout = v;
-            Line = v.findViewById(R.id.Line);
             Station = v.findViewById(R.id.Station);
             Status = v.findViewById(R.id.image);
-            this.onPressListener = onPressListener;
+            this.onPushListener = onPushListener;
             v.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            onPressListener.onPressClick(getAdapterPosition());
+            onPushListener.onPushClick(getAdapterPosition());
         }
     }
-    public MachineDashboardAdapter(List<MachineListItems> machineListItems, OnPressListener onPressListener, Context context){
+    public MachineDashboardAdapter(List<MachineListItems> machineListItems, OnPushListener onPushListener, Context context){
         values = machineListItems;
         this.context = context;
-        this.onPressListener = onPressListener;
+        this.onPushListener = onPushListener;
     }
     @Override
     public MachineDashboardAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.stationlistitem,parent,false);
-        ViewHolder vh = new ViewHolder(v,onPressListener);
+        ViewHolder vh = new ViewHolder(v,onPushListener);
         return vh;
     }
     @Override
     public void onBindViewHolder (ViewHolder holder,final int position) {
         final MachineListItems machineListItems = values.get(position);
-        holder.Line.setText(machineListItems.getLine());
         holder.Station.setText(machineListItems.getStation());
-        holder.Status.setImageResource(listviewImage[machineListItems.Status]);
+        holder.Status.setImageResource(listviewImage[machineListItems.getStatus()]);
     }
     @Override
     public int getItemCount(){
         return values.size();
     }
-    public interface OnPressListener{
-        void onPressClick(int position);
+    public interface OnPushListener{
+        void onPushClick(int position);
     }
 }
 

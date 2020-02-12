@@ -40,7 +40,6 @@ import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener, pop_dialog.ExampleDialogListener {
     public String pic, Line, Station, MachineID, Person;
     public int Status;
-    private ListView ListProblem;
     int itemcount;
     Connection connect;
     private SimpleAdapter AP;

@@ -46,6 +46,10 @@
             android:label="@string/machine_dashboard_title"
             android:screenOrientation="userLandscape" />
         <activity
+            android:name=".ui.MachineDashboard.MachineDashboard2"
+            android:label="@string/machine_dashboard_title"
+            android:screenOrientation="userLandscape" />
+        <activity
             android:name=".ui.ProblemList.ProblemWaitingList"
             android:label="Problem List" />
         <activity

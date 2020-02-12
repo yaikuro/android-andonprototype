@@ -23,6 +23,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
+import com.app.andonprototype.ui.MachineDashboard.MachineDashboard2;
 import com.app.andonprototype.ui.ProblemList.ProblemWaitingList;
 import com.google.android.material.card.MaterialCardView;
 
@@ -82,7 +83,7 @@ public class MainDashboardFragment extends Fragment {
         cardView_MachineDasboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), MachineDashboard.class);
+                Intent i = new Intent(getActivity(), MachineDashboard2.class);
                 startActivity(i);
             }
         });
