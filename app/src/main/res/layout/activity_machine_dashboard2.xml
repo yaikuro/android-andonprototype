@@ -1,5 +1,7 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -9,400 +11,325 @@
         android:id="@+id/refresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="20dp"
-        android:text="@string/refresh" />
+        android:layout_marginEnd="16dp"
+        android:text="@string/refresh"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ProgressBar
         android:id="@+id/pbbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/Machine_Dashboard_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="30dp"
-        android:text="Machine Dashboard MCB-VRLA"
+        android:text="@string/machine_dashboard_mcb_vrla"
         android:textColor="@color/black"
         android:textSize="35sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/refresh"
+        app:layout_constraintHorizontal_bias="0.752"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
-    <RelativeLayout
-        android:id="@+id/Legend"
-        android:layout_width="match_parent"
+
+    <ImageView
+        android:id="@+id/green_symbol"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/running"
+        android:src="@drawable/color_green"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/runninginfo"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <TextView
+        android:id="@+id/runninginfo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/Machine_Dashboard_Title"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="30dp">
+        android:layout_marginEnd="92dp"
+        android:text="@string/doubledot_running"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/red_symbol"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.036" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
+    <ImageView
+        android:id="@+id/red_symbol"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/breakdown"
+        android:src="@drawable/color_red"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@id/breakdowninfo"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.292" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+    <TextView
+        android:id="@+id/breakdowninfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:text="@string/doubledot_breakdown"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/yello_symbol"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125" />
 
-                <ImageView
-                    android:id="@+id/green_symbol"
-                    android:layout_width="50sp"
-                    android:layout_height="50sp"
-                    android:src="@drawable/color_green" />
+    <ImageView
+        android:id="@+id/yello_symbol"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/repair_on_progress"
+        android:src="@drawable/color_yellow"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@id/repairOnProgress"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.303" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/green_symbol"
-                    android:text=": Running"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+    <TextView
+        android:id="@+id/repairOnProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="100dp"
+        android:text="@string/doubledot_repair_on_progress"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/blue_symbol"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.303" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+    <ImageView
+        android:id="@+id/blue_symbol"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="4dp"
+        android:contentDescription="@string/finish_repair"
+        android:src="@drawable/color_blue"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/finishRepairing"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.312" />
 
-                <ImageView
-                    android:id="@+id/red_symbol"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/color_red" />
+    <TextView
+        android:id="@+id/finishRepairing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/doubledot_finish_repair"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/pullToRefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="0.303" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/red_symbol"
-                    android:text=": Breakdown"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+    <TextView
+        android:id="@+id/line1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/line_1"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line2"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/runninginfo"
+        app:layout_constraintVertical_bias="1.0" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+    <TextView
+        android:id="@+id/line2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line3"
+        app:layout_constraintStart_toEndOf="@id/line1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-                <ImageView
-                    android:id="@+id/yello_symbol"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/color_yellow" />
+    <TextView
+        android:id="@+id/line3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_3"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line4"
+        app:layout_constraintStart_toEndOf="@id/line2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/yello_symbol"
-                    android:text=": Repair on Progress"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </RelativeLayout>
+    <TextView
+        android:id="@+id/line4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_4"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line5"
+        app:layout_constraintStart_toEndOf="@id/line3"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="1.0" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+    <TextView
+        android:id="@+id/line5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_5"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line6"
+        app:layout_constraintStart_toEndOf="@id/line4"
+        app:layout_constraintTop_toBottomOf="@+id/repairOnProgress"
+        app:layout_constraintVertical_bias="1.0" />
 
-                <ImageView
-                    android:id="@+id/blue_symbol"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/color_blue" />
+    <TextView
+        android:id="@+id/line6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_6"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line7"
+        app:layout_constraintStart_toEndOf="@id/line5"
+        app:layout_constraintTop_toBottomOf="@+id/repairOnProgress"
+        app:layout_constraintVertical_bias="1.0" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:layout_toEndOf="@id/blue_symbol"
-                    android:text=": Finish Repair"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-            </RelativeLayout>
-        </LinearLayout>
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/line7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_7"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line8"
+        app:layout_constraintStart_toEndOf="@id/line6"
+        app:layout_constraintTop_toBottomOf="@+id/finishRepairing"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+    <TextView
+        android:id="@+id/line8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_8"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line9"
+        app:layout_constraintStart_toEndOf="@id/line7"
+        app:layout_constraintTop_toBottomOf="@+id/refresh"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/line9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_9"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line10"
+        app:layout_constraintStart_toEndOf="@id/line8"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/line10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/line_10"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toStartOf="@+id/line11"
+        app:layout_constraintStart_toEndOf="@id/line9"
+        app:layout_constraintTop_toBottomOf="@+id/finishRepairing"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/line11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/line_11"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pullToRefresh"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.364"
+        app:layout_constraintStart_toEndOf="@id/line10"
+        app:layout_constraintTop_toBottomOf="@+id/refresh"
+        app:layout_constraintVertical_bias="1.0" />
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/Legend"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp">
+        android:layout_width="990dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/margintop">
 
-        <LinearLayout
-            android:id="@+id/List"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView11"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:choiceMode="multipleChoice" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line10_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Line 10"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line10_Title"
-                    android:id="@+id/recyclerView10"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line9_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 9"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line9_Title"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="0dp"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical" />
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line8_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 8"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line8_Title"
-                    android:id="@+id/recyclerView8"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line7_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 7"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line7_Title"
-                    android:id="@+id/recyclerView7"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line6_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 6"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line6_Title"
-                    android:id="@+id/recyclerView6"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line5_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 5"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line5_Title"
-                    android:id="@+id/recyclerView5"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line4_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 4"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line4_Title"
-                    android:id="@+id/recyclerView4"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line11_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 11"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line11_Title"
-                    android:id="@+id/recyclerView11"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line3_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 3"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line3_Title"
-                    android:id="@+id/recyclerView3"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line2_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 2"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line2_Title"
-                    android:id="@+id/recyclerView2"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/Line1_Title"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Line 1"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/Line1_Title"
-                    android:id="@+id/recyclerView1"
-                    android:choiceMode="multipleChoice"
-                    android:scrollbars="vertical"/>
-            </RelativeLayout>
-        </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/margintop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Machine_Dashboard_Title" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,7 +21,7 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
         tools:targetApi="donut">
-        <activity android:name=".Success_Page"/>
+        <activity android:name=".Success_Page" />
         <activity android:name=".ui.Dashboard.Change_Part_List" />
         <activity android:name=".ui.pop_dialog" />
         <activity android:name=".SwipeProblem" />
@@ -36,11 +36,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.Dashboard.MainDashboard"
             android:label="@string/main_dashboard"
-            android:screenOrientation="userPortrait"/>
+            android:screenOrientation="userPortrait" />
         <activity
             android:name=".ui.MachineDashboard.MachineDashboard"
             android:label="@string/machine_dashboard_title"

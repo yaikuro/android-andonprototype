@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -17,6 +18,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -53,27 +56,7 @@ public class MachineDashboard2 extends AppCompatActivity implements MachineDashb
     private ArrayList<MachineListItems> itemsArrayList;
 
     RecyclerView recyclerView11;
-    RecyclerView recyclerView10;
-    RecyclerView recyclerView9;
-    RecyclerView recyclerView8;
-    RecyclerView recyclerView7;
-    RecyclerView recyclerView6;
-    RecyclerView recyclerView5;
-    RecyclerView recyclerView4;
-    RecyclerView recyclerView3;
-    RecyclerView recyclerView2;
-    RecyclerView recyclerView1;
     private MachineDashboardAdapter machineDashboardAdapter11;
-    private MachineDashboardAdapter machineDashboardAdapter10;
-    private MachineDashboardAdapter machineDashboardAdapter9;
-    private MachineDashboardAdapter machineDashboardAdapter8;
-    private MachineDashboardAdapter machineDashboardAdapter7;
-    private MachineDashboardAdapter machineDashboardAdapter6;
-    private MachineDashboardAdapter machineDashboardAdapter5;
-    private MachineDashboardAdapter machineDashboardAdapter4;
-    private MachineDashboardAdapter machineDashboardAdapter3;
-    private MachineDashboardAdapter machineDashboardAdapter2;
-    private MachineDashboardAdapter machineDashboardAdapter1;
 
 
     @Override
@@ -81,16 +64,6 @@ public class MachineDashboard2 extends AppCompatActivity implements MachineDashb
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_dashboard2);
         recyclerView11 = findViewById(R.id.recyclerView11);
-        recyclerView10 = findViewById(R.id.recyclerView10);
-        recyclerView9 = findViewById(R.id.recyclerView9);
-        recyclerView8 = findViewById(R.id.recyclerView8);
-        recyclerView7 = findViewById(R.id.recyclerView7);
-        recyclerView6 = findViewById(R.id.recyclerView6);
-        recyclerView5 = findViewById(R.id.recyclerView5);
-        recyclerView4 = findViewById(R.id.recyclerView4);
-        recyclerView3 = findViewById(R.id.recyclerView3);
-        recyclerView2 = findViewById(R.id.recyclerView2);
-        recyclerView1 = findViewById(R.id.recyclerView1);
 
         recyclerSetup();
 
@@ -131,38 +104,14 @@ public class MachineDashboard2 extends AppCompatActivity implements MachineDashb
 
     public void recyclerSetup(){
         recyclerView11.setHasFixedSize(true);
-        recyclerView10.setHasFixedSize(true);
-        recyclerView9.setHasFixedSize(true);
-        recyclerView8.setHasFixedSize(true);
-        recyclerView7.setHasFixedSize(true);
-        recyclerView6.setHasFixedSize(true);
-        recyclerView5.setHasFixedSize(true);
-        recyclerView4.setHasFixedSize(true);
-        recyclerView3.setHasFixedSize(true);
-        recyclerView2.setHasFixedSize(true);
-        recyclerView1.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager11 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager10 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager9 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager8 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager7 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager6 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager5 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager4 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager3 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager2 = new LinearLayoutManager(this);
-        RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(this);
-        recyclerView11.setLayoutManager(layoutManager11);
-        recyclerView10.setLayoutManager(layoutManager10);
-        recyclerView9.setLayoutManager(layoutManager9);
-        recyclerView8.setLayoutManager(layoutManager8);
-        recyclerView7.setLayoutManager(layoutManager7);
-        recyclerView6.setLayoutManager(layoutManager6);
-        recyclerView5.setLayoutManager(layoutManager5);
-        recyclerView4.setLayoutManager(layoutManager4);
-        recyclerView3.setLayoutManager(layoutManager3);
-        recyclerView2.setLayoutManager(layoutManager2);
-        recyclerView1.setLayoutManager(layoutManager1);
+        int numberOfColumns = 6;
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(MachineDashboard2.this, numberOfColumns, GridLayoutManager.HORIZONTAL, false);
+        recyclerView11.setLayoutManager(gridLayoutManager);
+
+        /*DIVIDER*/
+//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView11.getContext(),
+//                gridLayoutManager.getOrientation());
+//        recyclerView11.addItemDecoration(dividerItemDecoration);
 
     }
 
@@ -184,41 +133,11 @@ public class MachineDashboard2 extends AppCompatActivity implements MachineDashb
     public void getStatusInfo(){
         itemsArrayList = new ArrayList<>();
         getData();
-        ArrayList<MachineListItems> list11 = new ArrayList<>(itemsArrayList.subList(60,66));
-        ArrayList<MachineListItems> list10 = new ArrayList<>(itemsArrayList.subList(54,60));
-        ArrayList<MachineListItems> list9 = new ArrayList<>(itemsArrayList.subList(48,54));
-        ArrayList<MachineListItems> list8 = new ArrayList<>(itemsArrayList.subList(42,48));
-        ArrayList<MachineListItems> list7 = new ArrayList<>(itemsArrayList.subList(36,42));
-        ArrayList<MachineListItems> list6 = new ArrayList<>(itemsArrayList.subList(30,36));
-        ArrayList<MachineListItems> list5 = new ArrayList<>(itemsArrayList.subList(24,30));
-        ArrayList<MachineListItems> list4 = new ArrayList<>(itemsArrayList.subList(18,24));
-        ArrayList<MachineListItems> list3 = new ArrayList<>(itemsArrayList.subList(12,18));
-        ArrayList<MachineListItems> list2 = new ArrayList<>(itemsArrayList.subList(6,12));
-        ArrayList<MachineListItems> list1 = new ArrayList<>(itemsArrayList.subList(0,6));
-        machineDashboardAdapter11 = new MachineDashboardAdapter(list11,this,this);
-        machineDashboardAdapter10 = new MachineDashboardAdapter(list10,this,this);
-        machineDashboardAdapter9 = new MachineDashboardAdapter(list9,this,this);
-        machineDashboardAdapter8 = new MachineDashboardAdapter(list8,this,this);
-        machineDashboardAdapter7 = new MachineDashboardAdapter(list7,this,this);
-        machineDashboardAdapter6 = new MachineDashboardAdapter(list6,this,this);
-        machineDashboardAdapter5 = new MachineDashboardAdapter(list5,this,this);
-        machineDashboardAdapter4 = new MachineDashboardAdapter(list4,this,this);
-        machineDashboardAdapter3 = new MachineDashboardAdapter(list3,this,this);
-        machineDashboardAdapter2 = new MachineDashboardAdapter(list2,this,this);
-        machineDashboardAdapter1 = new MachineDashboardAdapter(list1,this,this);
+        machineDashboardAdapter11 = new MachineDashboardAdapter(itemsArrayList,this,this);
     }
     public void setAdapter(){
         recyclerView11.setAdapter(machineDashboardAdapter11);
-        recyclerView10.setAdapter(machineDashboardAdapter10);
-        recyclerView9.setAdapter(machineDashboardAdapter9);
-        recyclerView8.setAdapter(machineDashboardAdapter8);
-        recyclerView7.setAdapter(machineDashboardAdapter7);
-        recyclerView6.setAdapter(machineDashboardAdapter6);
-        recyclerView5.setAdapter(machineDashboardAdapter5);
-        recyclerView4.setAdapter(machineDashboardAdapter4);
-        recyclerView3.setAdapter(machineDashboardAdapter3);
-        recyclerView2.setAdapter(machineDashboardAdapter2);
-        recyclerView1.setAdapter(machineDashboardAdapter1);
+
     }
     public void getData(){
         Boolean isSuccess = false;

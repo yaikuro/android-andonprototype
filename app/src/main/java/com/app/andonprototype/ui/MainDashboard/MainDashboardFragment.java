@@ -121,11 +121,15 @@ public class MainDashboardFragment extends Fragment {
             }
         });
 
-
-        getImage();
-        if (isSuccess = true) {
-            setPicture();
+        try {
+            getImage();
+            if (isSuccess = true) {
+                setPicture();
+            }
+        } catch (Exception e) {
+            errorBox("Error", e.getMessage());
         }
+
 
         get_list_done();
         get_list_all();
@@ -195,7 +199,7 @@ public class MainDashboardFragment extends Fragment {
                 ResultSet rs = stmt.executeQuery(query);
                 if (rs.next()) {
                     image = rs.getString("Image");
-                    if(!image.isEmpty()){
+                    if (!image.isEmpty()) {
                         isSuccess = true;
                     }
                 }

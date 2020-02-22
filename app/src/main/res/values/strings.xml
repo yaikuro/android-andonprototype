@@ -109,4 +109,24 @@
     <string name="warning_sign">Warning Sign</string>
     <string name="line_doubledot">Line :</string>
     <string name="station_doubledot">Station :</string>
+    <string name="machine_dashboard_mcb_vrla">Machine Dashboard MCB-VRLA</string>
+    <string name="doubledot_finish_repair">: Finish Repair</string>
+    <string name="doubledot_repair_on_progress">: Repair on Progress</string>
+    <string name="doubledot_breakdown">: Breakdown</string>
+    <string name="doubledot_running">: Running</string>
+    <string name="repair_on_progress">Repair on Progress</string>
+    <string name="breakdown">Breakdown</string>
+    <string name="running">Running</string>
+    <string name="finish_repair">Finish Repair</string>
+    <string name="line_1">Line 1</string>
+    <string name="line_2">Line 2</string>
+    <string name="line_3">Line 3</string>
+    <string name="line_4">Line 4</string>
+    <string name="line_5">Line 5</string>
+    <string name="line_6">Line 6</string>
+    <string name="line_7">Line 7</string>
+    <string name="line_8">Line 8</string>
+    <string name="line_9">Line 9</string>
+    <string name="line_10">Line 10</string>
+    <string name="line_11">Line 11</string>
 </resources>

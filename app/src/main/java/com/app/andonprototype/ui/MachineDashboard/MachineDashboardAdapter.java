@@ -58,8 +58,8 @@ public class MachineDashboardAdapter extends RecyclerView.Adapter<MachineDashboa
         return vh;
     }
     @Override
-    public void onBindViewHolder (ViewHolder holder,final int position) {
-        final MachineListItems machineListItems = values.get(position);
+    public void onBindViewHolder (ViewHolder holder,int position) {
+         MachineListItems machineListItems = values.get(position);
         holder.Station.setText(machineListItems.getStation());
         holder.Status.setImageResource(listviewImage[machineListItems.getStatus()]);
     }

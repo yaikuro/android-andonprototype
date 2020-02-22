@@ -19,4 +19,5 @@
     <dimen name="card_view_text_hp">15sp</dimen>
 
     <dimen name="material_card_spacing">8dp</dimen>
+    <dimen name="line_spacing">32dp</dimen>
 </resources>
