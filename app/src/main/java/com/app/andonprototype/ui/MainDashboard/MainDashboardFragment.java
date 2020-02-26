@@ -23,7 +23,6 @@ import androidx.lifecycle.ViewModelProviders;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
-import com.app.andonprototype.ui.MachineDashboard.MachineDashboard2;
 import com.app.andonprototype.ui.ProblemList.ProblemWaitingList;
 import com.google.android.material.card.MaterialCardView;
 
@@ -43,7 +42,7 @@ public class MainDashboardFragment extends Fragment {
     private MainViewModel mainViewModel;
     private ImageView image_person;
     private String ConnectionResult, pic, image, currentDate;
-    private Boolean isSuccess;
+    private Boolean isSuccess = false;
     private TextView txtProgress;
     private ProgressBar progressBar;
     private ArrayList<String> list_done;
@@ -83,7 +82,7 @@ public class MainDashboardFragment extends Fragment {
         cardView_MachineDasboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), MachineDashboard2.class);
+                Intent i = new Intent(getActivity(), MachineDashboard.class);
                 startActivity(i);
             }
         });
@@ -123,7 +122,7 @@ public class MainDashboardFragment extends Fragment {
 
         try {
             getImage();
-            if (isSuccess = true) {
+            if (isSuccess) {
                 setPicture();
             }
         } catch (Exception e) {

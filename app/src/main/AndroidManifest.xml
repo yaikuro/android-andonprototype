@@ -43,11 +43,11 @@
             android:label="@string/main_dashboard"
             android:screenOrientation="userPortrait" />
         <activity
-            android:name=".ui.MachineDashboard.MachineDashboard"
+            android:name=".ui.MachineDashboard.MachineDashboard_ListView"
             android:label="@string/machine_dashboard_title"
             android:screenOrientation="userLandscape" />
         <activity
-            android:name=".ui.MachineDashboard.MachineDashboard2"
+            android:name=".ui.MachineDashboard.MachineDashboard"
             android:label="@string/machine_dashboard_title"
             android:screenOrientation="userLandscape" />
         <activity

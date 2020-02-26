@@ -1,16 +1,5 @@
 package com.app.andonprototype.ui.Dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
 import android.Manifest;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -26,12 +15,23 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.content.ContextCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.SwipeProblem;
 import com.app.andonprototype.drawer_ui.Help;
 import com.app.andonprototype.drawer_ui.Settings;
-import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
+import com.app.andonprototype.ui.MachineDashboard.MachineDashboard_ListView;
 import com.app.andonprototype.ui.pop_dialog;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mikepenz.materialdrawer.Drawer;
@@ -400,7 +400,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
     }
 
     public void btnLocation(View view) {
-        Intent i = new Intent(this, MachineDashboard.class);
+        Intent i = new Intent(this, MachineDashboard_ListView.class);
         startActivity(i);
     }
 

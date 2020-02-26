@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    tools:context=".ui.MachineDashboard.MachineDashboard">
+    tools:context=".ui.MachineDashboard.MachineDashboard_ListView">
 
     <Button
         android:id="@+id/refresh"
@@ -306,10 +306,15 @@
         app:layout_constraintTop_toBottomOf="@+id/refresh"
         app:layout_constraintVertical_bias="1.0" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/line_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
-        android:layout_width="990dp"
-        android:layout_height="400dp"
+        android:layout_width="@dimen/machine_dashboard_recyclerview_width_size"
+        android:layout_height="@dimen/machine_dashboard_recyclerview_height_size"
         android:layout_marginTop="50dp"
         android:layout_marginStart="40dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -20,4 +20,11 @@
 
     <dimen name="material_card_spacing">8dp</dimen>
     <dimen name="line_spacing">32dp</dimen>
+
+    <dimen name="machine_dashboard_recyclerview_width_size">990dp</dimen>
+    <dimen name="machine_dashboard_recyclerview_height_size">400dp</dimen>
+
+    <dimen name="machine_dashboard_recyclerview_width_size_hp">990dp</dimen>
+    <dimen name="machine_dashboard_recyclerview_height_size_hp">400dp</dimen>
+
 </resources>

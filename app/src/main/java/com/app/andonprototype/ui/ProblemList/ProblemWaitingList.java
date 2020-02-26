@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,10 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
-import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
 import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
 import com.app.andonprototype.drawer_ui.Settings;
+import com.app.andonprototype.ui.MachineDashboard.MachineDashboard_ListView;
 import com.app.andonprototype.ui.pop_dialog;
 
 import java.sql.Connection;
@@ -210,7 +209,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
     }
 
     public void btnLocation(View view) {
-        Intent i = new Intent(this, MachineDashboard.class);
+        Intent i = new Intent(this, MachineDashboard_ListView.class);
         startActivity(i);
     }
 
