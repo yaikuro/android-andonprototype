@@ -23,7 +23,7 @@
         tools:targetApi="donut">
         <activity android:name=".Success_Page" />
         <activity android:name=".ui.Dashboard.Change_Part_List" />
-        <activity android:name=".ui.pop_dialog" />
+        <activity android:name=".ui.pop_dialog_location" />
         <activity android:name=".SwipeProblem" />
         <activity
             android:name=".ui.Dashboard.LoginActivity"

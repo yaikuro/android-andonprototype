@@ -12,7 +12,7 @@ import android.view.View;
 
 import com.app.andonprototype.R;
 
-public class pop_dialog extends AppCompatDialogFragment {
+public class pop_dialog_location extends AppCompatDialogFragment {
     private ExampleDialogListener listener;
 
     @Override

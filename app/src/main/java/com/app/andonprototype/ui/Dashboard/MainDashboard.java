@@ -32,7 +32,7 @@ import com.app.andonprototype.SwipeProblem;
 import com.app.andonprototype.drawer_ui.Help;
 import com.app.andonprototype.drawer_ui.Settings;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
-import com.app.andonprototype.ui.pop_dialog;
+import com.app.andonprototype.ui.pop_dialog_location;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
@@ -52,7 +52,7 @@ import static com.app.andonprototype.Background.SaveSharedPreference.clearUserNa
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 
-public class MainDashboard extends AppCompatActivity implements pop_dialog.ExampleDialogListener {
+public class MainDashboard extends AppCompatActivity implements pop_dialog_location.ExampleDialogListener {
     private static final String TAG = "MainDashboard";
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_2_ID = "channel2";
@@ -387,7 +387,7 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog.Examp
     }
 
     public void openDialog() {
-        pop_dialog exampleDialog = new pop_dialog();
+        pop_dialog_location exampleDialog = new pop_dialog_location();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 

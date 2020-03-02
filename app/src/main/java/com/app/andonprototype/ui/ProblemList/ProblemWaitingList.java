@@ -23,7 +23,7 @@ import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
 import com.app.andonprototype.drawer_ui.Settings;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard_ListView;
-import com.app.andonprototype.ui.pop_dialog;
+import com.app.andonprototype.ui.pop_dialog_location;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,7 +36,7 @@ import java.util.Locale;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 
-public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener, pop_dialog.ExampleDialogListener {
+public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener, pop_dialog_location.ExampleDialogListener {
     public String pic, Line, Station, MachineID, Person;
     public int Status;
     int itemcount;
@@ -200,7 +200,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
     }
 
     public void openDialog() {
-        pop_dialog exampleDialog = new pop_dialog();
+        pop_dialog_location exampleDialog = new pop_dialog_location();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
     }
 

@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.app.andonprototype.R;
 
-public class pop_dialog_part extends AppCompatDialogFragment {
+public class pop_dialog_renew_part extends AppCompatDialogFragment {
     private ExampleDialogListener listener;
 
     @Override

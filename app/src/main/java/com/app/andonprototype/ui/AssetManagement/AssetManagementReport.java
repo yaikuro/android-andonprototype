@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -16,6 +17,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.pop_dialog_add_part;
+import com.app.andonprototype.ui.pop_dialog_renew_part;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_add_part.ExampleDialogListener {
+public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_renew_part.ExampleDialogListener,pop_dialog_add_part.ExampleDialogListener {
     private String No, Name, Format, Query, currentDate;
     Button addPart;
     ListView ListAsset;
@@ -174,13 +176,17 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
         Object ID = mp.get("No");
         No = ID.toString();
-        openDialog();
+        openDialog_Renew();
     }
 
-    public void openDialog() {
-        pop_dialog_add_part exampleDialog = new pop_dialog_add_part();
-        exampleDialog.show(getSupportFragmentManager(), "example dialog");
-        Toast.makeText(this, No, Toast.LENGTH_SHORT).show();
+    public void openDialog_Part() {
+        pop_dialog_add_part popDialogAddPart = new pop_dialog_add_part();
+        popDialogAddPart.show(getSupportFragmentManager(), "part dialog");
+    }
+
+    public void openDialog_Renew(){
+        pop_dialog_renew_part popDialogRenewPart = new pop_dialog_renew_part();
+        popDialogRenewPart.show(getSupportFragmentManager(),"renew dialog");
     }
 
     @Override
@@ -189,6 +195,32 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     }
 
     public void btn_addPart(View view) {
-        openDialog();
+        openDialog_Part();
+    }
+
+    public static class getP{
+        Connection connection;
+        public ArrayList ListPartArray;
+        public void getPart(){
+            String z = "";
+            try {
+                ConnectionClass connectionClass = new ConnectionClass();
+                connection = connectionClass.CONN();
+                if (connectionClass == null) {
+                    z = "Check Your Internet Connection";
+                } else {
+                    String query = "SELECT Nama_Part FROM inventorypart";
+                    Statement stmt = connection.createStatement();
+                    ResultSet rs = stmt.executeQuery(query);
+                    ListPartArray = new ArrayList();
+                    while (rs.next()) {
+                        ListPartArray.add(rs.getString("Nama"));
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+                z = "Check Your Internet";
+            }
+        }
     }
 }
