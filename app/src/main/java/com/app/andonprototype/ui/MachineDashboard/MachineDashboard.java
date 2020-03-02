@@ -1,6 +1,8 @@
 package com.app.andonprototype.ui.MachineDashboard;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +12,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -17,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.Background.SaveSharedPreference;
 import com.app.andonprototype.R;
+import com.app.andonprototype.barcodescanner.SimpleScanner;
 import com.app.andonprototype.ui.Dashboard.MainDashboard;
 
 import java.sql.Connection;
@@ -27,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Map;
 
 public class MachineDashboard extends AppCompatActivity implements MachineDashboardAdapter.OnPushListener {
     private static final int ZBAR_CAMERA_PERMISSION = 1;
@@ -123,12 +129,57 @@ public class MachineDashboard extends AppCompatActivity implements MachineDashbo
 
     @Override
     public void onPushClick(int position) {
-//        Line = itemsArrayList.get(position).getLine();
-//        Station = itemsArrayList.get(position).getStation();
-//        Status = itemsArrayList.get(position).getStatus() + 1;
-//        String person = itemsArrayList.get(position).getPIC();
-        String abc = itemsArrayList.get(position).toString();
-        Toast.makeText(this, abc, Toast.LENGTH_SHORT).show();
+        Class<?> clss = SimpleScanner.class;
+        if (PIC.equals("")){
+            Toast.makeText(this, "ID Required, Try to Re-Login", Toast.LENGTH_SHORT).show();
+        } else{
+            if (ContextCompat.checkSelfPermission(MachineDashboard.this, Manifest.permission.CAMERA)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(MachineDashboard.this,
+                        new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
+            } else{
+                Intent i = new Intent(this,clss);
+                Line = itemsArrayList.get(position).getLine();
+                Station = itemsArrayList.get(position).getStation();
+                Status = itemsArrayList.get(position).getStatus() + 1;
+                i.putExtra("Line", Line);
+                i.putExtra("Station", Station);
+                i.putExtra("PIC", PIC);
+                if (PIC.equals("admin")) {
+                    startActivity(i);
+                } else {
+                    String person = itemsArrayList.get(position).getPIC();
+                    switch (Status) {
+                        case 1:
+                            Toast.makeText(this, "Machine is Running", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            startActivity(i);
+                            break;
+                        case 3:
+                            if (person != null) {
+                                Person = person;
+                                if (person.equals(PIC)) {
+                                    startActivity(i);
+                                } else {
+                                    Toast.makeText(this, Person + " is currently repairing", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                Toast.makeText(this, "Another PIC is currently repairing", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                        case 4:
+                            if (person == null) {
+                                Person = person;
+                                Toast.makeText(this, "Waiting for Production Approval, Done by " + Person, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(this, "Waiting for Production Approval", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     public void getStatusInfo() {
@@ -139,7 +190,6 @@ public class MachineDashboard extends AppCompatActivity implements MachineDashbo
 
     public void setAdapter() {
         recyclerView11.setAdapter(machineDashboardAdapter11);
-
     }
 
     public void getData() {

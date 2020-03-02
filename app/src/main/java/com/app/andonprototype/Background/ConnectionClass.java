@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class ConnectionClass {
     private String ipHP = "172.20.10.2";
-    private String ip = "192.168.1.100";
+    private String ip = "192.168.1.102";
     private String classs = "net.sourceforge.jtds.jdbc.Driver";
     private String db = "Winteq";
     private String un = "admin";

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -28,6 +29,7 @@ import java.util.Map;
 
 public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_part.ExampleDialogListener {
     private String No, Name, Format, Query, currentDate;
+    Button addPart;
     ListView ListAsset;
     TextView Machine;
     SimpleAdapter AP;
@@ -39,6 +41,7 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asset_management);
+        addPart = findViewById(R.id.btnAdd_Part);
         Name = getIntent().getStringExtra("Name");
         currentDate = getIntent().getStringExtra("Current_Date");
         Format = getIntent().getStringExtra("Format");
