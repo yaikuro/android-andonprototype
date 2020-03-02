@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -16,7 +15,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
-import com.app.andonprototype.ui.pop_dialog_add_part;
 import com.app.andonprototype.ui.pop_dialog_renew_part;
 
 import java.sql.Connection;
@@ -29,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_renew_part.ExampleDialogListener,pop_dialog_add_part.ExampleDialogListener {
+public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_renew_part.ExampleDialogListener {
     private String No, Name, Format, Query, currentDate;
     Button addPart;
     ListView ListAsset;
@@ -179,9 +177,14 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         openDialog_Renew();
     }
 
-    public void openDialog_Part() {
-        pop_dialog_add_part popDialogAddPart = new pop_dialog_add_part();
-        popDialogAddPart.show(getSupportFragmentManager(), "part dialog");
+    public void addPart() {
+        Intent i = new Intent(this, AddPart_AssetManagement.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void btn_addPart(View view) {
+        addPart();
     }
 
     public void openDialog_Renew(){
@@ -191,12 +194,8 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
 
     @Override
     public void applyTexts(String username, String password) {
-
     }
 
-    public void btn_addPart(View view) {
-        openDialog_Part();
-    }
 
     public static class getP{
         Connection connection;
