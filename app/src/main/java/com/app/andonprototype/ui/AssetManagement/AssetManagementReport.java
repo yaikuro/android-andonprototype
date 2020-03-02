@@ -15,7 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
-import com.app.andonprototype.ui.pop_dialog_part;
+import com.app.andonprototype.ui.pop_dialog_add_part;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_part.ExampleDialogListener {
+public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_add_part.ExampleDialogListener {
     private String No, Name, Format, Query, currentDate;
     Button addPart;
     ListView ListAsset;
@@ -178,7 +178,7 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     }
 
     public void openDialog() {
-        pop_dialog_part exampleDialog = new pop_dialog_part();
+        pop_dialog_add_part exampleDialog = new pop_dialog_add_part();
         exampleDialog.show(getSupportFragmentManager(), "example dialog");
         Toast.makeText(this, No, Toast.LENGTH_SHORT).show();
     }
@@ -186,5 +186,9 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     @Override
     public void applyTexts(String username, String password) {
 
+    }
+
+    public void btn_addPart(View view) {
+        openDialog();
     }
 }

@@ -33,6 +33,7 @@
             android:layout_below="@id/Title"
             android:layout_marginTop="20sp"
             android:layout_alignParentEnd="true"
+            android:onClick="btn_addPart"
             android:text="Add Part"/>
 
         <TextView
