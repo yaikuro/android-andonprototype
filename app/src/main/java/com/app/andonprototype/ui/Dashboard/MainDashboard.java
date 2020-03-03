@@ -11,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,8 +33,8 @@ import com.app.andonprototype.SwipeProblem;
 import com.app.andonprototype.drawer_ui.Help;
 import com.app.andonprototype.drawer_ui.Settings;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
-import com.app.andonprototype.ui.pop_dialog_location;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
@@ -52,7 +53,7 @@ import static com.app.andonprototype.Background.SaveSharedPreference.clearUserNa
 import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 
-public class MainDashboard extends AppCompatActivity implements pop_dialog_location.ExampleDialogListener {
+public class MainDashboard extends AppCompatActivity {
     private static final String TAG = "MainDashboard";
     public static final String CHANNEL_1_ID = "channel1";
     public static final String CHANNEL_2_ID = "channel2";
@@ -386,17 +387,13 @@ public class MainDashboard extends AppCompatActivity implements pop_dialog_locat
         }
     }
 
-    public void openDialog() {
-        pop_dialog_location exampleDialog = new pop_dialog_location();
-        exampleDialog.show(getSupportFragmentManager(), "example dialog");
-    }
-
-    @Override
-    public void applyTexts(String username, String password) {
-    }
-
     public void listMenuButton(View view) {
-        openDialog();
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View CustomView = inflater.inflate(R.layout.activity_pop_dialog, null);
+
+        new MaterialAlertDialogBuilder(this)
+                .setView(CustomView)
+                .show();
     }
 
     public void btnLocation(View view) {

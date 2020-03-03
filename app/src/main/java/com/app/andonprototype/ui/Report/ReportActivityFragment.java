@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -138,6 +136,7 @@ public class ReportActivityFragment extends Fragment implements ReportListAdapte
             ConnectionResult = ex.getMessage();
         }
     }
+
     private void GetPIC() {
         String z = "";
         try {

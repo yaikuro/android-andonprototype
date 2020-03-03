@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -17,27 +16,30 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
+import com.app.andonprototype.ui.Report.ReportListAdapter;
+import com.app.andonprototype.ui.Report.ReportListItems;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class MachineReportActivityFragment extends Fragment implements ListView.OnItemClickListener {
+public class MachineReportActivityFragment extends Fragment implements ReportListAdapter.OnNoteListener {
     public String id;
     public String Station;
     public String Line;
     public String Number;
-    ListView ListMachineReport;
+    RecyclerView ListMachineReport;
     SimpleAdapter AR;
     public ImageView imageView;
     public EditText edtInsertID;
@@ -51,6 +53,10 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
     List<Map<String, String>> MachineReportList;
 
     private MachineReportActivityViewModel mainDashboardViewModel;
+
+    private ArrayList<ReportListItems> itemArrayList;  //List items Array
+    private ReportListAdapter myAppAdapter; //Array Adapter
+    private RecyclerView.LayoutManager mLayoutManager;
 
     public static MachineReportActivityFragment newInstance(int instance) {
         Bundle args = new Bundle();
@@ -67,7 +73,9 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
         LineSpinner = root.findViewById(R.id.spinnerLine);
         StationSpinner = root.findViewById(R.id.spinnerStation);
         ListMachineReport = root.findViewById(R.id.ListMachineReport);
-        ListMachineReport.setOnItemClickListener(this);
+        ListMachineReport.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        ListMachineReport.setLayoutManager(mLayoutManager);
         GetLine();
         final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -99,7 +107,7 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
                 station = StationArray.indexOf(StationSpinner.getSelectedItem());
                 Station = (String) parent.getItemAtPosition(station);
                 getMachineReport();
-                if (MachineReportList.isEmpty()) {
+                if (itemArrayList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Report Activity", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -113,17 +121,13 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
     }
 
     private void getMachineReport() {
-        MachineReportList = getRep();
-        String[] fromwhere = {"MachineID", "Line", "Station", "Repair_Time_Start", "Repair_Time_Finish", "Repair_Duration", "PIC"};
-        int[] viewwhere = {R.id.MachineID, R.id.Line, R.id.Station, R.id.RepairTimeStart, R.id.RepairTimeFinish, R.id.Duration, R.id.PIC};
-        AR = new SimpleAdapter(getActivity(), MachineReportList, R.layout.report_activity_listitem, fromwhere, viewwhere);
-        ListMachineReport.setAdapter(AR);
+        itemArrayList = new ArrayList<>();
+        getRep();
+        myAppAdapter = new ReportListAdapter(itemArrayList, this, getActivity());
+        ListMachineReport.setAdapter(myAppAdapter);
     }
 
-    private List<Map<String, String>> getRep() {
-        List<Map<String, String>> data;
-        data = new ArrayList<Map<String, String>>();
-
+    private void getRep() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connect = connectionClass.CONN();
@@ -136,24 +140,15 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
                 Statement stmt = connect.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
                 while (rs.next()) {
-                    String No = rs.getString("No");
-                    String MachineID = rs.getString("MachineID");
-                    String Line = rs.getString("Line");
-                    String Station = rs.getString("Station");
-                    String Repair_Time_Start = rs.getString("Repair_Time_Start");
-                    String Repair_Time_Finish = rs.getString("Repair_Time_Finish");
-                    String Repair_Duration = rs.getString("Repair_Duration");
-                    String PIC = rs.getString("PIC");
-                    Map<String, String> datanum = new HashMap<String, String>();
-                    datanum.put("No", No);
-                    datanum.put("MachineID", MachineID);
-                    datanum.put("Line", Line);
-                    datanum.put("Station", Station);
-                    datanum.put("Repair_Time_Start", Repair_Time_Start);
-                    datanum.put("Repair_Time_Finish", Repair_Time_Finish);
-                    datanum.put("Repair_Duration", Repair_Duration);
-                    datanum.put("PIC", PIC);
-                    data.add(datanum);
+                    itemArrayList.add(new ReportListItems(
+                            rs.getString("No"),
+                            rs.getString("MachineID"),
+                            rs.getString("Line"),
+                            rs.getString("Station"),
+                            rs.getString("Repair_Time_Start"),
+                            rs.getString("Repair_Time_Finish"),
+                            rs.getString("Repair_Duration"),
+                            rs.getString("PIC")));
                 }
                 ConnectionResult = "Successful";
                 isSuccess = true;
@@ -163,7 +158,6 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
             isSuccess = false;
             ConnectionResult = ex.getMessage();
         }
-        return data;
     }
 
     public String GetLine() {
@@ -222,13 +216,10 @@ public class MachineReportActivityFragment extends Fragment implements ListView.
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onNoteClick(int position) {
         Intent i = new Intent(getActivity(), DetailMachineReport.class);
-        Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
-        Object No = mp.get("No");
-        Number = No.toString();
+        Number = itemArrayList.get(position).getNo();
         i.putExtra("No", Number);
-        //Toast.makeText(this, Mesin, Toast.LENGTH_SHORT).show();
         startActivity(i);
     }
 }
