@@ -12,6 +12,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
+import com.app.andonprototype.ui.pop_dialog_quantity_part;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Add_Part extends AppCompatActivity implements ListView.OnItemClickListener{
+public class Add_Part extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_quantity_part.ExampleDialogListener {
     public String No,Name;
     ListView ListPart;
     Boolean isSuccess = false;
@@ -91,8 +92,17 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
         return data;
     }
 
+    public void openDialog_addQty() {
+        pop_dialog_quantity_part popDialogQtyPart = new pop_dialog_quantity_part();
+        popDialogQtyPart.show(getSupportFragmentManager(), "QTY dialog");
+    }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        openDialog_addQty();
+    }
 
+    @Override
+    public void applyTexts(String username, String password) {
     }
 }
