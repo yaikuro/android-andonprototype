@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_renew_part.ExampleDialogListener{
-    private String No, Name, Format, Query, currentDate;
+    private String No, Name, Format, Query, currentDate, Line, Station;
     Button addPart;
     ListView ListAsset;
     TextView Machine;
@@ -42,6 +42,8 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asset_management);
         addPart = findViewById(R.id.btnAdd_Part);
+        Line = getIntent().getStringExtra("Line");
+        Station = getIntent().getStringExtra("Station");
         Name = getIntent().getStringExtra("Name");
         currentDate = getIntent().getStringExtra("Current_Date");
         Format = getIntent().getStringExtra("Format");
@@ -49,6 +51,7 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         ListAsset.setOnItemClickListener(this);
         Machine = findViewById(R.id.dataMachineID);
         Machine.setText(Name);
+        Toast.makeText(this, Line + Station + Name, Toast.LENGTH_SHORT).show();
         getAsset();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -189,8 +192,9 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
 
     public void btn_addPart(View view) {
         Intent i = new Intent(this,Add_Part.class);
-        i.putExtra(Name,"Nama");
-        i.putExtra(No,"No");
+        i.putExtra("Line", Line);
+        i.putExtra("Station", Station);
+        i.putExtra("Name", Name);
         startActivity(i);
     }
 

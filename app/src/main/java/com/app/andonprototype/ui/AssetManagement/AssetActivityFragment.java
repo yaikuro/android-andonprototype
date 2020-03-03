@@ -198,6 +198,8 @@ public class AssetActivityFragment extends Fragment implements ListView.OnItemCl
         String name = MachineName.toString();
         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String format = "1";
+        i.putExtra("Line", Line);
+        i.putExtra("Station", Station);
         i.putExtra("Name", name);
         i.putExtra("Format", format);
         i.putExtra("Current_Date", currentDate);
