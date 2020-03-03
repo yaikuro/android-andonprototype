@@ -195,7 +195,10 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     }
 
     public void btn_addPart(View view) {
-        openDialog_Part();
+        Intent i = new Intent(this,Add_Part.class);
+        i.putExtra(Name,"Nama");
+        i.putExtra(No,"No");
+        startActivity(i);
     }
 
     public static class getP{

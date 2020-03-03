@@ -21,6 +21,7 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
         tools:targetApi="donut">
+        <activity android:name=".ui.AssetManagement.Add_Part"></activity>
         <activity android:name=".Success_Page" />
         <activity android:name=".ui.Dashboard.Change_Part_List" />
         <activity android:name=".ui.pop_dialog_location" />
@@ -36,7 +37,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.Dashboard.MainDashboard"
