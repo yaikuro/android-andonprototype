@@ -101,7 +101,7 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
 
         final EditText etName = CustomView.findViewById(R.id.etqty);
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Enter the Zip Code")
+                .setTitle("Add Part")
                 .setView(CustomView)
                 .setPositiveButton("ADD", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
