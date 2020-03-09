@@ -105,11 +105,17 @@ public class Change_Part_List extends AppCompatActivity implements AdapterView.O
         Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
         Intent i = new Intent(this, AssetManagementReport.class);
         Object MachineName = mp.get("Machine_Name");
+        Object Line = mp.get("Line");
+        Object Station = mp.get("Station");
         String name = MachineName.toString();
         String format = "2";
+        String line = Line.toString();
+        String station = Station.toString();
         i.putExtra("Name", name);
         i.putExtra("Format", format);
         i.putExtra("Current_Date", currentDate);
+        i.putExtra("Line", line);
+        i.putExtra("Station",station);
         startActivity(i);
     }
 }
