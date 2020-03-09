@@ -40,19 +40,44 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/spinnerLineTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:text="Line : "
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <Spinner
-                    android:id="@+id/spinnerLine"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/spinnerLineCardView"
+                    style="@style/Widget.MaterialComponents.CardView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/material_card_spacing"
+                    android:layout_marginTop="@dimen/material_card_spacing"
+                    android:layout_marginEnd="@dimen/material_card_spacing"
+                    android:background="?selectableItemBackground"
+                    android:minHeight="30dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/spinnerLineTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/material_card_spacing"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/line_doubledot"
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerLine"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@id/spinnerLineTitle"
+                            android:textAlignment="viewEnd" />
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
 
             <LinearLayout
@@ -60,19 +85,43 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <TextView
-                    android:id="@+id/spinnerStationTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="5dp"
-                    android:text="Station : "
-                    android:textColor="@color/black"
-                    android:textSize="20sp" />
-
-                <Spinner
-                    android:id="@+id/spinnerStation"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/spinnerStationCardView"
+                    style="@style/Widget.MaterialComponents.CardView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/material_card_spacing"
+                    android:layout_marginTop="@dimen/material_card_spacing"
+                    android:layout_marginEnd="@dimen/material_card_spacing"
+                    android:background="?selectableItemBackground"
+                    android:minHeight="10dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="6dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/spinnerStationTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="@dimen/material_card_spacing"
+                            android:layout_marginTop="5dp"
+                            android:text="Station : "
+                            android:textColor="@color/black"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerStation"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toEndOf="@id/spinnerStationTitle" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
         </LinearLayout>
 

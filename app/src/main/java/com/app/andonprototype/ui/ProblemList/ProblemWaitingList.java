@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
@@ -23,7 +24,7 @@ import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
 import com.app.andonprototype.drawer_ui.Settings;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard_ListView;
-import com.app.andonprototype.ui.pop_dialog_location;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -36,19 +37,18 @@ import java.util.Locale;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 
-public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener, pop_dialog_location.ExampleDialogListener {
+public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener {
+    private static final int ZBAR_CAMERA_PERMISSION = 1;
     public String pic, Line, Station, MachineID, Person;
     public int Status;
+    public ImageView imageView;
     int itemcount;
     Connection connect;
-    private SimpleAdapter AP;
     boolean doubleBackToExitPressedOnce = false;
     TextView textView;
-    public ImageView imageView;
-    private static final int ZBAR_CAMERA_PERMISSION = 1;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
-
     RecyclerView recyclerView;
+    private SimpleAdapter AP;
     private ArrayList<ProblemListItems> itemsArrayList;
     private ProblemListAdapter problemListAdapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -82,7 +82,7 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
     public void getProblem() {
         itemsArrayList = new ArrayList<>();
         GetProblem();
-        problemListAdapter = new ProblemListAdapter(itemsArrayList,this,this);
+        problemListAdapter = new ProblemListAdapter(itemsArrayList, this, this);
         recyclerView.setAdapter(problemListAdapter);
         itemcount = itemsArrayList.size();
         if (itemcount < 1) {
@@ -92,12 +92,8 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
         }
     }
 
-    @Override
-    public void applyTexts(String username, String password) {
 
-    }
-
-    public void GetProblem () {
+    public void GetProblem() {
         Boolean isSuccess = false;
         String ConnectionResult;
         try {
@@ -114,14 +110,14 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
                 while (rs.next()) {
                     String status = rs.getString("Status");
                     int i = Integer.parseInt(status) - 1;
-                    itemsArrayList.add(new ProblemListItems(i, rs.getString("Line"), rs.getString("Station"),rs.getString("PIC")));
+                    itemsArrayList.add(new ProblemListItems(i, rs.getString("Line"), rs.getString("Station"), rs.getString("PIC")));
                 }
                 ConnectionResult = "Successful";
                 isSuccess = true;
                 connect.close();
             }
-        }catch (Exception ex){
-            isSuccess=false;
+        } catch (Exception ex) {
+            isSuccess = false;
             ConnectionResult = ex.getMessage();
         }
     }
@@ -199,13 +195,13 @@ public class ProblemWaitingList extends AppCompatActivity implements ProblemList
         }, 3000);
     }
 
-    public void openDialog() {
-        pop_dialog_location exampleDialog = new pop_dialog_location();
-        exampleDialog.show(getSupportFragmentManager(), "example dialog");
-    }
-
     public void listMenuButton(View view) {
-        openDialog();
+        LayoutInflater inflater = LayoutInflater.from(this);
+        final View CustomView = inflater.inflate(R.layout.activity_pop_dialog, null);
+
+        new MaterialAlertDialogBuilder(this)
+                .setView(CustomView)
+                .show();
     }
 
     public void btnLocation(View view) {

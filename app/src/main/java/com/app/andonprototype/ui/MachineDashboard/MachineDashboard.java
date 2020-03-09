@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -23,6 +22,7 @@ import com.app.andonprototype.Background.SaveSharedPreference;
 import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
 import com.app.andonprototype.ui.Dashboard.MainDashboard;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -32,7 +32,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.Locale;
-import java.util.Map;
 
 public class MachineDashboard extends AppCompatActivity implements MachineDashboardAdapter.OnPushListener {
     private static final int ZBAR_CAMERA_PERMISSION = 1;
@@ -43,7 +42,7 @@ public class MachineDashboard extends AppCompatActivity implements MachineDashbo
     Connection connection;
     ProgressBar pbbar;
     int Status;
-    Button refresh;
+    FloatingActionButton refresh;
     String currentDateStart = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.getDefault()).format(new Date());
     RecyclerView recyclerView11, lineRecyclerView;
     private ArrayList<MachineListItems> itemsArrayList;

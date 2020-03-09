@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -16,6 +15,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.pop_dialog_renew_part;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -29,7 +29,7 @@ import java.util.Map;
 
 public class AssetManagementReport extends AppCompatActivity implements ListView.OnItemClickListener, pop_dialog_renew_part.ExampleDialogListener{
     private String No, Name, Format, Query, currentDate, Line, Station;
-    Button addPart;
+    FloatingActionButton addPart;
     ListView ListAsset;
     TextView Machine;
     SimpleAdapter AP;
@@ -51,7 +51,6 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
         ListAsset.setOnItemClickListener(this);
         Machine = findViewById(R.id.dataMachineID);
         Machine.setText(Name);
-        Toast.makeText(this, Line + Station + Name, Toast.LENGTH_SHORT).show();
         getAsset();
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
