@@ -9,9 +9,6 @@ public class AssetActivityViewModel extends ViewModel {
     private MutableLiveData<String> welcomeText;
 
     public AssetActivityViewModel() {
-//        welcomeText = new MutableLiveData<>();
-//        String pic = getID(MainDashboardViewModel.this);
-//        welcomeText.setValue("Welcome " + pic);
     }
 
     public LiveData<String> getText() {

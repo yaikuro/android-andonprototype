@@ -8,9 +8,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Objects;
 
+
 public class ConnectionClass {
-    private String ipHP = "172.20.10.2";
-    private String ip = "192.168.1.100";
+
+    ///// Masukkan IP server disini ////////
+    private String ip = "192.168.100.14";
+    ////////////////////////////////////////
+
     private String classs = "net.sourceforge.jtds.jdbc.Driver";
     private String db = "Winteq";
     private String un = "admin";
@@ -24,14 +28,18 @@ public class ConnectionClass {
         Connection conn = null;
         String ConnURL = null;
         try {
+
+// Ini buat SQL Server
             Class.forName(classs);
             ConnURL = "jdbc:jtds:sqlserver://" + ip + ";"
                     + "databaseName=" + db + ";user=" + un + ";password="
                     + password + ";";
             conn = DriverManager.getConnection(ConnURL);
+
 // Ini buat MySQL
 //              Class.forName(classXAMPP);
 //                conn = DriverManager.getConnection(url,unXAMPP,passwordXAMPP);
+
         } catch (Exception se) {
             Log.e("ERROR", Objects.requireNonNull(se.getMessage()));
         }

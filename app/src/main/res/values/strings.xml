@@ -129,4 +129,13 @@
     <string name="line_9">Line 9</string>
     <string name="line_10">Line 10</string>
     <string name="line_11">Line 11</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="part_list">Part List</string>
+    <string name="name">Name</string>
+    <string name="type">Type</string>
+    <string name="lifetime_hour">Lifetime (Hour)</string>
+    <string name="machine_part_list">Machine Part List</string>
+    <string name="quantity">Quantity</string>
+    <string name="date_register">Date Register</string>
+    <string name="next_replacement">Next Replacement</string>
 </resources>

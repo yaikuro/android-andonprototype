@@ -1,4 +1,4 @@
-package com.app.andonprototype.drawer_ui;
+package com.app.andonprototype.drawer_ui.Settings;
 
 import android.Manifest;
 import android.content.ContentValues;
@@ -27,7 +27,6 @@ import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.Background.SwipeDismissBaseActivity;
 import com.app.andonprototype.R;
 import com.app.andonprototype.Success_Page;
-import com.app.andonprototype.ui.Dashboard.DetailBreakdownPage2;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOError;
@@ -38,7 +37,7 @@ import java.sql.PreparedStatement;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 
-public class Settings extends SwipeDismissBaseActivity {
+public class ChangeProfilePicture extends SwipeDismissBaseActivity {
 
     ConnectionClass connectionClass;
     String encodedProfilePic;
@@ -55,12 +54,10 @@ public class Settings extends SwipeDismissBaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
+        setContentView(R.layout.activity_change_pp);
         connectionClass = new ConnectionClass();
         values = new ContentValues();
-
         pic = getNama(this);
-
         txtmsg = findViewById(R.id.txtmsg);
         profile_pic = findViewById(R.id.profile_picture);
         profile_pic_btn = findViewById(R.id.camera_button_profile_picture);
@@ -72,17 +69,18 @@ public class Settings extends SwipeDismissBaseActivity {
         profile_pic_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ContextCompat.checkSelfPermission(Settings.this, Manifest.permission.CAMERA)
+                if (ContextCompat.checkSelfPermission(ChangeProfilePicture.this, Manifest.permission.CAMERA)
                         != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Settings.this,
+                    ActivityCompat.requestPermissions(ChangeProfilePicture.this,
                             new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
-                }else{
+                } else{
                 camera_profile_pic();
             }
             }
         });
 
         GetPicture();
+
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +128,7 @@ public class Settings extends SwipeDismissBaseActivity {
                     "UPDATE userid SET Image = '" + encodedProfilePic + "' WHERE Nama = '" + pic + "' ";
             PreparedStatement preStmt = con.prepareStatement(commands);
             preStmt.execute();
-            msg = encodedProfilePic;
+            msg = "Success!";
         } catch (IOError | Exception ex) {
             msg = ex.getMessage();
             Log.d("hitesh", msg);
@@ -139,6 +137,8 @@ public class Settings extends SwipeDismissBaseActivity {
         txtmsg.setText(msg);
     }
 
+
+    // Dibutuhkan untuk merubah arah rotasi foto
     public static Bitmap rotateImage(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
@@ -146,6 +146,31 @@ public class Settings extends SwipeDismissBaseActivity {
                 matrix, true);
     }
 
+    // Dibutuhkan untuk ambil foto
+    public void GetPicture() {
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+        imageUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+    }
+
+    // Ambil foto
+    public void camera_profile_pic() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        startActivityForResult(intent, pic_id);
+    }
+
+    // Convert foto menjadi format Base64
+    private String encodeImage(Bitmap bm) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
+        byte[] b = baos.toByteArray();
+        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
+        return encImage;
+    }
+
+    // Setelah ambil foto, hasilnya diproses disini
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
@@ -157,7 +182,9 @@ public class Settings extends SwipeDismissBaseActivity {
                     final Bitmap selectedImageProblem = BitmapFactory.decodeStream(imageStream);
 
                     Bitmap RotatedselectedImageProblem = null;
-                    RotatedselectedImageProblem = rotateImage(selectedImageProblem, 270);
+
+                    // Jika arah foto yang diambil tidak sesuai, ganti angle di bawah ini
+                    RotatedselectedImageProblem = rotateImage(selectedImageProblem, 0);
 
                     profile_pic.setImageBitmap(RotatedselectedImageProblem);
 
@@ -173,27 +200,6 @@ public class Settings extends SwipeDismissBaseActivity {
                 }
             }
         }
-    }
-
-    public void GetPicture() {
-        values.put(MediaStore.Images.Media.TITLE, "New Picture");
-        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
-        imageUri = getContentResolver().insert(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
-    }
-
-    public void camera_profile_pic() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-        startActivityForResult(intent, pic_id);
-    }
-
-    private String encodeImage(Bitmap bm) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);
-        byte[] b = baos.toByteArray();
-        String encImage = Base64.encodeToString(b, Base64.DEFAULT);
-        return encImage;
     }
 
 }

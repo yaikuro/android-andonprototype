@@ -2,73 +2,97 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/md_blue_grey_100"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayoutHistory"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="8dp"
+        app:cardCornerRadius="15dp">
 
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Part List"
-            android:textSize="40sp" />
-
-        <LinearLayout
-            android:id="@+id/title_part"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_below="@id/Title"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Name"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Type"
-                android:textSize="20sp" />
-
-            <TextView
+            <RelativeLayout
+                android:id="@+id/RelativeLayoutHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Lifetime (Hour)"
-                android:textSize="20sp" />
-        </LinearLayout>
+                android:layout_margin="5dp">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/title_part"
-            android:layout_marginTop="5dp"
-            android:background="@color/black" />
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/part_list"
+                    android:textColor="@color/black"
+                    android:textSize="40sp"
+                    android:textStyle="bold" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/pullToRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/RelativeLayoutHistory"
-        android:background="@android:color/transparent">
-        <ListView
-            android:id="@+id/ListPart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/RelativeLayoutHistory" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                <LinearLayout
+                    android:id="@+id/title_part"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Title"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/name"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/type"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lifetime_hour"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/title_part"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/black" />
+            </RelativeLayout>
+
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/pullToRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/RelativeLayoutHistory"
+                android:background="@android:color/transparent">
+
+                <ListView
+                    android:id="@+id/ListPart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
 </RelativeLayout>

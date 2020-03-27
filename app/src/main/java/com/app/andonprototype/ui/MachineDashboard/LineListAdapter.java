@@ -12,6 +12,8 @@ import com.app.andonprototype.R;
 
 import java.util.LinkedList;
 
+//
+
 public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineViewHolder> {
 
     private final LinkedList<String> mLineList;
@@ -53,12 +55,7 @@ public class LineListAdapter extends RecyclerView.Adapter<LineListAdapter.LineVi
             super(itemView);
             lineItemView = itemView.findViewById(R.id.lineTitle);
             this.mAdapter = adapter;
-//            itemView.setOnClickListener(this);
         }
 
-        // Line onClick
-//        @Override
-//        public void onClick(View view) {
-//        }
     }
 }

@@ -13,19 +13,16 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.andonprototype.Background.ConnectionClass;
-import com.app.andonprototype.R;
 import com.app.andonprototype.Background.SaveSharedPreference;
+import com.app.andonprototype.R;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import static com.app.andonprototype.Background.SaveSharedPreference.getID;
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
-import static com.app.andonprototype.Background.SaveSharedPreference.getUserName;
 import static com.app.andonprototype.Background.SaveSharedPreference.setID;
 import static com.app.andonprototype.Background.SaveSharedPreference.setNama;
-import static com.app.andonprototype.Background.SaveSharedPreference.setUserName;
 
 public class LoginActivity extends AppCompatActivity {
     public String ID, PIC;
@@ -37,29 +34,44 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-//        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         saveSharedPreference = new SaveSharedPreference();
         setContentView(R.layout.activity_login);
+
+        // Kalau sudah pernah Login, langsung masuk activity Main Dashboard
         if (!getNama(this).isEmpty()) {
             loadDashboard2();
         }
+
+        // Panggil ConnectionClass java
         connectionClass = new ConnectionClass();
+
+        // ID
         etuserid = findViewById(R.id.edtuserid);
+
+        // Password
         etpass = findViewById(R.id.edtpass);
+
+        // Tombol Login
         btnlogin = findViewById(R.id.btnlogin);
+
+        // Loading bar
         pbbar = findViewById(R.id.pbbar);
         pbbar.setVisibility(View.GONE);
 
+        // User bisa menekan tombol Login atau tombol enter(keyboard) untuk melakukan login
         btnlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DoLogin doLogin = new DoLogin();
                 doLogin.execute("");
+
+                // Simpan ID user di SaveSharedPreference
                 setID(LoginActivity.this, etuserid.getText().toString());
             }
         });
 
+        // Berikut ini code ketika user menekan tombol enter(keyboard)
         etpass.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -74,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public class DoLogin extends AsyncTask<String, String, String> {
         String z = "";
@@ -99,6 +112,8 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+
+            // Logic ketika user ingin login
             if (userid.isEmpty() && password.isEmpty()) {
                 z = "Please Enter User ID and Password";
             } else if (userid.isEmpty()) {
@@ -120,6 +135,8 @@ public class LoginActivity extends AppCompatActivity {
                             isSuccess = true;
                             ID = rs.getString("npk");
                             PIC = rs.getString("Nama");
+
+                            // Simpan nama user di SaveSharedPreference
                             setNama(LoginActivity.this,PIC);
                         } else {
                             z = "Invalid Credentials";
@@ -135,6 +152,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    // Activity Main Dashboard
     private void loadDashboard() {
         Intent i = new Intent(getApplicationContext(), MainDashboard.class);
         setNama(LoginActivity.this, PIC);

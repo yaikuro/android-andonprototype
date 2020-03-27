@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import com.app.andonprototype.R;
 
+// Menampilkan Dialog pada Asset Management
+
 public class pop_dialog_renew_part extends AppCompatDialogFragment {
     private ExampleDialogListener listener;
 

@@ -22,7 +22,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.barcodescanner.SimpleScanner;
-import com.app.andonprototype.drawer_ui.Settings;
+import com.app.andonprototype.drawer_ui.Settings.Settings;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard_ListView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -36,6 +36,9 @@ import java.util.Locale;
 
 import static com.app.andonprototype.Background.SaveSharedPreference.getNama;
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
+
+// Ketika user menekan notifikasi breakdown, tampilkan halaman ProblemWaitingList
+// Memiliki struktur yang sama dengan ProblemListFragment
 
 public class ProblemWaitingList extends AppCompatActivity implements ProblemListAdapter.OnPressListener {
     private static final int ZBAR_CAMERA_PERMISSION = 1;

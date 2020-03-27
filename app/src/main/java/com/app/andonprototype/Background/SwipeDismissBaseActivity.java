@@ -6,6 +6,9 @@ import android.view.MotionEvent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
+// Fitur untuk keluar dari activity dengan melakukan swipe ke arah kanan
+
 public abstract class SwipeDismissBaseActivity extends AppCompatActivity {
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;

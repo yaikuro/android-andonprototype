@@ -39,6 +39,7 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
     Boolean isSuccess = false;
     Connection connection;
     SimpleAdapter AP;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +49,10 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
         Name = getIntent().getStringExtra("Name");
         ListPart = findViewById(R.id.ListPart);
         ListPart.setOnItemClickListener(this);
+
+        // Tampilkan list part dari database
         retrievePart();
+
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -59,22 +63,23 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
         });
     }
 
-    public void retrievePart(){
-        List<Map<String,String>> PartList = null;
+    public void retrievePart() {
+        List<Map<String, String>> PartList = null;
         PartList = getPart();
-        String[] data = {"Part","Type","Durability"};
-        int[] elements = {R.id.Part,R.id.Type,R.id.Durability};
-        AP = new SimpleAdapter(this,PartList,R.layout.list_part_add,data,elements);
+        String[] data = {"Part", "Type", "Durability"};
+        int[] elements = {R.id.Part, R.id.Type, R.id.Durability};
+        AP = new SimpleAdapter(this, PartList, R.layout.list_part_add, data, elements);
         ListPart.setAdapter(AP);
     }
 
-    public List<Map<String,String>> getPart(){
+    // Ambil list part dari database
+    public List<Map<String, String>> getPart() {
         String ConnectionResult;
-        List<Map<String,String>> data = new ArrayList<>();
+        List<Map<String, String>> data = new ArrayList<>();
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connection = connectionClass.CONN();
-            if (connection==null){
+            if (connection == null) {
                 ConnectionResult = "Check your Internet Connection";
             } else {
                 String query = "Select PartID,Jenis_Part,Nama_Part,Umur from inventorypart " +
@@ -83,16 +88,16 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
                         "where m.Machine_Name = '" + Name + "'";
                 Statement stmt = connection.createStatement();
                 ResultSet rs = stmt.executeQuery(query);
-                while(rs.next()){
+                while (rs.next()) {
                     String PartID = rs.getString("PartID");
                     String Part = rs.getString("Nama_Part");
                     String Type = rs.getString("Jenis_Part");
                     String Durability = rs.getString("Umur");
-                    Map<String,String> datanum = new HashMap<>();
-                    datanum.put("PartID",PartID);
-                    datanum.put("Part",Part);
-                    datanum.put("Type",Type);
-                    datanum.put("Durability",Durability);
+                    Map<String, String> datanum = new HashMap<>();
+                    datanum.put("PartID", PartID);
+                    datanum.put("Part", Part);
+                    datanum.put("Type", Type);
+                    datanum.put("Durability", Durability);
                     data.add(datanum);
                 }
                 ConnectionResult = "Successfull";
@@ -107,6 +112,7 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
         return data;
     }
 
+    // Membuat Simple Dialog untuk memasukkan jumlah part yang dipilih
     public void openDialog_addQty() {
         LayoutInflater inflater = LayoutInflater.from(this);
         final View CustomView = inflater.inflate(R.layout.activity_add_qty_assetmanagement, null);
@@ -125,25 +131,17 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
         dialog.show();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Map<String,String> mp = (Map<String, String>) parent.getItemAtPosition(position);
-        Object age = mp.get("Durability");
-        Object No = mp.get("PartID");
-        PartID = No.toString();
-        Durability = Integer.parseInt(age.toString());
-        openDialog_addQty();
-    }
-    public void add_data(){
+
+    // Masukkan part dan jumlahnya ke list
+    public void add_data() {
         String ConnectionResult = "";
         try {
             ConnectionClass connectionClass = new ConnectionClass();
             connection = connectionClass.CONN();
-            if (connection==null){
+            if (connection == null) {
                 ConnectionResult = "Connection Failed";
                 Toast.makeText(this, ConnectionResult, Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
                 String query = "INSERT INTO machinelist (Line,Station,Machine_Name,PartID,Date_Start,Due_Date,Quantity) " +
                         "values ('" + Line + "','" + Station + "','" + Name + "','" + PartID + "', GETDATE(), DATEADD(SECOND," + Durability +
                         ",GETDATE()) ,'" + Quantity + "')";
@@ -157,5 +155,15 @@ public class Add_Part extends AppCompatActivity implements ListView.OnItemClickL
             ConnectionResult = e.getMessage();
             Toast.makeText(this, ConnectionResult, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Map<String, String> mp = (Map<String, String>) parent.getItemAtPosition(position);
+        Object age = mp.get("Durability");
+        Object No = mp.get("PartID");
+        PartID = No.toString();
+        Durability = Integer.parseInt(age.toString());
+        openDialog_addQty();
     }
 }

@@ -42,7 +42,6 @@ import java.util.Locale;
 
 
 public class DetailBreakdownPage2 extends AppCompatActivity {
-
     ConnectionClass connectionClass;
     private boolean success = false;
     private static final int pic_id = 123;
@@ -54,7 +53,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
     ImageView click_image_id, click_image_id2;
     String encodedImageProblem, encodedImageSolution;
     TextView txtmsg, machine_id, date_start_text, date_finish_text, pic;
-    Button  camera_open_id, camera_open_id2;
+    Button camera_open_id, camera_open_id2;
     FloatingActionButton btnSave;
     EditText problem_desc_text, solution_desc_text;
     public ContentValues values;
@@ -120,8 +119,12 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         startChronometer();
         ////////////////////////////////////////////////////////end of stop watch section///////////////////////////////////////////////////////////////////////////////////////////////////
 
+
         updatePICstatus3();
+
+        // Diperlukan untuk mengambil gambar
         GetPicture();
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,8 +175,10 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
+    // Kirim informasi mesin breakdown ke database
     public void UploadtoDB() {
         String msg = "unknown";
+
         chronometer.stop();
         long saveTime = SystemClock.elapsedRealtime() - chronometer.getBase();
         int seconds = (int) (saveTime / 1000);
@@ -201,6 +206,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         txtmsg.setText(msg);
     }
 
+    // Update status mesin menjadi 4 (menunggu konfirmasi)
     public void updatePICstatus4() {
         try {
             Connection connection = connectionClass.CONN();
@@ -211,6 +217,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
+    // Update status mesin menjadi 3 (sedang dikerjakan)
     public void updatePICstatus3() {
         try {
             Connection connection = connectionClass.CONN();
@@ -221,6 +228,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
+    // Update status mesin menjadi 2 (breakdown)
     public void updatePICstatus2() {
         try {
             Connection connection = connectionClass.CONN();
@@ -231,6 +239,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
+    // Mulai stopwatch
     public void startChronometer() {
         if (!running) {
             chronometer.setBase(SystemClock.elapsedRealtime());
@@ -259,6 +268,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }, 3000);
     }
 
+    // Digunakan untuk memutar gambar
     public static Bitmap rotateImage(Bitmap source, float angle) {
         Matrix matrix = new Matrix();
         matrix.postRotate(angle);
@@ -266,6 +276,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                 matrix, true);
     }
 
+    // Hasil gambar yang diambil diproses disini
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
@@ -277,6 +288,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                     final Bitmap selectedImageProblem = BitmapFactory.decodeStream(imageStream);
 
                     Bitmap RotatedselectedImageProblem = null;
+                    // Jika arah foto yang diambil tidak sesuai, ganti angle di bawah ini
                     RotatedselectedImageProblem = rotateImage(selectedImageProblem, 90);
 
                     click_image_id.setImageBitmap(RotatedselectedImageProblem);
@@ -322,6 +334,7 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
         }
     }
 
+    // Diperlukan untuk mengambil gambar
     public void GetPicture() {
         values.put(MediaStore.Images.Media.TITLE, "New Picture");
         values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
@@ -329,18 +342,21 @@ public class DetailBreakdownPage2 extends AppCompatActivity {
                 MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
     }
 
+    // Ambil foto penyebab breakdown
     public void camera_problem() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, pic_id);
     }
 
+    // Ambil foto solusi breakdown
     public void camera_solution() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         startActivityForResult(intent, pic_id2);
     }
 
+    // Convert gambar yang diambil menjadi Base64
     private String encodeImage(Bitmap bm) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 40, baos);

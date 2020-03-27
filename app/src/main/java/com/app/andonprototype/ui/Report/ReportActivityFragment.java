@@ -98,13 +98,8 @@ public class ReportActivityFragment extends Fragment implements ReportListAdapte
         return root;
     }
 
-    private void getReport() {
-        itemArrayList = new ArrayList<>();
-        getRep();
-        myAppAdapter = new ReportListAdapter(itemArrayList,this,getActivity());
-        recyclerView.setAdapter(myAppAdapter);
-    }
 
+    // Ambil semua history data mesin yang dikerjakan oleh user tersebut
     private void getRep() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -137,6 +132,15 @@ public class ReportActivityFragment extends Fragment implements ReportListAdapte
         }
     }
 
+    // Tampilkan semua history tersebut di database
+    private void getReport() {
+        itemArrayList = new ArrayList<>();
+        getRep();
+        myAppAdapter = new ReportListAdapter(itemArrayList, this, getActivity());
+        recyclerView.setAdapter(myAppAdapter);
+    }
+
+    // Ambil data PIC dari database
     private void GetPIC() {
         String z = "";
         try {
@@ -162,6 +166,7 @@ public class ReportActivityFragment extends Fragment implements ReportListAdapte
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
     }
+
     @Override
     public void onNoteClick(int position) {
         Intent i = new Intent(getActivity(), DetailMachineReport.class);

@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import static android.content.SharedPreferences.*;
 
+// Menyimpan data-data seperti Npk dan Nama user di dalam aplikasi
+
 public class SaveSharedPreference {
     private static final String PREF_USER_NAME = "username";
     private static final String PREF_ID = "ID";
@@ -15,12 +17,6 @@ public class SaveSharedPreference {
 
     private static SharedPreferences getSharedPreferences(Context ctx) {
         return PreferenceManager.getDefaultSharedPreferences(ctx);
-    }
-
-    public static void setUserName(Context ctx, String userName) {
-        Editor editor = getSharedPreferences(ctx).edit();
-        editor.putString(PREF_USER_NAME, userName);
-        editor.apply();
     }
 
     public static void setID(Context ctx, String ID) {
@@ -33,10 +29,6 @@ public class SaveSharedPreference {
         Editor editor = getSharedPreferences(ctx).edit();
         editor.putString(PREF_NAMA, ID);
         editor.apply();
-    }
-
-    public static String getUserName(Context ctx) {
-        return getSharedPreferences(ctx).getString(PREF_USER_NAME, "");
     }
 
     public static String getID(FragmentActivity ctx) {

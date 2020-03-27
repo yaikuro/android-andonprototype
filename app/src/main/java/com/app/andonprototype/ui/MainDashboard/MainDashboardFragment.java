@@ -120,6 +120,7 @@ public class MainDashboardFragment extends Fragment {
             }
         });
 
+        // Pasang foto profile user di Main Dashboard
         try {
             getImage();
             if (isSuccess) {
@@ -133,6 +134,8 @@ public class MainDashboardFragment extends Fragment {
         get_list_done();
         get_list_all();
 
+        // Tampilkan performa hari ini dengan persentase:
+        // Jumlah mesin yang diperbaiki oleh user dibandingkan dengan total mesin breakdown pada hari tersebut
         try {
             if (!list_all.isEmpty()) {
                 work = list_done.size();
@@ -176,6 +179,7 @@ public class MainDashboardFragment extends Fragment {
     }
 
 
+    // Tampilkan error berbentuk Dialog
     private void errorBox(String method, String message) {
         Log.d("EXCEPTION: " + method, message);
 
@@ -186,6 +190,7 @@ public class MainDashboardFragment extends Fragment {
         messageBox.show();
     }
 
+    // Ambil gambar profile user dari database
     private void getImage() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -211,12 +216,14 @@ public class MainDashboardFragment extends Fragment {
         }
     }
 
+    // Convert data Base64 menjadi gambar, kemudian tampilkan di Main Dashboard
     private void setPicture() {
         byte[] decodeStringPicture = Base64.decode(image, Base64.DEFAULT);
         Bitmap decodebitmapPicture = BitmapFactory.decodeByteArray(decodeStringPicture, 0, decodeStringPicture.length);
         image_person.setImageBitmap(decodebitmapPicture);
     }
 
+    // Periksa total mesin yang hanya diperbaiki oleh user
     private void get_list_done() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -234,6 +241,7 @@ public class MainDashboardFragment extends Fragment {
         }
     }
 
+    // Periksa total mesin yang diperbaiki oleh semua user
     private void get_list_all() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();

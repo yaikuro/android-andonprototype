@@ -12,17 +12,17 @@ import com.app.andonprototype.R;
 
 import java.util.List;
 
-public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.ViewHolder>{
+public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.ViewHolder> {
     private List<ReportListItems> values;
     public Context context;
     private OnNoteListener onNoteListener;
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView MachineID,Line,Station,Repair_Start,Repair_Finish,Duration,PIC;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        public TextView MachineID, Line, Station, Repair_Start, Repair_Finish, Duration, PIC;
         public View layout;
         OnNoteListener onNoteListener;
 
-        public ViewHolder(View v,OnNoteListener onNoteListener){
+        public ViewHolder(View v, OnNoteListener onNoteListener) {
             super(v);
             layout = v;
             MachineID = v.findViewById(R.id.MachineID);
@@ -41,22 +41,24 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
             onNoteListener.onNoteClick(getAdapterPosition());
         }
     }
-    public ReportListAdapter(List<ReportListItems> myDataset, OnNoteListener onNoteListener, Context context){
+
+    public ReportListAdapter(List<ReportListItems> myDataset, OnNoteListener onNoteListener, Context context) {
         values = myDataset;
         this.context = context;
         this.onNoteListener = onNoteListener;
     }
+
     @Override
-    public ReportListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
-    {
+    public ReportListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // create a new view
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View v = inflater.inflate(R.layout.report_activity_listitem, parent, false);
         ViewHolder vh = new ViewHolder(v, onNoteListener);
         return vh;
     }
+
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position){
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         final ReportListItems reportListItems = values.get(position);
         holder.MachineID.setText(reportListItems.getMachineID());
         holder.Line.setText(reportListItems.getLine());
@@ -66,11 +68,13 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Vi
         holder.Duration.setText(reportListItems.getRepair_Duration());
         holder.PIC.setText(reportListItems.getPIC());
     }
+
     @Override
     public int getItemCount() {
         return values.size();
     }
-    public interface OnNoteListener{
+
+    public interface OnNoteListener {
         void onNoteClick(int position);
     }
 }

@@ -12,6 +12,8 @@ import android.view.View;
 
 import com.app.andonprototype.R;
 
+// Menampilkan Dialog pada ProblemWaitingList
+
 public class pop_dialog_location extends AppCompatDialogFragment {
     private ExampleDialogListener listener;
 

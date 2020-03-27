@@ -31,7 +31,7 @@ import com.app.andonprototype.Background.ConnectionClass;
 import com.app.andonprototype.R;
 import com.app.andonprototype.SwipeProblem;
 import com.app.andonprototype.drawer_ui.Help;
-import com.app.andonprototype.drawer_ui.Settings;
+import com.app.andonprototype.drawer_ui.Settings.Settings;
 import com.app.andonprototype.ui.MachineDashboard.MachineDashboard;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -61,7 +61,7 @@ public class MainDashboard extends AppCompatActivity {
     public static boolean validate = false;
     boolean doubleBackToExitPressedOnce = false;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
-    public String currentDate, MachineID, Status, MachineName, Station, send, hasil, pic, ID;
+    public String currentDate, MachineID, Status, MachineName, Station, send, pic, ID;
     String notifikasi = "Welcome ";
     Connection connect;
     String ConnectionResult = "";
@@ -71,6 +71,17 @@ public class MainDashboard extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_dashboard);
+
+        // Minta ijin untuk mengakses kamera
+        isCameraPermissionGranted();
+        // Minta ijin untuk mengakses storage
+        isStoragePermissionGranted();
+
+        // Ambil ID dan Nama dari SaveSharedPreference
+        ID = getID(this); // Npk
+        pic = getNama(this); // Nama
+
+        // Diperlukan untuk mengirim notifikasi
         if (!running) {
             running = true;
         }
@@ -78,42 +89,26 @@ public class MainDashboard extends AppCompatActivity {
             validate = true;
         }
         createNotificationChannels();
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
-        }
-
-
         notificationManager = NotificationManagerCompat.from(this);
         TextView txtnotif = findViewById(R.id.txtnotif);
-        ID = getID(this); // Npk
-        pic = getNama(this); // Nama
         send = notifikasi + pic;
         txtnotif.setText(send);
-        hasil = txtnotif.getText().toString();
-
         content();
-        isStoragePermissionGranted();
-
 
         ///////////////////////////////////////////////////////////////////////////
-        // Navigation Section
+        // Bottom Navigation Section
         ///////////////////////////////////////////////////////////////////////////
         BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_maindashboard, R.id.navigation_problemwaitinglist, R.id.navigation_reportactivity, R.id.navigation_machinereport, R.id.navigation_assetmanagement)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //Navigation drawer
+        //Navigation Drawer Section
         new DrawerBuilder().withActivity(this).build();
 
-        //primary items
+        // Primary items
         PrimaryDrawerItem home = new PrimaryDrawerItem()
                 .withIdentifier(1)
                 .withName(R.string.drawer_item_home)
@@ -131,7 +126,7 @@ public class MainDashboard extends AppCompatActivity {
                 .withName(R.string.drawer_item_logout)
                 .withIcon(R.drawable.ic_contact_mail_black_24dp);
 
-        //Toolbar
+        // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -147,12 +142,6 @@ public class MainDashboard extends AppCompatActivity {
                 .addDrawerItems(
                         new DividerDrawerItem(),
                         home,
-//                        primary_item1,
-//                        primary_item2,
-//                        new SectionDrawerItem().withName("Categories"),
-//                        secondary_item1,
-//                        secondary_item2,
-//                        secondary_item2,
                         new DividerDrawerItem(),
                         settings,
                         help,
@@ -166,16 +155,6 @@ public class MainDashboard extends AppCompatActivity {
                             if (drawerItem.getIdentifier() == 1) {
                                 intent = new Intent(MainDashboard.this, MainDashboard.class);
                                 finish();
-//                            } else if (drawerItem.getIdentifier() == 2) {
-//                                //intent = new Intent(MainActivity.this, Class.class);
-//                            } else if (drawerItem.getIdentifier() == 3) {
-//                                //intent = new Intent(MainActivity.this, Class.class);
-//                            } else if (drawerItem.getIdentifier() == 11) {
-//                                //intent = new Intent(MainActivity.this, Class.class);
-//                            } else if (drawerItem.getIdentifier() == 12) {
-//                                //intent = new Intent(MainActivity.this, Class.class);
-//                            } else if (drawerItem.getIdentifier() == 13) {
-//                                //intent = new Intent(MainActivity.this, Class.class);
                             } else if (drawerItem.getIdentifier() == 97) {
                                 intent = new Intent(MainDashboard.this, Settings.class);
                             } else if (drawerItem.getIdentifier() == 98) {
@@ -199,11 +178,9 @@ public class MainDashboard extends AppCompatActivity {
     } // End of onCreate
 
 
+    // Tekan back 2x untuk keluar dari activity
     @Override
     public void onBackPressed() {
-//        if (fragNavController.getCurrentStack().size() > 1) {
-//            fragNavController.pop();
-//        } else
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             return;
@@ -217,19 +194,17 @@ public class MainDashboard extends AppCompatActivity {
                 doubleBackToExitPressedOnce = false;
             }
         }, 3000);
-        {
-        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-
         // Necessary to restore the BottomBar's state, otherwise we would
         // lose the current tab on orientation change.
 //        mBottomBar.onSaveInstanceState(outState);
     }
 
+    // Log out, hapus semua data yang tersimpan di SaveSharedPreference
     public void logout() {
         clearUserName(this);
         send = "";
@@ -240,9 +215,14 @@ public class MainDashboard extends AppCompatActivity {
         finish();
     }
 
+    // Logic ketika mengirim notifikasi
     private void content() {
+
+        // Cek status mesin di database
         getStatus();
         getDate();
+
+        // Kalau salah satu mesin rusak (Status = 2), kirim notifikasi
         if (running && !send.equals(notifikasi) && Status.equals("2") && validate) {
             sendOnChannel1();
             Intent i = new Intent(MainDashboard.this, SwipeProblem.class);
@@ -254,6 +234,7 @@ public class MainDashboard extends AppCompatActivity {
         refresh(1000);
     }
 
+    // Refresh
     private void refresh(int milliseconds) {
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
@@ -265,6 +246,7 @@ public class MainDashboard extends AppCompatActivity {
         handler.postDelayed(runnable, milliseconds);
     }
 
+    // Cek status mesin di database
     public void getStatus() {
         Status = "1";
         try {
@@ -288,10 +270,8 @@ public class MainDashboard extends AppCompatActivity {
         }
     }
 
+    // Cek status part di database
     public void getDate() {
-//        select Machine_Name, Due_Date, DATEDIFF(second, '2019-12-11 16:39',Due_Date)
-//        from machinelist
-//        where DATEDIFF(second, '2019-12-11 16:39',Due_Date) < 300 and DATEDIFF(second, '2019-12-11 16:39',Due_Date) >	0
         currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         try {
             ConnectionClass connectionClass = new ConnectionClass();
@@ -313,6 +293,7 @@ public class MainDashboard extends AppCompatActivity {
         }
     }
 
+    // Buat channel untuk mengirim notifikasi
     private void createNotificationChannels() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel1 = new NotificationChannel(
@@ -335,6 +316,7 @@ public class MainDashboard extends AppCompatActivity {
         }
     }
 
+    // Notifikasi ketika terjadi kerusakan pada salah satu mesin
     public void sendOnChannel1() {
         String title = "ALERT";
         String message = "Machine Problem Detected";
@@ -356,6 +338,7 @@ public class MainDashboard extends AppCompatActivity {
         notificationManager.notify(1, notification);
     }
 
+    // Notifikasi ketika diperlukan pergantian part pada salah satu mesin
     public void sendOnChannel2() {
         String title = "ALERT PART";
         String message = "Part Replacement Check";
@@ -387,6 +370,15 @@ public class MainDashboard extends AppCompatActivity {
         }
     }
 
+    public void isCameraPermissionGranted() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
+        }
+    }
+
+    // List menu pada ProblemWaitingList
     public void listMenuButton(View view) {
         LayoutInflater inflater = LayoutInflater.from(this);
         final View CustomView = inflater.inflate(R.layout.activity_pop_dialog, null);
@@ -396,11 +388,13 @@ public class MainDashboard extends AppCompatActivity {
                 .show();
     }
 
+    // Tombol Location pada list menu di atas
     public void btnLocation(View view) {
         Intent i = new Intent(this, MachineDashboard.class);
         startActivity(i);
     }
 
+    // Tombol More Info pada list menu di atas
     public void btnMoreInfo(View view) {
         Intent i = new Intent(this, Settings.class);
         startActivity(i);

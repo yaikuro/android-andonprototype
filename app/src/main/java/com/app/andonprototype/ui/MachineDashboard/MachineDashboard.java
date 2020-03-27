@@ -96,6 +96,7 @@ public class MachineDashboard extends AppCompatActivity implements MachineDashbo
         });
     }
 
+    // Menampilkan Line pada Machine Dashboard
     public void lineRecyclerViewSetup() {
         for (int i = 1; i < 12; i++) {
             mLineList.addLast("Line " + i);
@@ -107,17 +108,12 @@ public class MachineDashboard extends AppCompatActivity implements MachineDashbo
         lineRecyclerView.setLayoutManager(gridLayoutManager);
     }
 
+    // Atur format Line yang ingin ditampilkan
     public void recyclerSetup() {
         recyclerView11.setHasFixedSize(true);
         int numberOfColumns = 6;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, numberOfColumns, GridLayoutManager.HORIZONTAL, false);
         recyclerView11.setLayoutManager(gridLayoutManager);
-
-        /*DIVIDER*/
-//        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView11.getContext(),
-//                gridLayoutManager.getOrientation());
-//        recyclerView11.addItemDecoration(dividerItemDecoration);
-
     }
 
     @Override
@@ -126,18 +122,19 @@ public class MachineDashboard extends AppCompatActivity implements MachineDashbo
         startActivity(i);
     }
 
+
     @Override
     public void onPushClick(int position) {
         Class<?> clss = SimpleScanner.class;
-        if (PIC.equals("")){
+        if (PIC.equals("")) {
             Toast.makeText(this, "ID Required, Try to Re-Login", Toast.LENGTH_SHORT).show();
-        } else{
+        } else {
             if (ContextCompat.checkSelfPermission(MachineDashboard.this, Manifest.permission.CAMERA)
                     != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(MachineDashboard.this,
                         new String[]{Manifest.permission.CAMERA}, ZBAR_CAMERA_PERMISSION);
-            } else{
-                Intent i = new Intent(this,clss);
+            } else {
+                Intent i = new Intent(this, clss);
                 Line = itemsArrayList.get(position).getLine();
                 Station = itemsArrayList.get(position).getStation();
                 Status = itemsArrayList.get(position).getStatus() + 1;

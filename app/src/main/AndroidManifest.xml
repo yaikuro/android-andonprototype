@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.andonprototype"
-    android:versionCode="1"
-    android:versionName="AndonPrototype">
+    >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -21,7 +20,7 @@
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"
         tools:ignore="ExtraText,InnerclassSeparator,RtlEnabled"
         tools:targetApi="donut">
-        <activity android:name=".ui.AssetManagement.Add_Part"></activity>
+        <activity android:name=".ui.AssetManagement.Add_Part"/>
         <activity android:name=".Success_Page" />
         <activity android:name=".ui.Dashboard.Change_Part_List" />
         <activity android:name=".ui.pop_dialog_location" />
@@ -66,7 +65,8 @@
         <activity
             android:name=".ui.MachineReport.DetailMachineReport"
             android:label="Detail Machine Report" />
-        <activity android:name=".drawer_ui.Settings" />
+        <activity android:name=".drawer_ui.Settings.Settings" />
+        <activity android:name=".drawer_ui.Settings.ChangeProfilePicture" />
         <activity android:name=".drawer_ui.Help" />
         <activity android:name=".drawer_ui.Logout" />
         <activity android:name=".ui.AssetManagement.AssetManagementReport" />

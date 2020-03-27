@@ -15,6 +15,7 @@ import com.mysql.fabric.Response;
 
 import static com.app.andonprototype.ui.Dashboard.MainDashboard.validate;
 
+
 public class SwipeProblem extends AppCompatActivity {
     boolean doubleBackToExitPressedOnce = false;
     String Response_Time_Start;
@@ -35,7 +36,6 @@ public class SwipeProblem extends AppCompatActivity {
         enableButton.setOnActiveListener(new OnActiveListener() {
             @Override
             public void onActive() {
-//                Toast.makeText(SwipeProblem.this, "Active!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(SwipeProblem.this, ProblemWaitingList.class);
                 startActivity(i);
                 finish();

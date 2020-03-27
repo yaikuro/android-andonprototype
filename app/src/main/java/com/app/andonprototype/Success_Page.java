@@ -13,6 +13,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
 
+// Tampilkan gambar untuk mengkonfirmasi upload berhasil dilakukan
+
 public class Success_Page extends AppCompatActivity {
 
     @Override

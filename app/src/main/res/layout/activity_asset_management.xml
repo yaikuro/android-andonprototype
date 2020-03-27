@@ -1,129 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/md_blue_grey_100"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:id="@+id/RelativeLayoutHistory"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView1"
+        style="@style/Widget.MaterialComponents.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="10dp"
+        android:layout_marginLeft="@dimen/mtrl_card_spacing"
+        android:layout_marginTop="@dimen/mtrl_card_spacing"
+        android:layout_marginRight="@dimen/mtrl_card_spacing"
+        android:layout_marginBottom="@dimen/mtrl_card_spacing"
+        android:minHeight="50dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Machine Part List"
-            android:textSize="40sp" />
-
-        <TextView
-            android:id="@+id/Machine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Title"
-            android:layout_marginTop="20sp"
-            android:text="@string/machine_id_colon"
-            android:textSize="30sp" />
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnAdd_Part"
-            android:layout_below="@id/Title"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:onClick="btn_addPart"
-            app:srcCompat="@drawable/ic_add" />
-
-        <TextView
-            android:id="@+id/dataMachineID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Title"
-            android:layout_marginStart="10sp"
-            android:layout_marginTop="20sp"
-            android:layout_toEndOf="@id/Machine"
-            android:textSize="30sp" />
-
-        <LinearLayout
-            android:id="@+id/title_part"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Machine"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Name"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Type"
-                android:textSize="20sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Quantity"
-                android:textSize="20sp" />
-
-            <TextView
+            <RelativeLayout
+                android:id="@+id/RelativeLayoutHistory"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Lifetime (Hour)"
-                android:textSize="20sp" />
+                android:layout_margin="5dp">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/machine_part_list"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="40sp" />
+
+                <TextView
+                    android:id="@+id/Machine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Title"
+                    android:layout_marginTop="20sp"
+                    android:text="@string/machine_id_colon"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btnAdd_Part"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Title"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_margin="10dp"
+                    android:onClick="btn_addPart"
+                    app:srcCompat="@drawable/ic_add" />
+
+                <TextView
+                    android:id="@+id/dataMachineID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Title"
+                    android:layout_marginStart="10sp"
+                    android:layout_marginTop="20sp"
+                    android:layout_toEndOf="@id/Machine"
+                    android:textColor="@color/black"
+                    android:textSize="30sp" />
+
+                <LinearLayout
+                    android:id="@+id/title_part"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Machine"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/name"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/type"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/quantity"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/lifetime_hour"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/date_register"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/next_replacement"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@id/title_part"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/black" />
+            </RelativeLayout>
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/pullToRefresh"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Date Register"
-                android:textSize="20sp" />
+                android:layout_below="@id/RelativeLayoutHistory"
+                android:background="@android:color/transparent">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Next Replacement"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@id/title_part"
-            android:layout_marginTop="5dp"
-            android:background="@color/black" />
-    </RelativeLayout>
-
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/pullToRefresh"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_below="@id/RelativeLayoutHistory"
-        android:background="@android:color/transparent">
-
-        <ListView
-            android:id="@+id/ListAssetPart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/RelativeLayoutHistory" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</RelativeLayout>
+                <ListView
+                    android:id="@+id/ListAssetPart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/RelativeLayoutHistory" />
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

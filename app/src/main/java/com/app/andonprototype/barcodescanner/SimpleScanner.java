@@ -42,19 +42,8 @@ public class SimpleScanner extends AppCompatActivity implements ZXingScannerView
         Verification = Line + "," + Station + ",";
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mScannerView.setResultHandler(this);
-        mScannerView.startCamera();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mScannerView.stopCamera();
-    }
-
+    // Format isi QR = Line, Station, Nama mesin
+    // Contoh isi QR = 1, 2, Mesin Produksi
     @Override
     public void handleResult(com.google.zxing.Result rawResult) {
         if (rawResult.getText().length() < 4) {
@@ -80,6 +69,20 @@ public class SimpleScanner extends AppCompatActivity implements ZXingScannerView
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mScannerView.setResultHandler(this);
+        mScannerView.startCamera();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mScannerView.stopCamera();
+    }
+
+    // Press back twice to exit
+    @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
@@ -98,6 +101,7 @@ public class SimpleScanner extends AppCompatActivity implements ZXingScannerView
         }, 3000);
     }
 
+    // Ketika perbaikan mesin dibatalkan, kembalikan status mesin menjadi 2
     public void updatePICstatus2() {
         try {
             Connection connection = connectionClass.CONN();

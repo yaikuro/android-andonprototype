@@ -53,6 +53,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         });
     }
 
+    // Tampilkan history mesin dari database
     public void getHistory() {
         List<Map<String, String>> HistoryList = null;
         HistoryList = getData();
@@ -62,6 +63,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         BreakdownHistory.setAdapter(ABH);
     }
 
+    // Ambil history mesin dari database
     public List<Map<String, String>> getData() {
         List<Map<String, String>> data = null;
         data = new ArrayList<Map<String, String>>();
@@ -105,6 +107,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         return data;
     }
 
+    // Jika tidak ada history yang ditampilkan, tampilkan 'No Data Found'
     public void validation() {
         ValidationData();
         if (Validation == null) {
@@ -114,6 +117,7 @@ public class BreakdownHistory extends AppCompatActivity implements ListView.OnIt
         }
     }
 
+    // Periksa semua history mesin pada line dan station yang ditentukan
     public void ValidationData() {
         try {
             ConnectionClass connectionClass = new ConnectionClass();

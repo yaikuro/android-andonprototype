@@ -92,6 +92,7 @@ public class ProblemListFragment extends Fragment implements ProblemListAdapter.
         return root;
     }
 
+    // Tampilkan semua status masalah di aplikasi
     public void getProblem() {
         itemsArrayList = new ArrayList<>();
         GetProblem();
@@ -99,6 +100,7 @@ public class ProblemListFragment extends Fragment implements ProblemListAdapter.
         recyclerView.setAdapter(problemListAdapter);
     }
 
+    // Ambil semua status masalah di database
     public void GetProblem () {
         boolean isSuccess = false;
         String ConnectionResult;
