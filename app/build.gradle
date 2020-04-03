@@ -37,9 +37,13 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    // Fragment
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+    // Swipe Activity
     implementation 'com.ebanx:swipe-button:0.8.3'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -56,10 +60,10 @@ dependencies {
         transitive = true
     }
 
-    //gif
+    // gif
     implementation 'com.facebook.fresco:fresco:2.0.0'
     implementation 'com.facebook.fresco:animated-gif:2.0.0'
 
-    //cardview
+    // CardView
     implementation 'androidx.cardview:cardview:1.0.0'
 }

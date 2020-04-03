@@ -13,5 +13,3 @@ public class Help extends SwipeDismissBaseActivity {
         setContentView(R.layout.activity_help);
     }
 }
-
-
