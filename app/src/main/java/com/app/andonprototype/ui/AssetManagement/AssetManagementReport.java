@@ -37,6 +37,8 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
     Connection connect;
     String ConnectionResult = "";
 
+    //Semua yang SECOND diubah menjadi HOUR untuk mengubah menjadi per jam//
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +97,7 @@ public class AssetManagementReport extends AppCompatActivity implements ListView
                         Query = "Select m.No, i.Nama_Part, i.Jenis_Part, i.Umur, m.Quantity, CONVERT (date, m.Date_Start) AS Date_Register, CONVERT(date, m.Due_Date) AS Due_Date " +
                                 "from machinelist m,inventorypart i " +
                                 "where m.Machine_Name = '" + Name + "' and m.PartID = i.PartID " +
-                                "and DATEDIFF(second, '" + currentDate + "', m.Due_Date) < 300";
+                                "and DATEDIFF(second, '" + currentDate + "', m.Due_Date) < 300";//Datediff duration
                         break;
                     }
                 }

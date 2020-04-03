@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
+import com.app.andonprototype.Background.SaveSharedPreference;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.MachineReport.DetailMachineReport;
 
@@ -32,6 +33,7 @@ import java.util.Map;
 
 public class ReportActivityFragment extends Fragment implements ReportListAdapter.OnNoteListener {
     public String id, Station, Line, Number, Person;
+    public String PIC; //ID dari pengguna
     Spinner spinner;
     RecyclerView recyclerView;
     private boolean success = false;
@@ -67,6 +69,7 @@ public class ReportActivityFragment extends Fragment implements ReportListAdapte
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
+        PIC = SaveSharedPreference.getNama(getActivity()); //Untuk mendapat nama 'admin'//
         GetPIC();
         final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

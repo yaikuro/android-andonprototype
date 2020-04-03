@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.app.andonprototype.Background.ConnectionClass;
+import com.app.andonprototype.Background.SaveSharedPreference;
 import com.app.andonprototype.R;
 import com.app.andonprototype.ui.Report.ReportListAdapter;
 import com.app.andonprototype.ui.Report.ReportListItems;
@@ -39,6 +40,7 @@ public class MachineReportActivityFragment extends Fragment implements ReportLis
     public String Station;
     public String Line;
     public String Number;
+    public String PIC; //untuk menentukan admin atau bukan
     RecyclerView ListMachineReport;
     SimpleAdapter AR;
     public ImageView imageView;
@@ -74,6 +76,7 @@ public class MachineReportActivityFragment extends Fragment implements ReportLis
         ListMachineReport = root.findViewById(R.id.ListMachineReport);
         ListMachineReport.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
+        PIC = SaveSharedPreference.getNama(getActivity()); //mendapatkan PIC tersebut, jika PIC admin akan dapat di atur pada class ini dengan variabel PIC disini
         ListMachineReport.setLayoutManager(mLayoutManager);
         GetLine();
         final SwipeRefreshLayout pullToRefresh = root.findViewById(R.id.pullToRefresh);
