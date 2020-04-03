@@ -50,7 +50,6 @@ public class MachineReportActivityFragment extends Fragment implements ReportLis
     Spinner LineSpinner, StationSpinner;
     ArrayList LineArray, StationArray;
     int line, station;
-    List<Map<String, String>> MachineReportList;
 
     private MachineReportActivityViewModel mainDashboardViewModel;
 
@@ -82,7 +81,7 @@ public class MachineReportActivityFragment extends Fragment implements ReportLis
             @Override
             public void onRefresh() {
                 getMachineReport();
-                if (MachineReportList.isEmpty()) {
+                if (itemArrayList.isEmpty()) {
                     Toast.makeText(getActivity(), "No Report Activity", Toast.LENGTH_SHORT).show();
                 }
                 pullToRefresh.setRefreshing(false);

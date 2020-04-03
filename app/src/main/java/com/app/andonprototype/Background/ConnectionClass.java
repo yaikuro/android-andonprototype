@@ -12,7 +12,7 @@ import java.util.Objects;
 public class ConnectionClass {
 
     ///// Masukkan IP server disini ////////
-    private String ip = "192.168.100.14";
+    private String ip = "192.168.0.124";
     ////////////////////////////////////////
 
     private String classs = "net.sourceforge.jtds.jdbc.Driver";

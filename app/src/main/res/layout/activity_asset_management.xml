@@ -54,17 +54,6 @@
                     android:textColor="@color/black"
                     android:textSize="30sp" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btnAdd_Part"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/Title"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_margin="10dp"
-                    android:onClick="btn_addPart"
-                    app:srcCompat="@drawable/ic_add" />
-
                 <TextView
                     android:id="@+id/dataMachineID"
                     android:layout_width="wrap_content"
@@ -159,6 +148,15 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/RelativeLayoutHistory" />
             </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnAdd_Part"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="10dp"
+                android:onClick="btn_addPart"
+                app:srcCompat="@drawable/ic_add" />
         </RelativeLayout>
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
