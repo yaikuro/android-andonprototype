@@ -64,6 +64,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/black"
+                android:layout_marginStart="15dp"
                 android:textSize="18sp" />
 
             <TextView
@@ -73,6 +74,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:textColor="@color/black"
+                android:layout_marginStart="15dp"
                 android:textSize="18sp" />
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
